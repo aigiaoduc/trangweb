@@ -1,0 +1,247 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    .ai-gradient {
+        background: linear-gradient(135deg, #0b0b3b 0%, #1a1a6c 50%, #3a0ca3 100%);
+        position: relative;
+        overflow: hidden;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .ai-circuit {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        pointer-events: none;
+    }
+    
+    .logo-glow {
+        filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.8));
+    }
+    
+    .footer-link {
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    
+    .footer-link:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 1px;
+        bottom: -2px;
+        left: 0;
+        background-color: #8a2be2;
+        transition: width 0.3s ease;
+    }
+    
+    .footer-link:hover:after {
+        width: 100%;
+    }
+    
+    .footer-link:hover {
+        color: #a855f7;
+    }
+    
+    .dot-separator {
+        display: inline-block;
+        margin: 0 6px;
+        opacity: 0.7;
+    }
+    
+    .social-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        margin: 0 8px;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        overflow: hidden;
+    }
+    
+    .social-icon:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .social-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 8px;
+    }
+    
+    .social-text {
+        margin-top: 4px;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+    }
+    
+    .social-item:hover .social-text {
+        color: white;
+    }
+    
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .footer-container {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    .icon-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .fb-icon, .yt-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .fb-icon {
+        background-color: #1877F2;
+    }
+    
+    .yt-icon {
+        background-color: #FF0000;
+    }
+    
+    @media (max-width: 768px) {
+        .footer-content {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .footer-links {
+            margin-top: 1rem;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .dot-separator {
+            display: none;
+        }
+        
+        .footer-link {
+            margin: 0.4rem 0;
+        }
+        
+        .description-text {
+            max-width: 100%;
+        }
+        
+        .social-icons {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-item {
+            margin: 8px 0;
+        }
+    }
+    
+    @media (max-width: 640px) {
+        .social-icons {
+            flex-direction: column;
+        }
+    }
+</style>
+<footer class="ai-gradient text-white">
+    <!-- AI Circuit Pattern Background -->
+    <svg class="ai-circuit" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+        <pattern id="circuit-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+            <path d="M10 10 L90 10 L90 90 L10 90 Z" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+            <circle cx="10" cy="10" r="2" fill="#ffffff"/>
+            <circle cx="90" cy="10" r="2" fill="#ffffff"/>
+            <circle cx="90" cy="90" r="2" fill="#ffffff"/>
+            <circle cx="10" cy="90" r="2" fill="#ffffff"/>
+            <path d="M10 50 L40 50 L40 10" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+            <path d="M90 50 L60 50 L60 90" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+            <circle cx="40" cy="50" r="2" fill="#ffffff"/>
+            <circle cx="60" cy="50" r="2" fill="#ffffff"/>
+        </pattern>
+        <rect width="100%" height="100%" fill="url(#circuit-pattern)"/>
+    </svg>
+    
+    <div class="footer-container px-3 py-4">
+        <div class="footer-content flex flex-col items-center justify-center">
+            <!-- Logo and Description -->
+            <div class="flex flex-col items-center mb-2">
+                <div class="logo-glow rounded-full overflow-hidden w-16 h-16 flex-shrink-0 border-2 border-purple-400 mb-3">
+                    <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" 
+                         alt="Quân H Logo" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="text-center max-w-md">
+                    <p class="text-sm md:text-base font-medium description-text">
+                        Quân H – Giảng viên & Youtuber chia sẻ kiến thức AI, công nghệ và giáo dục.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Social Media Icons - Vertical Layout -->
+            <div class="social-icons flex flex-row md:flex-row justify-center flex-wrap">
+                <a href="https://www.facebook.com/tran.hong.quan.216221/" target="_blank" class="social-item">
+                    <div class="social-icon">
+                        <div class="fb-icon">
+                            <i class="fab fa-facebook-f text-white"></i>
+                        </div>
+                    </div>
+                    <span class="social-text">Trần Hồng Quân</span>
+                </a>
+                
+                <a href="javascript:void(0)" class="social-item" onclick="alert('Zalo: 0355.213.107')">
+                    <div class="social-icon p-0">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/768px-Icon_of_Zalo.svg.png" 
+                             alt="Zalo" 
+                             class="icon-img">
+                    </div>
+                    <span class="social-text">0355.213.107</span>
+                </a>
+                
+                <a href="https://www.youtube.com/@quanh95" target="_blank" class="social-item">
+                    <div class="social-icon">
+                        <div class="yt-icon">
+                            <i class="fab fa-youtube text-white"></i>
+                        </div>
+                    </div>
+                    <span class="social-text">Quân H</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="border-t border-purple-900/50 mt-1 pt-3">
+            <div class="flex flex-wrap justify-center md:justify-between items-center text-xs text-purple-200/80">
+                <div class="mb-1 md:mb-0">
+                    © 2025 Quân H.
+                </div>
+                <div class="flex flex-wrap justify-center">
+                    <a href="#" class="footer-link mx-1">Chính sách bảo mật</a>
+                    <span class="dot-separator">•</span>
+                    <a href="#" class="footer-link mx-1">Điều khoản sử dụng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

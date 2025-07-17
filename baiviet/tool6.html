@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Heyzine – Biến File PDF Thành Sách Lật Trang Chuyên Nghiệp Trong Vài Phút">
+    <meta property="og:description" content="Heyzine.com là một nền tảng online cho phép bạn chuyển file PDF thành flipbook – tức là sách điện tử có hiệu ứng lật trang như sách thật.">
+    <meta property="og:image" content="https://s3-eu-west-1.amazonaws.com/tpd/logos/6202b1012319ce92697374c8/0x0.png">
+    <meta property="og:url" content="[URL chuẩn của trang]"> <!-- Cần cập nhật URL chuẩn của trang nếu có -->
+    <meta property="og:type" content="article">
+    <title>Heyzine – Biến File PDF Thành Sách Lật Trang Chuyên Nghiên</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .navbar {
+            position: sticky; top:0; left:0; width:100%;
+            display:flex; justify-content:space-between; align-items:center;
+            padding:1rem 2rem; background:rgba(0,0,0,0.5); z-index:100;
+        }
+        .logo            { display:flex; align-items:center; gap:.75rem; }
+        .logo-img        { width:40px; height:40px; border-radius:50%; border:2px solid #2f73ff; }
+        .logo-text       { font-family:'Inter',sans-serif; font-size:1.5rem; font-weight:700; color:#fff; }
+        .nav-links       { display:flex; gap:2rem; font-weight:600; }
+        .nav-links a     { color:#fff; transition:color .3s; }
+        .nav-links a:hover { color:#2f73ff; }
+        .cta             { padding:.6rem 1.4rem; background:#2f73ff; border-radius:999px; font-weight:600; color:#fff; transition:background .3s; }
+        .cta:hover       { background:#245ad1; }
+
+        /* Responsive Navbar */
+        @media (max-width: 767px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: rgba(0,0,0,0.8);
+                position: absolute;
+                top: 64px; /* Height of navbar */
+                left: 0;
+                padding: 1rem 2rem;
+                gap: 1rem;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .hamburger {
+                display: block;
+                cursor: pointer;
+                color: #fff;
+                font-size: 1.5rem;
+            }
+            .cta {
+                display: none; /* Hide CTA button on mobile */
+            }
+        }
+        @media (min-width: 768px) {
+            .hamburger {
+                display: none;
+            }
+        }
+
+        /* Custom styles for content */
+        .section-card {
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 2rem 2rem;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .step-card {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #e0f2f7;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        .step-card h3 {
+            color: #2f73ff;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .step-card p {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png"
+                 alt="Logo Quân H" class="logo-img" />
+            <span class="logo-text">Quân H</span>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="../index.html">Trang chủ</a>
+            <a href="../baiviet.html">Bài viết</a>
+            <a href="../congcu.html">Công cụ</a>
+            <a href="../video.html">Video</a>
+            <a href="../lienhe.html">Liên hệ</a>
+        </div>
+        <a href="../lienhe.html" class="cta">Liên hệ</a>
+        <div class="hamburger" id="hamburger">
+            &#9776;
+        </div>
+    </nav>
+
+    <div class="hero-section">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 font-montserrat">Heyzine – Biến File PDF Thành Sách Lật Trang Chuyên Nghiệp Trong Vài Phút</h1>
+        <p class="text-lg md:text-xl max-w-3xl mx-auto opacity-90">Biến tài liệu PDF khô khan thành trải nghiệm sinh động và chuyên nghiệp.</p>
+    </div>
+
+    <main class="container mx-auto px-4 py-8 max-w-4xl">
+        <section class="section-card">
+            <img src="https://s3-eu-west-1.amazonaws.com/tpd/logos/6202b1012319ce92697374c8/0x0.png" alt="Heyzine Logo" class="w-full max-w-md mx-auto rounded-lg shadow-md mb-8">
+            <p class="text-lg mb-4 leading-relaxed">
+                Bạn có một tài liệu PDF muốn chia sẻ với học sinh, khách hàng, hoặc đăng tải lên mạng một cách ấn tượng và dễ xem hơn?
+            </p>
+            <p class="text-lg mb-6 leading-relaxed">
+                Bạn muốn biến các tập san, bài giảng, sách hướng dẫn hay hồ sơ giới thiệu thành một cuốn sách lật trang chuyên nghiệp, thay vì để người xem phải kéo từng trang PDF nhàm chán?
+            </p>
+            <p class="text-xl font-semibold text-blue-600 mb-6">
+                Heyzine chính là công cụ mà bạn đang cần.
+            </p>
+        </section>
+
+        <section class="section-card">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4 font-montserrat">Heyzine là gì?</h2>
+            <p class="text-lg leading-relaxed">
+                Heyzine.com là một nền tảng online cho phép bạn chuyển file PDF thành flipbook – tức là sách điện tử có hiệu ứng lật trang như sách thật.
+            </p>
+            <p class="text-lg leading-relaxed mt-2">
+                Chỉ cần tải lên file PDF, trong vài giây bạn sẽ có ngay một liên kết chia sẻ đẹp mắt, có thể xem trên mọi thiết bị.
+            </p>
+        </section>
+
+        <section class="section-card">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4 font-montserrat">Tính năng nổi bật của Heyzine:</h2>
+            <ul class="text-lg space-y-2">
+                <li class="text-gray-700"><span class="font-semibold text-blue-600">📖 Hiệu ứng lật trang</span> mượt mà như sách giấy, tạo trải nghiệm đọc thú vị</li>
+                <li class="text-gray-700"><span class="font-semibold text-blue-600">🌐 Dễ chia sẻ:</span> bạn nhận được ngay đường link để gửi cho người khác hoặc nhúng vào website</li>
+                <li class="text-gray-700"><span class="font-semibold text-blue-600">🎨 Tùy chỉnh giao diện:</span> màu nền, logo, hiệu ứng, biểu tượng,... giúp bạn cá nhân hóa sách của mình</li>
+                <li class="text-gray-700"><span class="font-semibold text-blue-600">🔊 Thêm đa phương tiện:</span> chèn video, âm thanh, liên kết, hình ảnh động vào từng trang</li>
+                <li class="text-gray-700"><span class="font-semibold text-blue-600">📱 Tương thích mọi thiết bị:</span> máy tính, điện thoại, máy tính bảng đều xem tốt</li>
+                <li class="text-gray-700"><span class="font-semibold text-blue-600">🔒 Quyền riêng tư linh hoạt:</span> bạn có thể đặt mật khẩu, hoặc chỉ chia sẻ cho người có link</li>
+            </ul>
+        </section>
+
+        <section class="section-card">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4 font-montserrat">Heyzine phù hợp với ai?</h2>
+            <ul class="text-lg space-y-2">
+                <li class="text-gray-700"><span class="font-semibold text-green-600">🧑‍🏫 Giáo viên:</span> tạo bài giảng điện tử sinh động, phát tài liệu học trực tuyến</li>
+                <li class="text-gray-700"><span class="font-semibold text-green-600">🧾 Nhân viên văn phòng:</span> trình bày hồ sơ, báo cáo, brochure chuyên nghiệp</li>
+                <li class="text-gray-700"><span class="font-semibold text-green-600">🛍️ Người làm marketing:</span> thiết kế lookbook, catalogue sản phẩm hấp dẫn</li>
+                <li class="text-gray-700"><span class="font-semibold text-green-600">✍️ Người sáng tạo nội dung:</span> chia sẻ ebook, portfolio, tạp chí online</li>
+                <li class="text-gray-700"><span class="font-semibold text-green-600">👩‍🎓 Học sinh – sinh viên:</span> nộp bài tập, làm dự án nhóm ấn tượng hơn</li>
+            </ul>
+        </section>
+
+        <section class="section-card">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4 font-montserrat">Vì sao nên dùng Heyzine thay vì chỉ gửi file PDF?</h2>
+            <ul class="text-lg space-y-2">
+                <li class="text-gray-700"><span class="font-semibold text-purple-600">✅ Trải nghiệm hiện đại,</span> dễ đọc, không cần tải về</li>
+                <li class="text-gray-700"><span class="font-semibold text-purple-600">✅ Xem trực tiếp</span> trên trình duyệt, không phụ thuộc thiết bị</li>
+                <li class="text-gray-700"><span class="font-semibold text-purple-600">✅ Chuyên nghiệp hơn,</span> dễ gây ấn tượng với người nhận</li>
+                <li class="text-gray-700"><span class="font-semibold text-purple-600">✅ Có thể cập nhật nội dung,</span> đổi màu, đổi bìa ngay cả sau khi xuất bản</li>
+                <li class="text-gray-700"><span class="font-semibold text-purple-600">✅ Hỗ trợ chia sẻ,</span> nhúng vào web hoặc gửi qua mạng xã hội</li>
+            </ul>
+        </section>
+
+        <section class="section-card">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center font-montserrat">Cách sử dụng Heyzine (rất đơn giản!):</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="step-card">
+                    <h3 class="text-xl">1. Truy cập công cụ</h3>
+                    <p>Mở trình duyệt và truy cập vào trang web Heyzine.</p>
+                </div>
+                <div class="step-card">
+                    <h3 class="text-xl">2. Đăng ký tài khoản miễn phí</h3>
+                    <p>Tạo một tài khoản để bắt đầu sử dụng các tính năng.</p>
+                </div>
+                <div class="step-card">
+                    <h3 class="text-xl">3. Tải lên file PDF của bạn</h3>
+                    <p>Chọn file PDF bạn muốn chuyển đổi từ máy tính của mình.</p>
+                </div>
+                <div class="step-card">
+                    <h3 class="text-xl">4. Tùy chỉnh giao diện theo ý thích</h3>
+                    <p>Thay đổi màu nền, thêm logo, chọn hiệu ứng lật trang.</p>
+                </div>
+                <div class="step-card">
+                    <h3 class="text-xl">5. Lưu và lấy link chia sẻ!</h3>
+                    <p>Hoàn tất quá trình và nhận liên kết để chia sẻ flipbook của bạn.</p>
+                </div>
+            </div>
+            <p class="text-lg mt-8 text-center leading-relaxed">
+                👉 Bạn có thể bắt đầu với gói miễn phí (rất đủ dùng), và nâng cấp nếu cần thêm tính năng nâng cao như tải offline, gỡ logo, hoặc số lượng flipbook nhiều hơn.
+            </p>
+        </section>
+
+        <section class="section-card text-center">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4 font-montserrat">Kết luận:</h2>
+            <p class="text-lg leading-relaxed mb-4">
+                Heyzine giúp biến tài liệu khô khan thành trải nghiệm sinh động và chuyên nghiệp.
+            </p>
+            <p class="text-lg leading-relaxed">
+                Dù bạn là giáo viên, nhân viên văn phòng hay người yêu thích chia sẻ kiến thức, Heyzine chắc chắn sẽ khiến người xem tài liệu của bạn phải ấn tượng ngay từ cái nhìn đầu tiên.
+            </p>
+        </section>
+
+        <section class="section-card text-center">
+            <a href="https://heyzine.com/" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out shadow-lg">
+                Truy cập công cụ Heyzine
+            </a>
+        </section>
+    </main>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

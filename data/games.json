@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Lật Thẻ – Tìm Tên Động Vật",
+    "image": "https://i.etsystatic.com/27759810/r/il/f178f4/3661501502/il_fullxfull.3661501502_3dzo.jpg",
+    "desc": "Hãy lật các thẻ và tìm đúng cặp hình ảnh – tên tiếng Anh của các loài động vật! Cùng thử thách trí nhớ và học từ vựng tiếng Anh một cách thật vui nhé!",
+    "url": "../trochoi/trochoi1.html"
+  },
+  {
+    "title": "🎮Đua Xe Giải Đố Toán Học",
+    "image": "https://res.cloudinary.com/dejnvixvn/image/upload/v1751152585/def0ccdd-83ee-43fa-8541-04c7be9d44b4.png",
+    "desc": "Người chơi trả lời các phép tính toán học đơn giản (cộng, trừ, nhân, chia) để giúp chiếc xe của mình chạy nhanh hơn và về đích trước xe đối thủ",
+    "url": "../trochoi/trochoi2.html"
+  },
+  {
+    "title": "🧩Ghép Hình Động Vật",
+    "image": "https://res.cloudinary.com/dejnvixvn/image/upload/v1751163556/6159d8c6-aa2b-4743-aab9-82fcbbf98a01.png",
+    "desc": "Trò chơi giúp người chơi kéo và thả các mảnh ghép để hoàn thành bức tranh động vật.",
+    "url": "../trochoi/trochoi3.html"
+  },
+  {
+    "title": "🧮Ghép Phép Tính: Tìm Số Đúng",
+    "image": "https://res.cloudinary.com/dejnvixvn/image/upload/v1751359412/b1e3e962-0e37-4867-a6f4-86d7f0f0708c.png",
+    "desc": "Trò chơi rèn luyện tư duy toán học ngược: từ một kết quả cho trước, người chơi phải chọn đúng hai số và phép tính phù hợp để tạo ra kết quả đó. Có nhiều chế độ như cộng, trừ, nhân, chia hoặc kết hợp. Học sinh sẽ học cách suy luận nhanh, chính xác và phản xạ tốt với các phép tính cơ bản.",
+    "url": "../trochoi/trochoi4.html"
+  }
+]

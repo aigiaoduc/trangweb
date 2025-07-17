@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek – Mô Hình AI Mã Nguồn Mở Đang Làm Nóng Cộng Đồng Công Nghệ</title>
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="DeepSeek – Mô Hình AI Mã Nguồn Mở Đang Làm Nóng Cộng Đồng Công Nghệ">
+    <meta property="og:description" content="Khám phá DeepSeek, mô hình ngôn ngữ lớn mã nguồn mở từ Trung Quốc, với các dòng mô hình DeepSeek-VL, DeepSeek-Coder, DeepSeek-MoE và những ưu điểm vượt trội.">
+    <meta property="og:image" content="https://cdnv2.tgdd.vn/mwg-static/common/News/1574589/cach-su-dung-deepseek-1.jpg">
+    <meta property="og:url" content="https://aigiaoduc.github.io/tools/tool9.html">
+    <meta property="og:type" content="article">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@400;500;6600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: #1a202c;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px; /* Adjust for fixed navbar */
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23ffffff" fill-opacity="0.1" fill-rule="evenodd"%3E%3Cpath d="M11 0h1v60h-1V0zm6 0h1v60h-1V0zm6 0h1v60h-1V0zm6 0h1v60h-1V0zm6 0h1v60h-1V0zm6 0h1v60h-1V0zm6 0h1v60h-1V0zm6 0h1v60h-1V0zM0 11v1h60v-1H0zm0 6v1h60v-1H0zm0 6v1h60v-1H0zm0 6v1h60v-1H0zm0 6v1h60v-1H0zm0 6v1h60v-1H0zm0 6v1h60v-1H0zm0 6v1h60v-1H0z" fill="%239ca3af"/%3E%3C/g%3E%3C/svg%3E');
+            opacity: 0.2;
+            z-index: 0;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .article-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .section-card {
+            background-color: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+        .section-card h2 {
+            color: #4a5568;
+            margin-bottom: 1rem;
+            font-size: 1.75rem;
+        }
+        .section-card ul {
+            list-style: none; /* Remove default bullet points */
+            padding-left: 0;
+        }
+        .section-card ul li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .section-card ul li::before {
+            content: '•'; /* Custom bullet point */
+            color: #667eea;
+            font-size: 1.2em;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .image-container {
+            margin: 1.5rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .image-container img {
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .btn-video {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: #667eea;
+            color: white;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'Quicksand', sans-serif;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .btn-video:hover {
+            background-color: #764ba2;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(118, 75, 162, 0.5);
+        }
+
+        /* Responsive adjustments for images */
+        @media (min-width: 768px) {
+            .img-left {
+                float: left;
+                margin-right: 1.5rem;
+                margin-bottom: 1rem;
+                width: 40%; /* Adjust as needed */
+            }
+            .img-right {
+                float: right;
+                margin-left: 1.5rem;
+                margin-bottom: 1rem;
+                width: 40%; /* Adjust as needed */
+            }
+            .img-full-width {
+                width: 100%;
+            }
+        }
+        @media (max-width: 767px) {
+            .img-left, .img-right, .img-full-width {
+                float: none;
+                margin-left: auto;
+                margin-right: auto;
+                width: 100%;
+            }
+        }
+
+        /* Navbar styles from menu.html */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.5);
+            transition: top 0.3s;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #2f73ff;
+        }
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .nav-links { display: flex; gap: 2rem; font-weight: 600; }
+        .nav-links a { font-size: 1rem; color: #fff; text-decoration: none; transition: color 0.3s; }
+        .nav-links a:hover { color: #2f73ff; }
+        .cta {
+            padding: 0.6rem 1.4rem;
+            background: #2f73ff;
+            border-radius: 999px;
+            font-weight: 600;
+            color: #fff;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+        .cta:hover { background: #245ad1; }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 0.3rem;
+        }
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+        .menu-toggle.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .menu-toggle.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+
+        /* Responsive for Navbar */
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem; }
+            .nav-links { display: none; flex-direction: column; width: 100%; background: rgba(0,0,0,0.8); position: absolute; top: 60px; left: 0; padding: 1rem; }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: 0.5rem 0; text-align: center; }
+            .cta { display: none; }
+            .menu-toggle { display: flex; }
+        }
+
+        /* Footer styles from footer.html */
+        .ai-gradient {
+            background: linear-gradient(135deg, #0b0b3b 0%, #1a1a6c 50%, #3a0ca3 100%);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .ai-circuit {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .logo-glow {
+            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.8));
+        }
+        
+        .footer-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #8a2be2;
+            transition: width 0.3s ease;
+        }
+        
+        .footer-link:hover:after {
+            width: 100%;
+        }
+        
+        .footer-link:hover {
+            color: #a855f7;
+        }
+        
+        .dot-separator {
+            display: inline-block;
+            margin: 0 6px;
+            opacity: 0.7;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin: 0 8px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            overflow: hidden;
+        }
+        
+        .social-icon:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .social-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 8px;
+        }
+        
+        .social-text {
+            margin-top: 4px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+        
+        .social-item:hover .social-text {
+            color: white;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .icon-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .fb-icon, .yt-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .fb-icon {
+            background-color: #1877F2;
+        }
+        
+        .yt-icon {
+            background-color: #FF0000;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-links {
+                margin-top: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .dot-separator {
+                display: none;
+            }
+            
+            .footer-link {
+                margin: 0.4rem 0;
+            }
+            
+            .description-text {
+                max-width: 100%;
+            }
+            
+            .social-icons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .social-item {
+                margin: 8px 0;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .social-icons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Section -->
+    <style>
+        /* Navbar */
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          padding: 1rem 2rem;
+          z-index: 100;
+          background: rgba(0, 0, 0, 0.5);
+          transition: top 0.3s;
+        }
+        .logo {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+        }
+        .logo-img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 2px solid #2f73ff;
+        }
+        .logo-text {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: #fff;
+        }
+        .nav-links { display: flex; gap: 2rem; font-weight: 600; }
+        .nav-links a { font-size: 1rem; color: #fff; text-decoration: none; transition: color 0.3s; }
+        .nav-links a:hover { color: #2f73ff; }
+        .cta {
+          padding: 0.6rem 1.4rem;
+          background: #2f73ff;
+          border-radius: 999px;
+          font-weight: 600;
+          color: #fff;
+          transition: background 0.3s;
+          text-decoration: none;
+        }
+        .cta:hover { background: #245ad1; }
+    
+        .menu-toggle {
+          display: none;
+          flex-direction: column;
+          cursor: pointer;
+          gap: 0.3rem;
+        }
+        .menu-toggle span {
+          width: 25px;
+          height: 3px;
+          background: #fff;
+          border-radius: 5px;
+          transition: all 0.3s ease-in-out;
+        }
+        .menu-toggle.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .menu-toggle.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+    
+        /* Responsive */
+        @media (max-width: 768px) {
+          .navbar { padding: 1rem; }
+          .nav-links { display: none; flex-direction: column; width: 100%; background: rgba(0,0,0,0.8); position: absolute; top: 60px; left: 0; padding: 1rem; }
+          .nav-links.open { display: flex; }
+          .nav-links a { padding: 0.5rem 0; text-align: center; }
+          .cta { display: none; }
+          .menu-toggle { display: flex; }
+        }
+    </style>
+    <nav class="navbar">
+        <div class="logo">
+          <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
+          <span class="logo-text">Quân H</span>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <a href="../index.html">Trang chủ</a>
+          <a href="../baiviet.html">Bài viết</a>
+          <a href="../congcu.html">Công cụ</a>
+          <a href="../video.html">Video</a>
+          <a href="../trochoi.html">Trò chơi</a>
+          <a href="../thinghiemao.html">Thí nghiệm ảo</a>
+          <a href="../khoahoconline.html">Khóa học</a>
+        </div>
+        <a href="../lienhe.html" class="cta">Liên hệ</a>
+        <div class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+    
+        menuToggle.addEventListener('click', () => {
+          navLinks.classList.toggle('open');
+          menuToggle.classList.toggle('open');
+        });
+    </script>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+                🤖 DeepSeek – Mô Hình AI Mã Nguồn Mở Đang Làm Nóng Cộng Đồng Công Nghệ
+            </h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto">
+                Trong thế giới AI đang phát triển với tốc độ chóng mặt, hàng loạt mô hình lớn xuất hiện từ OpenAI, Google, Anthropic, Meta… Nhưng một cái tên mới nổi từ Trung Quốc đang thu hút rất nhiều sự chú ý từ giới công nghệ quốc tế: DeepSeek.
+            </p>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto mt-2">
+                Vậy DeepSeek là gì? Có gì đặc biệt? Liệu đây có phải là một “đối thủ đáng gờm” với các ông lớn như ChatGPT?
+            </p>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <article class="article-container">
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold mb-4">🔍 DeepSeek Là Gì?</h2>
+            <div class="image-container">
+                <img src="https://cdnv2.tgdd.vn/mwg-static/common/News/1574589/cach-su-dung-deepseek-1.jpg" alt="DeepSeek AI" class="img-full-width">
+            </div>
+            <p class="mb-4">
+                DeepSeek là một dự án mô hình ngôn ngữ lớn (LLM) đến từ Trung Quốc, phát triển bởi công ty DeepSeek AI.
+            </p>
+            <p class="mb-4">
+                Điểm đáng chú ý nhất là: mã nguồn mở hoàn toàn và hướng tới việc phục vụ cộng đồng AI toàn cầu.
+            </p>
+        </section>
+
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold mb-4">🧠 Các Dòng Mô Hình Chính Của DeepSeek</h2>
+            
+            <h3 class="text-xl font-medium text-gray-700 mb-2">1. DeepSeek-VL (Vision-Language)</h3>
+            <div class="image-container">
+                <img src="https://www.reuters.com/resizer/v2/UQ5ULKEZRFMGDB4IG2HV7T6SKQ.jpg?auth=b61b777739a5221814e10147b61c6905e9d5c78ee6c019fa759d3fcd745f122a&width=3000&quality=80" alt="DeepSeek-VL" class="img-left w-full md:w-2/5">
+            </div>
+            <p class="mb-2">
+                Mô hình kết hợp văn bản và hình ảnh, có khả năng xử lý cả hai đầu vào (giống GPT-4V).
+            </p>
+            <ul>
+                <li>Có thể mô tả hình ảnh, trả lời câu hỏi về hình ảnh, giải thích sơ đồ, biểu đồ...</li>
+            </ul>
+            <div class="clearfix"></div> <!-- Clear float -->
+
+            <h3 class="text-xl font-medium text-gray-700 mt-6 mb-2">2. DeepSeek-Coder</h3>
+            <p class="mb-2">
+                Mô hình chuyên về lập trình, có thể hỗ trợ:
+            </p>
+            <ul>
+                <li>Viết code nhiều ngôn ngữ (Python, C++, JavaScript…)</li>
+                <li>Sửa lỗi, giải thích thuật toán</li>
+                <li>Tự động tạo tài liệu hoặc script theo yêu cầu</li>
+                <li>Mạnh mẽ như CodeLlama hoặc GPT-4 Turbo, nhưng hoàn toàn miễn phí</li>
+            </ul>
+
+            <h3 class="text-xl font-medium text-gray-700 mt-6 mb-2">3. DeepSeek-MoE (Mixture of Experts)</h3>
+            <div class="image-container">
+                <img src="https://cdn1-m.alittihad.ae/store/archive/image/2025/1/27/ad87157f-5783-407b-b8be-1df3f07c57bc.jpg" alt="DeepSeek-MoE" class="img-right w-full md:w-2/5">
+            </div>
+            <p class="mb-2">
+                Mô hình sử dụng kiến trúc MoE (Chuyên gia trộn lẫn) – chỉ kích hoạt một phần nhỏ tham số trong mỗi lần chạy → tối ưu tài nguyên và hiệu suất
+            </p>
+            <ul>
+                <li>Hiện có phiên bản với 236 tỷ tham số nhưng chỉ sử dụng ~26 tỷ khi chạy inference.</li>
+            </ul>
+            <div class="clearfix"></div> <!-- Clear float -->
+        </section>
+
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold mb-4">🚀 Ưu Điểm Của DeepSeek</h2>
+            <ul>
+                <li>✅ Mã nguồn mở hoàn toàn – dễ tích hợp, tùy biến, dùng cho nghiên cứu và phát triển sản phẩm AI riêng.</li>
+                <li>✅ Miễn phí – trong khi nhiều mô hình mạnh hiện nay yêu cầu trả phí.</li>
+                <li>✅ Hiệu suất cao – đặc biệt trong xử lý lập trình, văn bản và hình ảnh.</li>
+                <li>✅ Phù hợp với người dùng toàn cầu – hỗ trợ nhiều ngôn ngữ, bao gồm cả tiếng Trung và tiếng Anh.</li>
+            </ul>
+        </section>
+
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold mb-4">💼 Ai Nên Quan Tâm DeepSeek?</h2>
+            <ul>
+                <li>🧑‍💻 Lập trình viên, kỹ sư AI: muốn tích hợp AI vào phần mềm hoặc học cách huấn luyện mô hình LLM.</li>
+                <li>🧪 Nhà nghiên cứu: cần truy cập mã nguồn và mô hình để thử nghiệm, đánh giá, so sánh.</li>
+                <li>📚 Người học AI: muốn hiểu cách hoạt động của các LLM hiện đại mà không bị giới hạn bởi các API trả phí.</li>
+                <li>🏢 Doanh nghiệp vừa và nhỏ: có thể tận dụng DeepSeek để xây dựng hệ thống chatbot, phân tích dữ liệu, trợ lý nội bộ… mà không phải trả chi phí cao.</li>
+            </ul>
+        </section>
+
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold mb-4">🔧 Cách Trải Nghiệm DeepSeek</h2>
+            <p class="mb-2">Bạn có thể:</p>
+            <ul>
+                <li>Truy cập bản demo của các mô hình trên web chính thức của DeepSeek</li>
+                <li>Tải mô hình từ Hugging Face hoặc GitHub</li>
+                <li>Tự triển khai trên môi trường máy chủ riêng hoặc cloud (nếu có GPU)</li>
+            </ul>
+        </section>
+
+        <section class="section-card text-center">
+            <h2 class="text-2xl font-semibold mb-4">🌟 Kết Luận</h2>
+            <p class="mb-4">
+                DeepSeek không chỉ là một mô hình AI, mà là lời khẳng định rằng AI mở – minh bạch – chia sẻ đang là xu hướng toàn cầu.
+            </p>
+            <p class="mb-6">
+                Dù bạn là người học, nhà nghiên cứu, hay người muốn tạo ra sản phẩm ứng dụng AI – DeepSeek là một lựa chọn đáng để thử và theo dõi trong năm 2025 và những năm tới.
+            </p>
+            <a href="https://deepseek.com/" target="_blank" class="btn-video">
+                Truy cập công cụ
+            </a>
+        </section>
+    </article>
+
+    <!-- Footer Section -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        .ai-gradient {
+            background: linear-gradient(135deg, #0b0b3b 0%, #1a1a6c 50%, #3a0ca3 100%);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .ai-circuit {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .logo-glow {
+            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.8));
+        }
+        
+        .footer-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #8a2be2;
+            transition: width 0.3s ease;
+        }
+        
+        .footer-link:hover:after {
+            width: 100%;
+        }
+        
+        .footer-link:hover {
+            color: #a855f7;
+        }
+        
+        .dot-separator {
+            display: inline-block;
+            margin: 0 6px;
+            opacity: 0.7;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin: 0 8px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            overflow: hidden;
+        }
+        
+        .social-icon:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .social-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 8px;
+        }
+        
+        .social-text {
+            margin-top: 4px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+        
+        .social-item:hover .social-text {
+            color: white;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .icon-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .fb-icon, .yt-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .fb-icon {
+            background-color: #1877F2;
+        }
+        
+        .yt-icon {
+            background-color: #FF0000;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-links {
+                margin-top: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .dot-separator {
+                display: none;
+            }
+            
+            .footer-link {
+                margin: 0.4rem 0;
+            }
+            
+            .description-text {
+                max-width: 100%;
+            }
+            
+            .social-icons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .social-item {
+                margin: 8px 0;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .social-icons {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <footer class="ai-gradient text-white">
+        <!-- AI Circuit Pattern Background -->
+        <svg class="ai-circuit" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <pattern id="circuit-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                <path d="M10 10 L90 10 L90 90 L10 90 Z" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+                <circle cx="10" cy="10" r="2" fill="#ffffff"/>
+                <circle cx="90" cy="10" r="2" fill="#ffffff"/>
+                <circle cx="90" cy="90" r="2" fill="#ffffff"/>
+                <circle cx="10" cy="90" r="2" fill="#ffffff"/>
+                <path d="M10 50 L40 50 L40 10" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+                <path d="M90 50 L60 50 L60 90" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+                <circle cx="40" cy="50" r="2" fill="#ffffff"/>
+                <circle cx="60" cy="50" r="2" fill="#ffffff"/>
+            </pattern>
+            <rect width="100%" height="100%" fill="url(#circuit-pattern)"/>
+        </svg>
+        
+        <div class="footer-container px-3 py-4">
+            <div class="footer-content flex flex-col items-center justify-center">
+                <!-- Logo and Description -->
+                <div class="flex flex-col items-center mb-2">
+                    <div class="logo-glow rounded-full overflow-hidden w-16 h-16 flex-shrink-0 border-2 border-purple-400 mb-3">
+                        <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" 
+                             alt="Quân H Logo" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-center max-w-md">
+                        <p class="text-sm md:text-base font-medium description-text">
+                            Quân H – Giảng viên & Youtuber chia sẻ kiến thức AI, công nghệ và giáo dục.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Social Media Icons - Vertical Layout -->
+                <div class="social-icons flex flex-row md:flex-row justify-center flex-wrap">
+                    <a href="https://www.facebook.com/tran.hong.quan.216221/" target="_blank" class="social-item">
+                        <div class="social-icon">
+                            <div class="fb-icon">
+                                <i class="fab fa-facebook-f text-white"></i>
+                            </div>
+                        </div>
+                        <span class="social-text">Trần Hồng Quân</span>
+                    </a>
+                    
+                    <a href="javascript:void(0)" class="social-item" onclick="alert('Zalo: 0355.213.107')">
+                        <div class="social-icon p-0">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/768px-Icon_of_Zalo.svg.png" 
+                                 alt="Zalo" 
+                                 class="icon-img">
+                        </div>
+                        <span class="social-text">0355.213.107</span>
+                    </a>
+                    
+                    <a href="https://www.youtube.com/@quanh95" target="_blank" class="social-item">
+                        <div class="social-icon">
+                            <div class="yt-icon">
+                                <i class="fab fa-youtube text-white"></i>
+                            </div>
+                        </div>
+                        <span class="social-text">Quân H</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-purple-900/50 mt-1 pt-3">
+                <div class="flex flex-wrap justify-center md:justify-between items-center text-xs text-purple-200/80">
+                    <div class="mb-1 md:mb-0">
+                        © 2025 Quân H.
+                    </div>
+                    <div class="flex flex-wrap justify-center">
+                        <a href="#" class="footer-link mx-1">Chính sách bảo mật</a>
+                        <span class="dot-separator">•</span>
+                        <a href="#" class="footer-link mx-1">Điều khoản sử dụng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

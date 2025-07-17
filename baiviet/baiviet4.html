@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ứng dụng AI trong dạy và học</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5; /* Màu nền nhẹ nhàng */
+            color: #333;
+            line-height: 1.6;
+        }
+        .navbar {
+            position: sticky; top:0; left:0; width:100%;
+            display:flex; justify-content:space-between; align-items:center;
+            padding:1rem 2rem; background:rgba(0,0,0,0.5); z-index:100;
+        }
+        .logo            { display:flex; align-items:center; gap:.75rem; }
+        .logo-img        { width:40px; height:40px; border-radius:50%; border:2px solid #2f73ff; }
+        .logo-text       { font-family:'Inter',sans-serif; font-size:1.5rem; font-weight:700; color:#fff; }
+        .nav-links       { display:flex; gap:2rem; font-weight:600; }
+        .nav-links a     { color:#fff; transition:color .3s; }
+        .nav-links a:hover { color:#2f73ff; }
+        .cta             { padding:.6rem 1.4rem; background:#2f73ff; border-radius:999px; font-weight:600; color:#fff; transition:background .3s; }
+        .cta:hover       { background:#245ad1; }
+
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem;
+            }
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+                margin-top: 1rem;
+                display: none; /* Hidden by default on small screens */
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .logo-img {
+                width: 32px;
+                height: 32px;
+            }
+            .hamburger {
+                display: block;
+                cursor: pointer;
+                color: #fff;
+                font-size: 1.5rem;
+                position: absolute;
+                right: 1rem;
+                top: 1rem;
+            }
+            .cta {
+                margin-top: 1rem;
+                width: 100%;
+                text-align: center;
+            }
+        }
+        @media (min-width: 769px) {
+            .hamburger {
+                display: none;
+            }
+        }
+
+        .article-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Bóng nhẹ */
+        }
+        .article-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2f73ff;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .article-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .article-section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .article-paragraph {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .download-button {
+            display: block;
+            width: fit-content;
+            margin: 2rem auto;
+            padding: 1rem 2.5rem;
+            background-color: #2f73ff;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-align: center;
+            border-radius: 999px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 6px 15px rgba(47, 115, 255, 0.4);
+        }
+        .download-button:hover {
+            background-color: #245ad1;
+            transform: translateY(-2px);
+        }
+        .download-button:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive adjustments for text and padding */
+        @media (max-width: 768px) {
+            .article-container {
+                margin: 1rem auto;
+                padding: 1rem;
+            }
+            .article-title {
+                font-size: 1.8rem;
+            }
+            .article-section-title {
+                font-size: 1.5rem;
+            }
+            .article-paragraph {
+                font-size: 1rem;
+            }
+            .download-button {
+                font-size: 1rem;
+                padding: 0.8rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // JavaScript for responsive navbar (hamburger menu)
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.querySelector('.navbar');
+            const navLinks = document.querySelector('.nav-links');
+            const hamburger = document.createElement('div');
+            hamburger.classList.add('hamburger');
+            hamburger.innerHTML = '&#9776;'; // Hamburger icon
+            navbar.insertBefore(hamburger, navLinks);
+
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+        });
+    </script>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png"
+                 alt="Logo Quân H" class="logo-img" />
+            <span class="logo-text">Quân H</span>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html">Trang chủ</a>
+            <a href="../baiviet.html">Bài viết</a>
+            <a href="../congcu.html">Công cụ</a>
+            <a href="../video.html">Video</a>
+            <a href="../lienhe.html">Liên hệ</a>
+        </div>
+        <a href="../lienhe.html" class="cta">Liên hệ</a>
+    </nav>
+
+    <div class="article-container">
+        <h1 class="article-title">Ứng dụng AI trong dạy và học</h1>
+
+        <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1750396128/Screenshot_2025-06-14_213830_hkvyhm.png"
+             alt="Ảnh minh họa AI trong giáo dục" class="article-image">
+
+        <p class="article-paragraph">
+            Trí tuệ nhân tạo (AI) không còn là khái niệm xa vời – ngày nay, AI đã và đang được áp dụng trong giáo dục để tiết kiệm thời gian, cá nhân hóa việc học và nâng cao trải nghiệm giảng dạy.
+        </p>
+        <p class="article-paragraph">
+            Tôi xin chia sẻ một tài liệu PDF tổng hợp có tên "Ứng dụng AI trong dạy và học", dành cho các thầy cô, nhà giáo dục hoặc bất kỳ ai quan tâm đến việc tích hợp công nghệ vào lớp học.
+        </p>
+
+        <h2 class="article-section-title">Trong tài liệu này, bạn sẽ tìm thấy:</h2>
+        <ul class="list-disc list-inside ml-4 article-paragraph">
+            <li>Các công cụ AI phổ biến và cách sử dụng chúng trong thực tế</li>
+            <li>Gợi ý bài giảng mẫu áp dụng AI hỗ trợ soạn nội dung, minh họa, kiểm tra</li>
+            <li>Mẹo tiết kiệm thời gian trong công việc hàng ngày bằng AI</li>
+            <li>Quan điểm sư phạm khi kết hợp AI vào lớp học</li>
+        </ul>
+        <p class="article-paragraph">
+            Tài liệu được trình bày ngắn gọn, dễ hiểu, đặc biệt phù hợp với giáo viên không chuyên công nghệ.
+        </p>
+
+        <a href="https://kontum01-my.sharepoint.com/:b:/g/personal/quanth_c12sb_st_gdkontum_edu_vn/ESDRHwM7oGNDjk6N2u49yssBLcguSzDC5_nWgUBxOMqO4g?e=le4hHn"
+           target="_blank" class="download-button">
+            Tải tài liệu ngay!
+        </a>
+    </div>
+</body>
+</html>

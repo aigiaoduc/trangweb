@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đi tìm hành tinh – Trò chơi gọi tên học sinh vui nhộn</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS for Navbar */
+        .navbar {
+            position: sticky; top:0; left:0; width:100%;
+            display:flex; justify-content:space-between; align-items:center;
+            padding:1rem 2rem; background:rgba(0,0,0,0.5); z-index:100;
+            backdrop-filter: blur(10px); /* Hiệu ứng làm mờ */
+        }
+        .logo            { display:flex; align-items:center; gap:.75rem; }
+        .logo-img        { width:40px; height:40px; border-radius:50%; border:2px solid #2f73ff; }
+        .logo-text       { font-family:'Inter',sans-serif; font-size:1.5rem; font-weight:700; color:#fff; }
+        .nav-links       { display:flex; gap:2rem; font-weight:600; }
+        .nav-links a     { color:#fff; transition:color .3s; }
+        .nav-links a:hover { color:#2f73ff; }
+        .cta             { padding:.6rem 1.4rem; background:#2f73ff; border-radius:999px; font-weight:600; color:#fff; transition:background .3s; }
+        .cta:hover       { background:#245ad1; }
+
+        /* Hamburger menu styles */
+        .hamburger {
+            display: none; /* Hidden by default, shown on mobile */
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .nav-links.nav-active {
+            transform: translateX(0%);
+        }
+
+        /* Custom CSS for responsive and other styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light gray background */
+            color: #333;
+        }
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+            padding: 1.5rem;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .btn-primary {
+            background-color: #2f73ff;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px; /* rounded-full */
+            font-weight: 600;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            background-color: #245ad1;
+            transform: translateY(-2px);
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradient background */
+            color: #fff;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: 2rem;
+            border-bottom-right-radius: 2rem;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: rotate(45deg);
+            animation: float1 10s infinite ease-in-out;
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            transform: rotate(-30deg);
+            animation: float2 12s infinite ease-in-out;
+        }
+        @keyframes float1 {
+            0% { transform: translate(0, 0) rotate(45deg); }
+            50% { transform: translate(20px, 20px) rotate(50deg); }
+            100% { transform: translate(0, 0) rotate(45deg); }
+        }
+        @keyframes float2 {
+            0% { transform: translate(0, 0) rotate(-30deg); }
+            50% { transform: translate(-20px, -20px) rotate(-35deg); }
+            100% { transform: translate(0, 0) rotate(-30deg); }
+        }
+
+        /* Responsive adjustments for Navbar */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: row; /* Keep navbar horizontal on mobile for logo and hamburger */
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem;
+            }
+            .nav-links {
+                position: fixed;
+                top: 60px; /* Height of the navbar */
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 60px);
+                background: rgba(0,0,0,0.9);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transform: translateX(100%); /* Hidden by default */
+                transition: transform 0.3s ease-in;
+                z-index: 90;
+            }
+            .nav-links a {
+                padding: 1rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            .cta {
+                display: none; /* Hide CTA button on mobile */
+            }
+            .hamburger {
+                display: flex; /* Show hamburger on mobile */
+            }
+            .logo-img {
+                width: 32px;
+                height: 32px;
+            }
+        }
+
+        /* Responsive adjustments for Hero and Content */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+            .hero-section h1 {
+                font-size: 2rem; /* text-2xl */
+            }
+            .content-grid {
+                grid-template-columns: 1fr; /* grid-cols-1 */
+            }
+            .card {
+                padding: 1rem;
+            }
+            .card h3 {
+                font-size: 1.1rem;
+            }
+            .btn-primary {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) { /* md: */
+            .content-grid {
+                grid-template-columns: repeat(2, 1fr); /* md:grid-cols-2 */
+            }
+        }
+        @media (min-width: 1025px) { /* lg: */
+            .content-grid {
+                grid-template-columns: repeat(3, 1fr); /* lg:grid-cols-3 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png"
+                 alt="Logo Quân H" class="logo-img" />
+            <span class="logo-text">Quân H</span>
+        </div>
+        <div class="hamburger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="../index.html">Trang chủ</a>
+            <a href="../baiviet.html">Bài viết</a>
+            <a href="../congcu.html">Công cụ</a>
+            <a href="../video.html">Video</a>
+            <a href="../lienhe.html">Liên hệ</a>
+        </div>
+        <a href="../lienhe.html" class="cta" id="ctaButton">Liên hệ</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight">
+            🪐 Đi tìm hành tinh – Trò chơi gọi tên học sinh vui nhộn
+        </h1>
+        <p class="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto opacity-90">
+            Công cụ nhỏ giúp giáo viên thêm phần hứng thú khi điểm danh, chọn nhóm, hoặc khởi động tiết học.
+        </p>
+    </header>
+
+    <main class="container mx-auto p-4 sm:p-6 md:p-8 lg:p-10">
+        <!-- Article Image -->
+        <div class="my-8 text-center">
+            <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1750410562/Screenshot_2025-06-15_172853_mjxu4h.png"
+                 alt="Đi tìm hành tinh" class="mx-auto rounded-lg shadow-lg max-w-full h-auto md:max-w-xl lg:max-w-2xl" />
+        </div>
+
+        <!-- Introduction -->
+        <section class="mb-12 card">
+            <h2 class="text-2xl font-bold mb-4">🌍 Giới thiệu trò chơi:</h2>
+            <p class="mb-4">
+                "Đi tìm hành tinh" là một công cụ nhỏ giúp giáo viên thêm phần hứng thú khi điểm danh, chọn nhóm, hoặc khởi động tiết học.
+            </p>
+            <p>
+                Thay vì đọc tên truyền thống, giờ đây mỗi học sinh sẽ ẩn mình sau một hành tinh kỳ bí ✨
+            </p>
+            <p>
+                Bạn chỉ cần nhập danh sách tên, trò chơi sẽ gán ngẫu nhiên từng cái tên vào một hành tinh dễ thương.
+            </p>
+        </section>
+
+        <!-- How to use -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 text-center">🎯 Cách sử dụng:</h2>
+            <div class="content-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">Bước 1: Mở trò chơi</h3>
+                    <p>Mở trò chơi trên trình duyệt (file HTML).</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">Bước 2: Nhập tên học sinh</h3>
+                    <p>Nhập tên học sinh theo hướng dẫn.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">Bước 3: Bắt đầu trò chơi</h3>
+                    <p>Bấm "Bắt đầu", các hành tinh sẽ xuất hiện trên màn hình.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">Bước 4: Khám phá hành tinh</h3>
+                    <p>Bấm vào từng hành tinh để... khám phá ai đang ẩn náu bên trong! 😄</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advantages -->
+        <section class="mb-12 card">
+            <h2 class="text-2xl font-bold mb-4">✅ Ưu điểm:</h2>
+            <ul class="list-disc list-inside space-y-2">
+                <li>Hoạt động ngay trên máy – không cần kết nối mạng.</li>
+                <li>Dễ tuỳ chỉnh: có thể sửa tên, hình ảnh, số lượng hành tinh nếu muốn.</li>
+                <li>Học sinh cực kỳ thích thú vì cảm giác được “giấu mình” và được thầy/cô tìm thấy.</li>
+            </ul>
+        </section>
+
+        <!-- Suitable for -->
+        <section class="mb-12 card">
+            <h2 class="text-2xl font-bold mb-4">🧑‍🏫 Phù hợp với:</h2>
+            <p>Giáo viên tiểu học, THCS, các buổi sinh hoạt lớp, hoạt động nhóm...</p>
+        </section>
+
+        <!-- Call to action -->
+        <section class="mb-12 card text-center">
+            <a href="https://kontum01-my.sharepoint.com/:u:/g/personal/quanth_c12sb_st_gdkontum_edu_vn/EWWTqmL-SMFBtU6r8TgVHAoBBkvcU9vsG8zUV3woPF7I6Q?e=gDW5en" target="_blank" class="btn-primary text-xl px-8 py-4">Tải ứng dụng</a>
+            <p class="text-sm text-gray-500 mt-2">Mật khẩu giải nén: taiwebs.com</p>
+        </section>
+    </main>
+
+    <footer class="text-center py-8 text-gray-600 text-sm">
+        <p>&copy; 2025 Quân H. All rights reserved.</p>
+    </footer>
+    <script>
+        const hamburger = document.querySelector(".hamburger");
+        const navLinks = document.getElementById("navLinks");
+        const ctaButton = document.getElementById("ctaButton");
+
+        hamburger.addEventListener("click", () => {
+            navLinks.classList.toggle("nav-active");
+            // Optional: Toggle CTA button visibility if it's part of the mobile menu
+            // ctaButton.classList.toggle("nav-active"); 
+        });
+    </script>
+</body>
+</html>

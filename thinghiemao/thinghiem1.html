@@ -1,0 +1,1357 @@
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phòng Thí Nghiệm Ảo - Lửa và Các Vật Liệu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+                linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 200px, 400% 400%;
+            animation: gradient 15s ease infinite;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 0%, 0% 50%; }
+            50% { background-position: 100% 100%, 100% 50%; }
+            100% { background-position: 0% 0%, 0% 50%; }
+        }
+        
+        .material {
+            cursor: grab;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .material::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .material:hover {
+            transform: scale(1.08);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .material:hover::before {
+            opacity: 1;
+        }
+        
+        .material:active {
+            cursor: grabbing;
+            transform: scale(0.95);
+        }
+        
+        .lab-container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .fire-container {
+            position: relative;
+            width: 200px;
+            height: 250px;
+            margin: 0 auto;
+        }
+        
+        .lab-table {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 20px;
+            background: linear-gradient(to bottom, #8B4513, #654321);
+            border-radius: 5px 5px 0 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+        
+        .lab-table::before {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 10%;
+            width: 80%;
+            height: 20px;
+            background: #4a3728;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .burner {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 40px;
+            background: linear-gradient(to bottom, #777, #333);
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 2;
+        }
+        
+        .burner::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 10%;
+            width: 80%;
+            height: 5px;
+            background: #999;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .burner::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 10px;
+            background: #222;
+            border-radius: 50%;
+        }
+        
+        .fire {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 80px;
+            z-index: 3;
+        }
+        
+        .flame-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .flame {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(to top, #ff8c00, #ff4500, #ff0000);
+            border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
+            animation: flicker 1s infinite alternate;
+            filter: blur(5px);
+            transform-origin: center bottom;
+            box-shadow: 0 0 20px 5px rgba(255, 69, 0, 0.5);
+        }
+        
+        .flame::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 25%;
+            width: 50%;
+            height: 60%;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+            filter: blur(10px);
+        }
+        
+        .flame-inner {
+            position: absolute;
+            bottom: 10%;
+            left: 20%;
+            width: 60%;
+            height: 60%;
+            background: #ffdd00;
+            border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
+            filter: blur(4px);
+            animation: flicker-inner 0.8s infinite alternate;
+            transform-origin: center bottom;
+        }
+        
+        @keyframes flicker {
+            0% { transform: scaleY(1.0) scaleX(1.0); opacity: 0.9; }
+            25% { transform: scaleY(1.1) scaleX(0.95); opacity: 1; }
+            50% { transform: scaleY(0.95) scaleX(1.05); opacity: 0.9; }
+            75% { transform: scaleY(1.05) scaleX(0.95); opacity: 1; }
+            100% { transform: scaleY(1.0) scaleX(1.0); opacity: 0.9; }
+        }
+        
+        @keyframes flicker-inner {
+            0% { transform: scaleY(1.0) scaleX(1.0); opacity: 0.8; }
+            50% { transform: scaleY(1.1) scaleX(0.9); opacity: 1; }
+            100% { transform: scaleY(1.0) scaleX(1.0); opacity: 0.8; }
+        }
+        
+        .reaction-area {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+        }
+        
+        .quiz-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateY(20px);
+            opacity: 0;
+            transition: transform 0.5s, opacity 0.5s;
+            max-height: 0;
+            overflow: hidden;
+            z-index: 20;
+            width: 90%;
+            max-width: 400px;
+            pointer-events: none;
+        }
+        
+        .quiz-container.show {
+            transform: translate(-50%, -50%) translateY(0);
+            opacity: 1;
+            max-height: 200px;
+            pointer-events: all;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            border-radius: 50%;
+            animation: fall 3s ease-in infinite;
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(600px) rotate(360deg); opacity: 0; }
+        }
+        
+        .warning-banner {
+            background-color: rgba(255, 87, 34, 0.9);
+            border-left: 5px solid #ff3d00;
+        }
+        
+        .lab-equipment {
+            position: absolute;
+            z-index: 1;
+        }
+        
+        .beaker {
+            width: 40px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 0 0 5px 5px;
+            position: absolute;
+            bottom: 20px;
+        }
+        
+        .beaker::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -2px;
+            width: 40px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .flask {
+            width: 40px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50% 50% 5px 5px / 80% 80% 5px 5px;
+            position: absolute;
+            bottom: 20px;
+        }
+        
+        .flask::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-bottom: none;
+        }
+        
+        .feedback-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            z-index: 20;
+            width: 90%;
+            max-width: 400px;
+            pointer-events: none;
+        }
+        
+        .feedback-container.show {
+            max-height: 200px;
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .glow {
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 10px -5px rgba(255, 215, 0, 0.6); }
+            to { box-shadow: 0 0 20px 5px rgba(255, 215, 0, 0.9); }
+        }
+        
+        .material-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 12px;
+        }
+        
+        .material-card {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s;
+        }
+        
+        .material-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .material-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .material-name {
+            font-weight: 600;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .lab-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .bubble {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 3s infinite ease-in-out;
+            opacity: 0;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+        
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle 1s infinite;
+        }
+        
+        @keyframes sparkle {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+        
+        .experiment-area {
+            position: relative;
+            min-height: 500px;
+        }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 15;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <header class="bg-gradient-to-r from-blue-900 via-purple-800 to-blue-900 text-white p-4 shadow-lg">
+        <h1 class="text-2xl md:text-3xl font-bold text-center flex items-center justify-center">
+            <span class="mr-2">🧪</span> Phòng Thí Nghiệm Ảo - Lửa và Các Vật Liệu <span class="ml-2">🔥</span>
+        </h1>
+    </header>
+    <audio id="fire-sound" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1751174173/tieng_lua_chay-www_tiengdong_com_mp3cut.net_sibrhn.mp3" preload="auto"></audio>
+    <audio id="click-sound" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1743950559/Am_thanh_tieng_click_chuot-www_tiengdong_com_vg4uik.mp3" preload="auto"></audio>
+    <audio id="correct-sound" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1743950336/Am_thanh_chuc_mung_chien_thang-www_tiengdong_com_tzitdy.mp3" preload="auto"></audio>
+    <audio id="wrong-sound" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1743950341/Am_thanh_tra_loi_sai-www_tiengdong_com_r160v8.mp3" preload="auto"></audio>
+
+    <div class="warning-banner p-2 text-white text-center text-sm md:text-base">
+        <p>⚠️ <strong>Lưu ý:</strong> Đây chỉ là mô phỏng an toàn. Ngoài đời, không được thử các thí nghiệm với lửa nếu không có người lớn!</p>
+    </div>
+
+    <main class="flex-grow flex flex-col md:flex-row p-4 gap-4 overflow-hidden">
+        <!-- Materials Panel -->
+        <div class="w-full md:w-1/4 lab-container rounded-lg shadow-lg p-4 overflow-y-auto max-h-[80vh]">
+            <h2 class="text-xl font-bold mb-4 text-center text-blue-900">Vật Liệu</h2>
+            <div class="material-grid" id="materials-container">
+                <!-- Materials will be added here by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Experiment Area -->
+        <div class="w-full md:w-3/4 lab-container rounded-lg shadow-lg p-4 flex flex-col relative">
+            <div class="lab-background"></div>
+            
+            <!-- Lab equipment decorations -->
+            <div class="lab-equipment beaker" style="left: 10%; transform: rotate(-5deg);"></div>
+            <div class="lab-equipment flask" style="right: 10%; transform: rotate(5deg);"></div>
+            
+            <h2 class="text-xl font-bold mb-4 text-center text-blue-900 relative z-10">Khu Vực Thí Nghiệm</h2>
+            
+            <div class="flex-grow flex flex-col items-center justify-center relative experiment-area">
+                <div class="fire-container mb-8">
+                    <div class="lab-table"></div>
+                    <div class="burner"></div>
+                    <div class="fire">
+                        <div class="flame-wrapper">
+                            <div class="flame"></div>
+                            <div class="flame-inner"></div>
+                        </div>
+                    </div>
+                    <div id="reaction-area" class="reaction-area"></div>
+                </div>
+                
+                <div id="experiment-instruction" class="text-center mb-4 text-lg bg-blue-100 p-3 rounded-lg shadow-inner">
+                    <p>Kéo một vật liệu vào ngọn lửa để xem phản ứng</p>
+                </div>
+                
+                <div id="reaction-display" class="text-center mb-4 hidden w-full max-w-md">
+                    <div id="reaction-animation" class="mb-4 h-24 flex items-center justify-center"></div>
+                    <p id="reaction-text" class="text-lg font-medium bg-white bg-opacity-70 p-3 rounded-lg"></p>
+                </div>
+                
+                <div id="modal-overlay" class="modal-overlay"></div>
+                
+                <div id="quiz-container" class="quiz-container">
+                    <div class="p-4 bg-blue-100 rounded-lg shadow">
+                        <p id="quiz-question" class="text-lg font-medium mb-3"></p>
+                        <div class="flex gap-2 justify-center">
+                            <button id="answer-yes" class="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition shadow-md">Có</button>
+                            <button id="answer-no" class="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition shadow-md">Không</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="feedback-container" class="feedback-container">
+                    <!-- Content will be added dynamically -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const materials = [
+                { 
+                    id: 'paper', 
+                    name: 'Giấy', 
+                    icon: '📄', 
+                    flammable: true, 
+                    reaction: 'cháy nhanh thành tro',
+                    animation: 'burning',
+                    explanation: 'Giấy là vật liệu dễ cháy vì được làm từ sợi cellulose.'
+                },
+                { 
+                    id: 'wood', 
+                    name: 'Gỗ', 
+                    icon: '🪵', 
+                    flammable: true, 
+                    reaction: 'cháy từ từ và tạo than',
+                    animation: 'burning-slow',
+                    explanation: 'Gỗ là vật liệu dễ cháy nhưng cháy chậm hơn giấy.'
+                },
+                { 
+                    id: 'water', 
+                    name: 'Nước', 
+                    icon: '💧', 
+                    flammable: false, 
+                    reaction: 'bốc hơi nhưng không cháy',
+                    animation: 'evaporating',
+                    explanation: 'Nước không cháy mà chỉ bốc hơi khi gặp nhiệt.'
+                },
+                { 
+                    id: 'plastic', 
+                    name: 'Nhựa', 
+                    icon: '🥤', 
+                    flammable: true, 
+                    reaction: 'nóng chảy và tạo khói đen',
+                    animation: 'melting',
+                    explanation: 'Nhựa thường nóng chảy và có thể cháy, tạo ra khói độc hại.'
+                },
+                { 
+                    id: 'metal', 
+                    name: 'Kim loại', 
+                    icon: '🔧', 
+                    flammable: false, 
+                    reaction: 'nóng lên nhưng không cháy',
+                    animation: 'heating',
+                    explanation: 'Kim loại dẫn nhiệt tốt nhưng không cháy ở nhiệt độ thông thường.'
+                },
+                { 
+                    id: 'stone', 
+                    name: 'Đá', 
+                    icon: '🪨', 
+                    flammable: false, 
+                    reaction: 'không thay đổi',
+                    animation: 'no-reaction',
+                    explanation: 'Đá không cháy và chịu được nhiệt độ cao.'
+                },
+                { 
+                    id: 'cloth', 
+                    name: 'Vải', 
+                    icon: '🧵', 
+                    flammable: true, 
+                    reaction: 'cháy nhanh và tạo khói',
+                    animation: 'burning',
+                    explanation: 'Vải thường dễ cháy, đặc biệt là vải cotton và các loại vải tự nhiên.'
+                },
+                { 
+                    id: 'leaves', 
+                    name: 'Lá cây', 
+                    icon: '🍃', 
+                    flammable: true, 
+                    reaction: 'cháy nhanh và tạo tro',
+                    animation: 'burning',
+                    explanation: 'Lá cây khô rất dễ cháy do chứa nhiều cellulose.'
+                },
+                { 
+                    id: 'glass', 
+                    name: 'Thủy tinh', 
+                    icon: '🥛', 
+                    flammable: false, 
+                    reaction: 'nóng lên nhưng không cháy',
+                    animation: 'heating',
+                    explanation: 'Thủy tinh không cháy mà chỉ nóng chảy ở nhiệt độ rất cao.'
+                },
+                { 
+                    id: 'sand', 
+                    name: 'Cát', 
+                    icon: '🏝️', 
+                    flammable: false, 
+                    reaction: 'không thay đổi',
+                    animation: 'no-reaction',
+                    explanation: 'Cát không cháy và thường được dùng để dập lửa.'
+                },
+                { 
+                    id: 'oil', 
+                    name: 'Dầu', 
+                    icon: '🛢️', 
+                    flammable: true, 
+                    reaction: 'cháy mạnh với ngọn lửa lớn',
+                    animation: 'burning-intense',
+                    explanation: 'Dầu rất dễ cháy và tạo ra nhiều nhiệt khi cháy.'
+                },
+                { 
+                    id: 'rubber', 
+                    name: 'Cao su', 
+                    icon: '🧤', 
+                    flammable: true, 
+                    reaction: 'cháy và tạo khói đen dày',
+                    animation: 'burning-smoke',
+                    explanation: 'Cao su cháy tạo ra khói đen dày và mùi đặc trưng.'
+                }
+            ];
+            
+            const materialsContainer = document.getElementById('materials-container');
+            const reactionArea = document.getElementById('reaction-area');
+            const reactionDisplay = document.getElementById('reaction-display');
+            const reactionAnimation = document.getElementById('reaction-animation');
+            const reactionText = document.getElementById('reaction-text');
+            const quizContainer = document.getElementById('quiz-container');
+            const quizQuestion = document.getElementById('quiz-question');
+            const answerYes = document.getElementById('answer-yes');
+            const answerNo = document.getElementById('answer-no');
+            const feedbackContainer = document.getElementById('feedback-container');
+            const experimentInstruction = document.getElementById('experiment-instruction');
+            const modalOverlay = document.getElementById('modal-overlay');
+            
+            let currentMaterial = null;
+            
+            // Add sparkles to the lab background
+            addLabDecorations();
+            
+            // Initialize materials
+            materials.forEach(material => {
+                const materialElement = document.createElement('div');
+                materialElement.className = 'material material-card';
+                materialElement.setAttribute('draggable', 'true');
+                materialElement.setAttribute('data-id', material.id);
+                
+                materialElement.innerHTML = `
+                    <div class="material-icon">${material.icon}</div>
+                    <div class="material-name">${material.name}</div>
+                `;
+                
+                materialElement.addEventListener('dragstart', (e) => {
+                    e.dataTransfer.setData('text/plain', material.id);
+                    materialElement.classList.add('opacity-50');
+                });
+                
+                materialElement.addEventListener('dragend', () => {
+                    materialElement.classList.remove('opacity-50');
+                });
+
+                materialElement.addEventListener('click', () => {
+                    const clickAudio = document.getElementById('click-sound');
+                    clickAudio.currentTime = 0;
+                    clickAudio.play().catch(err => console.warn('Không thể phát âm thanh click:', err));
+                });
+                
+                materialsContainer.appendChild(materialElement);
+            });
+            
+            // Set up drop area
+            reactionArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                reactionArea.classList.add('glow');
+            });
+            
+            reactionArea.addEventListener('dragleave', () => {
+                reactionArea.classList.remove('glow');
+            });
+            
+            reactionArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                reactionArea.classList.remove('glow');
+                const materialId = e.dataTransfer.getData('text/plain');
+                currentMaterial = materials.find(m => m.id === materialId);
+                
+                if (currentMaterial) {
+                    showReaction(currentMaterial);
+                }
+            });
+            
+            function showReaction(material) {
+                const fireAudio = document.getElementById('fire-sound');
+                fireAudio.currentTime = 0;
+                fireAudio.play().catch(err => console.warn('Không thể phát âm thanh:', err));
+
+                experimentInstruction.classList.add('hidden');
+                reactionDisplay.classList.remove('hidden');
+                
+                // Show reaction animation
+                reactionAnimation.innerHTML = `<div class="text-6xl relative z-10">${material.icon}</div>`;
+                reactionText.textContent = `${material.name} ${material.reaction}`;
+                
+                // Show animation based on material type
+                switch(material.animation) {
+                    case 'burning':
+                        animateBurning(reactionAnimation, 'fast');
+                        break;
+                    case 'burning-slow':
+                        animateBurning(reactionAnimation, 'slow');
+                        break;
+                    case 'burning-intense':
+                        animateBurningIntense(reactionAnimation);
+                        break;
+                    case 'burning-smoke':
+                        animateBurningSmoke(reactionAnimation);
+                        break;
+                    case 'melting':
+                        animateMelting(reactionAnimation);
+                        break;
+                    case 'evaporating':
+                        animateEvaporating(reactionAnimation);
+                        break;
+                    case 'heating':
+                        animateHeating(reactionAnimation);
+                        break;
+                    case 'no-reaction':
+                        animateNoReaction(reactionAnimation);
+                        break;
+                }
+                
+                // Show quiz after a short delay
+                setTimeout(() => {
+                    showQuiz(material);
+                }, 2500);
+            }
+            
+            function showQuiz(material) {
+                quizQuestion.textContent = `Vật liệu ${material.name} có phải là vật dễ cháy không?`;
+                quizContainer.classList.add('show');
+                modalOverlay.classList.add('show');
+                
+                // Set up answer handlers
+                answerYes.onclick = () => checkAnswer(true, material);
+                answerNo.onclick = () => checkAnswer(false, material);
+            }
+            
+            function checkAnswer(answer, material) {
+                quizContainer.classList.remove('show');
+                
+                if (answer === material.flammable) {
+                    // Correct answer
+                    const correctAudio = document.getElementById('correct-sound');
+                    correctAudio.currentTime = 0;
+                    correctAudio.play().catch(err => console.warn('Không thể phát âm thanh đúng:', err));
+
+                    feedbackContainer.innerHTML = `
+                        <div class="p-4 bg-green-100 rounded-lg border-l-4 border-green-500">
+                            <p id="feedback-text" class="text-lg font-medium text-green-800">🎉 Đúng rồi! ${material.explanation}</p>
+                            <button id="continue-btn" class="mt-3 px-6 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:from-green-600 hover:to-green-700 transition shadow-md">Tiếp tục</button>
+                        </div>
+                    `;
+                    createConfetti();
+                } else {
+                    // Wrong answer
+                    const wrongAudio = document.getElementById('wrong-sound');
+                    wrongAudio.currentTime = 0;
+                    wrongAudio.play().catch(err => console.warn('Không thể phát âm thanh sai:', err));
+
+                    feedbackContainer.innerHTML = `
+                        <div class="p-4 bg-red-100 rounded-lg border-l-4 border-red-500">
+                            <p id="feedback-text" class="text-lg font-medium text-red-800">❌ Chưa đúng. ${material.explanation}</p>
+                            <button id="continue-btn" class="mt-3 px-6 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:from-red-600 hover:to-red-700 transition shadow-md">Thử lại</button>
+                        </div>
+                    `;
+                }
+                
+                feedbackContainer.classList.add('show');
+                document.getElementById('continue-btn').addEventListener('click', resetExperiment);
+            }
+            
+            function resetExperiment() {
+                // Reset the experiment
+                reactionDisplay.classList.add('hidden');
+                feedbackContainer.classList.remove('show');
+                feedbackContainer.innerHTML = '';
+                quizContainer.classList.remove('show');
+                modalOverlay.classList.remove('show');
+                experimentInstruction.classList.remove('hidden');
+                currentMaterial = null;
+            }
+            
+            // Animation functions
+            function animateBurning(element, speed) {
+                const duration = speed === 'fast' ? 1500 : 3000;
+                element.innerHTML = '';
+                
+                const flame = document.createElement('div');
+                flame.className = 'relative';
+                
+                const icon = document.createElement('div');
+                icon.className = 'text-6xl relative z-10';
+                icon.textContent = currentMaterial.icon;
+                
+                const fireEffect = document.createElement('div');
+                fireEffect.className = 'absolute top-0 left-0 w-full h-full z-0';
+                fireEffect.style.background = 'linear-gradient(to top, #ff8c00, #ff4500, #ff0000)';
+                fireEffect.style.mixBlendMode = 'color-dodge';
+                fireEffect.style.opacity = '0';
+                fireEffect.style.animation = `fadeIn 0.5s forwards, fadeOut 0.5s ${duration/1000 - 0.5}s forwards`;
+                
+                flame.appendChild(icon);
+                flame.appendChild(fireEffect);
+                element.appendChild(flame);
+                
+                // Add smoke particles
+                for (let i = 0; i < 8; i++) {
+                    const smoke = document.createElement('div');
+                    smoke.className = 'absolute';
+                    smoke.style.width = '15px';
+                    smoke.style.height = '15px';
+                    smoke.style.borderRadius = '50%';
+                    smoke.style.background = 'rgba(100, 100, 100, 0.7)';
+                    smoke.style.left = `${Math.random() * 60 + 20}%`;
+                    smoke.style.bottom = '100%';
+                    smoke.style.animation = `smoke ${Math.random() * 1 + 1.5}s ${i * 0.2}s forwards`;
+                    flame.appendChild(smoke);
+                }
+                
+                // Add keyframes for the animations
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes fadeIn {
+                        from { opacity: 0; }
+                        to { opacity: 0.8; }
+                    }
+                    
+                    @keyframes fadeOut {
+                        from { opacity: 0.8; }
+                        to { opacity: 0; }
+                    }
+                    
+                    @keyframes smoke {
+                        0% { transform: translateY(0) scale(1); opacity: 0.7; }
+                        100% { transform: translateY(-50px) scale(2); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // Animate the icon getting smaller/burning
+                let scale = 1;
+                const interval = setInterval(() => {
+                    scale -= 0.05;
+                    if (scale <= 0.2) {
+                        clearInterval(interval);
+                        icon.style.opacity = '0';
+                    } else {
+                        icon.style.transform = `scale(${scale})`;
+                        icon.style.filter = `brightness(${scale * 100}%)`;
+                    }
+                }, duration / 20);
+                
+                // Add ember particles
+                for (let i = 0; i < 10; i++) {
+                    setTimeout(() => {
+                        const ember = document.createElement('div');
+                        ember.className = 'absolute';
+                        ember.style.width = '4px';
+                        ember.style.height = '4px';
+                        ember.style.borderRadius = '50%';
+                        ember.style.background = '#ff4500';
+                        ember.style.boxShadow = '0 0 5px 2px rgba(255, 69, 0, 0.7)';
+                        ember.style.left = `${Math.random() * 80 + 10}%`;
+                        ember.style.bottom = '50%';
+                        ember.style.animation = `ember 1s forwards`;
+                        flame.appendChild(ember);
+                    }, i * 150);
+                }
+                
+                // Add ember animation
+                const emberStyle = document.createElement('style');
+                emberStyle.textContent = `
+                    @keyframes ember {
+                        0% { transform: translateY(0) translateX(0); opacity: 1; }
+                        100% { transform: translateY(-${Math.random() * 30 + 20}px) translateX(${Math.random() * 40 - 20}px); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(emberStyle);
+            }
+            
+            function animateBurningIntense(element) {
+                element.innerHTML = '';
+                
+                const container = document.createElement('div');
+                container.className = 'relative';
+                
+                const icon = document.createElement('div');
+                icon.className = 'text-6xl relative z-10';
+                icon.textContent = currentMaterial.icon;
+                
+                container.appendChild(icon);
+                element.appendChild(container);
+                
+                // Create large flames
+                for (let i = 0; i < 3; i++) {
+                    const flame = document.createElement('div');
+                    flame.className = 'absolute';
+                    flame.style.width = '40px';
+                    flame.style.height = '60px';
+                    flame.style.background = 'linear-gradient(to top, #ff8c00, #ff4500, #ff0000)';
+                    flame.style.borderRadius = '50% 50% 20% 20% / 60% 60% 40% 40%';
+                    flame.style.filter = 'blur(5px)';
+                    flame.style.left = `${i * 30 + 20}%`;
+                    flame.style.bottom = '0';
+                    flame.style.animation = `intenseFire 0.8s infinite alternate ${i * 0.2}s`;
+                    container.appendChild(flame);
+                }
+                
+                // Create smoke
+                for (let i = 0; i < 12; i++) {
+                    const smoke = document.createElement('div');
+                    smoke.className = 'absolute';
+                    smoke.style.width = '20px';
+                    smoke.style.height = '20px';
+                    smoke.style.borderRadius = '50%';
+                    smoke.style.background = 'rgba(50, 50, 50, 0.8)';
+                    smoke.style.left = `${Math.random() * 80 + 10}%`;
+                    smoke.style.bottom = '100%';
+                    smoke.style.animation = `intenseSmoke ${Math.random() * 1 + 2}s ${i * 0.15}s forwards`;
+                    container.appendChild(smoke);
+                }
+                
+                // Add keyframes
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes intenseFire {
+                        0% { transform: scaleY(1.0) scaleX(1.0); opacity: 0.9; }
+                        100% { transform: scaleY(1.2) scaleX(0.9); opacity: 1; }
+                    }
+                    
+                    @keyframes intenseSmoke {
+                        0% { transform: translateY(0) scale(1); opacity: 0.8; }
+                        100% { transform: translateY(-80px) scale(3); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // Animate the icon burning
+                icon.style.animation = 'burn 2s forwards';
+                
+                // Add burn animation
+                const burnStyle = document.createElement('style');
+                burnStyle.textContent = `
+                    @keyframes burn {
+                        0% { transform: scale(1); filter: brightness(1); }
+                        30% { transform: scale(1.1); filter: brightness(1.5) sepia(0.5); }
+                        100% { transform: scale(0.2); filter: brightness(0.3) sepia(1); opacity: 0.2; }
+                    }
+                `;
+                document.head.appendChild(burnStyle);
+                
+                // Add ember particles
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => {
+                        const ember = document.createElement('div');
+                        ember.className = 'absolute';
+                        ember.style.width = '5px';
+                        ember.style.height = '5px';
+                        ember.style.borderRadius = '50%';
+                        ember.style.background = '#ff4500';
+                        ember.style.boxShadow = '0 0 8px 3px rgba(255, 69, 0, 0.8)';
+                        ember.style.left = `${Math.random() * 80 + 10}%`;
+                        ember.style.bottom = '50%';
+                        ember.style.animation = `intensEmber 1.5s forwards`;
+                        container.appendChild(ember);
+                    }, i * 100);
+                }
+                
+                // Add ember animation
+                const emberStyle = document.createElement('style');
+                emberStyle.textContent = `
+                    @keyframes intensEmber {
+                        0% { transform: translateY(0) translateX(0); opacity: 1; }
+                        100% { transform: translateY(-${Math.random() * 50 + 30}px) translateX(${Math.random() * 60 - 30}px); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(emberStyle);
+            }
+            
+            function animateBurningSmoke(element) {
+                element.innerHTML = '';
+                
+                const container = document.createElement('div');
+                container.className = 'relative';
+                
+                const icon = document.createElement('div');
+                icon.className = 'text-6xl relative z-10';
+                icon.textContent = currentMaterial.icon;
+                
+                container.appendChild(icon);
+                element.appendChild(container);
+                
+                // Create thick black smoke
+                for (let i = 0; i < 15; i++) {
+                    const smoke = document.createElement('div');
+                    smoke.className = 'absolute';
+                    smoke.style.width = '25px';
+                    smoke.style.height = '25px';
+                    smoke.style.borderRadius = '50%';
+                    smoke.style.background = 'rgba(20, 20, 20, 0.9)';
+                    smoke.style.left = `${Math.random() * 80 + 10}%`;
+                    smoke.style.bottom = '100%';
+                    smoke.style.animation = `thickSmoke ${Math.random() * 1.5 + 2}s ${i * 0.12}s forwards`;
+                    container.appendChild(smoke);
+                }
+                
+                // Create flames
+                for (let i = 0; i < 2; i++) {
+                    const flame = document.createElement('div');
+                    flame.className = 'absolute';
+                    flame.style.width = '30px';
+                    flame.style.height = '40px';
+                    flame.style.background = 'linear-gradient(to top, #ff8c00, #ff4500, #ff0000)';
+                    flame.style.borderRadius = '50% 50% 20% 20% / 60% 60% 40% 40%';
+                    flame.style.filter = 'blur(5px)';
+                    flame.style.left = `${i * 40 + 30}%`;
+                    flame.style.bottom = '0';
+                    flame.style.animation = `smokyFire 0.8s infinite alternate ${i * 0.2}s`;
+                    container.appendChild(flame);
+                }
+                
+                // Add keyframes
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes thickSmoke {
+                        0% { transform: translateY(0) scale(1); opacity: 0.9; }
+                        100% { transform: translateY(-100px) scale(3); opacity: 0; }
+                    }
+                    
+                    @keyframes smokyFire {
+                        0% { transform: scaleY(1.0) scaleX(1.0); opacity: 0.8; }
+                        100% { transform: scaleY(1.1) scaleX(0.9); opacity: 0.9; }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // Animate the icon burning
+                icon.style.animation = 'smokyBurn 2.5s forwards';
+                
+                // Add burn animation
+                const burnStyle = document.createElement('style');
+                burnStyle.textContent = `
+                    @keyframes smokyBurn {
+                        0% { transform: scale(1); filter: brightness(1); }
+                        30% { transform: scale(1.05); filter: brightness(1.2); }
+                        100% { transform: scale(0.4); filter: brightness(0.4) grayscale(0.8); opacity: 0.5; }
+                    }
+                `;
+                document.head.appendChild(burnStyle);
+            }
+            
+            function animateMelting(element) {
+                element.innerHTML = '';
+                
+                const container = document.createElement('div');
+                container.className = 'relative';
+                
+                const icon = document.createElement('div');
+                icon.className = 'text-6xl';
+                icon.textContent = currentMaterial.icon;
+                
+                container.appendChild(icon);
+                element.appendChild(container);
+                
+                // Create smoke effect
+                for (let i = 0; i < 8; i++) {
+                    const smoke = document.createElement('div');
+                    smoke.className = 'absolute';
+                    smoke.style.width = '20px';
+                    smoke.style.height = '20px';
+                    smoke.style.borderRadius = '50%';
+                    smoke.style.background = 'rgba(100, 100, 100, 0.7)';
+                    smoke.style.left = `${Math.random() * 60 + 20}%`;
+                    smoke.style.bottom = '100%';
+                    smoke.style.animation = `smoke 2s ${i * 0.25}s forwards`;
+                    container.appendChild(smoke);
+                }
+                
+                // Create dripping effect
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const drip = document.createElement('div');
+                        drip.className = 'absolute';
+                        drip.style.width = '10px';
+                        drip.style.height = '15px';
+                        drip.style.background = 'rgba(200, 200, 200, 0.8)';
+                        drip.style.borderRadius = '40% 40% 50% 50%';
+                        drip.style.left = `${Math.random() * 60 + 20}%`;
+                        drip.style.top = '70%';
+                        drip.style.animation = `drip 1.5s forwards`;
+                        container.appendChild(drip);
+                    }, i * 300);
+                }
+                
+                // Add melting animation
+                icon.style.animation = 'melt 2.5s forwards';
+                
+                // Add keyframes
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes melt {
+                        0% { transform: scale(1); filter: blur(0); }
+                        30% { transform: scale(1.05) translateY(5px); filter: blur(1px); }
+                        100% { transform: scale(0.7) translateY(25px); filter: blur(3px); }
+                    }
+                    
+                    @keyframes smoke {
+                        0% { transform: translateY(0) scale(1); opacity: 0.7; }
+                        100% { transform: translateY(-60px) scale(2); opacity: 0; }
+                    }
+                    
+                    @keyframes drip {
+                        0% { transform: translateY(0) scale(1); opacity: 0.9; }
+                        100% { transform: translateY(40px) scaleY(1.5); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            function animateEvaporating(element) {
+                element.innerHTML = '';
+                
+                const container = document.createElement('div');
+                container.className = 'relative';
+                
+                const icon = document.createElement('div');
+                icon.className = 'text-6xl';
+                icon.textContent = currentMaterial.icon;
+                
+                container.appendChild(icon);
+                element.appendChild(container);
+                
+                // Create vapor effect
+                for (let i = 0; i < 12; i++) {
+                    const vapor = document.createElement('div');
+                    vapor.className = 'absolute';
+                    vapor.style.width = '15px';
+                    vapor.style.height = '15px';
+                    vapor.style.borderRadius = '50%';
+                    vapor.style.background = 'rgba(255, 255, 255, 0.7)';
+                    vapor.style.left = `${Math.random() * 60 + 20}%`;
+                    vapor.style.bottom = '100%';
+                    vapor.style.animation = `vapor 1.8s ${i * 0.15}s forwards`;
+                    container.appendChild(vapor);
+                }
+                
+                // Create bubbles
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(() => {
+                        const bubble = document.createElement('div');
+                        bubble.className = 'bubble';
+                        bubble.style.width = `${Math.random() * 8 + 5}px`;
+                        bubble.style.height = bubble.style.width;
+                        bubble.style.left = `${Math.random() * 60 + 20}%`;
+                        bubble.style.bottom = '30%';
+                        bubble.style.animationDelay = `${i * 0.2}s`;
+                        container.appendChild(bubble);
+                    }, i * 200);
+                }
+                
+                // Add evaporating animation
+                icon.style.animation = 'evaporate 2.5s forwards';
+                
+                // Add keyframes
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes evaporate {
+                        0% { transform: scale(1); opacity: 1; }
+                        30% { transform: scale(1.05); opacity: 0.9; filter: brightness(1.2); }
+                        100% { transform: scale(0.4); opacity: 0.2; filter: brightness(1.5) blur(2px); }
+                    }
+                    
+                    @keyframes vapor {
+                        0% { transform: translateY(0) scale(1); opacity: 0.7; }
+                        50% { opacity: 0.9; }
+                        100% { transform: translateY(-70px) scale(2); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            function animateHeating(element) {
+                element.innerHTML = '';
+                
+                const container = document.createElement('div');
+                container.className = 'relative';
+                
+                const icon = document.createElement('div');
+                icon.className = 'text-6xl';
+                icon.textContent = currentMaterial.icon;
+                
+                container.appendChild(icon);
+                element.appendChild(container);
+                
+                // Create heat waves
+                for (let i = 0; i < 5; i++) {
+                    const wave = document.createElement('div');
+                    wave.className = 'absolute';
+                    wave.style.width = '100%';
+                    wave.style.height = '20px';
+                    wave.style.background = 'linear-gradient(to right, transparent, rgba(255, 140, 0, 0.2), transparent)';
+                    wave.style.borderRadius = '50%';
+                    wave.style.left = '0';
+                    wave.style.bottom = `${i * 20}%`;
+                    wave.style.animation = `heatWave 2s infinite ${i * 0.2}s`;
+                    wave.style.opacity = '0';
+                    container.appendChild(wave);
+                }
+                
+                // Add sparkles
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(() => {
+                        const sparkle = document.createElement('div');
+                        sparkle.className = 'sparkle';
+                        sparkle.style.left = `${Math.random() * 80 + 10}%`;
+                        sparkle.style.top = `${Math.random() * 80 + 10}%`;
+                        sparkle.style.animationDelay = `${i * 0.1}s`;
+                        container.appendChild(sparkle);
+                    }, i * 200);
+                }
+                
+                // Add heating animation
+                icon.style.animation = 'heat 0.7s infinite alternate';
+                
+                // Add keyframes
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes heat {
+                        0% { filter: brightness(1) sepia(0.2); }
+                        100% { filter: brightness(1.3) sepia(0.5); }
+                    }
+                    
+                    @keyframes heatWave {
+                        0% { transform: translateY(0) scaleX(1); opacity: 0; }
+                        50% { opacity: 0.7; }
+                        100% { transform: translateY(-20px) scaleX(1.1); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            function animateNoReaction(element) {
+                element.innerHTML = '';
+                
+                const container = document.createElement('div');
+                container.className = 'relative';
+                
+                const icon = document.createElement('div');
+                icon.className = 'text-6xl';
+                icon.textContent = currentMaterial.icon;
+                
+                container.appendChild(icon);
+                element.appendChild(container);
+                
+                // Create subtle heat waves
+                for (let i = 0; i < 3; i++) {
+                    const wave = document.createElement('div');
+                    wave.className = 'absolute';
+                    wave.style.width = '100%';
+                    wave.style.height = '10px';
+                    wave.style.background = 'linear-gradient(to right, transparent, rgba(255, 140, 0, 0.1), transparent)';
+                    wave.style.borderRadius = '50%';
+                    wave.style.left = '0';
+                    wave.style.bottom = `${i * 30}%`;
+                    wave.style.animation = `subtleWave 3s infinite ${i * 0.3}s`;
+                    wave.style.opacity = '0';
+                    container.appendChild(wave);
+                }
+                
+                // Add subtle animation
+                icon.style.animation = 'subtle 2s infinite alternate';
+                
+                // Add keyframes
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes subtle {
+                        0% { transform: scale(1); }
+                        100% { transform: scale(1.03); }
+                    }
+                    
+                    @keyframes subtleWave {
+                        0% { transform: translateY(0); opacity: 0; }
+                        50% { opacity: 0.3; }
+                        100% { transform: translateY(-10px); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            function createConfetti() {
+                const confettiContainer = document.createElement('div');
+                confettiContainer.className = 'fixed top-0 left-0 w-full h-full pointer-events-none z-50';
+                document.body.appendChild(confettiContainer);
+                
+                const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ff8c00', '#4b0082'];
+                
+                for (let i = 0; i < 80; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = `${Math.random() * 100}%`;
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = `${Math.random() * 10 + 5}px`;
+                    confetti.style.height = `${Math.random() * 10 + 5}px`;
+                    confetti.style.animationDelay = `${Math.random() * 2}s`;
+                    confetti.style.animationDuration = `${Math.random() * 2 + 2}s`;
+                    
+                    // Random shape
+                    const shape = Math.floor(Math.random() * 3);
+                    if (shape === 0) {
+                        confetti.style.borderRadius = '50%';
+                    } else if (shape === 1) {
+                        confetti.style.borderRadius = '0';
+                    } else {
+                        confetti.style.width = '8px';
+                        confetti.style.height = '8px';
+                        confetti.style.transform = 'rotate(45deg)';
+                    }
+                    
+                    confettiContainer.appendChild(confetti);
+                }
+                
+                setTimeout(() => {
+                    confettiContainer.remove();
+                }, 4000);
+            }
+            
+            function addLabDecorations() {
+                const labContainer = document.querySelector('.lab-container');
+                
+                // Add sparkles
+                for (let i = 0; i < 10; i++) {
+                    setTimeout(() => {
+                        const sparkle = document.createElement('div');
+                        sparkle.className = 'sparkle';
+                        sparkle.style.left = `${Math.random() * 90 + 5}%`;
+                        sparkle.style.top = `${Math.random() * 90 + 5}%`;
+                        sparkle.style.width = '3px';
+                        sparkle.style.height = '3px';
+                        sparkle.style.opacity = '0.7';
+                        sparkle.style.animationDelay = `${Math.random() * 5}s`;
+                        sparkle.style.animationDuration = '3s';
+                        labContainer.appendChild(sparkle);
+                    }, i * 500);
+                }
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'95726a2b72d9dbc4',t:'MTc1MTE2ODU1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

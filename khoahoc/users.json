@@ -1,0 +1,42 @@
+[
+    {
+        "username": "user1",
+        "password": "password1",
+        "courses": ["khoahoc_ungdungcanva"]
+    },
+    {
+        "username": "user2",
+        "password": "password2",
+        "courses": ["khoahoc_ungdung_ai_truyentranh"]
+    },
+    {
+        "username": "admin",
+        "password": "admin123",
+        "courses": ["khoahoc_ungdungcanva", "khoahoc_ungdung_ai_truyentranh"]
+    },
+    {
+        "username": "tuluyentinhoc@gmail.com",
+        "password": "tuluyentinhoc",
+        "courses": ["khoahoc_ungdungcanva"]
+    },
+    {
+        "username": "phuongloan13579@gmail.com",
+        "password": "phuongloan13579",
+        "courses": ["khoahoc_ungdungcanva"]
+    },
+    {
+        "username": "htindb1983@gmail.com",
+        "password": "htindb1983",
+        "courses": ["khoahoc_ungdungcanva"]
+    },
+    {
+        "username": "quangtuan",
+        "password": "quangtuan",
+        "courses": ["khoahoc_ungdungcanva"]
+    },
+    {
+        "username": "mayoanh2@gmail.com.vn",
+        "password": "mayoanh2",
+        "courses": ["khoahoc_ungdung_ai_truyentranh"]
+    }
+]

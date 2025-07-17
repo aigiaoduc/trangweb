@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danh sách Video - Quân H</title>
+  <!-- Font và CSS chung -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/button.css">
+  <link rel="stylesheet" href="../assets/css/pagination.css">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',sans-serif; background:#111; color:#fff; }
+    a { text-decoration:none; color:inherit; }
+
+    .container { max-width:1200px; margin:6rem auto 2rem; padding:2rem; background:#f6f9fc; border-radius:8px; color:#333; margin-top: 80px; /* Adjust for fixed navbar height */ }
+    h1 { font-family:'Montserrat',sans-serif; font-size:2rem; margin-bottom:1.5rem; color:#111; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.5rem; }
+    .card { 
+      background:#fff; 
+      border-radius:8px; 
+      overflow:hidden; 
+      box-shadow:0 4px 12px rgba(0,0,0,0.1); 
+      display: flex;
+      flex-direction: column;
+    }
+    .card img { width:100%; height:180px; object-fit:cover; }
+    .card-content { 
+      padding:1rem; 
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .card-content h3 { font-size:1.25rem; margin-bottom:.5rem; color:#111; }
+    .card-content p { font-size:.95rem; line-height:1.5; color:#555; margin-bottom:1rem; flex-grow: 1; }
+    .card-content a { font-weight:600; margin-top: auto; align-self: flex-start; }
+    .back { margin-top:2rem; display:inline-block; color:#2f73ff; }
+    .back:hover { color:#245ad1; }
+
+    .pagination span {
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    @media (max-width: 768px) {
+      .container { margin-top: 4rem; padding: 1rem; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="menu-placeholder"></div>
+
+  <div class="container">
+    <h1>Danh sách Video</h1>
+    <div class="grid" id="videos-grid"></div>
+    <div class="pagination">
+      <button id="prevPage" class="pagination-btn prev-btn">
+        <div class="arrow">
+          <svg height="20" width="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.004 8.635l10.522.001.001-3.292 7.478 4.645-7.478 4.645-.001-3.292-10.522.001z" class="three"></path>
+            <path d="M1.004 8.635l10.522.001.001-3.292 7.478 4.645-7.478 4.645-.001-3.292-10.522.001z" class="two"></path>
+            <path d="M1.004 8.635l10.522.001.001-3.292 7.478 4.645-7.478 4.645-.001-3.292-10.522.001z" class="one"></path>
+          </svg>
+        </div>
+        <span class="text">Trước</span>
+      </button>
+      <span id="pageInfo">Trang 1</span>
+      <button id="nextPage" class="pagination-btn next-btn">
+        <span class="text">Tiếp</span>
+        <div class="arrow">
+          <svg height="20" width="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.004 8.635l10.522.001.001-3.292 7.478 4.645-7.478 4.645-.001-3.292-10.522.001z" class="three"></path>
+            <path d="M1.004 8.635l10.522.001.001-3.292 7.478 4.645-7.478 4.645-.001-3.292-10.522.001z" class="two"></path>
+            <path d="M1.004 8.635l10.522.001.001-3.292 7.478 4.645-7.478 4.645-.001-3.292-10.522.001z" class="one"></path>
+          </svg>
+        </div>
+      </button>
+    </div>
+    <a href="../index.html" class="back">← Về Trang chủ</a>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <script>
+    let allVideos = [];
+    let currentPage = 1;
+    const itemsPerPage = 6;
+
+    async function fetchVideos() {
+      const res = await fetch('../data/videos.json');
+      return res.json();
+    }
+
+    function createVideoCard(item) {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <img src="${item.image}" alt="${item.title}">
+        <div class="card-content">
+          <h3>${item.title}</h3>
+          <p>${item.desc}</p>
+          <a href="${item.url}" class="detail-btn">Xem chi tiết</a>
+        </div>
+      `;
+      return card;
+    }
+
+    function displayVideos() {
+      const grid = document.getElementById('videos-grid');
+      grid.innerHTML = ''; // Clear current videos
+
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      const videosToDisplay = allVideos.slice(startIndex, endIndex);
+
+      videosToDisplay.forEach(video => grid.appendChild(createVideoCard(video)));
+
+      updatePaginationControls();
+      window.scrollTo(0, 0); // Cuộn lên đầu trang
+    }
+
+    function updatePaginationControls() {
+      const prevButton = document.getElementById('prevPage');
+      const nextButton = document.getElementById('nextPage');
+      const pageInfo = document.getElementById('pageInfo');
+
+      const totalPages = Math.ceil(allVideos.length / itemsPerPage);
+      pageInfo.textContent = `Trang ${currentPage} / ${totalPages}`;
+
+      prevButton.disabled = currentPage === 1;
+      nextButton.disabled = currentPage === totalPages || totalPages === 0;
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      allVideos = (await fetchVideos()).reverse();
+      displayVideos();
+
+      document.getElementById('prevPage').addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage--;
+          displayVideos();
+        }
+      });
+
+      document.getElementById('nextPage').addEventListener('click', () => {
+        const totalPages = Math.ceil(allVideos.length / itemsPerPage);
+        if (currentPage < totalPages) {
+          currentPage++;
+          displayVideos();
+        }
+      });
+    });
+
+    // Tải menu.html vào placeholder
+    fetch('../assets/includes/menu.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('menu-placeholder').innerHTML = data;
+            // Thêm script cho menu sau khi nội dung được tải
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('open');
+                    menuToggle.classList.toggle('open');
+                });
+            } else {
+                console.error('Menu elements not found after loading menu.html');
+            }
+        });
+
+    // Tải footer.html vào placeholder
+    fetch('../assets/includes/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-placeholder').innerHTML = data;
+        });
+  </script>
+</body>
+</html>

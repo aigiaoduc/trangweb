@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tra cứu Đơn vị Hành chính Việt Nam – Bản đồ Sáp Nhập 2025</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f8f8; /* Light background */
+            color: #333;
+        }
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #1a202c; /* Default for other headings */
+        }
+        .text-shadow-lg {
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .text-shadow-lg {
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .luxury-gradient {
+            background: linear-gradient(to right, #f0f0f0, #e0e0e0);
+        }
+        .luxury-shadow {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 6rem 0;
+            text-align: center;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            animation: float1 10s infinite ease-in-out;
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            animation: float2 8s infinite ease-in-out;
+        }
+        @keyframes float1 {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(20px, 20px); }
+            100% { transform: translate(0, 0); }
+        }
+        @keyframes float2 {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(-15px, -15px); }
+            100% { transform: translate(0, 0); }
+        }
+        .button-primary {
+            background-color: #007bff;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .button-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .list-unstyled {
+            list-style: none;
+            padding-left: 0;
+        }
+        .list-unstyled li {
+            margin-bottom: 0.5rem;
+        }
+        .font-quicksand {
+            font-family: 'Quicksand', sans-serif;
+        }
+    </style>
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Tra cứu Đơn vị Hành chính Việt Nam – Bản đồ Sáp Nhập 2025">
+    <meta property="og:description" content="Công cụ tra cứu bản đồ hành chính Việt Nam sau sắp xếp 2025, giúp cập nhật thông tin tỉnh/thành, phường/xã mới nhất.">
+    <meta property="og:image" content="https://www.shutterstock.com/image-photo/vietnam-flag-beautifully-waving-sky-600nw-2589853503.jpg">
+    <meta property="og:url" content="https://aigiaoduc.github.io/tools/tool12.html">
+    <meta property="og:type" content="article">
+</head>
+<body class="text-gray-800">
+
+    <div id="menu-placeholder"></div>
+    <script>
+        fetch('../assets/includes/menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu-placeholder').innerHTML = data;
+                const menuToggle = document.getElementById('menuToggle');
+                const navLinks = document.getElementById('navLinks');
+                if (menuToggle && navLinks) {
+                    menuToggle.addEventListener('click', () => {
+                        navLinks.classList.toggle('open');
+                        menuToggle.classList.toggle('open');
+                    });
+                }
+            });
+    </script>
+
+    <main class="container mx-auto px-4 py-8 pt-24">
+        <!-- Hero Section -->
+        <section class="hero-section luxury-shadow rounded-xl mb-12">
+            <div class="max-w-4xl mx-auto">
+                <div class="inline-block bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-6 py-3 rounded-full luxury-shadow mb-6 transform hover:scale-105 transition-transform duration-300 ease-in-out">
+                    <h1 class="text-3xl md:text-4xl font-extrabold leading-tight text-shadow-lg">
+                        🌍 Tra cứu Đơn vị Hành chính Việt Nam – Bản đồ Sáp Nhập 2025
+                    </h1>
+                </div>
+                <p class="text-lg md:text-xl text-gray-700 mb-8 font-quicksand">
+                    Ngày 1/7/2025, sau quyết định sắp xếp hành chính vượt bậc, số lượng tỉnh/thành của Việt Nam được gom lại còn 34 đơn vị, cùng 3.321 phường, xã, đặc khu mới. Điều này không chỉ là dấu mốc đổi mới, mà còn là bước đi quan trọng nâng cao hiệu quả quản lý, tiết kiệm tài nguyên và cải thiện dịch vụ hành chính cho người dân.
+                </p>
+                <img src="https://www.shutterstock.com/image-photo/vietnam-flag-beautifully-waving-sky-600nw-2589853503.jpg" alt="Cờ Việt Nam tung bay" class="w-full max-w-2xl mx-auto rounded-lg luxury-shadow mb-8">
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="card luxury-shadow">
+                <h2 class="text-3xl font-bold mb-6 text-blue-700">🔎 Tra cứu dễ dàng – Thông tin chuẩn xác – Hỗ trợ bạn ngay lập tức</h2>
+                <p class="text-lg mb-4 font-quicksand">Một website hữu ích vừa ra mắt giúp bạn:</p>
+                <ul class="list-unstyled text-lg space-y-3">
+                    <li>Tra cứu chuẩn 34 tỉnh và 3.321 đơn vị hành chính cấp xã (gồm phường, xã, đặc khu)</li>
+                    <li>Xem bản đồ tương tác rõ ràng: hiển thị ranh giới hành chính từng cấp, hỗ trợ phóng to, thu nhỏ để xem chi tiết</li>
+                    <li>Nhập tên cũ hoặc mới của tỉnh/phường/xã → hệ thống cho kết quả chính xác với bản đồ minh hoạ trực quan</li>
+                    <li>Phù hợp mọi mục đích: từ cập nhật địa chỉ, khai báo hành chính, đăng ký doanh nghiệp đến nghiên cứu – quy hoạch – bất động sản</li>
+                    <li>Thông tin do Bộ Nông nghiệp – Môi trường và Nhà xuất bản Tài nguyên Môi trường & Bản đồ phối hợp phát triển, đảm bảo tính chính xác – cập nhật theo tinh gọn bộ máy hành chính 2025</li>
+                </ul>
+            </div>
+
+            <div class="card luxury-shadow">
+                <h2 class="text-3xl font-bold mb-6 text-purple-700">📲 Ai cần dùng trang web này?</h2>
+                <ul class="list-unstyled text-lg space-y-3">
+                    <li>Người dân muốn cập nhật ngay địa chỉ hành chính mới</li>
+                    <li>Chủ doanh nghiệp/thương mại cần tra cứu mã đơn vị để đăng ký kinh doanh, khai thuế</li>
+                    <li>Luật sư, kế toán, chuyên viên hành chính lo thủ tục pháp lý</li>
+                    <li>Nhà nghiên cứu, quy hoạch, bất động sản cần bản đồ ranh giới mới</li>
+                    <li>Đơn giản chỉ là ai quan tâm đến vị trí hành chính – địa lý của nơi mình sống</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mb-12 card">
+            <div class="banner-container" style="text-align: center; margin: 20px 0;">
+                <a href="https://aigiaoduc.io.vn/pages/khoahoconline.html" target="_blank">
+                    <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1752286655/Banner_ADS_obhpcy.png" 
+                         alt="Banner Quảng Cáo" 
+                         style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block;">
+                </a>
+            </div>
+        </section>
+
+        <section class="card luxury-shadow mt-8">
+            <h2 class="text-3xl font-bold mb-6 text-green-700">🧭 Hướng dẫn tra cứu nhanh – chỉ trong 3 bước đơn giản</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="card luxury-shadow text-center hover:bg-gray-50">
+                    <div class="text-5xl mb-4 text-blue-500">1</div>
+                    <h3 class="text-xl font-semibold mb-2 font-quicksand">Truy cập</h3>
+                    <p class="text-gray-600">sapnhap.bando.com.vn</p>
+                </div>
+                <div class="card luxury-shadow text-center hover:bg-gray-50">
+                    <div class="text-5xl mb-4 text-blue-500">2</div>
+                    <h3 class="text-xl font-semibold mb-2 font-quicksand">Nhập tên tỉnh/thành</h3>
+                    <p class="text-gray-600">(cũ hoặc mới) → trang hiển thị bản đồ, dân số, diện tích...</p>
+                </div>
+                <div class="card luxury-shadow text-center hover:bg-gray-50">
+                    <div class="text-5xl mb-4 text-blue-500">3</div>
+                    <h3 class="text-xl font-semibold mb-2 font-quicksand">Nhập tên phường/xã/đặc khu</h3>
+                    <p class="text-gray-600">tương ứng → kết quả hiện chi tiết giới hạn hành chính trên bản đồ</p>
+                </div>
+            </div>
+            <p class="text-center text-lg mt-6 font-quicksand">Đây là công cụ miễn phí, giao diện thân thiện, không cần đăng nhập – tra cứu nhanh mà vẫn đầy đủ thông tin.</p>
+        </section>
+
+        <section class="card luxury-shadow mt-8">
+            <h2 class="text-3xl font-bold mb-6 text-red-700">📝 Tại sao bạn nên biết đến?</h2>
+            <ul class="list-unstyled text-lg space-y-3">
+                <li>Không lo sai địa chỉ khi làm giấy tờ, giao dịch ngân hàng, khai thuế hoặc giấy chứng nhận</li>
+                <li>Hỗ trợ công việc hành chính và nghiên cứu hiệu quả hơn</li>
+                <li>Là minh chứng cho cải cách hành chính số: Đơn giản, nhanh chóng, thuận tiện</li>
+            </ul>
+        </section>
+
+        <section class="text-center mt-12">
+            <h2 class="text-3xl font-bold mb-6 text-gray-900">🚀 Kết luận</h2>
+            <p class="text-xl italic text-gray-700 mb-8 font-quicksand">
+                “Biết chính xác mình đang ở đâu – là quyền và là trách nhiệm của mỗi công dân trong thời đại số.”
+            </p>
+            <a href="https://sapnhap.bando.com.vn/" target="_blank" class="button-primary inline-block text-xl">
+                TRUY CẬP CÔNG CỤ
+            </a>
+        </section>
+    </main>
+
+    <!-- Footer Content -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        .ai-gradient {
+            background: linear-gradient(135deg, #0b0b3b 0%, #1a1a6c 50%, #3a0ca3 100%);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .ai-circuit {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .logo-glow {
+            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.8));
+        }
+        
+        .footer-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #8a2be2;
+            transition: width 0.3s ease;
+        }
+        
+        .footer-link:hover:after {
+            width: 100%;
+        }
+        
+        .footer-link:hover {
+            color: #a855f7;
+        }
+        
+        .dot-separator {
+            display: inline-block;
+            margin: 0 6px;
+            opacity: 0.7;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin: 0 8px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            overflow: hidden;
+        }
+        
+        .social-icon:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .social-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 8px;
+        }
+        
+        .social-text {
+            margin-top: 4px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+        
+        .social-item:hover .social-text {
+            color: white;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .icon-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .fb-icon, .yt-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .fb-icon {
+            background-color: #1877F2;
+        }
+        
+        .yt-icon {
+            background-color: #FF0000;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-links {
+                margin-top: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .dot-separator {
+                display: none;
+            }
+            
+            .footer-link {
+                margin: 0.4rem 0;
+            }
+            
+            .description-text {
+                max-width: 100%;
+            }
+            
+            .social-icons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .social-item {
+                margin: 8px 0;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .social-icons {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <footer class="ai-gradient text-white">
+        <!-- AI Circuit Pattern Background -->
+        <svg class="ai-circuit" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <pattern id="circuit-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                <path d="M10 10 L90 10 L90 90 L10 90 Z" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+                <circle cx="10" cy="10" r="2" fill="#ffffff"/>
+                <circle cx="90" cy="10" r="2" fill="#ffffff"/>
+                <circle cx="90" cy="90" r="2" fill="#ffffff"/>
+                <circle cx="10" cy="90" r="2" fill="#ffffff"/>
+                <path d="M10 50 L40 50 L40 10" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+                <path d="M90 50 L60 50 L60 90" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+                <circle cx="40" cy="50" r="2" fill="#ffffff"/>
+                <circle cx="60" cy="50" r="2" fill="#ffffff"/>
+            </pattern>
+            <rect width="100%" height="100%" fill="url(#circuit-pattern)"/>
+        </svg>
+        
+        <div class="footer-container px-3 py-4">
+            <div class="footer-content flex flex-col items-center justify-center">
+                <!-- Logo and Description -->
+                <div class="flex flex-col items-center mb-2">
+                    <div class="logo-glow rounded-full overflow-hidden w-16 h-16 flex-shrink-0 border-2 border-purple-400 mb-3">
+                        <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" 
+                             alt="Quân H Logo" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-center max-w-md">
+                        <p class="text-sm md:text-base font-medium description-text">
+                            Quân H – Giảng viên & Youtuber chia sẻ kiến thức AI, công nghệ và giáo dục.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Social Media Icons - Vertical Layout -->
+                <div class="social-icons flex flex-row md:flex-row justify-center flex-wrap">
+                    <a href="https://www.facebook.com/tran.hong.quan.216221/" target="_blank" class="social-item">
+                        <div class="social-icon">
+                            <div class="fb-icon">
+                                <i class="fab fa-facebook-f text-white"></i>
+                            </div>
+                        </div>
+                        <span class="social-text">Trần Hồng Quân</span>
+                    </a>
+                    
+                    <a href="javascript:void(0)" class="social-item" onclick="alert('Zalo: 0355.213.107')">
+                        <div class="social-icon p-0">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/768px-Icon_of_Zalo.svg.png" 
+                                 alt="Zalo" 
+                                 class="icon-img">
+                        </div>
+                        <span class="social-text">0355.213.107</span>
+                    </a>
+                    
+                    <a href="https://www.youtube.com/@quanh95" target="_blank" class="social-item">
+                        <div class="social-icon">
+                            <div class="yt-icon">
+                                <i class="fab fa-youtube text-white"></i>
+                            </div>
+                        </div>
+                        <span class="social-text">Quân H</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-purple-900/50 mt-1 pt-3">
+                <div class="flex flex-wrap justify-center md:justify-between items-center text-xs text-purple-200/80">
+                    <div class="mb-1 md:mb-0">
+                        © 2025 Quân H.
+                    </div>
+                    <div class="flex flex-wrap justify-center">
+                        <a href="#" class="footer-link mx-1">Chính sách bảo mật</a>
+                        <span class="dot-separator">•</span>
+                        <a href="#" class="footer-link mx-1">Điều khoản sử dụng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

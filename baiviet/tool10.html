@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BestList.ai – Trang Web Tổng Hợp Công Cụ AI Hàng Đầu</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: #1a202c;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" stroke="%23ffffff" stroke-width="1" fill="none" opacity="0.1"/><path d="M10 50 L90 50 M50 10 L50 90" stroke="%23ffffff" stroke-width="1" opacity="0.1"/></svg>') repeat;
+            opacity: 0.2;
+            animation: backgroundPan 20s linear infinite;
+        }
+        @keyframes backgroundPan {
+            from { background-position: 0 0; }
+            to { background-position: -100px -100px; }
+        }
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
+        }
+        .btn-primary {
+            background-color: #667eea;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            background-color: #5a67d8;
+            transform: translateY(-2px);
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        .feature-item i {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .benefit-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+        .benefit-table th, .benefit-table td {
+            border: 1px solid #e2e8f0;
+            padding: 1rem;
+            text-align: left;
+        }
+        .benefit-table th {
+            background-color: #edf2f7;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        .benefit-table tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        .benefit-table td:first-child {
+            font-weight: 500;
+            color: #4a5568;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        ul {
+            list-style: none; /* Loại bỏ dấu chấm mặc định */
+            padding: 0;
+            margin: 0;
+        }
+        ul li::before {
+            content: none; /* Đảm bảo không có dấu chấm đầu dòng */
+        }
+        .hover-effect {
+            transition: all 0.3s ease;
+        }
+        .hover-effect:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .font-quicksand {
+            font-family: 'Quicksand', sans-serif;
+        }
+
+    </style>
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="BestList.ai – Thư Mục Tổng Hợp Công Cụ AI Hàng Đầu">
+    <meta property="og:description" content="Khám phá BestList.ai, thư mục tổng hợp hàng nghìn công cụ AI hàng đầu, giúp bạn tìm kiếm và lựa chọn công cụ phù hợp cho mọi nhu cầu.">
+    <meta property="og:image" content="https://bestlist.ai/images/logo.png">
+    <meta property="og:url" content="https://aigiaoduc.github.io/tools/tool10.html">
+    <meta property="og:type" content="article">
+</head>
+<body>
+    <style>
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem 2rem;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.5);
+      transition: top 0.3s;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #2f73ff;
+    }
+    .logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .nav-links { display: flex; gap: 2rem; font-weight: 600; }
+    .nav-links a { font-size: 1rem; color: #fff; text-decoration: none; transition: color 0.3s; }
+    .nav-links a:hover { color: #2f73ff; }
+    .cta {
+      padding: 0.6rem 1.4rem;
+      background: #2f73ff;
+      border-radius: 999px;
+      font-weight: 600;
+      color: #fff;
+      transition: background 0.3s;
+      text-decoration: none;
+    }
+    .cta:hover { background: #245ad1; }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 0.3rem;
+    }
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      border-radius: 5px;
+      transition: all 0.3s ease-in-out;
+    }
+    .menu-toggle.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar { padding: 1rem; }
+      .nav-links { display: none; flex-direction: column; width: 100%; background: rgba(0,0,0,0.8); position: absolute; top: 60px; left: 0; padding: 1rem; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 0.5rem 0; text-align: center; }
+      .cta { display: none; }
+      .menu-toggle { display: flex; }
+    }
+</style>
+<nav class="navbar">
+    <div class="logo">
+      <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
+      <span class="logo-text">Quân H</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html">Trang chủ</a>
+      <a href="../baiviet.html">Bài viết</a>
+      <a href="../congcu.html">Công cụ</a>
+      <a href="../video.html">Video</a>
+      <a href="../trochoi.html">Trò chơi</a>
+      <a href="../thinghiemao.html">Thí nghiệm ảo</a>
+      <a href="../khoahoconline.html">Khóa học</a>
+    </div>
+    <a href="../lienhe.html" class="cta">Liên hệ</a>
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      menuToggle.classList.toggle('open');
+    });
+</script>
+    <div class="pt-20">
+        <div class="hero-section">
+            <div class="relative z-10 max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
+                    🌟 BestList.ai – Thư Mục Tổng Hợp Công Cụ AI Hàng Đầu
+                </h1>
+                <p class="text-lg md:text-xl mb-8 opacity-90">
+                    Trong thời đại AI bùng nổ, có hàng ngàn công cụ hỗ trợ từ viết lách, đồ họa, lập trình đến quản lý công việc. Nhưng làm sao để chọn đúng công cụ phù hợp? BestList.ai chính là câu trả lời.
+                </p>
+                <img src="https://bestlist.ai/images/logo.png" alt="BestList.ai Logo" class="mx-auto w-48 h-48 object-contain mb-8 rounded-full shadow-lg">
+            </div>
+        </div>
+
+        <main class="container mx-auto px-4 py-12">
+            <section class="mb-12">
+                <h2 class="section-title text-purple-700">🔎 BestList.ai Là Gì?</h2>
+                <div class="card hover-effect">
+                    <p class="text-lg mb-4">
+                        BestList.ai là một thư mục (directory) tổng hợp và phân loại hàng nghìn công cụ AI. Giao diện trực quan giúp bạn tìm nhanh công cụ phù hợp cho từng nhu cầu:
+                    </p>
+                    <ul class="text-base text-gray-700 space-y-2">
+                        <li>Công cụ mới ra mắt, phổ biến, được yêu thích</li>
+                        <li>Bộ lọc theo loại: miễn phí, trả phí, freemium, no‑code, viết nội dung, social media, chuyển giọng…</li>
+                        <li>Các danh mục chuyên sâu như transcriber, prompt-engineering, developer tools…</li>
+                        <li>Giao diện dạng bảng trực quan, cho phép bạn dễ dàng lọc và xem mô tả từng công cụ</li>
+                    </ul>
+                    <div class="image-container">
+                        <img src="https://d1imcxa2q50kmu.cloudfront.net/compressed-screenshots/screenshot_fef71480-d4b9-4de6-9678-97cf8697ccc7.png" alt="BestList.ai Interface" class="w-full md:w-3/4 lg:w-2/3">
+                    </div>
+                    <p class="text-sm text-gray-500 mt-4 text-center">
+                        shop.bestlist.ai, bestlist.ai, facebook.com
+                    </p>
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="section-title text-green-700">✅ Tính Năng Nổi Bật</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="card hover-effect">
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800 font-quicksand">Tổng hợp nhanh & cập nhật thường xuyên</h3>
+                        <p class="text-gray-700">BestList.ai liệt kê hàng nghìn công cụ, cập nhật theo xu hướng “just launched”, “most used”, “most favored”.</p>
+                    </div>
+                    <div class="card hover-effect">
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800 font-quicksand">Bộ lọc linh hoạt</h3>
+                        <p class="text-gray-700">Lọc công cụ theo loại sử dụng, giá cả, ngành nghề – tiết kiệm thời gian tìm kiếm.</p>
+                    </div>
+                    <div class="card hover-effect">
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800 font-quicksand">Đánh giá & xếp hạng cộng đồng</h3>
+                        <p class="text-gray-700">Các công cụ được người dùng yêu thích đánh dấu “favorites”, giúp bạn dễ chọn lựa hơn.</p>
+                    </div>
+                    <div class="card hover-effect">
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800 font-quicksand">Chia sẻ & tham gia cộng đồng</h3>
+                        <p class="text-gray-700">Bạn có thể submit tool đề xuất thêm công cụ hay theo dõi khóa học, dịch vụ liên quan trong mục “Course & Service”.</p>
+                    </div>
+                </div>
+                <div class="image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5v32-rObrQRiamuxjdNh7j14ptpqem6NTvQ&s" alt="AI Tools Categories" class="w-full md:w-3/4 lg:w-2/3">
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="section-title text-blue-700">💡 Lợi Ích Khi Sử Dụng</h2>
+                <div class="card hover-effect overflow-x-auto">
+                    <table class="benefit-table">
+                        <thead>
+                            <tr>
+                                <th>Lợi ích</th>
+                                <th>Mô tả</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tiết kiệm thời gian</td>
+                                <td>Không mất công tìm từng công cụ rải rác trên Google, chỉ cần một nguồn duy nhất.</td>
+                            </tr>
+                            <tr>
+                                <td>Khám phá công cụ mới</td>
+                                <td>Các mục “Just Launched” đưa bạn đến những ứng dụng AI mới nổi hiệu quả.</td>
+                            </tr>
+                            <tr>
+                                <td>Phù hợp đa nhu cầu</td>
+                                <td>Giao diện rõ ràng, dễ dùng cho cả người không chuyên và lập trình viên, marketer…</td>
+                            </tr>
+                            <tr>
+                                <td>Xác thực & đáng tin cậy</td>
+                                <td>Người dùng đánh giá, cộng đồng tham gia sôi nổi, giúp chọn đúng công cụ chất lượng.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="section-title text-orange-700">👥 Ai Nên Dùng BestList.ai?</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="card hover-effect text-center">
+                        <i class="fas fa-user-graduate text-4xl text-orange-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 font-quicksand">Người mới bắt đầu</h3>
+                        <p class="text-gray-700">Giao diện thân thiện, dễ tìm theo mục đích.</p>
+                    </div>
+                    <div class="card hover-effect text-center">
+                        <i class="fas fa-paint-brush text-4xl text-orange-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 font-quicksand">Freelancer, marketer, content creator</h3>
+                        <p class="text-gray-700">Cần nhanh chóng chọn công cụ viết nội dung, chỉnh ảnh, tạo video.</p>
+                    </div>
+                    <div class="card hover-effect text-center">
+                        <i class="fas fa-code text-4xl text-orange-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 font-quicksand">Dev và kỹ sư AI</h3>
+                        <p class="text-gray-700">Tìm thấy các công cụ hỗ trợ lập trình, API, no-code tích hợp.</p>
+                    </div>
+                    <div class="card hover-effect text-center">
+                        <i class="fas fa-building text-4xl text-orange-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 font-quicksand">Doanh nghiệp nhỏ & startup</h3>
+                        <p class="text-gray-700">Trao đổi, chia sẻ công cụ và tham khảo dịch vụ AI.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="text-center mb-12">
+                <h2 class="section-title text-red-700">🧭 Kết Luận</h2>
+                <div class="card hover-effect max-w-3xl mx-auto">
+                    <p class="text-lg text-gray-700 mb-6">
+                        BestList.ai là kho tài nguyên AI đáng giá trong thế giới đầy rẫy công cụ hôm nay. Với bộ lọc mạnh mẽ, cập nhật nhanh và đánh giá cộng đồng, đây là nơi bạn nên ghé khi muốn chọn công cụ hiệu quả – đúng mục đích – phù hợp ngân sách.
+                    </p>
+                    <a href="https://bestlist.ai/" target="_blank" class="btn-primary text-lg font-quicksand">
+                        Truy cập công cụ ngay!
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+    <!-- Footer will be inserted here -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    .ai-gradient {
+        background: linear-gradient(135deg, #0b0b3b 0%, #1a1a6c 50%, #3a0ca3 100%);
+        position: relative;
+        overflow: hidden;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .ai-circuit {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        pointer-events: none;
+    }
+    
+    .logo-glow {
+        filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.8));
+    }
+    
+    .footer-link {
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    
+    .footer-link:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 1px;
+        bottom: -2px;
+        left: 0;
+        background-color: #8a2be2;
+        transition: width 0.3s ease;
+    }
+    
+    .footer-link:hover:after {
+        width: 100%;
+    }
+    
+    .footer-link:hover {
+        color: #a855f7;
+    }
+    
+    .dot-separator {
+        display: inline-block;
+        margin: 0 6px;
+        opacity: 0.7;
+    }
+    
+    .social-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        margin: 0 8px;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        overflow: hidden;
+    }
+    
+    .social-icon:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .social-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 8px;
+    }
+    
+    .social-text {
+        margin-top: 4px;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+    }
+    
+    .social-item:hover .social-text {
+        color: white;
+    }
+    
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .footer-container {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    .icon-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .fb-icon, .yt-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .fb-icon {
+        background-color: #1877F2;
+    }
+    
+    .yt-icon {
+        background-color: #FF0000;
+    }
+    
+    @media (max-width: 768px) {
+        .footer-content {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .footer-links {
+            margin-top: 1rem;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .dot-separator {
+            display: none;
+        }
+        
+        .footer-link {
+            margin: 0.4rem 0;
+        }
+        
+        .description-text {
+            max-width: 100%;
+        }
+        
+        .social-icons {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-item {
+            margin: 8px 0;
+        }
+    }
+    
+    @media (max-width: 640px) {
+        .social-icons {
+            flex-direction: column;
+        }
+    }
+</style>
+<footer class="ai-gradient text-white">
+    <!-- AI Circuit Pattern Background -->
+    <svg class="ai-circuit" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+        <pattern id="circuit-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+            <path d="M10 10 L90 10 L90 90 L10 90 Z" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+            <circle cx="10" cy="10" r="2" fill="#ffffff"/>
+            <circle cx="90" cy="10" r="2" fill="#ffffff"/>
+            <circle cx="90" cy="90" r="2" fill="#ffffff"/>
+            <circle cx="10" cy="90" r="2" fill="#ffffff"/>
+            <path d="M10 50 L40 50 L40 10" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+            <path d="M90 50 L60 50 L60 90" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+            <circle cx="40" cy="50" r="2" fill="#ffffff"/>
+            <circle cx="60" cy="50" r="2" fill="#ffffff"/>
+        </pattern>
+        <rect width="100%" height="100%" fill="url(#circuit-pattern)"/>
+    </svg>
+    
+    <div class="footer-container px-3 py-4">
+        <div class="footer-content flex flex-col items-center justify-center">
+            <!-- Logo and Description -->
+            <div class="flex flex-col items-center mb-2">
+                <div class="logo-glow rounded-full overflow-hidden w-16 h-16 flex-shrink-0 border-2 border-purple-400 mb-3">
+                    <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" 
+                         alt="Quân H Logo" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="text-center max-w-md">
+                    <p class="text-sm md:text-base font-medium description-text">
+                        Quân H – Giảng viên & Youtuber chia sẻ kiến thức AI, công nghệ và giáo dục.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Social Media Icons - Vertical Layout -->
+            <div class="social-icons flex flex-row md:flex-row justify-center flex-wrap">
+                <a href="https://www.facebook.com/tran.hong.quan.216221/" target="_blank" class="social-item">
+                    <div class="social-icon">
+                        <div class="fb-icon">
+                            <i class="fab fa-facebook-f text-white"></i>
+                        </div>
+                    </div>
+                    <span class="social-text">Trần Hồng Quân</span>
+                </a>
+                
+                <a href="javascript:void(0)" class="social-item" onclick="alert('Zalo: 0355.213.107')">
+                    <div class="social-icon p-0">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/768px-Icon_of_Zalo.svg.png" 
+                             alt="Zalo" 
+                             class="icon-img">
+                    </div>
+                    <span class="social-text">0355.213.107</span>
+                </a>
+                
+                <a href="https://www.youtube.com/@quanh95" target="_blank" class="social-item">
+                    <div class="social-icon">
+                        <div class="yt-icon">
+                            <i class="fab fa-youtube text-white"></i>
+                        </div>
+                    </div>
+                    <span class="social-text">Quân H</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="border-t border-purple-900/50 mt-1 pt-3">
+            <div class="flex flex-wrap justify-center md:justify-between items-center text-xs text-purple-200/80">
+                <div class="mb-1 md:mb-0">
+                    © 2025 Quân H.
+                </div>
+                <div class="flex flex-wrap justify-center">
+                    <a href="#" class="footer-link mx-1">Chính sách bảo mật</a>
+                    <span class="dot-separator">•</span>
+                    <a href="#" class="footer-link mx-1">Điều khoản sử dụng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

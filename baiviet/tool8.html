@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notebook LM – Trợ Lý Ghi Chú AI Từ Google Có Gì Đặc Biệt?</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Notebook LM – Trợ Lý Ghi Chú AI Từ Google Có Gì Đặc Biệt?">
+    <meta property="og:description" content="Khám phá Notebook LM, trợ lý ghi chú AI từ Google DeepMind, với khả năng hiểu nội dung, trả lời câu hỏi, tóm tắt văn bản và nhiều tính năng nổi bật khác.">
+    <meta property="og:image" content="https://file.hstatic.net/200000722513/file/notebooklm_7e16240f8f214ebd9f6bc5f39e60bb0b_1024x1024.jpg">
+    <meta property="og:url" content="[URL chuẩn của trang]"> <!-- Cần thay thế bằng URL thực tế -->
+    <meta property="og:type" content="article">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%); /* Green gradient */
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: move1 10s infinite linear;
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: move2 12s infinite linear;
+        }
+        @keyframes move1 {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(100px, 100px); }
+            100% { transform: translate(0, 0); }
+        }
+        @keyframes move2 {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(-100px, -100px); }
+            100% { transform: translate(0, 0); }
+        }
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
+        }
+        .list-none {
+            list-style: none;
+            padding-left: 0;
+        }
+        .list-none li::before {
+            content: none;
+        }
+        .hover-effect:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease-in-out;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        .animated-button {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 999px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+            display: inline-block;
+        }
+        .animated-button:hover {
+            background-color: #45a049; /* Darker green */
+            transform: translateY(-3px);
+        }
+        /* Custom styles from menu.html */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.5);
+            transition: top 0.3s;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #2f73ff;
+        }
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .nav-links { display: flex; gap: 2rem; font-weight: 600; }
+        .nav-links a { font-size: 1rem; color: #fff; text-decoration: none; transition: color 0.3s; }
+        .nav-links a:hover { color: #2f73ff; }
+        .cta {
+            padding: 0.6rem 1.4rem;
+            background: #2f73ff;
+            border-radius: 999px;
+            font-weight: 600;
+            color: #fff;
+            transition: background 0.3s;
+        }
+        .cta:hover { background: #245ad1; }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 0.3rem;
+        }
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+        .menu-toggle.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .menu-toggle.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+
+        /* Responsive for menu.html */
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem; }
+            .nav-links { display: none; flex-direction: column; width: 100%; background: rgba(0,0,0,0.8); position: absolute; top: 60px; left: 0; padding: 1rem; }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: 0.5rem 0; text-align: center; }
+            .cta { display: none; }
+            .menu-toggle { display: flex; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Nội dung từ menu.html sẽ được chèn vào đây -->
+    <nav class="navbar">
+        <div class="logo">
+          <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
+          <span class="logo-text">Quân H</span>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <a href="../index.html">Trang chủ</a>
+          <a href="../baiviet.html">Bài viết</a>
+          <a href="../congcu.html">Công cụ</a>
+          <a href="../video.html">Video</a>
+          <a href="../trochoi.html">Trò chơi</a>
+          <a href="../thinghiemao.html">Thí nghiệm ảo</a>
+          <a href="../khoahoconline.html">Khóa học</a>
+          <a href="../lienhe.html">Liên hệ</a>
+        </div>
+        <a href="../lienhe.html" class="cta">Liên hệ</a>
+        <div class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+          navLinks.classList.toggle('open');
+          menuToggle.classList.toggle('open');
+        });
+    </script>
+
+    <header class="hero-section">
+        <div class="container mx-auto px-4 py-16">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">🧠 Notebook LM – Trợ Lý Ghi Chú AI Từ Google Có Gì Đặc Biệt?</h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto">Trong thế giới mà thông tin ngày càng nhiều và việc ghi chú, tổ chức kiến thức trở thành nhu cầu thiết yếu – thì Notebook LM chính là một bước tiến lớn trong việc cá nhân hóa trải nghiệm học tập và nghiên cứu bằng AI.</p>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto mt-2">Vậy Notebook LM là gì? Nó khác gì so với Notion, Obsidian hay các công cụ ghi chú truyền thống?</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <div class="image-container py-8">
+            <img src="https://file.hstatic.net/200000722513/file/notebooklm_7e16240f8f214ebd9f6bc5f39e60bb0b_1024x1024.jpg" alt="Notebook LM Image 1" class="max-w-full md:max-w-3xl lg:max-w-4xl mx-auto transition-transform duration-300 hover:scale-105">
+        </div>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-8 text-green-700">✅ Notebook LM Là Gì?</h2>
+            <div class="card hover-effect">
+                <p class="mb-4">Notebook LM (Language Model) là một ứng dụng do Google DeepMind phát triển, kết hợp giữa AI ngôn ngữ mạnh mẽ và sổ tay số thông minh.</p>
+                <p class="mb-4">Thay vì chỉ lưu trữ thông tin như một ứng dụng ghi chú thông thường, Notebook LM có thể:</p>
+                <ul class="list-none space-y-2">
+                    <li><p class="font-semibold text-lg">Hiểu nội dung trong ghi chú của bạn</p></li>
+                    <li><p class="font-semibold text-lg">Trả lời câu hỏi dựa trên nội dung bạn đã lưu</p></li>
+                    <li><p class="font-semibold text-lg">Tóm tắt văn bản dài, giải thích khái niệm, trích xuất thông tin chính xác</p></li>
+                    <li><p class="font-semibold text-lg">Tạo câu hỏi luyện tập, đề xuất ý tưởng hoặc hỗ trợ nghiên cứu chuyên sâu</p></li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="image-container py-8">
+            <img src="https://cdn-www.cw.com.tw/article/202503/article-67cfecc99e49a2.05914659.jpg" alt="Notebook LM Image 2" class="max-w-full md:max-w-3xl lg:max-w-4xl mx-auto transition-transform duration-300 hover:scale-105">
+        </div>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-8 text-blue-700">🔍 Tính Năng Nổi Bật</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card hover-effect">
+                    <h3 class="text-2xl font-semibold mb-4 text-blue-600">📚 “Hỏi ghi chú” như hỏi người thật</h3>
+                    <p class="mb-4">Bạn có thể nhập câu hỏi như: “Tóm tắt chương 3 trong tài liệu PDF mình đã thêm?” hoặc “Tác giả có quan điểm gì về giáo dục STEM?” → AI sẽ trả lời dựa trên chính tài liệu bạn đã đưa vào.</p>
+                </div>
+                <div class="card hover-effect">
+                    <h3 class="text-2xl font-semibold mb-4 text-blue-600">📝 Tự động tạo nội dung từ tài liệu gốc</h3>
+                    <p class="mb-4">Ví dụ, nếu bạn tải một file nghiên cứu hoặc bài giảng lên, Notebook LM có thể giúp bạn:</p>
+                    <ul class="list-none space-y-2">
+                        <li><p class="font-semibold text-lg">Tạo bản tóm tắt dễ hiểu</p></li>
+                        <li><p class="font-semibold text-lg">Tạo flashcard để ôn tập</p></li>
+                        <li><p class="font-semibold text-lg">Viết lại văn bản theo phong cách bạn mong muốn</p></li>
+                    </ul>
+                </div>
+                <div class="card hover-effect">
+                    <h3 class="text-2xl font-semibold mb-4 text-blue-600">📌 Tổ chức ghi chú dạng sổ tay (notebook)</h3>
+                    <p>Không còn rối rắm. Mỗi dự án hoặc chủ đề có thể được tách riêng thành một notebook, nơi bạn có thể thêm tài liệu, văn bản, và AI sẽ “nằm vùng” sẵn sàng hỗ trợ bất cứ lúc nào.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="image-container py-8">
+            <img src="https://www.testingcatalog.com/content/images/size/w2000/2025/02/screenshot-notebooklm_google_com-2025_02_10-23_16_38.jpeg" alt="Notebook LM Image 3" class="max-w-full md:max-w-3xl lg:max-w-4xl mx-auto transition-transform duration-300 hover:scale-105">
+        </div>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-8 text-purple-700">🤖 Khác Gì So Với ChatGPT Hay Gemini?</h2>
+            <div class="card hover-effect">
+                <p class="mb-4">ChatGPT/Gemini là các trợ lý AI đa năng, nhưng khi làm việc với tài liệu cụ thể, bạn cần “gợi lại” hoặc cung cấp lại nội dung nhiều lần.</p>
+                <p class="mb-4">Notebook LM thì giống như trợ lý nhớ hết mọi thứ bạn đã đưa vào – không cần bạn phải nhắc lại.</p>
+                <p>Tưởng tượng có một người trợ lý đọc toàn bộ tài liệu của bạn và luôn sẵn sàng giúp đỡ, không quên gì cả. Đó là Notebook LM.</p>
+            </div>
+        </section>
+
+        <div class="image-container py-8">
+            <img src="https://9to5google.com/wp-content/uploads/sites/4/2025/06/NotebookLM-cover-2.jpg?quality=82&strip=all&w=1024" alt="Notebook LM Image 4" class="max-w-full md:max-w-3xl lg:max-w-4xl mx-auto transition-transform duration-300 hover:scale-105">
+        </div>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-8 text-orange-700">🧑‍🏫 Ai Nên Dùng Notebook LM?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card hover-effect">
+                    <h3 class="text-xl font-semibold mb-2 text-orange-600">Sinh viên – học sinh</h3>
+                    <p>Tóm tắt giáo trình, tạo flashcard, ôn tập trước thi.</p>
+                </div>
+                <div class="card hover-effect">
+                    <h3 class="text-xl font-semibold mb-2 text-orange-600">Nhà nghiên cứu – học giả</h3>
+                    <p>Phân tích tài liệu, hỗ trợ trích dẫn, viết lại theo phong cách học thuật.</p>
+                </div>
+                <div class="card hover-effect">
+                    <h3 class="text-xl font-semibold mb-2 text-orange-600">Giáo viên – giảng viên</h3>
+                    <p>Soạn bài giảng từ tài liệu sẵn có, tạo đề thi, câu hỏi trắc nghiệm.</p>
+                </div>
+                <div class="card hover-effect">
+                    <h3 class="text-xl font-semibold mb-2 text-orange-600">Content Creator – Blogger</h3>
+                    <p>Tạo nội dung nhanh từ tài liệu, báo cáo, phỏng vấn…</p>
+                </div>
+                <div class="card hover-effect">
+                    <h3 class="text-xl font-semibold mb-2 text-orange-600">Bất kỳ ai</h3>
+                    <p>Thường xuyên làm việc với tài liệu dài và phức tạp.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="text-center mt-12">
+            <h2 class="text-3xl font-bold mb-4 text-gray-800">✨ Kết Luận</h2>
+            <p class="text-lg max-w-3xl mx-auto">Notebook LM là ví dụ rõ nét cho tương lai của trí tuệ nhân tạo: không chỉ thông minh, mà còn cá nhân hóa – linh hoạt – hỗ trợ theo ngữ cảnh.</p>
+            <p class="text-lg max-w-3xl mx-auto mt-2">Nếu bạn thường xuyên làm việc với văn bản, học tập hoặc nghiên cứu, thì việc có một trợ lý AI như Notebook LM là một lợi thế rất lớn. Hãy sẵn sàng trải nghiệm, vì đây có thể là công cụ thay đổi cách bạn ghi chú và học tập mãi mãi.</p>
+            <a href="https://notebooklm.google/" target="_blank" class="animated-button mt-8">Truy cập NotebookLM</a>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center py-6 mt-12">
+        <p>&copy; 2025 Quân H. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

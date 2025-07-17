@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Công cụ AI - Quân H</title>
+  <!-- Font và CSS chung -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/button.css">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',sans-serif; background:#111; color:#333; }
+    a { text-decoration:none; color:inherit; }
+
+    .container { max-width:1200px; margin:6rem auto 2rem; padding:2rem; background:#f6f9fc; border-radius:8px; color:#333; margin-top: 80px; }
+    .category-section {
+      background: #f6f9fc;
+      padding: 0;
+      margin-bottom: 2rem;
+    }
+    .category-section h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: #2f73ff;
+      border-bottom: 3px solid #2f73ff;
+      padding-bottom: 0.5rem;
+      display: inline-block;
+      width: 100%;
+    }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1rem; }
+    .card { 
+      background:#fff; 
+      border-radius:8px; 
+      overflow:hidden; 
+      box-shadow:0 2px 8px rgba(0,0,0,0.1); 
+      display: flex;
+      flex-direction: column;
+      padding: 1rem; /* Giữ padding tổng thể */
+      border: 1px solid #eee;
+      /* Bỏ padding-top và position: relative */
+    }
+    .card-logo {
+      width: 100%; /* Trải tràn */
+      height: 80px; /* Chiều cao cố định cho logo */
+      object-fit: contain; /* Giữ tỷ lệ khung hình */
+      margin-bottom: 0.5rem; /* Khoảng cách dưới logo */
+    }
+    .card-content { 
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      /* Bỏ margin-top */
+    }
+    .card-content h3 { 
+      font-size:1rem; 
+      margin-bottom:.25rem; 
+      color:#2f73ff; 
+      font-weight: 600; 
+      line-height: 1.2;
+      text-align: center; /* Căn giữa tên công cụ */
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      /* Bỏ margin-left */
+    }
+    .card-content p { 
+      font-size:.8rem; 
+      line-height:1.4; 
+      color:#555; 
+      margin-bottom:.75rem; 
+      flex-grow: 1; 
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+    }
+    .card-content .detail-btn { 
+      font-weight:600; 
+      margin-top: auto; 
+      align-self: center; 
+      border-radius: 999px;
+      font-size: 0.8rem; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: auto; 
+      padding: 0.6rem 1.4rem; 
+      min-height: 36px;
+    }
+    .back { margin-top:2rem; display:inline-block; color:#2f73ff; }
+    .back:hover { color:#245ad1; }
+
+    @media (max-width: 768px) {
+      .container { margin-top: 4rem; padding: 1rem; }
+      .grid { grid-template-columns: 1fr; }
+      .card { padding-top: 1rem; }
+      .card-logo { height: 60px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="menu-placeholder"></div>
+
+  <div class="container">
+    <div id="tools-container"></div>
+    <a href="../index.html" class="back">← Về Trang chủ</a>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <script>
+    async function fetchData(url) {
+      const res = await fetch(url);
+      return res.json();
+    }
+
+    function createToolCard(tool) {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <img src="${tool.logo_image}" alt="${tool.title} Logo" class="card-logo">
+        <div class="card-content">
+          <h3>${tool.title}</h3>
+          <p>${tool.desc}</p>
+          <a href="${tool.url}" target="_blank" class="detail-btn">Truy cập</a>
+        </div>
+      `;
+      return card;
+    }
+
+    async function renderTools() {
+      const toolsData = await fetchData('../data/congcu.json');
+      const toolsContainer = document.getElementById('tools-container');
+      toolsContainer.innerHTML = ''; // Clear existing content
+
+      toolsData.forEach(categoryData => {
+        const categorySection = document.createElement('div');
+        categorySection.className = 'category-section';
+        categorySection.innerHTML = `<h2>${categoryData.category}</h2><div class="grid"></div>`;
+        
+        const grid = categorySection.querySelector('.grid');
+        categoryData.tools.forEach(tool => {
+          grid.appendChild(createToolCard(tool));
+        });
+        toolsContainer.appendChild(categorySection);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderTools();
+
+      // Tải menu.html vào placeholder
+      fetch('../assets/includes/menu.html')
+          .then(response => response.text())
+          .then(data => {
+              document.getElementById('menu-placeholder').innerHTML = data;
+              const menuToggle = document.getElementById('menuToggle');
+              const navLinks = document.getElementById('navLinks');
+
+              if (menuToggle && navLinks) {
+                  menuToggle.addEventListener('click', () => {
+                      navLinks.classList.toggle('open');
+                      menuToggle.classList.toggle('open');
+                  });
+              } else {
+                  console.error('Menu elements not found after loading menu.html');
+              }
+          });
+      
+      // Tải footer.html vào placeholder
+      fetch('../assets/includes/footer.html')
+          .then(response => response.text())
+          .then(data => {
+              document.getElementById('footer-placeholder').innerHTML = data;
+          });
+    });
+  </script>
+</body>
+</html>
+

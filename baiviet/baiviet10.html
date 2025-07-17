@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Sử Dụng Veo 3 Miễn Phí – Tạo Video AI Cực Đỉnh</title>
+    <meta name="description" content="Bạn muốn tạo những video chuyên nghiệp với công nghệ AI mới nhất nhưng ngại chi phí? Tin vui là Veo 3 – công cụ tạo video từ văn bản (text-to-video) đỉnh cao của Google – đã có cách để bạn trải nghiệm miễn phí!">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Hướng Dẫn Sử Dụng Veo 3 Miễn Phí – Tạo Video AI Cực Đỉnh Mà Không Tốn Một Xu!">
+    <meta property="og:description" content="Bạn muốn tạo những video chuyên nghiệp với công nghệ AI mới nhất nhưng ngại chi phí? Tin vui là Veo 3 – công cụ tạo video từ văn bản (text-to-video) đỉnh cao của Google – đã có cách để bạn trải nghiệm miễn phí!">
+    <meta property="og:image" content="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png">
+    <meta property="og:url" content="[URL chuẩn của trang]">
+    <meta property="og:type" content="article">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: moveShape 10s infinite alternate;
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            animation: moveShape 12s infinite alternate-reverse;
+        }
+        @keyframes moveShape {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.1); }
+        }
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
+        }
+        .btn-primary {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+            display: inline-block;
+        }
+        .btn-primary:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+        ul {
+            list-style: none; /* Loại bỏ dấu chấm mặc định */
+            padding-left: 0; /* Đảm bảo không có padding mặc định */
+        }
+        ul li::before {
+            content: none; /* Loại bỏ dấu chấm đầu dòng */
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            transition: top 0.3s;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            color: white;
+        }
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .logo-img {
+            height: 40px;
+            margin-right: 0.5rem;
+        }
+        .navbar .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-family: 'Inter', sans-serif;
+            transition: color 0.3s ease-in-out;
+        }
+        .navbar .nav-links a:hover {
+            color: #a0aec0;
+        }
+        .navbar .cta {
+            background-color: #4CAF50;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .navbar .cta:hover {
+            background-color: #45a049;
+        }
+        .navbar .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .navbar .menu-toggle span {
+            background: white;
+            height: 3px;
+            width: 25px;
+            margin: 4px 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 60px; /* Adjust based on navbar height */
+                left: 0;
+                background: rgba(0, 0, 0, 0.8);
+                padding: 1rem 0;
+                text-align: center;
+            }
+            .navbar .nav-links.active {
+                display: flex;
+            }
+            .navbar .nav-links a {
+                margin: 0.5rem 0;
+            }
+            .navbar .cta {
+                display: none; /* Hide CTA button on small screens */
+            }
+            .navbar .menu-toggle {
+                display: flex;
+            }
+            .hero-section {
+                padding: 6rem 0;
+            }
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            .hero-section p {
+                font-size: 1rem;
+            }
+            .card {
+                padding: 1.5rem;
+            }
+        }
+        .banner-left, .banner-right {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 99; /* Đảm bảo banner nằm dưới navbar nhưng trên nội dung */
+        }
+        .banner-left {
+            left: 10px;
+        }
+        .banner-right {
+            right: 10px;
+        }
+        .banner-left img, .banner-right img {
+            max-height: 400px; /* Giới hạn chiều cao của banner */
+            width: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Navbar from menu.html -->
+    <nav class="navbar" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 100; transition: top 0.3s; background: rgba(0, 0, 0, 0.5);">
+        <div class="logo">
+          <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
+          <span class="logo-text">Quân H</span>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <a href="../index.html">Trang chủ</a>
+          <a href="../baiviet.html">Bài viết</a>
+          <a href="../congcu.html">Công cụ</a>
+          <a href="../video.html">Video</a>
+          <a href="../lienhe.html">Liên hệ</a>
+        </div>
+        <a href="../lienhe.html" class="cta">Liên hệ</a>
+        <div class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+
+    <main class="flex-grow pt-20"> <!-- Add pt-20 to account for fixed navbar height -->
+        <!-- Hero Section -->
+        <section class="hero-section text-center">
+            <div class="container mx-auto px-4">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+                    🎥 Hướng Dẫn Sử Dụng Veo 3 Miễn Phí – Tạo Video AI Cực Đỉnh Mà Không Tốn Một Xu!
+                </h1>
+                <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
+                    Bạn muốn tạo những video chuyên nghiệp với công nghệ AI mới nhất nhưng ngại chi phí? Tin vui là Veo 3 – công cụ tạo video từ văn bản (text-to-video) đỉnh cao của Google – đã có cách để bạn trải nghiệm miễn phí! 🎉
+                </p>
+            </div>
+        </section>
+
+        <!-- Main Content Section -->
+        <section class="container mx-auto px-4 py-12">
+            <div class="max-w-4xl mx-auto">
+                <div class="card">
+                    <h2 class="text-3xl font-semibold mb-4 text-purple-700">🧠 Veo 3 là gì?</h2>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Veo 3 là một nền tảng AI tạo video từ mô tả văn bản, cho phép bạn tạo ra những đoạn video cực kỳ ấn tượng chỉ bằng cách nhập vào một vài dòng mô tả. Bạn có thể sử dụng nó để làm:
+                    </p>
+                    <ul class="text-gray-700 space-y-2">
+                        <li>Video giới thiệu sản phẩm 📦</li>
+                        <li>Video hoạt hình giáo dục 📚</li>
+                        <li>Trailer phim, hoạt cảnh 🎬</li>
+                    </ul>
+                    <p class="text-gray-700 leading-relaxed mt-4">
+                        Điểm đặc biệt: Veo có thể hiểu và dựng khung cảnh, chuyển động, thậm chí cả phong cách quay camera như một đạo diễn thực thụ! 🎥
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h2 class="text-3xl font-semibold mb-4 text-green-700">✅ Hướng dẫn dùng Veo 3 miễn phí</h2>
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        Mình đã chuẩn bị sẵn một video hướng dẫn chi tiết, từng bước dễ hiểu, phù hợp cả với người mới.
+                    </p>
+                    <div class="text-center">
+                        <a href="https://kontum01-my.sharepoint.com/:v:/g/personal/quanth_c12sb_st_gdkontum_edu_vn/EXHhFQjupvdOkdSO0OwQb1MBzummPpBUGISP7GY9w2rk0w?e=xSmJSo" target="_blank" class="btn-primary">
+                            Xem video
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center py-6 mt-auto">
+        <p>&copy; 2025 Quân H. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Navbar toggle for mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Hide navbar on scroll down, show on scroll up
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('.navbar');
+
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                // Scrolling down
+                navbar.style.top = '-80px'; // Adjust based on navbar height
+            } else {
+                // Scrolling up
+                navbar.style.top = '0';
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>

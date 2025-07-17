@@ -1,0 +1,803 @@
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đua Xe Giải Đố Toán Học</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(to bottom, #1e3c72, #2a5298);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-top: 80px; /* Thêm padding-top để tạo không gian cho menu cố định */
+        }
+        
+        .car {
+            transition: all 0.5s ease;
+            position: relative;
+        }
+        
+        .road {
+            background: #333;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .road::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: repeating-linear-gradient(to right, white, white 50px, transparent 50px, transparent 100px);
+            margin-top: -5px;
+            animation: roadMove 1s linear infinite;
+        }
+        
+        @keyframes roadMove {
+            0% { background-position: 0 0; }
+            100% { background-position: -100px 0; }
+        }
+        
+        .finish-line {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 10px;
+            background: repeating-linear-gradient(to bottom, black, black 20px, white 20px, white 40px);
+        }
+        
+        .timer-bar {
+            transition: width 1s linear;
+        }
+        
+        .btn {
+            transition: all 0.2s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* CSS cho menu */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #4CAF50; /* Màu xanh lá cây khi hover */
+        }
+
+        .cta {
+            background-color: #007bff; /* Màu xanh dương */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta:hover {
+            background-color: #0056b3; /* Màu xanh dương đậm hơn khi hover */
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            height: 3px;
+            width: 25px;
+            background-color: white;
+            margin-bottom: 5px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                position: absolute;
+                top: 70px; /* Adjust based on navbar height */
+                left: 0;
+                padding: 1rem 0;
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                margin: 10px 0;
+            }
+
+            .cta {
+                display: none; /* Hide CTA button on small screens */
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+        }
+    </style>
+</head>
+<body class="text-white">
+    <nav class="navbar" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 100; transition: top 0.3s; background: rgba(0, 0, 0, 0.5);">
+        <div class="logo">
+          <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
+          <span class="logo-text">Quân H</span>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <a href="../../index.html">Trang chủ</a>
+          <a href="../../baiviet.html">Bài viết</a>
+          <a href="../../congcu.html">Công cụ</a>
+          <a href="../../video.html">Video</a>
+          <a href="../../trochoi.html">Trò chơi</a>
+          <a href="../../lienhe.html">Liên hệ</a>
+        </div>
+        <a href="../../lienhe.html" class="cta">Liên hệ</a>
+        <div class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+    <!-- Game Container -->
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Game Title -->
+        <div class="text-center mb-6">
+            <h1 class="text-4xl font-bold mb-2">🏎️ Đua Xe Giải Đố Toán Học 🏎️</h1>
+            <p class="text-xl">Giải các phép tính để đua xe về đích!</p>
+        </div>
+        
+        <!-- Game Settings (Initially Visible) -->
+        <div id="gameSettings" class="bg-white/10 backdrop-blur-md rounded-xl p-6 mb-8 shadow-lg">
+            <h2 class="text-2xl font-bold mb-4 text-center">Cài đặt trò chơi</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-xl font-semibold mb-3">Cấp độ</h3>
+                    <div class="flex flex-col space-y-2">
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="radio" name="difficulty" value="easy" checked class="w-5 h-5 accent-green-500">
+                            <span>Dễ (1-10)</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="radio" name="difficulty" value="medium" class="w-5 h-5 accent-yellow-500">
+                            <span>Trung bình (1-20)</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="radio" name="difficulty" value="hard" class="w-5 h-5 accent-red-500">
+                            <span>Khó (1-50)</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-3">Phép tính</h3>
+                    <div class="flex flex-col space-y-2">
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" id="addition" checked class="w-5 h-5 accent-blue-500">
+                            <span>Cộng (+)</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" id="subtraction" checked class="w-5 h-5 accent-blue-500">
+                            <span>Trừ (-)</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" id="multiplication" class="w-5 h-5 accent-blue-500">
+                            <span>Nhân (×)</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" id="division" class="w-5 h-5 accent-blue-500">
+                            <span>Chia (÷)</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6 text-center">
+                <button id="startGame" class="bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white font-bold py-3 px-8 rounded-full text-xl shadow-lg btn">
+                    Bắt đầu chơi!
+                </button>
+            </div>
+        </div>
+        
+        <!-- Game Area (Initially Hidden) -->
+        <div id="gameArea" class="hidden">
+            <!-- Question and Answer Area -->
+            <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 mb-6 shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-xl font-bold">Câu hỏi: <span id="questionNumber">1</span>/10</div>
+                    <div class="flex items-center">
+                        <span class="mr-2">Thời gian:</span>
+                        <div class="w-48 h-6 bg-gray-700 rounded-full overflow-hidden">
+                            <div id="timerBar" class="timer-bar h-full bg-gradient-to-r from-green-400 to-yellow-500 w-full"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center my-6">
+                    <div id="question" class="text-4xl font-bold mb-6">5 + 3 = ?</div>
+                    <input type="number" id="answerInput" class="w-32 text-center text-3xl py-2 px-4 rounded-lg bg-white/20 backdrop-blur-md border-2 border-white/30 focus:border-blue-400 focus:outline-none text-white" placeholder="?">
+                    <button id="submitAnswer" class="ml-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg text-xl btn">
+                        Trả lời
+                    </button>
+                </div>
+                
+                <div id="feedback" class="text-center text-xl font-bold hidden"></div>
+            </div>
+            
+            <!-- Racing Track -->
+            <div class="relative">
+                <div class="road h-40 rounded-xl mb-2 overflow-hidden">
+                    <div class="finish-line"></div>
+                    
+                    <!-- Player Car -->
+                    <div id="playerCar" class="car absolute bottom-2 left-0" style="left: 0%">
+                        <svg width="80" height="40" viewBox="0 0 80 40">
+                            <rect x="10" y="15" width="60" height="20" rx="5" fill="#3498db" />
+                            <rect x="20" y="5" width="30" height="15" rx="3" fill="#3498db" />
+                            <circle cx="20" cy="35" r="5" fill="#333" />
+                            <circle cx="60" cy="35" r="5" fill="#333" />
+                            <rect x="50" y="10" width="10" height="5" rx="2" fill="#f39c12" />
+                        </svg>
+                        <div class="absolute -top-8 left-0 right-0 text-center font-bold text-blue-300">Bạn</div>
+                    </div>
+                    
+                    <!-- AI Car -->
+                    <div id="aiCar" class="car absolute top-2 left-0" style="left: 0%">
+                        <svg width="80" height="40" viewBox="0 0 80 40">
+                            <rect x="10" y="15" width="60" height="20" rx="5" fill="#e74c3c" />
+                            <rect x="20" y="5" width="30" height="15" rx="3" fill="#e74c3c" />
+                            <circle cx="20" cy="35" r="5" fill="#333" />
+                            <circle cx="60" cy="35" r="5" fill="#333" />
+                            <rect x="50" y="10" width="10" height="5" rx="2" fill="#f39c12" />
+                        </svg>
+                        <div class="absolute -top-8 left-0 right-0 text-center font-bold text-red-300">Máy</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Score Display -->
+            <div class="flex justify-between items-center mt-4 bg-white/10 backdrop-blur-md rounded-xl p-4">
+                <div>
+                    <span class="font-bold">Điểm của bạn:</span>
+                    <span id="playerScore" class="ml-2 text-xl font-bold text-blue-300">0</span>
+                </div>
+                <div>
+                    <span class="font-bold">Điểm của máy:</span>
+                    <span id="aiScore" class="ml-2 text-xl font-bold text-red-300">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Result Modal (Initially Hidden) -->
+        <div id="resultModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+            <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+            <div class="bg-gradient-to-br from-blue-900 to-purple-900 p-8 rounded-2xl shadow-2xl z-10 max-w-md w-full mx-4 border border-white/20">
+                <div id="resultContent" class="text-center">
+                    <!-- Content will be dynamically inserted -->
+                </div>
+                <div class="mt-8 flex justify-center">
+                    <button id="playAgain" class="bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white font-bold py-3 px-8 rounded-full text-xl shadow-lg btn">
+                        Chơi lại
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game variables
+        let gameSettings = {
+            difficulty: "easy",
+            operations: {
+                addition: true,
+                subtraction: true,
+                multiplication: false,
+                division: false
+            },
+            totalQuestions: 10,
+            currentQuestion: 0,
+            playerScore: 0,
+            aiScore: 0,
+            playerPosition: 0,
+            aiPosition: 0,
+            timePerQuestion: 30,
+            timer: null,
+            timeLeft: 30,
+            gameActive: false
+        };
+        
+        // DOM Elements
+        const gameSettingsEl = document.getElementById('gameSettings');
+        const gameAreaEl = document.getElementById('gameArea');
+        const startGameBtn = document.getElementById('startGame');
+        const questionEl = document.getElementById('question');
+        const questionNumberEl = document.getElementById('questionNumber');
+        const answerInputEl = document.getElementById('answerInput');
+        const submitAnswerBtn = document.getElementById('submitAnswer');
+        const feedbackEl = document.getElementById('feedback');
+        const playerCarEl = document.getElementById('playerCar');
+        const aiCarEl = document.getElementById('aiCar');
+        const playerScoreEl = document.getElementById('playerScore');
+        const aiScoreEl = document.getElementById('aiScore');
+        const timerBarEl = document.getElementById('timerBar');
+        const resultModalEl = document.getElementById('resultModal');
+        const resultContentEl = document.getElementById('resultContent');
+        const playAgainBtn = document.getElementById('playAgain');
+        
+        // Event Listeners
+        startGameBtn.addEventListener('click', startGame);
+        submitAnswerBtn.addEventListener('click', checkAnswer);
+        playAgainBtn.addEventListener('click', resetGame);
+        answerInputEl.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+        
+        // Radio buttons for difficulty
+        document.querySelectorAll('input[name="difficulty"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                gameSettings.difficulty = e.target.value;
+            });
+        });
+        
+        // Checkboxes for operations
+        document.getElementById('addition').addEventListener('change', (e) => {
+            gameSettings.operations.addition = e.target.checked;
+            validateOperations();
+        });
+        
+        document.getElementById('subtraction').addEventListener('change', (e) => {
+            gameSettings.operations.subtraction = e.target.checked;
+            validateOperations();
+        });
+        
+        document.getElementById('multiplication').addEventListener('change', (e) => {
+            gameSettings.operations.multiplication = e.target.checked;
+            validateOperations();
+        });
+        
+        document.getElementById('division').addEventListener('change', (e) => {
+            gameSettings.operations.division = e.target.checked;
+            validateOperations();
+        });
+        
+        // Make sure at least one operation is selected
+        function validateOperations() {
+            const anyChecked = Object.values(gameSettings.operations).some(val => val);
+            if (!anyChecked) {
+                // If none are checked, force addition to be checked
+                document.getElementById('addition').checked = true;
+                gameSettings.operations.addition = true;
+                alert('Phải chọn ít nhất một loại phép tính!');
+            }
+        }
+        
+        // Start the game
+        function startGame() {
+            gameSettings.gameActive = true;
+            gameSettings.currentQuestion = 0;
+            gameSettings.playerScore = 0;
+            gameSettings.aiScore = 0;
+            gameSettings.playerPosition = 0;
+            gameSettings.aiPosition = 0;
+            
+            // Update display
+            gameSettingsEl.classList.add('hidden');
+            gameAreaEl.classList.remove('hidden');
+            playerScoreEl.textContent = '0';
+            aiScoreEl.textContent = '0';
+            
+            // Position cars at start
+            playerCarEl.style.left = '0%';
+            aiCarEl.style.left = '0%';
+            
+            // Generate first question
+            nextQuestion();
+        }
+        
+        // Generate a new math question
+        function generateQuestion() {
+            let num1, num2, operation, answer, questionText;
+            
+            // Set number range based on difficulty
+            let max;
+            switch(gameSettings.difficulty) {
+                case 'easy':
+                    max = 10;
+                    break;
+                case 'medium':
+                    max = 20;
+                    break;
+                case 'hard':
+                    max = 50;
+                    break;
+                default:
+                    max = 10;
+            }
+            
+            // Get available operations
+            const availableOps = [];
+            if (gameSettings.operations.addition) availableOps.push('+');
+            if (gameSettings.operations.subtraction) availableOps.push('-');
+            if (gameSettings.operations.multiplication) availableOps.push('×');
+            if (gameSettings.operations.division) availableOps.push('÷');
+            
+            // Select random operation
+            operation = availableOps[Math.floor(Math.random() * availableOps.length)];
+            
+            // Generate numbers based on operation
+            switch(operation) {
+                case '+':
+                    num1 = Math.floor(Math.random() * max) + 1;
+                    num2 = Math.floor(Math.random() * max) + 1;
+                    answer = num1 + num2;
+                    break;
+                case '-':
+                    num1 = Math.floor(Math.random() * max) + 1;
+                    num2 = Math.floor(Math.random() * num1) + 1; // Ensure positive result
+                    answer = num1 - num2;
+                    break;
+                case '×':
+                    num1 = Math.floor(Math.random() * (max/2)) + 1;
+                    num2 = Math.floor(Math.random() * (max/2)) + 1;
+                    answer = num1 * num2;
+                    break;
+                case '÷':
+                    num2 = Math.floor(Math.random() * 10) + 1;
+                    answer = Math.floor(Math.random() * 10) + 1;
+                    num1 = num2 * answer; // Ensure clean division
+                    break;
+            }
+            
+            questionText = `${num1} ${operation} ${num2} = ?`;
+            
+            return {
+                text: questionText,
+                answer: answer
+            };
+        }
+        
+        // Move to the next question
+        function nextQuestion() {
+            if (gameSettings.currentQuestion >= gameSettings.totalQuestions) {
+                endGame();
+                return;
+            }
+            
+            gameSettings.currentQuestion++;
+            questionNumberEl.textContent = gameSettings.currentQuestion;
+            
+            // Generate new question
+            const question = generateQuestion();
+            questionEl.textContent = question.text;
+            questionEl.dataset.answer = question.answer;
+            
+            // Reset input and feedback
+            answerInputEl.value = '';
+            answerInputEl.focus();
+            feedbackEl.classList.add('hidden');
+            
+            // Reset timer
+            gameSettings.timeLeft = gameSettings.timePerQuestion;
+            timerBarEl.style.width = '100%';
+            
+            // Start timer
+            clearInterval(gameSettings.timer);
+            gameSettings.timer = setInterval(updateTimer, 1000);
+            
+            // Move AI car
+            moveAiCar();
+        }
+        
+        // Update the timer
+        function updateTimer() {
+            gameSettings.timeLeft--;
+            
+            // Update timer bar
+            const percentage = (gameSettings.timeLeft / gameSettings.timePerQuestion) * 100;
+            timerBarEl.style.width = `${percentage}%`;
+            
+            // Change color based on time left
+            if (percentage > 60) {
+                timerBarEl.className = 'timer-bar h-full bg-gradient-to-r from-green-400 to-yellow-500';
+            } else if (percentage > 30) {
+                timerBarEl.className = 'timer-bar h-full bg-gradient-to-r from-yellow-400 to-orange-500';
+            } else {
+                timerBarEl.className = 'timer-bar h-full bg-gradient-to-r from-orange-500 to-red-600';
+            }
+            
+            // Time's up
+            if (gameSettings.timeLeft <= 0) {
+                clearInterval(gameSettings.timer);
+                showFeedback(false, "Hết giờ!");
+                setTimeout(nextQuestion, 1500);
+            }
+        }
+        
+        // Check the player's answer
+        function checkAnswer() {
+            if (!gameSettings.gameActive) return;
+            
+            const playerAnswer = parseInt(answerInputEl.value);
+            const correctAnswer = parseInt(questionEl.dataset.answer);
+            
+            if (isNaN(playerAnswer)) {
+                // No answer provided
+                showFeedback(false, "Hãy nhập câu trả lời!");
+                return;
+            }
+            
+            const isCorrect = playerAnswer === correctAnswer;
+            
+            // Stop the timer
+            clearInterval(gameSettings.timer);
+            
+            // Calculate score based on time left
+            let pointsEarned = 0;
+            if (isCorrect) {
+                // Base points + time bonus
+                pointsEarned = 10 + Math.floor(gameSettings.timeLeft / 3);
+                gameSettings.playerScore += pointsEarned;
+                playerScoreEl.textContent = gameSettings.playerScore;
+                
+                // Move player car
+                movePlayerCar(pointsEarned);
+                
+                showFeedback(true, `Đúng! +${pointsEarned} điểm`);
+            } else {
+                showFeedback(false, `Sai! Đáp án đúng là ${correctAnswer}`);
+            }
+            
+            // Move to next question after delay
+            setTimeout(nextQuestion, 1500);
+        }
+        
+        // Show feedback to the player
+        function showFeedback(isCorrect, message) {
+            feedbackEl.textContent = message;
+            feedbackEl.classList.remove('hidden', 'text-green-400', 'text-red-400');
+            feedbackEl.classList.add(isCorrect ? 'text-green-400' : 'text-red-400');
+        }
+        
+        // Move the player's car
+        function movePlayerCar(points) {
+            // Calculate new position (max 100%)
+            gameSettings.playerPosition += points * 0.8;
+            gameSettings.playerPosition = Math.min(gameSettings.playerPosition, 100);
+            
+            // Animate car
+            playerCarEl.style.left = `${gameSettings.playerPosition}%`;
+            
+            // Check if player reached finish line
+            if (gameSettings.playerPosition >= 100) {
+                setTimeout(endGame, 500);
+            }
+        }
+        
+        // Move the AI car
+        function moveAiCar() {
+            // AI difficulty adjustment
+            let aiSpeed;
+            switch(gameSettings.difficulty) {
+                case 'easy':
+                    aiSpeed = 6 + Math.random() * 4; // 6-10
+                    break;
+                case 'medium':
+                    aiSpeed = 7 + Math.random() * 5; // 7-12
+                    break;
+                case 'hard':
+                    aiSpeed = 8 + Math.random() * 6; // 8-14
+                    break;
+                default:
+                    aiSpeed = 7;
+            }
+            
+            // Calculate new position (max 100%)
+            gameSettings.aiPosition += aiSpeed;
+            gameSettings.aiScore += Math.floor(aiSpeed);
+            gameSettings.aiPosition = Math.min(gameSettings.aiPosition, 100);
+            
+            // Update score
+            aiScoreEl.textContent = gameSettings.aiScore;
+            
+            // Animate car
+            aiCarEl.style.left = `${gameSettings.aiPosition}%`;
+            
+            // Check if AI reached finish line
+            if (gameSettings.aiPosition >= 100) {
+                setTimeout(endGame, 500);
+            }
+        }
+        
+        // End the game
+        function endGame() {
+            gameSettings.gameActive = false;
+            clearInterval(gameSettings.timer);
+            
+            // Determine winner
+            const playerWon = gameSettings.playerPosition >= 100 && gameSettings.playerPosition >= gameSettings.aiPosition;
+            
+            // Create result content
+            let resultHTML = '';
+            
+            if (playerWon) {
+                resultHTML = `
+                    <h2 class="text-3xl font-bold text-green-400 mb-4">🏆 Chúc mừng! 🏆</h2>
+                    <p class="text-xl mb-4">Bạn đã chiến thắng!</p>
+                    <div class="flex justify-center mb-4">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <circle cx="60" cy="60" r="50" fill="gold" />
+                            <text x="60" y="75" text-anchor="middle" font-size="60" fill="#333">🏆</text>
+                        </svg>
+                    </div>
+                `;
+                createConfetti();
+            } else {
+                resultHTML = `
+                    <h2 class="text-3xl font-bold text-blue-400 mb-4">Rất tiếc!</h2>
+                    <p class="text-xl mb-4">Hãy cố gắng hơn lần sau nhé!</p>
+                    <div class="flex justify-center mb-4">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <circle cx="60" cy="60" r="50" fill="#3498db" />
+                            <text x="60" y="75" text-anchor="middle" font-size="60" fill="#fff">🏎️</text>
+                        </svg>
+                    </div>
+                `;
+            }
+            
+            resultHTML += `
+                <div class="bg-white/10 backdrop-blur-md rounded-lg p-4 flex justify-between">
+                    <div>
+                        <p class="font-bold">Điểm của bạn:</p>
+                        <p class="text-2xl font-bold text-blue-300">${gameSettings.playerScore}</p>
+                    </div>
+                    <div>
+                        <p class="font-bold">Điểm của máy:</p>
+                        <p class="text-2xl font-bold text-red-300">${gameSettings.aiScore}</p>
+                    </div>
+                </div>
+            `;
+            
+            resultContentEl.innerHTML = resultHTML;
+            resultModalEl.classList.remove('hidden');
+        }
+        
+        // Create confetti animation for winner
+        function createConfetti() {
+            const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50', '#8BC34A', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+        
+        // Reset the game
+        function resetGame() {
+            resultModalEl.classList.add('hidden');
+            gameAreaEl.classList.add('hidden');
+            gameSettingsEl.classList.remove('hidden');
+            
+            // Clear any remaining confetti
+            document.querySelectorAll('.confetti').forEach(el => el.remove());
+        }
+    </script>
+    <script>
+        // Script cho menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            const navbar = document.querySelector('.navbar');
+
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                });
+            }
+
+            // Hide menu on scroll down, show on scroll up
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', function() {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > lastScrollTop) {
+                    // Scrolling down
+                    navbar.style.top = '-80px'; // Adjust based on your navbar height
+                } else {
+                    // Scrolling up
+                    navbar.style.top = '0';
+                }
+                lastScrollTop = scrollTop;
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9570d9e506ff4098',t:'MTc1MTE1MjE1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

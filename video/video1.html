@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biến Ảnh Thành Video Bằng AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f6f9fc; /* Màu nền nhẹ nhàng */
+            color: #333;
+            line-height: 1.6;
+        }
+        .navbar {
+            position: sticky; top:0; left:0; width:100%;
+            display:flex; justify-content:space-between; align-items:center;
+            padding:1rem 2rem; background:rgba(0,0,0,0.5); z-index:100;
+        }
+        .logo            { display:flex; align-items:center; gap:.75rem; }
+        .logo-img        { width:40px; height:40px; border-radius:50%; border:2px solid #2f73ff; }
+        .logo-text       { font-family:'Inter',sans-serif; font-size:1.5rem; font-weight:700; color:#fff; }
+        .nav-links       { display:flex; gap:2rem; font-weight:600; }
+        .nav-links a     { color:#fff; transition:color .3s; }
+        .nav-links a:hover { color:#2f73ff; }
+        .cta             { padding:.6rem 1.4rem; background:#2f73ff; border-radius:999px; font-weight:600; color:#fff; transition:background .3s; }
+        .cta:hover       { background:#245ad1; }
+
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem;
+            }
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+                margin-top: 1rem;
+                display: none; /* Hidden by default on small screens */
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .logo-img {
+                width: 32px;
+                height: 32px;
+            }
+            .hamburger {
+                display: block;
+                cursor: pointer;
+                color: #fff;
+                font-size: 1.5rem;
+                position: absolute;
+                right: 1rem;
+                top: 1rem;
+            }
+            .cta {
+                margin-top: 1rem;
+                width: 100%;
+                text-align: center;
+            }
+        }
+        @media (min-width: 769px) {
+            .hamburger {
+                display: none;
+            }
+        }
+
+        .article-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Bóng nhẹ */
+        }
+        .article-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2f73ff;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .article-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .article-section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .article-paragraph {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .article-container ul {
+            list-style: none; /* Loại bỏ dấu chấm đen mặc định */
+            padding-left: 0;
+        }
+        .article-container ul li {
+            position: relative;
+            padding-left: 1.8rem; /* Khoảng cách cho icon */
+            margin-bottom: 0.5rem;
+        }
+        .article-container ul li::before {
+            content: '\2022'; /* Dấu chấm tròn Unicode */
+            color: #2f73ff; /* Màu icon */
+            position: absolute;
+            left: 0;
+            top: 0.2rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .video-button {
+            display: block;
+            width: fit-content;
+            margin: 2rem auto;
+            padding: 1rem 2.5rem;
+            background-color: #ff0000; /* Màu đỏ nổi bật cho nút video */
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-align: center;
+            border-radius: 999px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 6px 15px rgba(255, 0, 0, 0.4);
+        }
+        .video-button:hover {
+            background-color: #cc0000;
+            transform: translateY(-2px);
+        }
+        .video-button:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive adjustments for text and padding */
+        @media (max-width: 768px) {
+            .article-container {
+                margin: 1rem auto;
+                padding: 1rem;
+            }
+            .article-title {
+                font-size: 1.8rem;
+            }
+            .article-section-title {
+                font-size: 1.5rem;
+            }
+            .article-paragraph {
+                font-size: 1rem;
+            }
+            .video-button {
+                font-size: 1rem;
+                padding: 0.8rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // JavaScript for responsive navbar (hamburger menu)
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.querySelector('.navbar');
+            const navLinks = document.querySelector('.nav-links');
+            const hamburger = document.createElement('div');
+            hamburger.classList.add('hamburger');
+            hamburger.innerHTML = '&#9776;'; // Hamburger icon
+            navbar.insertBefore(hamburger, navLinks);
+
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+        });
+    </script>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png"
+                 alt="Logo Quân H" class="logo-img" />
+            <span class="logo-text">Quân H</span>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html">Trang chủ</a>
+            <a href="../baiviet.html">Bài viết</a>
+            <a href="../congcu.html">Công cụ</a>
+            <a href="../video.html">Video</a>
+            <a href="../lienhe.html">Liên hệ</a>
+        </div>
+        <a href="../lienhe.html" class="cta">Liên hệ</a>
+    </nav>
+
+    <div class="article-container">
+        <h1 class="article-title">Biến Ảnh Thành Video Bằng AI</h1>
+
+        <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1750396952/d8536ef9-c805-4e15-bb52-1c4c5a1d9939.png"
+             alt="Ảnh minh họa Biến Ảnh Thành Video Bằng AI" class="article-image">
+
+        <p class="article-paragraph">
+            Hình ảnh vốn là một phương tiện mạnh mẽ để truyền tải thông điệp. Nhưng khi được "thổi hồn" bằng công nghệ AI và chuyển thành video, ảnh không chỉ còn là ảnh – mà trở thành một câu chuyện sống động.
+        </p>
+        <p class="article-paragraph">
+            Biến ảnh thành video bằng AI là một tính năng mới đang được ứng dụng rộng rãi trong nhiều lĩnh vực – từ giáo dục, truyền thông, marketing đến giải trí cá nhân. Chỉ với một bức ảnh, bạn có thể tạo nên:
+        </p>
+
+        <ul class="list-disc list-inside ml-4 article-paragraph">
+            <li>Một đoạn phim hoạt hình ngắn có biểu cảm, lời thoại</li>
+            <li>Một video kể chuyện sinh động cho học sinh hoặc con trẻ</li>
+            <li>Một phần mở đầu hấp dẫn cho bài giảng hoặc bài thuyết trình</li>
+            <li>Một kỷ niệm cá nhân được kể lại bằng hình ảnh chuyển động, hiệu ứng và âm thanh</li>
+        </ul>
+
+        <h2 class="article-section-title">Chức năng nổi bật của tính năng này:</h2>
+        <ul class="list-disc list-inside ml-4 article-paragraph">
+            <li>Tự động tạo chuyển động: AI có thể phân tích nội dung ảnh và tự tạo ra chuyển động phù hợp (như gió lay tóc, nhân vật nháy mắt, môi mấp máy theo lời nói...).</li>
+            <li>Kết hợp giọng nói và biểu cảm: Bạn có thể ghép lời nói vào ảnh, khiến nhân vật trong ảnh như đang trò chuyện hoặc thuyết trình.</li>
+            <li>Tăng tính tương tác và thu hút: Thay vì một hình ảnh tĩnh, giờ đây bạn có thể làm cho nội dung của mình trở nên sinh động, hấp dẫn và dễ nhớ hơn nhiều lần.</li>
+            <li>Cá nhân hóa nội dung một cách sáng tạo: Từ một bức chân dung, bạn có thể tạo ra một nhân vật kể chuyện, một đoạn phim cổ tích hoặc một lời chào sinh nhật mang dấu ấn cá nhân.</li>
+            <li>Tiết kiệm thời gian sản xuất video: Thay vì quay phim, dựng cảnh, thu âm…, giờ đây chỉ cần một bức ảnh và vài phút tinh chỉnh, bạn đã có một video hoàn chỉnh.</li>
+        </ul>
+
+        <h2 class="article-section-title">Ứng dụng thực tế:</h2>
+        <ul class="list-disc list-inside ml-4 article-paragraph">
+            <li>Trong giáo dục: Biến tranh minh họa thành video giảng dạy sinh động</li>
+            <li>Trong truyền thông: Tạo video quảng cáo nhanh chóng, hiệu quả</li>
+            <li>Trong gia đình: Làm video kỷ niệm từ những bức ảnh cũ</li>
+            <li>Trong nghệ thuật: Thử nghiệm những cách kể chuyện mới bằng hình ảnh động</li>
+        </ul>
+
+        <h2 class="article-section-title">Kết luận:</h2>
+        <p class="article-paragraph">
+            Khi AI có thể hiểu, phân tích và diễn giải nội dung của một bức ảnh, thì việc "biến ảnh thành video" không còn là phép màu, mà là một công cụ thực sự nằm trong tay bất kỳ ai.
+        </p>
+        <p class="article-paragraph">
+            Đây không chỉ là một chức năng kỹ thuật – nó là một cánh cửa mở ra thế giới sáng tạo mới, nơi bạn có thể biến bất kỳ bức ảnh nào thành một câu chuyện, một thông điệp, hoặc thậm chí là một bài học có hồn.
+        </p>
+        <p class="article-paragraph">
+            Nếu bạn chưa thử, có lẽ đã đến lúc khám phá khả năng này – bạn sẽ bất ngờ với những gì mà chỉ một bức ảnh có thể làm được.
+        </p>
+
+        <a href="https://www.youtube.com/watch?v=Sn-23tvcHrc"
+           target="_blank" class="video-button">
+            Xem video ngay!
+        </a>
+    </div>
+</body>
+</html>

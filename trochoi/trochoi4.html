@@ -1,0 +1,1381 @@
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghép Phép Tính - Tìm Số Đúng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .number-btn, .operator-btn {
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .number-btn:hover, .operator-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .number-btn:active, .operator-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .slot {
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 0.5rem;
+        }
+        
+        .slot.highlight {
+            box-shadow: 0 0 0 3px #4f46e5, 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .correct-animation {
+            animation: correct 0.5s ease-in-out;
+        }
+        
+        @keyframes correct {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .incorrect-animation {
+            animation: incorrect 0.5s ease-in-out;
+        }
+        
+        @keyframes incorrect {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-10px); }
+            40% { transform: translateX(10px); }
+            60% { transform: translateX(-10px); }
+            80% { transform: translateX(10px); }
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            border-radius: 50%;
+            animation: fall 3s ease-in-out forwards;
+            z-index: 100;
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(500px) rotate(720deg); opacity: 0; }
+        }
+        
+        .heart {
+            transition: all 0.3s;
+        }
+        
+        .heart.lost {
+            transform: scale(0.8);
+            opacity: 0.3;
+            filter: grayscale(100%);
+        }
+        
+        .heart.pulse {
+            animation: pulse 0.5s ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .rotate-slow {
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .bg-gradient-game {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .bg-gradient-success {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+        }
+        
+        .bg-gradient-error {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+        }
+        
+        .mode-btn.active {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+        
+        .game-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .decoration {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.6;
+        }
+        
+        .decoration-1 {
+            top: 10%;
+            left: 5%;
+            font-size: 2rem;
+        }
+        
+        .decoration-2 {
+            top: 20%;
+            right: 5%;
+            font-size: 2.5rem;
+        }
+        
+        .decoration-3 {
+            bottom: 15%;
+            left: 8%;
+            font-size: 2rem;
+        }
+        
+        .decoration-4 {
+            bottom: 10%;
+            right: 8%;
+            font-size: 2.5rem;
+        }
+        
+        .equation-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+        
+        .main-title {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        .math-symbol {
+            position: absolute;
+            opacity: 0.1;
+            font-size: 3rem;
+            color: #4f46e5;
+            z-index: -1;
+            animation: float-random 8s ease-in-out infinite;
+        }
+        
+        @keyframes float-random {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(10px, -10px) rotate(5deg); }
+            50% { transform: translate(0, -20px) rotate(0deg); }
+            75% { transform: translate(-10px, -10px) rotate(-5deg); }
+        }
+        
+        .game-frame {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .game-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #6a11cb, #2575fc, #6a11cb);
+            z-index: 10;
+        }
+        
+        .tab {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .music-control:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .music-control.muted {
+            background: rgba(220, 220, 220, 0.8);
+        }
+        
+        .music-waves {
+            display: flex;
+            align-items: flex-end;
+            height: 20px;
+            width: 20px;
+            justify-content: space-between;
+        }
+        
+        .music-waves span {
+            width: 3px;
+            background: #4f46e5;
+            border-radius: 3px;
+            animation: wave 1.2s infinite ease-in-out;
+        }
+        
+        .music-waves span:nth-child(1) {
+            height: 10px;
+            animation-delay: 0s;
+        }
+        
+        .music-waves span:nth-child(2) {
+            height: 16px;
+            animation-delay: 0.2s;
+        }
+        
+        .music-waves span:nth-child(3) {
+            height: 12px;
+            animation-delay: 0.4s;
+        }
+        
+        .music-waves span:nth-child(4) {
+            height: 18px;
+            animation-delay: 0.6s;
+        }
+        
+        .music-control.muted .music-waves span {
+            animation: none;
+            height: 3px !important;
+            background: #888;
+        }
+        
+        @keyframes wave {
+            0%, 100% {
+                transform: scaleY(1);
+            }
+            50% {
+                transform: scaleY(0.5);
+            }
+        }
+    </style>
+</head>
+<body class="p-4">
+    <!-- Home Button with Logo -->
+    <div class="absolute top-4 left-4 z-50">
+        <a href="../../index.html" class="flex items-center space-x-2 text-gray-800 hover:text-indigo-600 transition-colors">
+            <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo" class="h-8 w-8 rounded-full shadow-md">
+            <span class="font-bold text-lg">Trang chủ</span>
+        </a>
+    </div>
+    <!-- Audio elements -->
+    <audio id="click-sound" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1743950559/Am_thanh_tieng_click_chuot-www_tiengdong_com_vg4uik.mp3" preload="auto"></audio>
+    <audio id="correct-sound" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1744012356/success_sound_effect-www_tiengdong_com_qvaff1.mp3" preload="auto"></audio>
+    <audio id="wrong-sound" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1743950341/Am_thanh_tra_loi_sai-www_tiengdong_com_r160v8.mp3" preload="auto"></audio>
+    <audio id="win-sound" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1744012397/nhac_nen_trao_giai_thuong-www_tiengdong_com_ln6vu6.mp3" preload="auto"></audio>
+    <audio id="background-music" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1751357360/nhac_nen_video_danh_dan_guitar_ngan_hay-www_tiengdong_com_ay2i1p.mp3" loop preload="auto"></audio>
+
+    <!-- Music Control Button -->
+    <div id="music-control" class="music-control">
+        <div class="music-waves">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Math symbols background -->
+    <div class="math-symbol" style="top: 10%; left: 5%;">+</div>
+    <div class="math-symbol" style="top: 15%; right: 10%;">−</div>
+    <div class="math-symbol" style="top: 40%; left: 15%;">×</div>
+    <div class="math-symbol" style="top: 60%; right: 15%;">÷</div>
+    <div class="math-symbol" style="top: 75%; left: 10%;">=</div>
+    <div class="math-symbol" style="top: 30%; right: 5%;">π</div>
+    <div class="math-symbol" style="top: 85%; right: 20%;">√</div>
+
+    <div class="max-w-5xl mx-auto">
+        <!-- Main Game Container -->
+        <div id="main-container">
+            <!-- Game Header -->
+            <header class="text-center mb-8">
+                <h1 class="text-4xl md:text-5xl font-bold main-title mb-2">🧩 Ghép Phép Tính - Tìm Số Đúng</h1>
+                <p class="text-gray-700 text-lg">Luyện tập toán học vui nhộn với trò chơi ghép phép tính!</p>
+            </header>
+            
+            <!-- Game Frame -->
+            <div class="game-frame p-6 mb-8">
+                <!-- Tabs -->
+                <div class="flex border-b border-gray-200 mb-6">
+                    <div class="tab active px-4 py-2 font-semibold rounded-t-lg" data-tab="mode">Chế độ chơi</div>
+                    <div class="tab px-4 py-2 font-semibold rounded-t-lg" data-tab="instructions">Hướng dẫn</div>
+                    <div class="tab px-4 py-2 font-semibold rounded-t-lg" data-tab="about">Giới thiệu</div>
+                </div>
+                
+                <!-- Tab Contents -->
+                <div class="tab-content active fade-in" id="mode-tab">
+                    <div class="text-center mb-8">
+                        <div class="text-7xl mb-6 rotate-slow inline-block">🧮</div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Chọn chế độ chơi</h2>
+                        <p class="text-gray-600 mb-8">Hãy chọn loại phép tính bạn muốn luyện tập!</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                        <button class="mode-btn p-4 rounded-xl bg-indigo-100 text-indigo-700 font-semibold hover:bg-indigo-200 transition-colors flex flex-col items-center" data-mode="add">
+                            <span class="text-3xl mb-2">➕</span>
+                            <span>Chỉ cộng</span>
+                        </button>
+                        <button class="mode-btn p-4 rounded-xl bg-indigo-100 text-indigo-700 font-semibold hover:bg-indigo-200 transition-colors flex flex-col items-center" data-mode="subtract">
+                            <span class="text-3xl mb-2">➖</span>
+                            <span>Chỉ trừ</span>
+                        </button>
+                        <button class="mode-btn p-4 rounded-xl bg-indigo-100 text-indigo-700 font-semibold hover:bg-indigo-200 transition-colors flex flex-col items-center" data-mode="multiply">
+                            <span class="text-3xl mb-2">✖️</span>
+                            <span>Chỉ nhân</span>
+                        </button>
+                        <button class="mode-btn p-4 rounded-xl bg-indigo-100 text-indigo-700 font-semibold hover:bg-indigo-200 transition-colors flex flex-col items-center" data-mode="divide">
+                            <span class="text-3xl mb-2">➗</span>
+                            <span>Chỉ chia</span>
+                        </button>
+                        <button class="mode-btn p-4 rounded-xl bg-indigo-100 text-indigo-700 font-semibold hover:bg-indigo-200 transition-colors flex flex-col items-center" data-mode="add-subtract">
+                            <span class="text-3xl mb-2">➕➖</span>
+                            <span>Cộng + trừ</span>
+                        </button>
+                        <button class="mode-btn p-4 rounded-xl bg-indigo-100 text-indigo-700 font-semibold hover:bg-indigo-200 transition-colors flex flex-col items-center" data-mode="multiply-divide">
+                            <span class="text-3xl mb-2">✖️➗</span>
+                            <span>Nhân + chia</span>
+                        </button>
+                        <button class="mode-btn p-4 rounded-xl bg-indigo-100 text-indigo-700 font-semibold hover:bg-indigo-200 transition-colors flex flex-col items-center md:col-span-2 lg:col-span-3" data-mode="all">
+                            <span class="text-3xl mb-2">🔢</span>
+                            <span>Tất cả phép tính</span>
+                        </button>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button id="start-btn" class="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-colors text-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center mx-auto" disabled>
+                            <span class="mr-2">🚀</span> Bắt đầu
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="tab-content fade-in" id="instructions-tab">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="text-blue-500 mr-2">📝</span> Hướng dẫn chơi
+                    </h2>
+                    
+                    <div class="bg-blue-50 p-6 rounded-xl mb-6">
+                        <h3 class="text-xl font-semibold mb-3">Cách chơi:</h3>
+                        <ol class="list-decimal pl-5 space-y-3 text-gray-700">
+                            <li>Chọn chế độ chơi bạn muốn (loại phép tính).</li>
+                            <li>Nhìn vào kết quả bên trái dấu bằng.</li>
+                            <li>Chọn hai số và một phép tính để tạo ra kết quả đó.</li>
+                            <li>Nhấn "Kiểm tra" để xem đáp án của bạn có đúng không.</li>
+                            <li>Bạn có 3 mạng (❤️). Mỗi lần trả lời sai sẽ mất 1 mạng.</li>
+                            <li>Hoàn thành 10 câu để kết thúc lượt chơi.</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="bg-purple-50 p-6 rounded-xl mb-6">
+                        <h3 class="text-xl font-semibold mb-3">Tính điểm:</h3>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                            <li>Mỗi câu trả lời đúng: <span class="font-bold text-green-600">+10 điểm</span></li>
+                            <li>Mỗi câu trả lời sai: <span class="font-bold text-red-600">-1 mạng</span></li>
+                            <li>Hết thời gian: <span class="font-bold text-red-600">-1 mạng</span></li>
+                            <li>Điểm tối đa: <span class="font-bold text-blue-600">100 điểm</span> (10 câu đúng)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button class="back-to-mode px-6 py-3 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-colors flex items-center mx-auto">
+                            <span class="mr-2">⬅️</span> Quay lại chọn chế độ
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="tab-content fade-in" id="about-tab">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="text-purple-500 mr-2">ℹ️</span> Giới thiệu
+                    </h2>
+                    
+                    <div class="bg-indigo-50 p-6 rounded-xl mb-6">
+                        <h3 class="text-xl font-semibold mb-3">Về trò chơi:</h3>
+                        <p class="text-gray-700 mb-4">
+                            "Ghép Phép Tính - Tìm Số Đúng" là trò chơi giúp học sinh luyện tập các phép tính toán học cơ bản một cách vui nhộn và hấp dẫn. Trò chơi phù hợp với mọi lứa tuổi, đặc biệt là học sinh tiểu học đang học các phép tính cơ bản.
+                        </p>
+                        <p class="text-gray-700">
+                            Trò chơi giúp phát triển kỹ năng tính toán nhanh, tư duy logic và khả năng giải quyết vấn đề. Hãy thử thách bản thân với các chế độ chơi khác nhau!
+                        </p>
+                    </div>
+                    
+                    <div class="bg-green-50 p-6 rounded-xl mb-6">
+                        <h3 class="text-xl font-semibold mb-3">Lợi ích:</h3>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                            <li>Rèn luyện kỹ năng tính toán nhanh</li>
+                            <li>Phát triển tư duy logic và phản xạ</li>
+                            <li>Học toán một cách vui vẻ và hứng thú</li>
+                            <li>Tăng cường khả năng tập trung</li>
+                            <li>Phù hợp với mọi lứa tuổi</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button class="back-to-mode px-6 py-3 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-colors flex items-center mx-auto">
+                            <span class="mr-2">⬅️</span> Quay lại chọn chế độ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Game Play Container -->
+        <div id="game-play-container" class="hidden">
+            <!-- Game Container -->
+            <div class="game-frame relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+                
+                <!-- Game Header -->
+                <div class="bg-indigo-50 p-4 flex justify-between items-center">
+                    <button id="back-to-menu" class="px-4 py-2 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-colors flex items-center">
+                        <span class="mr-2">⬅️</span> Menu
+                    </button>
+                    <h2 class="text-xl font-bold text-indigo-800" id="game-mode-title">Chế độ: Tất cả phép tính</h2>
+                </div>
+                
+                <!-- Game Stats -->
+                <div class="flex flex-wrap justify-between items-center p-4 bg-white border-b border-gray-200">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-indigo-100 px-4 py-2 rounded-lg flex items-center">
+                            <span class="text-yellow-500 mr-1">⭐</span>
+                            <span class="font-bold text-indigo-800">Điểm: </span>
+                            <span id="score" class="font-bold text-indigo-800 ml-1">0</span>
+                        </div>
+                        <div class="bg-indigo-100 px-4 py-2 rounded-lg flex items-center">
+                            <span class="text-blue-500 mr-1">📝</span>
+                            <span class="font-bold text-indigo-800">Câu: </span>
+                            <span id="question-counter" class="font-bold text-indigo-800 ml-1">0</span>
+                            <span class="font-bold text-indigo-800">/10</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div id="hearts-container" class="flex">
+                            <div class="heart text-2xl px-1">❤️</div>
+                            <div class="heart text-2xl px-1">❤️</div>
+                            <div class="heart text-2xl px-1">❤️</div>
+                        </div>
+                    </div>
+                    <div class="bg-indigo-100 px-4 py-2 rounded-lg flex items-center">
+                        <span class="text-red-500 mr-1">⏱️</span>
+                        <span class="font-bold text-indigo-800">Thời gian: </span>
+                        <span id="timer" class="font-bold text-indigo-800 ml-1">30</span>
+                        <span class="font-bold text-indigo-800">s</span>
+                    </div>
+                </div>
+                
+                <!-- Game Board -->
+                <div id="game-board" class="p-6">
+                    <!-- Equation Display -->
+                    <div class="mb-8 mt-4">
+                        <div class="bg-gradient-game text-white p-4 rounded-lg shadow-lg mx-auto max-w-md">
+                            <div class="equation-container text-3xl md:text-4xl font-bold">
+                                <span id="result" class="text-yellow-300">12</span>
+                                <span class="text-white">=</span>
+                                <div id="slot1" class="slot bg-white bg-opacity-20 border-2 border-dashed border-white text-white">?</div>
+                                <div id="slot-operator" class="slot bg-white bg-opacity-20 border-2 border-dashed border-white text-white">?</div>
+                                <div id="slot2" class="slot bg-white bg-opacity-20 border-2 border-dashed border-white text-white">?</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Number Options -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-2 flex items-center">
+                            <span class="text-blue-500 mr-2">🔢</span> Chọn số:
+                        </h3>
+                        <div id="number-options" class="flex flex-wrap gap-2 justify-center">
+                            <!-- Numbers will be generated here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Operator Options -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-2 flex items-center">
+                            <span class="text-purple-500 mr-2">🔣</span> Chọn phép tính:
+                        </h3>
+                        <div id="operator-options" class="flex flex-wrap gap-2 justify-center">
+                            <!-- Operators will be generated here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex justify-center gap-4">
+                        <button id="check-btn" class="px-6 py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center">
+                            <span class="mr-2">✅</span> Kiểm tra
+                        </button>
+                        <button id="reset-btn" class="px-6 py-3 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-colors flex items-center">
+                            <span class="mr-2">🔄</span> Làm lại
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Results Screen -->
+                <div id="results-screen" class="hidden p-6 text-center">
+                    <div id="results-emoji" class="text-7xl mb-6 floating">🎉</div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Kết quả của bạn</h2>
+                    <div class="bg-gradient-to-r from-indigo-100 to-purple-100 p-6 rounded-xl mb-6 inline-block">
+                        <p class="text-xl mb-2 flex items-center justify-center">
+                            <span class="text-yellow-500 mr-2">⭐</span>
+                            Điểm số: <span id="final-score" class="font-bold text-indigo-800 ml-1">0</span>/100
+                        </p>
+                        <p class="text-xl mb-2 flex items-center justify-center">
+                            <span class="text-green-500 mr-2">✅</span>
+                            Câu đúng: <span id="correct-answers" class="font-bold text-green-600 ml-1">0</span>/10
+                        </p>
+                    </div>
+                    <div class="flex justify-center gap-4">
+                        <button id="play-again-btn" class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-colors flex items-center">
+                            <span class="mr-2">🎮</span> Chơi lại
+                        </button>
+                        <button id="change-mode-btn" class="px-6 py-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-bold rounded-lg hover:from-gray-700 hover:to-gray-800 transition-colors flex items-center">
+                            <span class="mr-2">🔄</span> Đổi chế độ
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Game Over Screen -->
+                <div id="game-over-screen" class="hidden p-6 text-center">
+                    <div class="text-7xl mb-6">😢</div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Trò chơi kết thúc!</h2>
+                    <p class="text-gray-600 mb-8">Bạn đã hết mạng. Hãy thử lại nhé!</p>
+                    <div class="flex justify-center gap-4">
+                        <button id="try-again-btn" class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-colors flex items-center">
+                            <span class="mr-2">🔄</span> Thử lại
+                        </button>
+                        <button id="game-over-change-mode-btn" class="px-6 py-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-bold rounded-lg hover:from-gray-700 hover:to-gray-800 transition-colors flex items-center">
+                            <span class="mr-2">🎮</span> Đổi chế độ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Feedback Message -->
+        <div id="feedback" class="hidden fixed top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-6 rounded-xl shadow-2xl text-center z-10 w-80">
+            <div id="feedback-content" class="bg-gradient-success p-6 rounded-xl">
+                <div id="feedback-icon" class="text-5xl mb-4">✅</div>
+                <h3 id="feedback-message" class="text-xl font-bold mb-2 text-gray-800">Chính xác!</h3>
+                <p id="feedback-equation" class="text-lg mb-4 text-gray-700">12 = 3 × 4</p>
+                <button id="feedback-continue" class="px-6 py-2 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition-colors">Tiếp tục</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Audio elements
+            const clickSound = document.getElementById('click-sound');
+            const correctSound = document.getElementById('correct-sound');
+            const wrongSound = document.getElementById('wrong-sound');
+            const winSound = document.getElementById('win-sound');
+            const backgroundMusic = document.getElementById('background-music');
+            const musicControl = document.getElementById('music-control');
+            
+            // Music state
+            let isMusicPlaying = false;
+            let isMusicMuted = false;
+            
+            // Play sound function with volume control
+            function playSound(sound) {
+                sound.volume = 0.5; // Set volume to 50%
+                sound.currentTime = 0;
+                sound.play().catch(e => console.log("Audio play failed:", e));
+            }
+            
+            // Toggle background music
+            function toggleBackgroundMusic() {
+                if (isMusicPlaying) {
+                    if (isMusicMuted) {
+                        backgroundMusic.volume = 0.3;
+                        musicControl.classList.remove('muted');
+                        isMusicMuted = false;
+                    } else {
+                        backgroundMusic.volume = 0;
+                        musicControl.classList.add('muted');
+                        isMusicMuted = true;
+                    }
+                } else {
+                    // First time playing
+                    backgroundMusic.volume = 0.3;
+                    backgroundMusic.play().then(() => {
+                        isMusicPlaying = true;
+                        musicControl.classList.remove('muted');
+                    }).catch(e => {
+                        console.log("Background music play failed:", e);
+                        musicControl.classList.add('muted');
+                    });
+                }
+            }
+            
+            // Music control click event
+            musicControl.addEventListener('click', toggleBackgroundMusic);
+            
+            // Game variables
+            let gameMode = '';
+            let currentQuestion = 0;
+            let score = 0;
+            let correctAnswers = 0;
+            let lives = 3;
+            let timer = 30;
+            let timerInterval;
+            let selectedSlot = null;
+            let currentPuzzle = {
+                result: 0,
+                num1: null,
+                num2: null,
+                operator: null
+            };
+            
+            // DOM elements - Main Menu
+            const mainContainer = document.getElementById('main-container');
+            const gamePlayContainer = document.getElementById('game-play-container');
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const startBtn = document.getElementById('start-btn');
+            const backToModeButtons = document.querySelectorAll('.back-to-mode');
+            const modeBtns = document.querySelectorAll('.mode-btn');
+            const gameModeTitle = document.getElementById('game-mode-title');
+            
+            // DOM elements - Game
+            const gameBoard = document.getElementById('game-board');
+            const resultsScreen = document.getElementById('results-screen');
+            const gameOverScreen = document.getElementById('game-over-screen');
+            const feedback = document.getElementById('feedback');
+            const feedbackContent = document.getElementById('feedback-content');
+            const backToMenuBtn = document.getElementById('back-to-menu');
+            const checkBtn = document.getElementById('check-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            const playAgainBtn = document.getElementById('play-again-btn');
+            const changeModeBtn = document.getElementById('change-mode-btn');
+            const tryAgainBtn = document.getElementById('try-again-btn');
+            const gameOverChangeModeBtn = document.getElementById('game-over-change-mode-btn');
+            const feedbackContinueBtn = document.getElementById('feedback-continue');
+            const slot1 = document.getElementById('slot1');
+            const slotOperator = document.getElementById('slot-operator');
+            const slot2 = document.getElementById('slot2');
+            const resultDisplay = document.getElementById('result');
+            const scoreDisplay = document.getElementById('score');
+            const questionCounter = document.getElementById('question-counter');
+            const timerDisplay = document.getElementById('timer');
+            const numberOptions = document.getElementById('number-options');
+            const operatorOptions = document.getElementById('operator-options');
+            const finalScore = document.getElementById('final-score');
+            const correctAnswersDisplay = document.getElementById('correct-answers');
+            const feedbackIcon = document.getElementById('feedback-icon');
+            const feedbackMessage = document.getElementById('feedback-message');
+            const feedbackEquation = document.getElementById('feedback-equation');
+            const resultsEmoji = document.getElementById('results-emoji');
+            const heartsContainer = document.getElementById('hearts-container');
+            const hearts = document.querySelectorAll('.heart');
+            
+            // Add click sound to all buttons
+            document.querySelectorAll('button').forEach(button => {
+                if (button.id !== 'music-control') {
+                    button.addEventListener('click', () => playSound(clickSound));
+                }
+            });
+            
+            // Tab switching
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show corresponding tab content
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        content.classList.remove('fade-in');
+                    });
+                    
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                    setTimeout(() => {
+                        document.getElementById(`${tabId}-tab`).classList.add('fade-in');
+                    }, 10);
+                });
+            });
+            
+            // Back to mode tab
+            backToModeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    document.querySelector('[data-tab="mode"]').classList.add('active');
+                    
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        content.classList.remove('fade-in');
+                    });
+                    
+                    document.getElementById('mode-tab').classList.add('active');
+                    setTimeout(() => {
+                        document.getElementById('mode-tab').classList.add('fade-in');
+                    }, 10);
+                });
+            });
+            
+            // Mode selection
+            modeBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    modeBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    gameMode = btn.dataset.mode;
+                    startBtn.disabled = false;
+                    
+                    // Set game mode title
+                    let modeTitle = "Chế độ: ";
+                    switch(gameMode) {
+                        case 'add': modeTitle += "Chỉ cộng"; break;
+                        case 'subtract': modeTitle += "Chỉ trừ"; break;
+                        case 'multiply': modeTitle += "Chỉ nhân"; break;
+                        case 'divide': modeTitle += "Chỉ chia"; break;
+                        case 'add-subtract': modeTitle += "Cộng + trừ"; break;
+                        case 'multiply-divide': modeTitle += "Nhân + chia"; break;
+                        case 'all': modeTitle += "Tất cả phép tính"; break;
+                    }
+                    gameModeTitle.textContent = modeTitle;
+                });
+            });
+            
+            // Start game
+            startBtn.addEventListener('click', function() {
+                mainContainer.classList.add('hidden');
+                gamePlayContainer.classList.remove('hidden');
+                
+                // Start background music if not already playing
+                if (!isMusicPlaying) {
+                    toggleBackgroundMusic();
+                }
+                
+                startGame();
+            });
+            
+            // Back to menu
+            backToMenuBtn.addEventListener('click', function() {
+                clearInterval(timerInterval);
+                gamePlayContainer.classList.add('hidden');
+                mainContainer.classList.remove('hidden');
+                
+                // Reset game board
+                gameBoard.classList.remove('hidden');
+                resultsScreen.classList.add('hidden');
+                gameOverScreen.classList.add('hidden');
+            });
+            
+            // Check answer
+            checkBtn.addEventListener('click', checkAnswer);
+            
+            // Reset current question
+            resetBtn.addEventListener('click', resetQuestion);
+            
+            // Play again
+            playAgainBtn.addEventListener('click', startGame);
+            
+            // Try again after game over
+            tryAgainBtn.addEventListener('click', startGame);
+            
+            // Change mode
+            changeModeBtn.addEventListener('click', function() {
+                gamePlayContainer.classList.add('hidden');
+                mainContainer.classList.remove('hidden');
+                
+                // Reset game board
+                gameBoard.classList.remove('hidden');
+                resultsScreen.classList.add('hidden');
+            });
+            
+            // Change mode after game over
+            gameOverChangeModeBtn.addEventListener('click', function() {
+                gamePlayContainer.classList.add('hidden');
+                mainContainer.classList.remove('hidden');
+                
+                // Reset game board
+                gameBoard.classList.remove('hidden');
+                gameOverScreen.classList.add('hidden');
+            });
+            
+            // Continue after feedback
+            feedbackContinueBtn.addEventListener('click', function() {
+                feedback.classList.add('hidden');
+                nextQuestion();
+            });
+            
+            // Start the game
+            function startGame() {
+                // Reset game state
+                currentQuestion = 0;
+                score = 0;
+                correctAnswers = 0;
+                lives = 3;
+                
+                // Reset hearts
+                hearts.forEach(heart => {
+                    heart.classList.remove('lost');
+                });
+                
+                // Update UI
+                scoreDisplay.textContent = score;
+                questionCounter.textContent = currentQuestion;
+                
+                // Hide results and game over screens, show game board
+                gameBoard.classList.remove('hidden');
+                resultsScreen.classList.add('hidden');
+                gameOverScreen.classList.add('hidden');
+                
+                // Start first question
+                nextQuestion();
+            }
+            
+            // Generate a new question
+            function nextQuestion() {
+                if (currentQuestion >= 10) {
+                    endGame(true);
+                    return;
+                }
+                
+                currentQuestion++;
+                questionCounter.textContent = currentQuestion;
+                
+                // Reset slots
+                slot1.textContent = '?';
+                slot1.classList.remove('bg-indigo-100', 'border-indigo-400', 'bg-white', 'bg-opacity-50');
+                slot1.classList.add('bg-white', 'bg-opacity-20', 'border-white');
+                
+                slotOperator.textContent = '?';
+                slotOperator.classList.remove('bg-indigo-100', 'border-indigo-400', 'bg-white', 'bg-opacity-50');
+                slotOperator.classList.add('bg-white', 'bg-opacity-20', 'border-white');
+                
+                slot2.textContent = '?';
+                slot2.classList.remove('bg-indigo-100', 'border-indigo-400', 'bg-white', 'bg-opacity-50');
+                slot2.classList.add('bg-white', 'bg-opacity-20', 'border-white');
+                
+                // Reset selected slot
+                selectedSlot = null;
+                
+                // Generate puzzle based on game mode
+                generatePuzzle();
+                
+                // Generate number options
+                generateNumberOptions();
+                
+                // Generate operator options
+                generateOperatorOptions();
+                
+                // Reset and start timer
+                resetTimer();
+                
+                // Enable check button
+                checkBtn.disabled = true;
+            }
+            
+            // Generate a puzzle based on the selected game mode
+            function generatePuzzle() {
+                let operators = [];
+                
+                // Determine available operators based on game mode
+                switch(gameMode) {
+                    case 'add':
+                        operators = ['+'];
+                        break;
+                    case 'subtract':
+                        operators = ['-'];
+                        break;
+                    case 'multiply':
+                        operators = ['×'];
+                        break;
+                    case 'divide':
+                        operators = ['÷'];
+                        break;
+                    case 'add-subtract':
+                        operators = ['+', '-'];
+                        break;
+                    case 'multiply-divide':
+                        operators = ['×', '÷'];
+                        break;
+                    case 'all':
+                        operators = ['+', '-', '×', '÷'];
+                        break;
+                }
+                
+                // Randomly select an operator
+                const operator = operators[Math.floor(Math.random() * operators.length)];
+                
+                // Generate numbers based on the operator
+                let num1, num2, result;
+                
+                switch(operator) {
+                    case '+':
+                        // For addition, generate two numbers that sum to a reasonable result
+                        num1 = Math.floor(Math.random() * 20) + 1;
+                        num2 = Math.floor(Math.random() * 20) + 1;
+                        result = num1 + num2;
+                        break;
+                    case '-':
+                        // For subtraction, ensure the result is positive
+                        num1 = Math.floor(Math.random() * 20) + 10;
+                        num2 = Math.floor(Math.random() * num1) + 1;
+                        result = num1 - num2;
+                        break;
+                    case '×':
+                        // For multiplication, use smaller numbers
+                        num1 = Math.floor(Math.random() * 10) + 1;
+                        num2 = Math.floor(Math.random() * 10) + 1;
+                        result = num1 * num2;
+                        break;
+                    case '÷':
+                        // For division, ensure the result is an integer
+                        num2 = Math.floor(Math.random() * 9) + 1;
+                        result = Math.floor(Math.random() * 10) + 1;
+                        num1 = result * num2;
+                        break;
+                }
+                
+                // Store the current puzzle
+                currentPuzzle = {
+                    result: result,
+                    num1: num1,
+                    num2: num2,
+                    operator: operator
+                };
+                
+                // Update the result display
+                resultDisplay.textContent = result;
+            }
+            
+            // Generate number options
+            function generateNumberOptions() {
+                numberOptions.innerHTML = '';
+                
+                // Create a set of numbers including the correct ones
+                let numbers = [currentPuzzle.num1, currentPuzzle.num2];
+                
+                // Add more random numbers
+                while (numbers.length < 8) {
+                    const randomNum = Math.floor(Math.random() * 20) + 1;
+                    if (!numbers.includes(randomNum)) {
+                        numbers.push(randomNum);
+                    }
+                }
+                
+                // Shuffle the numbers
+                numbers = shuffleArray(numbers);
+                
+                // Create buttons for each number
+                numbers.forEach(num => {
+                    const button = document.createElement('button');
+                    button.textContent = num;
+                    button.classList.add('number-btn', 'w-12', 'h-12', 'bg-gradient-to-br', 'from-blue-500', 'to-blue-600', 'text-white', 'font-bold', 'rounded-lg', 'hover:from-blue-600', 'hover:to-blue-700', 'transition-colors');
+                    button.addEventListener('click', () => {
+                        playSound(clickSound);
+                        selectNumber(num, button);
+                    });
+                    numberOptions.appendChild(button);
+                });
+            }
+            
+            // Generate operator options
+            function generateOperatorOptions() {
+                operatorOptions.innerHTML = '';
+                
+                // Determine available operators based on game mode
+                let operators = [];
+                
+                switch(gameMode) {
+                    case 'add':
+                        operators = ['+'];
+                        break;
+                    case 'subtract':
+                        operators = ['-'];
+                        break;
+                    case 'multiply':
+                        operators = ['×'];
+                        break;
+                    case 'divide':
+                        operators = ['÷'];
+                        break;
+                    case 'add-subtract':
+                        operators = ['+', '-'];
+                        break;
+                    case 'multiply-divide':
+                        operators = ['×', '÷'];
+                        break;
+                    case 'all':
+                        operators = ['+', '-', '×', '÷'];
+                        break;
+                }
+                
+                // Create buttons for each operator
+                operators.forEach(op => {
+                    const button = document.createElement('button');
+                    button.textContent = op;
+                    button.classList.add('operator-btn', 'w-12', 'h-12', 'bg-gradient-to-br', 'from-purple-500', 'to-purple-600', 'text-white', 'font-bold', 'rounded-lg', 'hover:from-purple-600', 'hover:to-purple-700', 'transition-colors');
+                    button.addEventListener('click', () => {
+                        playSound(clickSound);
+                        selectOperator(op, button);
+                    });
+                    operatorOptions.appendChild(button);
+                });
+            }
+            
+            // Select a number
+            function selectNumber(num, button) {
+                // If operator slot is selected, do nothing
+                if (selectedSlot === slotOperator) {
+                    return;
+                }
+                
+                // If no slot is selected, select slot1
+                if (!selectedSlot) {
+                    selectedSlot = slot1;
+                }
+                
+                // If slot1 is already filled and slot2 is not selected, select slot2
+                if (selectedSlot === slot1 && slot1.textContent !== '?' && slot2.textContent === '?') {
+                    selectedSlot = slot2;
+                }
+                
+                // Update the selected slot
+                selectedSlot.textContent = num;
+                selectedSlot.classList.remove('bg-white', 'bg-opacity-20', 'border-white');
+                selectedSlot.classList.add('bg-white', 'bg-opacity-50', 'border-indigo-400');
+                
+                // Check if all slots are filled
+                checkAllSlotsFilled();
+            }
+            
+            // Select an operator
+            function selectOperator(op, button) {
+                // Update the operator slot
+                slotOperator.textContent = op;
+                slotOperator.classList.remove('bg-white', 'bg-opacity-20', 'border-white');
+                slotOperator.classList.add('bg-white', 'bg-opacity-50', 'border-indigo-400');
+                
+                // Check if all slots are filled
+                checkAllSlotsFilled();
+            }
+            
+            // Check if all slots are filled
+            function checkAllSlotsFilled() {
+                if (slot1.textContent !== '?' && slotOperator.textContent !== '?' && slot2.textContent !== '?') {
+                    checkBtn.disabled = false;
+                } else {
+                    checkBtn.disabled = true;
+                }
+            }
+            
+            // Check the answer
+            function checkAnswer() {
+                // Get the values from the slots
+                const num1 = parseInt(slot1.textContent);
+                const operator = slotOperator.textContent;
+                const num2 = parseInt(slot2.textContent);
+                const result = parseInt(resultDisplay.textContent);
+                
+                // Calculate the expected result
+                let calculatedResult;
+                switch(operator) {
+                    case '+':
+                        calculatedResult = num1 + num2;
+                        break;
+                    case '-':
+                        calculatedResult = num1 - num2;
+                        break;
+                    case '×':
+                        calculatedResult = num1 * num2;
+                        break;
+                    case '÷':
+                        calculatedResult = num1 / num2;
+                        break;
+                }
+                
+                // Check if the answer is correct
+                const isCorrect = calculatedResult === result;
+                
+                // Show feedback
+                showFeedback(isCorrect, num1, operator, num2, result);
+                
+                // Update score and lives
+                if (isCorrect) {
+                    score += 10;
+                    correctAnswers++;
+                    scoreDisplay.textContent = score;
+                    playSound(correctSound);
+                    createConfetti();
+                } else {
+                    lives--;
+                    playSound(wrongSound);
+                    updateHearts();
+                    
+                    if (lives <= 0) {
+                        setTimeout(() => {
+                            endGame(false);
+                        }, 1500);
+                    }
+                }
+            }
+            
+            // Update hearts display
+            function updateHearts() {
+                const heartElements = document.querySelectorAll('.heart');
+                
+                for (let i = 0; i < heartElements.length; i++) {
+                    if (i >= lives) {
+                        heartElements[i].classList.add('lost');
+                    } else {
+                        heartElements[i].classList.remove('lost');
+                    }
+                }
+                
+                // Add pulse animation to the last heart lost
+                if (lives >= 0 && lives < 3) {
+                    heartElements[lives].classList.add('pulse');
+                    setTimeout(() => {
+                        heartElements[lives].classList.remove('pulse');
+                    }, 500);
+                }
+            }
+            
+            // Show feedback
+            function showFeedback(isCorrect, num1, operator, num2, result) {
+                clearInterval(timerInterval);
+                
+                if (isCorrect) {
+                    feedbackIcon.textContent = '✅';
+                    feedbackMessage.textContent = 'Chính xác!';
+                    feedbackMessage.classList.remove('text-red-600');
+                    feedbackMessage.classList.add('text-green-600');
+                    feedbackContent.classList.remove('bg-gradient-error');
+                    feedbackContent.classList.add('bg-gradient-success');
+                } else {
+                    feedbackIcon.textContent = '❌';
+                    feedbackMessage.textContent = 'Chưa đúng!';
+                    feedbackMessage.classList.remove('text-green-600');
+                    feedbackMessage.classList.add('text-red-600');
+                    feedbackContent.classList.remove('bg-gradient-success');
+                    feedbackContent.classList.add('bg-gradient-error');
+                }
+                
+                feedbackEquation.textContent = `${result} = ${num1} ${operator} ${num2}`;
+                feedback.classList.remove('hidden');
+            }
+            
+            // Reset the current question
+            function resetQuestion() {
+                slot1.textContent = '?';
+                slot1.classList.remove('bg-white', 'bg-opacity-50', 'border-indigo-400');
+                slot1.classList.add('bg-white', 'bg-opacity-20', 'border-white');
+                
+                slotOperator.textContent = '?';
+                slotOperator.classList.remove('bg-white', 'bg-opacity-50', 'border-indigo-400');
+                slotOperator.classList.add('bg-white', 'bg-opacity-20', 'border-white');
+                
+                slot2.textContent = '?';
+                slot2.classList.remove('bg-white', 'bg-opacity-50', 'border-indigo-400');
+                slot2.classList.add('bg-white', 'bg-opacity-20', 'border-white');
+                
+                selectedSlot = null;
+                checkBtn.disabled = true;
+            }
+            
+            // Reset and start the timer
+            function resetTimer() {
+                clearInterval(timerInterval);
+                timer = 30;
+                timerDisplay.textContent = timer;
+                timerDisplay.classList.remove('text-red-600');
+                
+                timerInterval = setInterval(() => {
+                    timer--;
+                    timerDisplay.textContent = timer;
+                    
+                    // Change color when time is running out
+                    if (timer <= 10) {
+                        timerDisplay.classList.add('text-red-600');
+                    } else {
+                        timerDisplay.classList.remove('text-red-600');
+                    }
+                    
+                    if (timer <= 0) {
+                        clearInterval(timerInterval);
+                        // Time's up - show the correct answer and lose a life
+                        lives--;
+                        updateHearts();
+                        playSound(wrongSound);
+                        showFeedback(false, currentPuzzle.num1, currentPuzzle.operator, currentPuzzle.num2, currentPuzzle.result);
+                        
+                        if (lives <= 0) {
+                            setTimeout(() => {
+                                endGame(false);
+                            }, 1500);
+                        }
+                    }
+                }, 1000);
+            }
+            
+            // End the game
+            function endGame(completed) {
+                clearInterval(timerInterval);
+                
+                if (completed) {
+                    // Game completed - show results
+                    playSound(winSound);
+                    
+                    // Update results screen
+                    finalScore.textContent = score;
+                    correctAnswersDisplay.textContent = correctAnswers;
+                    
+                    // Set emoji based on score
+                    if (score >= 80) {
+                        resultsEmoji.textContent = '🎉';
+                    } else if (score >= 50) {
+                        resultsEmoji.textContent = '👍';
+                    } else {
+                        resultsEmoji.textContent = '😊';
+                    }
+                    
+                    // Hide game board, show results screen
+                    gameBoard.classList.add('hidden');
+                    resultsScreen.classList.remove('hidden');
+                    
+                    // Create lots of confetti for winning
+                    createManyConfetti();
+                } else {
+                    // Game over - out of lives
+                    gameBoard.classList.add('hidden');
+                    gameOverScreen.classList.remove('hidden');
+                }
+            }
+            
+            // Create confetti effect
+            function createConfetti() {
+                const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+                
+                for (let i = 0; i < 30; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.classList.add('confetti');
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = Math.random() * 10 + 5 + 'px';
+                    confetti.style.height = Math.random() * 10 + 5 + 'px';
+                    confetti.style.animationDuration = Math.random() * 2 + 2 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    // Remove confetti after animation
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 3000);
+                }
+            }
+            
+            // Create many confetti for winning
+            function createManyConfetti() {
+                const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ff8800', '#8800ff'];
+                
+                for (let i = 0; i < 100; i++) {
+                    setTimeout(() => {
+                        const confetti = document.createElement('div');
+                        confetti.classList.add('confetti');
+                        confetti.style.left = Math.random() * 100 + 'vw';
+                        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                        confetti.style.width = Math.random() * 12 + 5 + 'px';
+                        confetti.style.height = Math.random() * 12 + 5 + 'px';
+                        confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                        document.body.appendChild(confetti);
+                        
+                        // Remove confetti after animation
+                        setTimeout(() => {
+                            confetti.remove();
+                        }, 5000);
+                    }, i * 50);
+                }
+            }
+            
+            // Utility function to shuffle an array
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'958475bca1233fa1',t:'MTc1MTM1Nzc3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

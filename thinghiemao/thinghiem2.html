@@ -1,0 +1,1192 @@
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thí nghiệm: Tìm Hiểu Tính Dẫn Điện của Vật Liệu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Đảm bảo footer ở cuối trang */
+        }
+        
+        .welcome-screen {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            width: 90%;
+            max-width: 900px;
+            margin: auto;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .experiment-container {
+            display: none;
+            height: 100vh;
+            width: 100vw;
+            flex-direction: column;
+        }
+        
+        .material {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .material:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .material.selected {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            background-color: rgba(219, 234, 254, 0.9);
+            border: 2px solid #3b82f6;
+        }
+        
+        .circuit {
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 16px;
+            padding: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            min-height: 250px;
+        }
+        
+        .wire {
+            height: 6px;
+            background-color: #374151;
+            position: absolute;
+        }
+        
+        .wire-left {
+            width: 30%;
+            top: 50%;
+            left: 0;
+        }
+        
+        .wire-right {
+            width: 30%;
+            top: 50%;
+            right: 0;
+        }
+        
+        .gap {
+            position: absolute;
+            width: 40%;
+            height: 70px;
+            top: calc(50% - 35px);
+            left: 30%;
+            border: 2px dashed #6b7280;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(243, 244, 246, 0.7);
+        }
+        
+        .battery {
+            position: absolute;
+            width: 50px;
+            height: 80px;
+            left: 10%;
+            top: calc(50% - 40px);
+            background-color: #fbbf24;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #92400e;
+        }
+        
+        .battery::before {
+            content: "";
+            width: 16px;
+            height: 8px;
+            background-color: #92400e;
+            position: absolute;
+            top: -8px;
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .battery::after {
+            content: "+";
+            position: absolute;
+            top: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #92400e;
+        }
+        
+        .battery-label {
+            position: absolute;
+            bottom: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #92400e;
+        }
+        
+        .bulb {
+            position: absolute;
+            width: 50px;
+            height: 80px;
+            right: 10%;
+            top: calc(50% - 40px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .bulb-glass {
+            width: 45px;
+            height: 45px;
+            background-color: #d1d5db;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #6b7280;
+        }
+        
+        .bulb-base {
+            width: 25px;
+            height: 18px;
+            background-color: #6b7280;
+            border-radius: 0 0 4px 4px;
+        }
+        
+        .bulb-thread {
+            width: 18px;
+            height: 8px;
+            background-color: #4b5563;
+            border-radius: 0 0 4px 4px;
+        }
+        
+        .bulb-light {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(252,211,77,0) 0%, rgba(252,211,77,0) 50%, rgba(252,211,77,0) 100%);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .bulb-light.on {
+            background: radial-gradient(circle, rgba(252,211,77,1) 0%, rgba(252,211,77,0.8) 50%, rgba(252,211,77,0) 100%);
+            opacity: 1;
+            box-shadow: 0 0 20px 10px rgba(252,211,77,0.6);
+        }
+        
+        .switch-container {
+            position: absolute;
+            left: calc(50% - 30px);
+            bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .switch-label {
+            font-weight: bold;
+            color: #374151;
+            margin-bottom: 3px;
+            font-size: 0.9rem;
+        }
+        
+        .switch {
+            width: 50px;
+            height: 26px;
+            background-color: #e5e7eb;
+            border-radius: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .switch-toggle {
+            width: 20px;
+            height: 20px;
+            background-color: #6b7280;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .switch.on {
+            background-color: #10b981;
+        }
+        
+        .switch.on .switch-toggle {
+            transform: translateX(24px);
+            background-color: #f3f4f6;
+        }
+        
+        .material-in-gap {
+            max-width: 90%;
+            max-height: 60px;
+            object-fit: contain;
+        }
+        
+        .feedback {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            width: 90%;
+            max-width: 500px;
+            display: none;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 50;
+            display: none;
+        }
+        
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 200;
+            display: none;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0.8;
+            animation: fall 3s ease-in-out;
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .start-btn {
+            background-color: #3b82f6;
+            color: white;
+            font-weight: bold;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.5);
+            cursor: pointer;
+            border: none;
+            outline: none;
+            display: block;
+            margin: 1rem auto;
+        }
+        
+        .start-btn:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(59, 130, 246, 0.6);
+        }
+        
+        .instruction-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .instruction-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.4rem;
+        }
+        
+        .step-number {
+            background-color: #3b82f6;
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+            font-size: 0.8rem;
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 0.75rem;
+            overflow: hidden;
+        }
+        
+        .experiment-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 1fr;
+            gap: 0.75rem;
+            height: 100%;
+        }
+        
+        .materials-container {
+            overflow-y: auto;
+            max-height: 180px;
+        }
+        
+        .header {
+            padding: 0.75rem;
+            background-color: #3b82f6;
+            color: white;
+        }
+        
+        .footer {
+            padding: 0.5rem;
+            background-color: #1f2937;
+            color: white;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+        
+        /* Responsive adjustments for 16:9 ratio */
+        @media (min-width: 768px) {
+            .experiment-grid {
+                grid-template-columns: 2fr 1fr;
+                grid-template-rows: 1fr;
+            }
+            
+            .materials-container {
+                max-height: none;
+                overflow-y: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+<style>
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 1rem 2rem;
+      background: rgba(0, 0, 0, 0.5);
+      transition: top 0.3s;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #2f73ff;
+    }
+    .logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .nav-links { display: flex; gap: 2rem; font-weight: 600; }
+    .nav-links a { font-size: 1rem; color: #fff; text-decoration: none; transition: color 0.3s; }
+    .nav-links a:hover { color: #2f73ff; }
+    .cta {
+      padding: 0.6rem 1.4rem;
+      background: #2f73ff;
+      border-radius: 999px;
+      font-weight: 600;
+      color: #fff;
+      transition: background 0.3s;
+      text-decoration: none;
+    }
+    .cta:hover { background: #245ad1; }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 0.3rem;
+    }
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      border-radius: 5px;
+      transition: all 0.3s ease-in-out;
+    }
+    .menu-toggle.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar { padding: 1rem; }
+      .nav-links { display: none; flex-direction: column; width: 100%; background: rgba(0,0,0,0.8); position: absolute; top: 60px; left: 0; padding: 1rem; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 0.5rem 0; text-align: center; }
+      .cta { display: none; }
+      .menu-toggle { display: flex; }
+    }
+</style>
+<nav class="navbar">
+    <div class="logo">
+      <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
+      <span class="logo-text">Quân H</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html">Trang chủ</a>
+      <a href="../baiviet.html">Bài viết</a>
+      <a href="../congcu.html">Công cụ</a>
+      <a href="../video.html">Video</a>
+      <a href="../trochoi.html">Trò chơi</a>
+      <a href="../thinghiemao.html">Thí nghiệm ảo</a>
+      <a href="../khoahoconline.html">Khóa học</a>
+    </div>
+    <a href="../lienhe.html" class="cta">Liên hệ</a>
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      menuToggle.classList.toggle('open');
+    });
+</script>
+    <!-- Welcome Screen -->
+    <div id="welcomeScreen" class="welcome-screen">
+        <div class="text-center mb-4">
+            <h1 class="text-2xl md:text-3xl font-bold text-blue-800 mb-2">🧪 Thí nghiệm: Tìm Hiểu Tính Dẫn Điện của Vật Liệu</h1>
+            <p class="text-gray-700">Khám phá các vật liệu dẫn điện và cách điện thông qua thí nghiệm tương tác!</p>
+        </div>
+        
+        <div class="mb-4">
+            <h2 class="text-xl font-bold text-blue-700 mb-2">📝 Hướng dẫn thí nghiệm:</h2>
+            
+            <div class="instruction-card">
+                <div class="instruction-step">
+                    <div class="step-number">1</div>
+                    <div>Chọn một vật liệu từ danh sách bên phải mạch điện.</div>
+                </div>
+                <div class="instruction-step">
+                    <div class="step-number">2</div>
+                    <div>Đặt vật liệu vào khoảng trống giữa hai đầu dây điện.</div>
+                </div>
+                <div class="instruction-step">
+                    <div class="step-number">3</div>
+                    <div>Bật công tắc để kiểm tra xem đèn có sáng không.</div>
+                </div>
+                <div class="instruction-step">
+                    <div class="step-number">4</div>
+                    <div>Trả lời câu hỏi về tính chất dẫn điện của vật liệu.</div>
+                </div>
+                <div class="instruction-step">
+                    <div class="step-number">5</div>
+                    <div>Tiếp tục thử nghiệm với các vật liệu khác nhau!</div>
+                </div>
+            </div>
+            
+            <div class="bg-yellow-50 p-3 rounded-lg border border-yellow-200">
+                <h3 class="font-bold text-yellow-800">🧠 Nguyên lý thí nghiệm:</h3>
+                <p class="text-yellow-800 text-sm">Khi vật liệu dẫn điện được đặt vào mạch, dòng điện sẽ khép kín và đèn sẽ sáng. Nếu vật liệu là cách điện, đèn sẽ không sáng.</p>
+            </div>
+        </div>
+        
+        <button id="startButton" class="start-btn">
+            Bắt đầu thí nghiệm
+        </button>
+    </div>
+    
+    <!-- Experiment Screen -->
+    <div id="experimentScreen" class="experiment-container">
+        <div class="header">
+            <h1 class="text-xl md:text-2xl font-bold text-center">🧪 Thí nghiệm: Tìm Hiểu Tính Dẫn Điện của Vật Liệu</h1>
+        </div>
+        
+        <div class="main-content">
+            <div class="experiment-grid">
+                <div class="circuit-container">
+                    <div class="circuit">
+                        <div class="wire wire-left"></div>
+                        <div class="wire wire-right"></div>
+                        <div class="gap" id="materialGap">
+                            <div class="text-gray-500 text-center text-sm">Chọn vật liệu</div>
+                        </div>
+                        <div class="battery">
+                            <div class="battery-label">-</div>
+                        </div>
+                        <div class="bulb">
+                            <div class="bulb-glass">
+                                <div class="bulb-light" id="bulbLight"></div>
+                            </div>
+                            <div class="bulb-base"></div>
+                            <div class="bulb-thread"></div>
+                        </div>
+                        <div class="switch-container">
+                            <div class="switch-label">Công tắc</div>
+                            <div class="switch" id="circuitSwitch">
+                                <div class="switch-toggle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="materials-section">
+                    <h3 class="text-md font-semibold text-center mb-2">Chọn vật liệu để thử nghiệm:</h3>
+                    <div class="materials-container">
+                        <div class="grid grid-cols-2 gap-2" id="materialsList">
+                            <div class="material flex flex-col items-center" data-conductive="true">
+                                <div class="text-3xl">🪙</div>
+                                <div class="text-center text-sm">Đồng xu</div>
+                            </div>
+                            <div class="material flex flex-col items-center" data-conductive="true">
+                                <div class="text-3xl">🔩</div>
+                                <div class="text-center text-sm">Đinh sắt</div>
+                            </div>
+                            <div class="material flex flex-col items-center" data-conductive="false">
+                                <div class="text-3xl">🧱</div>
+                                <div class="text-center text-sm">Gỗ</div>
+                            </div>
+                            <div class="material flex flex-col items-center" data-conductive="false">
+                                <div class="text-3xl">🧴</div>
+                                <div class="text-center text-sm">Nhựa</div>
+                            </div>
+                            <div class="material flex flex-col items-center" data-conductive="true">
+                                <div class="text-3xl">🔌</div>
+                                <div class="text-center text-sm">Dây đồng</div>
+                            </div>
+                            <div class="material flex flex-col items-center" data-conductive="false">
+                                <div class="text-3xl">📄</div>
+                                <div class="text-center text-sm">Giấy</div>
+                            </div>
+                            <div class="material flex flex-col items-center" data-conductive="false">
+                                <div class="text-3xl">✏️</div>
+                                <div class="text-center text-sm">Bút chì</div>
+                            </div>
+                            <div class="material flex flex-col items-center" data-conductive="true">
+                                <div class="text-3xl">📎</div>
+                                <div class="text-center text-sm">Kẹp giấy</div>
+                            </div>
+                            <div class="material flex flex-col items-center" data-conductive="false">
+                                <div class="text-3xl">🧊</div>
+                                <div class="text-center text-sm">Thủy tinh</div>
+                            </div>
+                            <div class="material flex flex-col items-center" data-conductive="true">
+                                <div class="text-3xl">💧</div>
+                                <div class="text-center text-sm">Nước muối</div>
+                            </div>
+                            <div class="material flex flex-col items-center" data-conductive="false">
+                                <div class="text-3xl">🧵</div>
+                                <div class="text-center text-sm">Vải</div>
+                            </div>
+                            <div class="material flex flex-col items-center" data-conductive="true">
+                                <div class="text-3xl">⚡</div>
+                                <div class="text-center text-sm">Nhôm</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 Thí nghiệm Khoa học - Tìm Hiểu Tính Dẫn Điện của Vật Liệu</p>
+        </div>
+    </div>
+    
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="feedback" id="feedback">
+        <h3 class="text-xl font-bold mb-3 text-center" id="feedbackTitle">Câu hỏi</h3>
+        <p class="text-center mb-4" id="feedbackQuestion">Vật liệu này là dẫn điện hay cách điện?</p>
+        <div class="flex justify-center gap-4">
+            <button id="conductiveBtn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                ✅ Dẫn điện
+            </button>
+            <button id="insulatorBtn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+                ❌ Cách điện
+            </button>
+        </div>
+        <div id="feedbackResult" class="mt-3 p-3 rounded text-center hidden"></div>
+        <div class="text-center mt-3">
+            <button id="continueBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded hidden">
+                Tiếp tục
+            </button>
+        </div>
+    </div>
+    
+    <div class="celebration" id="celebration"></div>
+    
+    <!-- Audio elements -->
+    <audio id="correctSound" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1743950336/Am_thanh_chuc_mung_chien_thang-www_tiengdong_com_tzitdy.mp3" preload="auto"></audio>
+    <audio id="wrongSound" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1743950341/Am_thanh_tra_loi_sai-www_tiengdong_com_r160v8.mp3" preload="auto"></audio>
+    <audio id="tingSound" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1751551309/tieng_ting_mp3-www_tiengdong_com_ctxexh.mp3" preload="auto"></audio>
+    <audio id="switchSound" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1751551464/Am_thanh_tieng_Dong_cua-www_tiengdong_com_fabmq8.mp3" preload="auto"></audio>
+    <audio id="clickSound" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1743950559/Am_thanh_tieng_click_chuot-www_tiengdong_com_vg4uik.mp3" preload="auto"></audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const welcomeScreen = document.getElementById('welcomeScreen');
+            const experimentScreen = document.getElementById('experimentScreen');
+            const startButton = document.getElementById('startButton');
+            const materialsList = document.getElementById('materialsList');
+            const materialGap = document.getElementById('materialGap');
+            const bulbLight = document.getElementById('bulbLight');
+            const circuitSwitch = document.getElementById('circuitSwitch');
+            const overlay = document.getElementById('overlay');
+            const feedback = document.getElementById('feedback');
+            const feedbackTitle = document.getElementById('feedbackTitle');
+            const feedbackQuestion = document.getElementById('feedbackQuestion');
+            const conductiveBtn = document.getElementById('conductiveBtn');
+            const insulatorBtn = document.getElementById('insulatorBtn');
+            const feedbackResult = document.getElementById('feedbackResult');
+            const continueBtn = document.getElementById('continueBtn');
+            const celebration = document.getElementById('celebration');
+            
+            // Audio elements
+            const correctSound = document.getElementById('correctSound');
+            const wrongSound = document.getElementById('wrongSound');
+            const tingSound = document.getElementById('tingSound');
+            const switchSound = document.getElementById('switchSound');
+            const clickSound = document.getElementById('clickSound');
+            
+            let currentMaterial = null;
+            let switchOn = false;
+            
+            // Start button click event
+            startButton.addEventListener('click', function() {
+                welcomeScreen.style.display = 'none';
+                experimentScreen.style.display = 'flex';
+                clickSound.play();
+            });
+            
+            // Add click event to materials
+            const materials = document.querySelectorAll('.material');
+            materials.forEach(material => {
+                material.addEventListener('click', function() {
+                    // Play click sound
+                    clickSound.play();
+                    
+                    // Remove selected class from all materials
+                    materials.forEach(m => m.classList.remove('selected'));
+                    
+                    // Add selected class to clicked material
+                    this.classList.add('selected');
+                    
+                    // Clear the gap
+                    materialGap.innerHTML = '';
+                    
+                    // Create a clone of the material emoji and add it to the gap
+                    const materialEmoji = this.querySelector('div:first-child').textContent;
+                    const materialName = this.querySelector('div:last-child').textContent;
+                    const materialElement = document.createElement('div');
+                    materialElement.className = 'material-in-gap text-4xl';
+                    materialElement.textContent = materialEmoji;
+                    materialGap.appendChild(materialElement);
+                    
+                    // Store the current material
+                    currentMaterial = {
+                        name: materialName,
+                        emoji: materialEmoji,
+                        conductive: this.dataset.conductive === 'true'
+                    };
+                    
+                    // If switch is on, update the bulb
+                    if (switchOn) {
+                        updateBulb();
+                    }
+                });
+            });
+            
+            // Add click event to switch
+            circuitSwitch.addEventListener('click', function() {
+                switchOn = !switchOn;
+                this.classList.toggle('on');
+                
+                // Play switch sound
+                switchSound.play();
+                
+                updateBulb();
+                
+                // If there's a material in the gap and the switch is turned on, show the feedback
+                if (currentMaterial && switchOn) {
+                    setTimeout(() => {
+                        showFeedback();
+                    }, 1000);
+                }
+            });
+            
+            // Update bulb based on current material and switch state
+            function updateBulb() {
+                if (switchOn && currentMaterial && currentMaterial.conductive) {
+                    bulbLight.classList.add('on');
+                    tingSound.play();
+                } else {
+                    bulbLight.classList.remove('on');
+                }
+            }
+            
+            // Show feedback dialog
+            function showFeedback() {
+                overlay.style.display = 'block';
+                feedback.style.display = 'block';
+                feedbackQuestion.textContent = `Vật liệu "${currentMaterial.name}" là dẫn điện hay cách điện?`;
+                feedbackResult.classList.add('hidden');
+                continueBtn.classList.add('hidden');
+            }
+            
+            // Handle conductive button click
+            conductiveBtn.addEventListener('click', function() {
+                const isCorrect = currentMaterial.conductive;
+                showResult(isCorrect, 'dẫn điện');
+            });
+            
+            // Handle insulator button click
+            insulatorBtn.addEventListener('click', function() {
+                const isCorrect = !currentMaterial.conductive;
+                showResult(isCorrect, 'cách điện');
+            });
+            
+            // Show result
+            function showResult(isCorrect, answer) {
+                feedbackResult.classList.remove('hidden');
+                continueBtn.classList.remove('hidden');
+                
+                if (isCorrect) {
+                    feedbackResult.className = 'mt-3 p-3 rounded text-center bg-green-100 text-green-800';
+                    feedbackResult.innerHTML = `
+                        <div class="text-xl mb-2">✅ Chính xác!</div>
+                        <p>Vật liệu "${currentMaterial.name}" ${currentMaterial.conductive ? 'là chất dẫn điện tốt' : 'là chất cách điện'}</p>
+                        <div class="mt-2 p-2 bg-blue-50 rounded-lg border border-blue-200">
+                            <p class="font-semibold">💡 Giải thích:</p>
+                            <p class="text-sm">${getExplanation(currentMaterial.name)}</p>
+                        </div>
+                    `;
+                    correctSound.play();
+                    showCelebration();
+                } else {
+                    feedbackResult.className = 'mt-3 p-3 rounded text-center bg-red-100 text-red-800';
+                    feedbackResult.innerHTML = `
+                        <div class="text-xl mb-2">❌ Chưa đúng</div>
+                        <p>Vật liệu "${currentMaterial.name}" ${currentMaterial.conductive ? 'là chất dẫn điện' : 'là chất cách điện'}</p>
+                        <div class="mt-2 p-2 bg-blue-50 rounded-lg border border-blue-200">
+                            <p class="font-semibold">💡 Giải thích:</p>
+                            <p class="text-sm">${getExplanation(currentMaterial.name)}</p>
+                        </div>
+                    `;
+                    wrongSound.play();
+                }
+            }
+            
+            // Continue button click
+            continueBtn.addEventListener('click', function() {
+                overlay.style.display = 'none';
+                feedback.style.display = 'none';
+                clickSound.play();
+                
+                // Reset the switch
+                switchOn = false;
+                circuitSwitch.classList.remove('on');
+                bulbLight.classList.remove('on');
+                
+                // Clear the gap
+                materialGap.innerHTML = '<div class="text-gray-500 text-center text-sm">Chọn vật liệu</div>';
+                currentMaterial = null;
+                
+                // Remove selected class from all materials
+                materials.forEach(m => m.classList.remove('selected'));
+            });
+            
+            // Get explanation for material
+            function getExplanation(materialName) {
+                switch(materialName) {
+                    case 'Đồng xu':
+                        return 'Đồng xu được làm từ kim loại (đồng, niken hoặc hợp kim), và kim loại là chất dẫn điện tốt vì có nhiều electron tự do có thể di chuyển dễ dàng.';
+                    case 'Đinh sắt':
+                        return 'Đinh sắt được làm từ kim loại sắt, và kim loại là chất dẫn điện tốt vì có cấu trúc tinh thể với nhiều electron tự do có thể di chuyển.';
+                    case 'Gỗ':
+                        return 'Gỗ không cho phép dòng điện đi qua vì không có electron tự do. Cấu trúc phân tử của gỗ giữ chặt các electron, ngăn chúng di chuyển tự do.';
+                    case 'Nhựa':
+                        return 'Nhựa là chất cách điện tốt vì các electron trong cấu trúc phân tử của nhựa bị ràng buộc chặt chẽ, không thể di chuyển tự do để tạo dòng điện.';
+                    case 'Dây đồng':
+                        return 'Dây đồng được làm từ kim loại đồng, là chất dẫn điện rất tốt vì đồng có nhiều electron tự do và có điện trở thấp, cho phép dòng điện di chuyển dễ dàng.';
+                    case 'Giấy':
+                        return 'Giấy khô không cho phép dòng điện đi qua vì cấu trúc sợi xenluloza của giấy không có electron tự do. Tuy nhiên, giấy ướt có thể dẫn điện yếu do ion trong nước.';
+                    case 'Bút chì':
+                        return 'Bút chì có lõi graphite có thể dẫn điện yếu vì graphite có cấu trúc lớp với electron tự do, nhưng vỏ gỗ bên ngoài là cách điện nên tổng thể là cách điện.';
+                    case 'Kẹp giấy':
+                        return 'Kẹp giấy được làm từ kim loại (thường là thép), và kim loại là chất dẫn điện tốt vì có nhiều electron tự do có thể di chuyển dễ dàng trong cấu trúc tinh thể.';
+                    case 'Thủy tinh':
+                        return 'Thủy tinh là chất cách điện tốt vì các electron trong cấu trúc phân tử của thủy tinh bị ràng buộc chặt chẽ trong liên kết cộng hóa trị, không thể di chuyển tự do.';
+                    case 'Nước muối':
+                        return 'Nước muối dẫn điện tốt vì chứa các ion Na+ và Cl- tự do có thể di chuyển và mang điện tích. Nước tinh khiết dẫn điện kém, nhưng khi có muối hòa tan, độ dẫn điện tăng lên.';
+                    case 'Vải':
+                        return 'Vải khô là chất cách điện vì các sợi tự nhiên hoặc tổng hợp không có electron tự do. Tuy nhiên, vải ướt có thể dẫn điện yếu do ion trong nước.';
+                    case 'Nhôm':
+                        return 'Nhôm là kim loại dẫn điện tốt vì có nhiều electron tự do trong cấu trúc tinh thể kim loại. Nhôm được sử dụng rộng rãi trong dây dẫn điện và các thiết bị điện.';
+                    default:
+                        return 'Hãy quan sát kỹ tính chất của vật liệu này và mối liên hệ với cấu trúc phân tử của nó.';
+                }
+            }
+            
+            // Show celebration effect
+            function showCelebration() {
+                celebration.style.display = 'block';
+                celebration.innerHTML = '';
+                
+                // Create confetti
+                for (let i = 0; i < 50; i++) {
+                    createConfetti();
+                }
+                
+                // Hide celebration after animation completes
+                setTimeout(() => {
+                    celebration.style.display = 'none';
+                }, 3000);
+            }
+            
+            // Create a single confetti element
+            function createConfetti() {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                
+                // Random position
+                const left = Math.random() * 100;
+                confetti.style.left = `${left}%`;
+                
+                // Random color
+                const colors = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff', '#fb8500', '#8338ec', '#3a86ff'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.backgroundColor = color;
+                
+                // Random size
+                const size = Math.random() * 8 + 4;
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                
+                // Random shape
+                const shapes = ['circle', 'square', 'triangle'];
+                const shape = shapes[Math.floor(Math.random() * shapes.length)];
+                if (shape === 'circle') {
+                    confetti.style.borderRadius = '50%';
+                } else if (shape === 'triangle') {
+                    confetti.style.width = '0';
+                    confetti.style.height = '0';
+                    confetti.style.backgroundColor = 'transparent';
+                    confetti.style.borderLeft = `${size/2}px solid transparent`;
+                    confetti.style.borderRight = `${size/2}px solid transparent`;
+                    confetti.style.borderBottom = `${size}px solid ${color}`;
+                }
+                
+                // Random rotation
+                const rotation = Math.random() * 360;
+                confetti.style.transform = `rotate(${rotation}deg)`;
+                
+                // Random animation delay
+                const delay = Math.random() * 1;
+                confetti.style.animationDelay = `${delay}s`;
+                
+                // Add to celebration container
+                celebration.appendChild(confetti);
+            }
+        });
+    </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    .ai-gradient {
+        background: linear-gradient(135deg, #0b0b3b 0%, #1a1a6c 50%, #3a0ca3 100%);
+        position: relative;
+        overflow: hidden;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .ai-circuit {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        pointer-events: none;
+    }
+    
+    .logo-glow {
+        filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.8));
+    }
+    
+    .footer-link {
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    
+    .footer-link:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 1px;
+        bottom: -2px;
+        left: 0;
+        background-color: #8a2be2;
+        transition: width 0.3s ease;
+    }
+    
+    .footer-link:hover:after {
+        width: 100%;
+    }
+    
+    .footer-link:hover {
+        color: #a855f7;
+    }
+    
+    .dot-separator {
+        display: inline-block;
+        margin: 0 6px;
+        opacity: 0.7;
+    }
+    
+    .social-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        margin: 0 8px;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        overflow: hidden;
+    }
+    
+    .social-icon:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .social-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 8px;
+    }
+    
+    .social-text {
+        margin-top: 4px;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+    }
+    
+    .social-item:hover .social-text {
+        color: white;
+    }
+    
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .footer-container {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    .icon-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .fb-icon, .yt-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .fb-icon {
+        background-color: #1877F2;
+    }
+    
+    .yt-icon {
+        background-color: #FF0000;
+    }
+    
+    @media (max-width: 768px) {
+        .footer-content {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .footer-links {
+            margin-top: 1rem;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .dot-separator {
+            display: none;
+        }
+        
+        .footer-link {
+            margin: 0.4rem 0;
+        }
+        
+        .description-text {
+            max-width: 100%;
+        }
+        
+        .social-icons {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-item {
+            margin: 8px 0;
+        }
+    }
+    
+    @media (max-width: 640px) {
+        .social-icons {
+            flex-direction: column;
+        }
+    }
+</style>
+<footer class="ai-gradient text-white">
+    <!-- AI Circuit Pattern Background -->
+    <svg class="ai-circuit" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+        <pattern id="circuit-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+            <path d="M10 10 L90 10 L90 90 L10 90 Z" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+            <circle cx="10" cy="10" r="2" fill="#ffffff"/>
+            <circle cx="90" cy="10" r="2" fill="#ffffff"/>
+            <circle cx="90" cy="90" r="2" fill="#ffffff"/>
+            <circle cx="10" cy="90" r="2" fill="#ffffff"/>
+            <path d="M10 50 L40 50 L40 10" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+            <path d="M90 50 L60 50 L60 90" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+            <circle cx="40" cy="50" r="2" fill="#ffffff"/>
+            <circle cx="60" cy="50" r="2" fill="#ffffff"/>
+        </pattern>
+        <rect width="100%" height="100%" fill="url(#circuit-pattern)"/>
+    </svg>
+    
+    <div class="footer-container px-3 py-4">
+        <div class="footer-content flex flex-col items-center justify-center">
+            <!-- Logo and Description -->
+            <div class="flex flex-col items-center mb-2">
+                <div class="logo-glow rounded-full overflow-hidden w-16 h-16 flex-shrink-0 border-2 border-purple-400 mb-3">
+                    <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" 
+                         alt="Quân H Logo" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="text-center max-w-md">
+                    <p class="text-sm md:text-base font-medium description-text">
+                        Quân H – Giảng viên & Youtuber chia sẻ kiến thức AI, công nghệ và giáo dục.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Social Media Icons - Vertical Layout -->
+            <div class="social-icons flex flex-row md:flex-row justify-center flex-wrap">
+                <a href="https://www.facebook.com/tran.hong.quan.216221/" target="_blank" class="social-item">
+                    <div class="social-icon">
+                        <div class="fb-icon">
+                            <i class="fab fa-facebook-f text-white"></i>
+                        </div>
+                    </div>
+                    <span class="social-text">Trần Hồng Quân</span>
+                </a>
+                
+                <a href="javascript:void(0)" class="social-item" onclick="alert('Zalo: 0355.213.107')">
+                    <div class="social-icon p-0">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/768px-Icon_of_Zalo.svg.png" 
+                             alt="Zalo" 
+                             class="icon-img">
+                    </div>
+                    <span class="social-text">0355.213.107</span>
+                </a>
+                
+                <a href="https://www.youtube.com/@quanh95" target="_blank" class="social-item">
+                    <div class="social-icon">
+                        <div class="yt-icon">
+                            <i class="fab fa-youtube text-white"></i>
+                        </div>
+                    </div>
+                    <span class="social-text">Quân H</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="border-t border-purple-900/50 mt-1 pt-3">
+            <div class="flex flex-wrap justify-center md:justify-between items-center text-xs text-purple-200/80">
+                <div class="mb-1 md:mb-0">
+                    © 2025 Quân H.
+                </div>
+                <div class="flex flex-wrap justify-center">
+                    <a href="#" class="footer-link mx-1">Chính sách bảo mật</a>
+                    <span class="dot-separator">•</span>
+                    <a href="#" class="footer-link mx-1">Điều khoản sử dụng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9597281d8729f87b',t:'MTc1MTU1MzgyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

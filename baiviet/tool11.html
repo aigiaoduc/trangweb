@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiings – Thư Viện Biểu Tượng 3D AI Miễn Phí</title>
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Thiings – Thư Viện Biểu Tượng 3D AI Miễn Phí">
+    <meta property="og:description" content="Khám phá Thiings.co, thư viện biểu tượng 3D do AI tạo ra, hoàn toàn miễn phí, giúp giáo viên nâng cao chất lượng bài giảng.">
+    <meta property="og:image" content="https://www.thiings.co/meta-new.png">
+    <meta property="og:url" content="https://aigiaoduc.github.io/tools/tool11.html">
+    <meta property="og:type" content="article">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Custom styles for fonts and general layout */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light gray background */
+            color: #333;
+            line-height: 1.6;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
+        }
+        .text-quicksand {
+            font-family: 'Quicksand', sans-serif;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); /* Gradient background */
+            color: white;
+            padding: 6rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+        .btn-primary {
+            background-color: #667eea;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .btn-primary:hover {
+            background-color: #5a67d8;
+            transform: translateY(-2px);
+        }
+        .list-unstyled {
+            list-style: none;
+            padding-left: 0;
+        }
+        .list-unstyled li::before {
+            content: none; /* Remove default bullet points */
+        }
+        .image-container {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Styles from menu.html */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.5);
+            transition: top 0.3s;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #2f73ff;
+        }
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .nav-links { display: flex; gap: 2rem; font-weight: 600; }
+        .nav-links a { font-size: 1rem; color: #fff; text-decoration: none; transition: color 0.3s; }
+        .nav-links a:hover { color: #2f73ff; }
+        .cta {
+            padding: 0.6rem 1.4rem;
+            background: #2f73ff;
+            border-radius: 999px;
+            font-weight: 600;
+            color: #fff;
+            transition: background 0.3s;
+        }
+        .cta:hover { background: #245ad1; }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 0.3rem;
+        }
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+        .menu-toggle.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .menu-toggle.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+
+        /* Responsive for menu */
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem; }
+            .nav-links { display: none; flex-direction: column; width: 100%; background: rgba(0,0,0,0.8); position: absolute; top: 60px; left: 0; padding: 1rem; }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: 0.5rem 0; text-align: center; }
+            .cta { display: none; }
+            .menu-toggle { display: flex; }
+        }
+
+        /* Styles from footer.html */
+        .ai-gradient {
+            background: linear-gradient(135deg, #0b0b3b 0%, #1a1a6c 50%, #3a0ca3 100%);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+        .ai-circuit {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        .logo-glow {
+            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.8));
+        }
+        .footer-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .footer-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #8a2be2;
+            transition: width 0.3s ease;
+        }
+        .footer-link:hover:after {
+            width: 100%;
+        }
+        .footer-link:hover {
+            color: #a855f7;
+        }
+        .dot-separator {
+            display: inline-block;
+            margin: 0 6px;
+            opacity: 0.7;
+        }
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin: 0 8px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            overflow: hidden;
+        }
+        .social-icon:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        .social-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 8px;
+        }
+        .social-text {
+            margin-top: 4px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+        .social-item:hover .social-text {
+            color: white;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        .footer-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .icon-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .fb-icon, .yt-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        .fb-icon {
+            background-color: #1877F2;
+        }
+        .yt-icon {
+            background-color: #FF0000;
+        }
+        /* Responsive for footer */
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-links {
+                margin-top: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+            .dot-separator {
+                display: none;
+            }
+            .footer-link {
+                margin: 0.4rem 0;
+            }
+            .description-text {
+                max-width: 100%;
+            }
+            .social-icons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .social-item {
+                margin: 8px 0;
+            }
+        }
+        @media (max-width: 640px) {
+            .social-icons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Section -->
+    <nav class="navbar">
+        <div class="logo">
+          <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
+          <span class="logo-text">Quân H</span>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <a href="../index.html">Trang chủ</a>
+          <a href="../baiviet.html">Bài viết</a>
+          <a href="../congcu.html">Công cụ</a>
+          <a href="../video.html">Video</a>
+          <a href="../trochoi.html">Trò chơi</a>
+          <a href="../thinghiemao.html">Thí nghiệm ảo</a>
+          <a href="../lienhe.html">Liên hệ</a>
+        </div>
+        <a href="../lienhe.html" class="cta">Liên hệ</a>
+        <div class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+    
+        menuToggle.addEventListener('click', () => {
+          navLinks.classList.toggle('open');
+          menuToggle.classList.toggle('open');
+        });
+    </script>
+
+    <main class="container mx-auto px-4 py-8 mt-16 max-w-4xl">
+        <!-- Hero Section -->
+        <section class="hero-section mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white text-shadow-xl">
+                🧑‍🏫 Thiings – Thư Viện Biểu Tượng 3D AI Miễn Phí
+            </h1>
+            <p class="text-lg md:text-xl text-quicksand max-w-2xl mx-auto mb-8 opacity-90">
+                Trong thời đại chuyển đổi số giáo dục, hình ảnh minh họa không còn chỉ là phần “trang trí” – mà là công cụ truyền đạt trực quan giúp học sinh hiểu nhanh, nhớ lâu và hứng thú hơn với bài học.
+            </p>
+            <div class="flex justify-center">
+                <img src="https://www.thiings.co/meta-new.png" alt="Thiings 3D Icons" class="w-full max-w-sm rounded-lg shadow-xl">
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <section class="mb-12 card">
+            <h2 class="text-3xl font-bold mb-6 text-center text-purple-700">🎒 Thiings Là Gì?</h2>
+            <p class="mb-4 text-gray-700">
+                Thiings là một bộ sưu tập hơn 1.900 biểu tượng 3D với đủ mọi chủ đề – từ đồ dùng học tập, công nghệ, sinh hoạt, đến cảm xúc và biểu tượng trừu tượng – được tạo bởi AI và chia sẻ hoàn toàn miễn phí cho cả mục đích cá nhân lẫn thương mại.
+            </p>
+            <p class="mb-4 text-gray-700">
+                Điều đó có nghĩa là:
+            </p>
+            <ul class="list-unstyled text-gray-700 space-y-2">
+                <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Bạn có thể tải, sử dụng và chèn vào slide bài giảng, video dạy học, bài kiểm tra, infographic, worksheet… một cách dễ dàng và hợp pháp.</li>
+            </ul>
+        </section>
+
+        <section class="mb-12 card">
+            <h2 class="text-3xl font-bold mb-6 text-center text-blue-700">✨ Vì Sao Giáo Viên Nên Biết Đến Thiings?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-6 bg-blue-50 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-800">Lợi ích</h3>
+                    <ul class="list-unstyled text-gray-700 space-y-2">
+                        <li><i class="fas fa-star text-yellow-500 mr-2"></i>Hình ảnh 3D đẹp, dễ hiểu</li>
+                        <li><i class="fas fa-cubes text-purple-500 mr-2"></i>Chủ đề đa dạng</li>
+                        <li><i class="fas fa-hand-holding-usd text-green-500 mr-2"></i>Miễn phí và không cần đăng ký</li>
+                        <li><i class="fas fa-lightbulb text-orange-500 mr-2"></i>Có thể sáng tạo thêm biểu tượng mới</li>
+                    </ul>
+                </div>
+                <div class="p-6 bg-green-50 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-3 text-green-800">Ứng dụng thực tế</h3>
+                    <ul class="list-unstyled text-gray-700 space-y-2">
+                        <li><i class="fas fa-chalkboard-teacher text-blue-500 mr-2"></i>Tăng tính trực quan trong slide hoặc trò chơi dạy học.</li>
+                        <li><i class="fas fa-book text-red-500 mr-2"></i>Có thể tìm icon cho mọi môn học: Toán, Khoa học, Công nghệ, Đạo đức…</li>
+                        <li><i class="fas fa-user-graduate text-purple-500 mr-2"></i>Phù hợp với giáo viên mọi cấp, không yêu cầu kỹ thuật cao.</li>
+                        <li><i class="fas fa-paint-brush text-yellow-500 mr-2"></i>Nếu bạn cần icon độc đáo, có thể dùng My:Thiings để tạo riêng.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12 card">
+            <div class="banner-container" style="text-align: center; margin: 20px 0;">
+                <a href="https://aigiaoduc.io.vn/pages/khoahoconline.html" target="_blank">
+                    <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1752286655/Banner_ADS_obhpcy.png" 
+                         alt="Banner Quảng Cáo" 
+                         style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block;">
+                </a>
+            </div>
+        </section>
+
+        <section class="mb-12 card">
+            <h2 class="text-3xl font-bold mb-6 text-center text-orange-700">📚 Một Số Gợi Ý Ứng Dụng Trong Lớp Học</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="p-6 bg-yellow-50 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-3 text-yellow-800">🎨 Thiết kế bài giảng PowerPoint/Canva</h3>
+                    <p class="text-gray-700">Chèn các biểu tượng 3D vào tiêu đề, phần mở bài hoặc minh họa cho từng phần nội dung → sinh động hơn hẳn so với slide toàn chữ.</p>
+                </div>
+                <div class="p-6 bg-red-50 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-3 text-red-800">📖 Làm bài tập minh họa, thẻ học từ vựng</h3>
+                    <p class="text-gray-700">Dùng icon để học sinh ghép tranh – từ, chơi các trò chơi tương tác.</p>
+                </div>
+                <div class="p-6 bg-purple-50 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-3 text-purple-800">📺 Làm video hoạt hình dạy học</h3>
+                    <p class="text-gray-700">Dùng icon 3D làm hình ảnh minh họa cho các đoạn video giáo dục, thuyết minh bằng giọng AI.</p>
+                </div>
+                <div class="p-6 bg-teal-50 rounded-lg shadow-md col-span-full md:col-span-1 lg:col-span-1">
+                    <h3 class="text-xl font-semibold mb-3 text-teal-800">🧠 Kích thích tư duy thị giác</h3>
+                    <p class="text-gray-700">Cho học sinh nhìn icon và đoán chủ đề, nội dung bài học → tạo sự tò mò, khởi động trước tiết học.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12 card">
+            <h2 class="text-3xl font-bold mb-6 text-center text-green-700">🔍 Cách Sử Dụng Thiings Rất Dễ</h2>
+            <div class="space-y-6 text-gray-700">
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center text-xl font-bold">1</div>
+                    <p class="flex-grow">Truy cập: <a href="https://www.thiings.co/things" target="_blank" class="text-blue-600 hover:underline">https://www.thiings.co/things</a></p>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center text-xl font-bold">2</div>
+                    <p class="flex-grow">Chọn icon theo chủ đề: học tập, công nghệ, cảm xúc, v.v.</p>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center text-xl font-bold">3</div>
+                    <p class="flex-grow">Tải xuống định dạng PNG, chèn vào giáo án, slide, Canva hoặc phần mềm biên tập.</p>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center text-xl font-bold">4</div>
+                    <p class="flex-grow">(Tùy chọn) Vào My.Thiings để tạo bộ icon mang phong cách cá nhân hoặc theo trường học.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12 card text-center">
+            <h2 class="text-3xl font-bold mb-6 text-center text-red-700">🌟 Kết Luận</h2>
+            <p class="mb-6 text-gray-700">
+                Trong lớp học hiện đại, một biểu tượng sinh động có thể nói lên nhiều điều hơn cả đoạn văn dài.
+            </p>
+            <p class="mb-8 text-gray-700">
+                Thiings.co là nguồn tài nguyên tuyệt vời, giúp người làm giáo dục tiết kiệm thời gian, nâng cao chất lượng bài giảng mà không cần phải giỏi thiết kế hay trả thêm chi phí.
+            </p>
+            <p class="mb-8 text-gray-700">
+                Nếu bạn là giáo viên đang tìm kiếm hình ảnh minh họa chất lượng cao, miễn phí, dễ dùng – hãy lưu ngay trang này lại!
+            </p>
+            <a href="https://www.thiings.co/things" target="_blank" class="btn-primary inline-block">
+                TRUY CẬP CÔNG CỤ
+            </a>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="ai-gradient text-white">
+        <!-- AI Circuit Pattern Background -->
+        <svg class="ai-circuit" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <pattern id="circuit-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                <path d="M10 10 L90 10 L90 90 L10 90 Z" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+                <circle cx="10" cy="10" r="2" fill="#ffffff"/>
+                <circle cx="90" cy="10" r="2" fill="#ffffff"/>
+                <circle cx="90" cy="90" r="2" fill="#ffffff"/>
+                <circle cx="10" cy="90" r="2" fill="#ffffff"/>
+                <path d="M10 50 L40 50 L40 10" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+                <path d="M90 50 L60 50 L60 90" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+                <circle cx="40" cy="50" r="2" fill="#ffffff"/>
+                <circle cx="60" cy="50" r="2" fill="#ffffff"/>
+            </pattern>
+            <rect width="100%" height="100%" fill="url(#circuit-pattern)"/>
+        </svg>
+        
+        <div class="footer-container px-3 py-4">
+            <div class="footer-content flex flex-col items-center justify-center">
+                <!-- Logo and Description -->
+                <div class="flex flex-col items-center mb-2">
+                    <div class="logo-glow rounded-full overflow-hidden w-16 h-16 flex-shrink-0 border-2 border-purple-400 mb-3">
+                        <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" 
+                             alt="Quân H Logo" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-center max-w-md">
+                        <p class="text-sm md:text-base font-medium description-text">
+                            Quân H – Giảng viên & Youtuber chia sẻ kiến thức AI, công nghệ và giáo dục.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Social Media Icons - Vertical Layout -->
+                <div class="social-icons flex flex-row md:flex-row justify-center flex-wrap">
+                    <a href="https://www.facebook.com/tran.hong.quan.216221/" target="_blank" class="social-item">
+                        <div class="social-icon">
+                            <div class="fb-icon">
+                                <i class="fab fa-facebook-f text-white"></i>
+                            </div>
+                        </div>
+                        <span class="social-text">Trần Hồng Quân</span>
+                    </a>
+                    
+                    <a href="javascript:void(0)" class="social-item" onclick="alert('Zalo: 0355.213.107')">
+                        <div class="social-icon p-0">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/768px-Icon_of_Zalo.svg.png" 
+                                 alt="Zalo" 
+                                 class="icon-img">
+                        </div>
+                        <span class="social-text">0355.213.107</span>
+                    </a>
+                    
+                    <a href="https://www.youtube.com/@quanh95" target="_blank" class="social-item">
+                        <div class="social-icon">
+                            <div class="yt-icon">
+                                <i class="fab fa-youtube text-white"></i>
+                            </div>
+                        </div>
+                        <span class="social-text">Quân H</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-purple-900/50 mt-1 pt-3">
+                <div class="flex flex-wrap justify-center md:justify-between items-center text-xs text-purple-200/80">
+                    <div class="mb-1 md:mb-0">
+                        © 2025 Quân H.
+                    </div>
+                    <div class="flex flex-wrap justify-center">
+                        <a href="#" class="footer-link mx-1">Chính sách bảo mật</a>
+                        <span class="dot-separator">•</span>
+                        <a href="#" class="footer-link mx-1">Điều khoản sử dụng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo Bài Thuyết Trình Chuyên Nghiệp Chỉ Trong Vài Phút Với Gamma AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .navbar {
+            position: sticky; top:0; left:0; width:100%;
+            display:flex; justify-content:space-between; align-items:center;
+            padding:1rem 2rem; background:rgba(0,0,0,0.5); z-index:100;
+        }
+        .logo            { display:flex; align-items:center; gap:.75rem; }
+        .logo-img        { width:40px; height:40px; border-radius:50%; border:2px solid #2f73ff; }
+        .logo-text       { font-family:'Inter',sans-serif; font-size:1.5rem; font-weight:700; color:#fff; }
+        .nav-links       { display:flex; gap:2rem; font-weight:600; }
+        .nav-links a     { color:#fff; transition:color .3s; }
+        .nav-links a:hover { color:#2f73ff; }
+        .cta             { padding:.6rem 1.4rem; background:#2f73ff; border-radius:999px; font-weight:600; color:#fff; transition:background .3s; }
+        .cta:hover       { background:#245ad1; }
+
+        /* Responsive Navbar */
+        @media (max-width: 767px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: rgba(0,0,0,0.8);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 1rem 2rem;
+                gap: 1rem;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .hamburger {
+                display: block;
+                cursor: pointer;
+                color: #fff;
+                font-size: 1.8rem;
+            }
+            .cta {
+                display: none; /* Hide CTA button on mobile */
+            }
+        }
+        @media (min-width: 768px) {
+            .hamburger {
+                display: none;
+            }
+        }
+
+        /* Custom styles for content blocks */
+        .content-card {
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #2f73ff, #00c6ff);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: 2rem;
+            border-bottom-right-radius: 2rem;
+            margin-bottom: 2rem;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .hero-section h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-section p {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+        .feature-card {
+            background-color: #f8f9fa;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-family: 'Quicksand', sans-serif;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        }
+        .feature-card h3 {
+            font-weight: 600;
+            color: #2f73ff;
+            margin-bottom: 0.75rem;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #2f73ff;
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 999px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2rem;
+        }
+        .cta-button:hover {
+            background-color: #245ad1;
+            transform: translateY(-2px);
+        }
+        .infographic-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">
+    <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png"
+         alt="Logo Quân H" class="logo-img" />
+    <span class="logo-text">Quân H</span>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a href="../index.html">Trang chủ</a>
+    <a href="../baiviet.html">Bài viết</a>
+    <a href="../congcu.html">Công cụ</a>
+    <a href="../video.html">Video</a>
+    <a href="../lienhe.html">Liên hệ</a>
+  </div>
+  <a href="../lienhe.html" class="cta">Liên hệ</a>
+  <div class="hamburger" id="hamburger">
+      &#9776; <!-- Hamburger icon -->
+  </div>
+</nav>
+
+<div class="hero-section">
+    <h1 class="text-4xl md:text-5xl lg:text-6xl">Tạo Bài Thuyết Trình Chuyên Nghiệp Chỉ Trong Vài Phút Với Gamma AI</h1>
+    <p class="mt-4 text-lg md:text-xl">Khám phá cách Gamma AI biến ý tưởng của bạn thành những bài thuyết trình ấn tượng, không cần kỹ năng thiết kế.</p>
+</div>
+
+<main class="container mx-auto px-4 py-8 max-w-4xl">
+    <section class="content-card">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4 font-montserrat">1. Gamma AI là gì?</h2>
+        <p class="mb-4">Gamma là một nền tảng trực tuyến cho phép bạn tạo slide thuyết trình, tài liệu giới thiệu hoặc bài học chỉ bằng một đoạn văn bản hoặc vài dòng mô tả.</p>
+        <p class="mb-4">Với sự hỗ trợ của trí tuệ nhân tạo, Gamma sẽ tự động:</p>
+        <ul class="list-disc list-inside ml-4 space-y-2">
+            <li>Hiểu nội dung bạn muốn trình bày</li>
+            <li>Biến ý tưởng thành bố cục rõ ràng, khoa học</li>
+            <li>Thiết kế giao diện đẹp, hiện đại và có thể điều chỉnh linh hoạt</li>
+            <li>Giúp bạn tập trung vào nội dung, không mất thời gian “trang trí”</li>
+        </ul>
+    </section>
+
+    <img src="https://tuilathao.com/wp-content/uploads/2024/03/Gamma-App-%E2%80%93-Tim-hieu-ve-AI-tao-slide-tu-dong.png" alt="Infographic Gamma AI" class="infographic-img">
+
+    <section class="content-card">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 font-montserrat">2. Điểm mạnh của Gamma AI</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="feature-card">
+                <h3 class="text-xl">Tạo bài thuyết trình chỉ trong vài phút</h3>
+                <p class="text-gray-700">Nhập mô tả chủ đề, Gamma sẽ tự động viết nội dung từng slide, chia bố cục hợp lý và trình bày đẹp mắt.</p>
+            </div>
+            <div class="feature-card">
+                <h3 class="text-xl">Không cần kỹ năng thiết kế</h3>
+                <p class="text-gray-700">Dù bạn không rành PowerPoint hay Canva, bạn vẫn có thể có một bài trình chiếu chỉn chu.</p>
+            </div>
+            <div class="feature-card">
+                <h3 class="text-xl">Trình bày hiện đại</h3>
+                <p class="text-gray-700">Các slide của Gamma mang phong cách tối giản, đẹp và rõ ràng – phù hợp cho thuyết trình trong lớp học, họp nhóm, hay thậm chí là giới thiệu dự án.</p>
+            </div>
+            <div class="feature-card">
+                <h3 class="text-xl">Dễ dàng chỉnh sửa</h3>
+                <p class="text-gray-700">Có thể thêm bớt nội dung, đổi màu sắc, chèn hình ảnh, video, biểu đồ... mà không rối rắm.</p>
+            </div>
+            <div class="feature-card">
+                <h3 class="text-xl">Trình chiếu trực tiếp hoặc xuất bản dễ dàng</h3>
+                <p class="text-gray-700">Gamma hỗ trợ cả chế độ “trình chiếu” như PowerPoint lẫn chế độ đọc tài liệu mượt mà trên web.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-card">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4 font-montserrat">3. Ứng dụng thực tế:</h2>
+        <ul class="list-disc list-inside ml-4 space-y-2">
+            <li><strong>Trong giảng dạy:</strong> Giáo viên có thể tạo bài giảng trực quan, sinh động mà không tốn nhiều thời gian.</li>
+            <li><strong>Trong học tập:</strong> Học sinh, sinh viên có thể làm slide thuyết trình nhóm, thuyết minh dự án, bài tập lớn.</li>
+            <li><strong>Trong công việc:</strong> Nhân viên văn phòng có thể dùng Gamma để trình bày kế hoạch, báo cáo, đề xuất dự án.</li>
+            <li><strong>Trong chia sẻ nội dung:</strong> Người làm nội dung có thể tạo slide chia sẻ kiến thức, hướng dẫn, tài liệu e-learning.</li>
+        </ul>
+    </section>
+
+    <section class="content-card">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4 font-montserrat">4. Sử dụng Gamma AI có khó không?</h2>
+        <p class="mb-4">Câu trả lời là: không hề khó.</p>
+        <p class="mb-4">Chỉ cần bạn biết gõ một đoạn mô tả, ví dụ: "Giới thiệu về trí tuệ nhân tạo trong giáo dục", Gamma sẽ giúp bạn tạo ra dàn ý, rồi tự động thiết kế slide tương ứng.</p>
+        <p class="mb-4">Gamma AI không đơn thuần là một công cụ tạo slide – nó là một người trợ lý sáng tạo thực sự.</p>
+        <p class="mb-4">Bạn không còn phải lo nghĩ cách trình bày, chọn bố cục, hay chỉnh từng dòng chữ. Thay vào đó, bạn chỉ cần tập trung vào thông điệp muốn truyền tải.</p>
+        <p class="mb-4">Trong vài phút, bạn có thể có một bài thuyết trình chuyên nghiệp, trực quan, sẵn sàng để gây ấn tượng.</p>
+        <p class="mb-4">Nếu bạn thường xuyên phải làm slide, hãy thử Gamma một lần – bạn sẽ bất ngờ vì hiệu quả mà nó mang lại.</p>
+    </section>
+
+    <div class="text-center">
+        <a href="https://gamma.app/signup?r=9w76ozpkdhlhi34" target="_blank" class="cta-button">Truy cập Gamma AI</a>
+    </div>
+</main>
+
+<script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+</script>
+
+</body>
+</html>

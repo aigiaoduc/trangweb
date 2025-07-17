@@ -1,0 +1,104 @@
+<style>
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem 2rem;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.5);
+      transition: top 0.3s;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #2f73ff;
+    }
+    .logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .nav-links { display: flex; gap: 2rem; font-weight: 600; }
+    .nav-links a { font-size: 1rem; color: #fff; text-decoration: none; transition: color 0.3s; }
+    .nav-links a:hover { color: #2f73ff; }
+    .cta {
+      padding: 0.6rem 1.4rem;
+      background: #2f73ff;
+      border-radius: 999px;
+      font-weight: 600;
+      color: #fff;
+      transition: background 0.3s;
+      text-decoration: none;
+    }
+    .cta:hover { background: #245ad1; }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 0.3rem;
+    }
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      border-radius: 5px;
+      transition: all 0.3s ease-in-out;
+    }
+    .menu-toggle.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar { padding: 1rem; }
+      .nav-links { display: none; flex-direction: column; width: 100%; background: rgba(0,0,0,0.8); position: absolute; top: 60px; left: 0; padding: 1rem; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 0.5rem 0; text-align: center; }
+      .cta { display: none; }
+      .menu-toggle { display: flex; }
+    }
+</style>
+<nav class="navbar">
+    <div class="logo">
+      <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
+      <span class="logo-text">Quân H</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="/index.html">Trang chủ</a>
+      <a href="/pages/baiviet.html">Bài viết</a>
+      <a href="/pages/congcu.html">Công cụ AI</a>
+      <a href="/pages/video.html">Video</a>
+      <a href="/pages/trochoi.html">Trò chơi</a>
+      <a href="/pages/thinghiemao.html">Thí nghiệm ảo</a>
+      <a href="/pages/khoahoconline.html">Khóa học</a>
+    </div>
+    <a href="/pages/lienhe.html" class="cta">Liên hệ</a>
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      menuToggle.classList.toggle('open');
+    });
+</script>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học Miễn Phí “Phổ Cập AI” – Nhận Chứng Chỉ Uy Tín Từ Trung Ương Đoàn</title>
+    <meta name="description" content="Khóa học Phổ cập AI miễn phí từ Trung ương Đoàn giúp mọi người tiếp cận và ứng dụng AI dễ dàng, nhận chứng chỉ uy tín.">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Học Miễn Phí “Phổ Cập AI” – Nhận Chứng Chỉ Uy Tín Từ Trung Ương Đoàn">
+    <meta property="og:description" content="Khóa học Phổ cập AI miễn phí từ Trung ương Đoàn giúp mọi người tiếp cận và ứng dụng AI dễ dàng, nhận chứng chỉ uy tín.">
+    <meta property="og:image" content="https://anonyviet.com/wp-content/uploads/2025/06/pho-cap-ai-4.jpg">
+    <meta property="og:url" content="[URL chuẩn của trang]"> <!-- Cần thay thế bằng URL thực tế của trang này -->
+    <meta property="og:type" content="article">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: move-up-left 10s infinite alternate;
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: move-down-right 10s infinite alternate;
+        }
+        @keyframes move-up-left {
+            from { transform: translate(0, 0); }
+            to { transform: translate(100px, 100px); }
+        }
+        @keyframes move-down-right {
+            from { transform: translate(0, 0); }
+            to { transform: translate(-100px, -100px); }
+        }
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
+        }
+        .step-card {
+            font-family: 'Quicksand', sans-serif;
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08);
+            padding: 1.5rem;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .step-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        .step-number {
+            background-color: #667eea;
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        ul {
+            list-style: none; /* Loại bỏ dấu chấm mặc định */
+            padding: 0;
+        }
+        ul li::before {
+            content: none; /* Đảm bảo không có dấu chấm đầu dòng */
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #4CAF50; /* Màu xanh lá cây */
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .cta-button:hover {
+            background-color: #45a049; /* Màu xanh lá cây đậm hơn khi hover */
+            transform: translateY(-2px);
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            transition: top 0.3s;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            color: white;
+        }
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .logo-img {
+            height: 40px;
+            margin-right: 0.5rem;
+        }
+        .navbar .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        .navbar .nav-links a:hover {
+            color: #a0aec0;
+        }
+        .navbar .cta {
+            background-color: #4CAF50;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .navbar .cta:hover {
+            background-color: #45a049;
+        }
+        .navbar .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .navbar .menu-toggle span {
+            background: white;
+            height: 3px;
+            width: 25px;
+            margin: 4px 0;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: rgba(0, 0, 0, 0.8);
+                padding: 1rem 0;
+            }
+            .navbar .nav-links.active {
+                display: flex;
+            }
+            .navbar .nav-links a {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+            .navbar .cta {
+                display: none; /* Hide CTA button on mobile */
+            }
+            .navbar .menu-toggle {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 100; transition: top 0.3s; background: rgba(0, 0, 0, 0.5);">
+        <div class="logo">
+          <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
+          <span class="logo-text">Quân H</span>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <a href="../index.html">Trang chủ</a>
+          <a href="../baiviet.html">Bài viết</a>
+          <a href="../congcu.html">Công cụ</a>
+          <a href="../video.html">Video</a>
+          <a href="../lienhe.html">Liên hệ</a>
+        </div>
+        <a href="../lienhe.html" class="cta">Liên hệ</a>
+        <div class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+
+    <header class="hero-section text-center">
+        <div class="container mx-auto px-4 relative z-10">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 leading-tight">🎓 Học Miễn Phí “Phổ Cập AI”</h1>
+            <p class="text-xl md:text-2xl font-light">Nhận Chứng Chỉ Uy Tín Từ Trung Ương Đoàn</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12 mt-16">
+        <section class="mb-12">
+            <div class="card">
+                <h2 class="text-3xl font-bold mb-6 text-center text-purple-700">🌟 AI không còn là điều xa vời</h2>
+                <p class="text-lg text-gray-700 mb-4">
+                    Trong kỷ nguyên 4.0, AI đã len lỏi vào mọi lĩnh vực, nhưng không phải ai cũng dễ tiếp cận vì rào cản ngôn ngữ, kiến thức và chi phí. Khóa học Phổ cập AI của Trung ương Đoàn là một bước đột phá để giúp tất cả mọi người – từ học sinh, sinh viên đến người đi làm – đều có cơ hội học và ứng dụng AI một cách dễ dàng.
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <div class="card">
+                <h2 class="text-3xl font-bold mb-6 text-center text-green-700">✅ Vì sao nên tham gia “Phổ cập AI”?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="step-card text-center">
+                        <h3 class="text-xl font-semibold mb-3 text-blue-600">Hoàn toàn bằng tiếng Việt</h3>
+                        <p class="text-gray-700">Các khái niệm AI phức tạp được giải thích bằng ngôn ngữ dễ hiểu, gần gũi với thực tế, không phải dùng tiếng Anh khó nhằn.</p>
+                    </div>
+                    <div class="step-card text-center">
+                        <h3 class="text-xl font-semibold mb-3 text-blue-600">Từ lý thuyết đến ứng dụng</h3>
+                        <p class="text-gray-700">Khóa học thiết kế bài bản – từ nền tảng AI đến các ứng dụng thực chiến – giúp bạn nắm vững và áp dụng nhanh.</p>
+                    </div>
+                    <div class="step-card text-center">
+                        <h3 class="text-xl font-semibold mb-3 text-blue-600">Học – làm – được chứng nhận</h3>
+                        <p class="text-gray-700">Sau khi hoàn thành trắc nghiệm + bài thực hành, bạn sẽ nhận “Chứng chỉ Kỹ năng ứng dụng AI” do Trung ương Đoàn cấp, rõ ràng và chuyên nghiệp.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <div class="card">
+                <h2 class="text-3xl font-bold mb-6 text-center text-orange-700">Quyền lợi đặc biệt:</h2>
+                <ul class="text-lg text-gray-700 space-y-2">
+                    <li>Miễn phí 100%, học tại nhà.</li>
+                    <li>Trải nghiệm các công cụ AI trả phí dưới bản dùng thử.</li>
+                    <li>Hồ sơ năng lực thêm phần nổi bật nhờ chứng chỉ.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <div class="card">
+                <h2 class="text-3xl font-bold mb-6 text-center text-red-700">🛠 Ai là người nên tham gia?</h2>
+                <ul class="text-lg text-gray-700 space-y-2">
+                    <li>Học sinh, sinh viên muốn bổ sung kỹ năng mới</li>
+                    <li>Người đi làm tìm cách ứng dụng AI vào công việc</li>
+                    <li>Giáo viên – nhân viên hành chính – marketer – creator...</li>
+                    <li>Bất kỳ ai muốn tiếp cận AI một cách bài bản, miễn phí, dễ hiểu</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <div class="card">
+                <h2 class="text-3xl font-bold mb-6 text-center text-indigo-700">Hướng dẫn tham gia chương trình Phổ cập AI</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="step-card text-center">
+                        <div class="step-number mx-auto">1</div>
+                        <h3 class="text-xl font-semibold mb-3 text-blue-600">Bước 1: Truy cập và Đăng ký</h3>
+                        <p class="text-gray-700">Truy cập trang web chính thức của chương trình tại địa chỉ: <a href="https://phocap.ai/vi" target="_blank" class="text-blue-500 hover:underline">https://phocap.ai/vi</a> và tiến hành đăng ký hoặc đăng nhập tài khoản.</p>
+                    </div>
+                    <div class="step-card text-center">
+                        <div class="step-number mx-auto">2</div>
+                        <h3 class="text-xl font-semibold mb-3 text-blue-600">Bước 2: Bắt đầu học</h3>
+                        <p class="text-gray-700">Nhấn vào nút “Bắt đầu học ngay”. Bạn sẽ lần lượt đi qua 4 phần học với 12 bài giảng và 7 video trực quan, sinh động.</p>
+                        <img src="https://anonyviet.com/wp-content/uploads/2025/06/pho-cap-ai-4.jpg" alt="Bắt đầu học AI" class="mt-4 rounded-lg shadow-md mx-auto max-w-full h-auto">
+                    </div>
+                    <div class="step-card text-center">
+                        <div class="step-number mx-auto">3</div>
+                        <h3 class="text-xl font-semibold mb-3 text-blue-600">Bước 3: Hoàn thành bài tập</h3>
+                        <p class="text-gray-700">Sau khi học xong, hãy hoàn thành 15 câu hỏi trắc nghiệm để củng cố kiến thức và nộp bài tập thực hành cuối khóa theo hướng dẫn.</p>
+                        <img src="https://anonyviet.com/wp-content/uploads/2025/06/pho-cap-ai-5.jpg" alt="Hoàn thành bài tập AI" class="mt-4 rounded-lg shadow-md mx-auto max-w-full h-auto">
+                    </div>
+                    <div class="step-card text-center">
+                        <div class="step-number mx-auto">4</div>
+                        <h3 class="text-xl font-semibold mb-3 text-blue-600">Bước 4: Nhận chứng chỉ</h3>
+                        <p class="text-gray-700">Khi đã hoàn thành tất cả yêu cầu, bạn sẽ nhận được chứng chỉ online và có thể tải về ngay lập tức.</p>
+                        <img src="https://anonyviet.com/wp-content/uploads/2025/06/pho-cap-ai-6.jpg" alt="Nhận chứng chỉ AI" class="mt-4 rounded-lg shadow-md mx-auto max-w-full h-auto">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="text-center mb-12">
+            <div class="card">
+                <h2 class="text-3xl font-bold mb-6 text-center text-purple-700">🎯 Kết luận</h2>
+                <p class="text-lg text-gray-700 mb-8">
+                    Khóa “Phổ cập AI” là cơ hội không thể bỏ lỡ để làm quen và ứng dụng AI một cách thiết thực, nhanh chóng – miễn phí và bằng tiếng Việt. Sau khi hoàn thành, bạn sẽ có chứng chỉ đáng giá trong tay, sẵn sàng cho nhiều cơ hội mới trong tương lai.
+                </p>
+                <a href="https://phocap.ai/vi" target="_blank" class="cta-button">Học ngay tại đây</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center p-6 mt-12">
+        <p>&copy; 2025 Quân H. Ứng dụng AI và Giáo dục</p>
+    </footer>
+
+    <script>
+        // JavaScript cho responsive menu
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // JavaScript cho sticky navbar
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('.navbar');
+
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                // Cuộn xuống
+                navbar.style.top = '-80px'; // Ẩn navbar
+            } else {
+                // Cuộn lên
+                navbar.style.top = '0'; // Hiện navbar
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Ứng Dụng: Biến Suy Nghĩ "Bâng Quơ" Thành Status "Nhiều Người Thích"?</title>
+    <meta property="og:title" content="Prompt Ứng Dụng: Biến Suy Nghĩ 'Bâng Quơ' Thành Status 'Nhiều Người Thích'?" />
+    <meta property="og:description" content="Khám phá cách AI có thể giúp bạn biến những suy nghĩ đời thường thành những status/caption thu hút, mang đậm phong cách cá nhân." />
+    <meta property="og:image" content="https://cdn-media.sforum.vn/storage/app/media/chatgpt-prompt-thumbnail.jpeg" />
+    <meta property="og:url" content="https://aigiaoduc.github.io/baiviet/baiviet12.html" />
+    <meta property="og:type" content="article" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float1 10s infinite ease-in-out;
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -70px;
+            right: -70px;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            animation: float2 12s infinite ease-in-out;
+        }
+        @keyframes float1 {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(20px, 30px) scale(1.1); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        @keyframes float2 {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-30px, -20px) scale(1.05); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+        .hover-effect {
+            transition: all 0.3s ease;
+        }
+        .hover-effect:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        ul {
+            list-style: none; /* Loại bỏ dấu chấm đầu dòng */
+            padding: 0;
+        }
+        ul li::before {
+            content: none; /* Đảm bảo không có dấu chấm */
+        }
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.5);
+            transition: top 0.3s;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #2f73ff;
+        }
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .nav-links { display: flex; gap: 2rem; font-weight: 600; }
+        .nav-links a { font-size: 1rem; color: #fff; text-decoration: none; transition: color 0.3s; }
+        .nav-links a:hover { color: #2f73ff; }
+        .cta {
+            padding: 0.6rem 1.4rem;
+            background: #2f73ff;
+            border-radius: 999px;
+            font-weight: 600;
+            color: #fff;
+            transition: background 0.3s;
+        }
+        .cta:hover { background: #245ad1; }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 0.3rem;
+        }
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+        .menu-toggle.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .menu-toggle.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem; }
+            .nav-links { display: none; flex-direction: column; width: 100%; background: rgba(0,0,0,0.8); position: absolute; top: 60px; left: 0; padding: 1rem; }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: 0.5rem 0; text-align: center; }
+            .cta { display: none; }
+            .menu-toggle { display: flex; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+          <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
+          <span class="logo-text">Quân H</span>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <a href="../index.html">Trang chủ</a>
+          <a href="../baiviet.html">Bài viết</a>
+          <a href="../congcu.html">Công cụ</a>
+          <a href="../video.html">Video</a>
+          <a href="../trochoi.html">Trò chơi</a>
+          <a href="../thinghiemao.html">Thí nghiệm ảo</a>
+          <a href="../khoahoconline.html">Khóa học</a>
+          <a href="../lienhe.html">Liên hệ</a>
+        </div>
+        <a href="../lienhe.html" class="cta">Liên hệ</a>
+        <div class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+          navLinks.classList.toggle('open');
+          menuToggle.classList.toggle('open');
+        });
+    </script>
+
+    <div class="hero-section text-center">
+        <div class="container mx-auto px-4 py-20">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 leading-tight animate-fade-in-up">
+                Prompt Ứng Dụng: Biến Suy Nghĩ "Bâng Quơ" Thành Status "Nhiều Người Thích"?
+            </h1>
+            <p class="text-xl md:text-2xl font-light mb-8 animate-fade-in-up delay-200">
+                Khám phá cách AI có thể giúp bạn biến những suy nghĩ đời thường thành những status/caption thu hút, mang đậm phong cách cá nhân.
+            </p>
+            <img src="https://cdn-media.sforum.vn/storage/app/media/chatgpt-prompt-thumbnail.jpeg" alt="Hero Image" class="mx-auto rounded-lg shadow-xl w-full max-w-2xl animate-zoom-in">
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-12">
+        <section class="mb-12">
+            <div class="bg-white p-8 rounded-xl shadow-lg hover-effect">
+                <p class="text-lg leading-relaxed mb-6">
+                    Trong cuộc sống hàng ngày, chúng ta thường có những suy nghĩ thoáng qua, những quan sát nhỏ, hay những cảm xúc bâng quơ. Đôi khi, chỉ một câu status ngắn gọn, chân thật về những điều này lại có sức lan tỏa đáng ngờ, nhận được vô số đồng cảm và tương tác trên mạng xã hội.
+                </p>
+                <p class="text-lg leading-relaxed mb-6 font-quicksand">
+                    🤔Nhưng làm thế nào để diễn đạt những suy nghĩ "rất đời" đó thành câu chữ "chạm như cách Nguyễn Ngọc Tư vẫn làm"? Làm sao để có được cái giọng điệu vừa gần gũi, vừa thú vị, mang màu sắc cá nhân của bạn?
+                </p>
+                <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1751420668/0be95bd2-d031-48ae-b3a2-5e50b054ca51.png" alt="Suy nghĩ bâng quơ" class="w-full rounded-lg shadow-md mb-6">
+                <p class="text-lg leading-relaxed mb-6">
+                    Việc này không phải lúc nào cũng dễ dàng. Tuy nhiên, AI có một khả năng đặc biệt có thể giúp bạn: nó có thể học cách "viết" theo phong cách bạn chỉ định, chỉ bằng cách cho nó xem VÍ DỤ.
+                </p>
+                <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500 text-blue-800 mb-6">
+                    <p class="font-semibold text-xl mb-2">Chào Các Bạn, mình là Hưng đến từ AI Làm Biếng!</p>
+                    <p class="text-lg">Bên cạnh ebook Prompt Mastery thì nay Hưng đã có thêm PromptLib là 1 thư viện Prompt và nhiều tính năng thú vị. Đặc biệt các bạn sở hữu ebook Prompt Mastery trong thời gian này sẽ nhận 🎁 3 tháng Premium PromptLib nhé.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12 card">
+            <div class="banner-container" style="text-align: center; margin: 20px 0;">
+                <a href="https://aigiaoduc.io.vn/pages/khoahoconline.html" target="_blank">
+                    <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1752286655/Banner_ADS_obhpcy.png" 
+                         alt="Banner Quảng Cáo" 
+                         style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block;">
+                </a>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-4xl font-bold mb-8 text-center">💡 Few-Shot: "Học Thầy Không Tày Học Bạn"</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card p-8 hover-effect">
+                    <p class="text-lg leading-relaxed mb-4">
+                        Trong ebook Prompt Mastery, bạn sẽ tìm hiểu về kỹ thuật Few-Shot Prompting (ở Ngày 11 và cách áp dụng hiệu quả ở Ngày 12). Đây là một trong những cách hiệu quả nhất để định hướng phong cách và cấu trúc output của AI. Thay vì cố gắng mô tả bằng lời một phong cách viết cụ thể (điều gần như bất khả thi), bạn chỉ cần cung cấp cho AI một vài cặp ví dụ về (Suy nghĩ/Quan sát thô -> Đoạn status/caption mong muốn).
+                    </p>
+                    <img src="https://cdn.bap-software.net/2024/08/19160659/Prompt-danh-cho-Dev.webp" alt="Few-Shot Prompting" class="w-full rounded-lg shadow-md mb-4">
+                </div>
+                <div class="card p-8 hover-effect">
+                    <ul class="space-y-4 text-lg leading-relaxed">
+                        <li>
+                            <span class="font-bold text-green-600">✅</span> AI sẽ phân tích các ví dụ này để tìm ra "công thức" về giọng điệu, cách dùng từ, cấu trúc câu, cách thêm emoji hay hashtag...
+                        </li>
+                        <li>
+                            <span class="font-bold text-green-600">✅</span> Sau đó, nó sẽ áp dụng "công thức" đó cho suy nghĩ bâng quơ mới nhất của bạn.
+                        </li>
+                    </ul>
+                    <p class="text-lg leading-relaxed mt-4">
+                        Hôm nay, chúng ta sẽ áp dụng Few-Shot để biến những ý tưởng thô của bạn thành những đoạn status/caption ngắn, gần gũi, có tiềm năng "chạm" đến nhiều người.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-4xl font-bold mb-8 text-center">👉 Prompt "Viết Theo Gu": Dạy AI Tạo Status Bằng Ví Dụ Cá Nhân</h2>
+            <div class="card p-8 hover-effect">
+                <p class="text-lg leading-relaxed mb-6">
+                    Đây là cấu trúc Prompt Few-Shot. Bạn sẽ cung cấp 2-3 cặp ví dụ (Input là suy nghĩ/quan sát đơn giản của bạn, Output là phiên bản status/caption đã được "cá nhân hóa" theo phong cách bạn muốn). Sau đó, đưa suy nghĩ mới nhất của bạn vào phần Input cuối cùng.
+                </p>
+                <h3 class="text-2xl font-semibold mb-4 text-purple-700">Code Prompt</h3>
+                <div class="bg-gray-100 p-6 rounded-lg font-mono text-sm overflow-x-auto mb-6">
+                    <pre><code>Bạn là một người viết nội dung mạng xã hội tinh tế, có khả năng biến những suy nghĩ/quan sát đời thường thành các đoạn status/caption ngắn gọn, gần gũi, chạm đến cảm xúc người đọc, mang phong cách của các ví dụ dưới đây.
+Hãy phân tích các cặp ví dụ dưới đây để hiểu phong cách tôi mong muốn, sau đó áp dụng phong cách đó để xử lý Input cuối cùng của tôi.
+
+Ví dụ:
+
+Input Mẫu: Hôm nay trời mưa nhỏ.
+Output Mẫu: Mưa tí tách ngoài cửa. Ngồi co ro với ly cà phê nóng, tự dưng thấy lòng dịu lại. Đôi khi bình yên chỉ đơn giản vậy thôi. ☕️🌧️ #binhyen #mua #caphe
+
+Input Mẫu: Sáng nay dậy muộn một chút.
+Output Mẫu: Ai cũng nói dậy sớm mới thành công. Mình thấy, ngủ đủ giấc và thức dậy với tâm trạng tốt cũng là một thành công rồi nha. Sáng nay của bạn thế nào? 😊 #morningmood #cauchuyenbuoisang #songchambatcan
+
+Input Mẫu: Đang nghe một bài hát cũ, nhớ về kỷ niệm.
+Output Mẫu: Chỉ cần giai điệu cũ vang lên, cả bầu trời ký ức ùa về. Có những thứ, thời gian không thể xóa nhòa, chỉ làm cho ta thêm trân trọng. ❤️ #kyuc #amnhac #camxuc
+
+Input Mẫu: [DÁN SUY NGHĨ / QUAN SÁT CỦA BẠN VÀO ĐÂY]
+Output Mẫu:</code></pre>
+                </div>
+                <p class="text-sm text-gray-600 mb-6">
+                    Lưu ý: Các ví dụ "Output Mẫu" ở trên đang mô phỏng một phong cách status/caption ngắn, có cảm xúc, kết nối với trải nghiệm chung và sử dụng hashtag/emoji.
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-4xl font-bold mb-8 text-center">👉Tại Sao Nó Hiệu Quả & Làm Sao Để Có Phong Cách Riêng Của Bạn?</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card p-8 hover-effect">
+                    <p class="text-lg leading-relaxed mb-4">
+                        AI phân tích các ví dụ bạn cung cấp để nhận diện các yếu tố lặp lại về: độ dài câu, cách dùng từ ngữ mang tính cảm xúc/gần gũi, cấu trúc bài viết ngắn (mở đầu gợi cảm xúc/tình huống -> diễn đạt suy nghĩ -> kết nối/hashtag/emoji), cách sử dụng emoji và hashtag...
+                    </p>
+                    <p class="text-lg leading-relaxed mb-4">
+                        Nó học được "gu" thẩm mỹ ngôn ngữ của bạn (hoặc của phong cách bạn chọn).
+                    </p>
+                </div>
+                <div class="card p-8 hover-effect">
+                    <p class="text-lg leading-relaxed mb-4">
+                        Để tạo phong cách CỦA BẠN: Hãy thay thế 3 cặp ví dụ mẫu trong prompt bằng 3 cặp ví dụ từ chính những status/caption mà bạn yêu thích, hoặc tự viết 3 cặp mẫu theo đúng giọng điệu, cấu trúc mà bạn muốn AI bắt chước. AI sẽ học từ CHÍNH những "bài học" bạn đưa ra. Càng nhiều ví dụ chất lượng và nhất quán, AI càng bắt chước tốt và cho ra output "rất bạn".
+                    </p>
+                    <p class="text-lg leading-relaxed">
+                        Đây là một tính năng rất hữu ích để bạn duy trì một phong cách viết nhất quán, rất cá nhân trên mạng xã hội, hoặc để nhanh chóng tạo ra nhiều biến thể nội dung theo "gu" của bạn. Kết quả thường rất bất ngờ và có tiềm năng "chạm" đến người đọc, khiến họ muốn tương tác, lưu lại hoặc chia sẻ.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center p-6 mt-12">
+        <p>&copy; 2025 Bản quyền thuộc về Quân H </p>
+    </footer>
+
+    <style>
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fade-in-up 0.6s ease-out forwards;
+        }
+        .animate-fade-in-up.delay-200 {
+            animation-delay: 0.2s;
+        }
+        @keyframes zoom-in {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .animate-zoom-in {
+            animation: zoom-in 0.6s ease-out forwards;
+        }
+    </style>
+</body>
+</html>

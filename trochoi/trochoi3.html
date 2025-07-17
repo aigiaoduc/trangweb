@@ -1,0 +1,1039 @@
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghép Hình Động Vật</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&family=Nunito:wght@400;700;900&display=swap');
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 50%, #d4fc79 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-attachment: fixed;
+            /* padding-top: 80px; */ /* Bỏ padding-top để menu không đè lên */
+        }
+        
+        .game-title {
+            font-family: 'Baloo 2', cursive;
+            text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2), 
+                         5px 5px 10px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(to right, #ff8a00, #e52e71, #7b68ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: title-glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes title-glow {
+            from {
+                filter: drop-shadow(0 0 5px rgba(255, 138, 0, 0.7));
+            }
+            to {
+                filter: drop-shadow(0 0 15px rgba(123, 104, 238, 0.9));
+            }
+        }
+        
+        .game-container {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(31, 38, 135, 0.2);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .puzzle-board {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 4px dashed #7e57c2;
+            border-radius: 15px;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(126, 87, 194, 0.3);
+        }
+        
+        .pieces-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 4px solid #7e57c2;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(126, 87, 194, 0.3);
+        }
+        
+        .puzzle-target {
+            position: absolute;
+            background-color: rgba(126, 87, 194, 0.1);
+            border: 2px dashed #7e57c2;
+            border-radius: 8px;
+        }
+        
+        .puzzle-piece {
+            position: absolute;
+            cursor: grab;
+            transition: transform 0.1s;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: white;
+        }
+        
+        .puzzle-piece:active {
+            cursor: grabbing;
+            z-index: 1000;
+            transform: scale(1.05);
+        }
+        
+        .puzzle-piece.correct {
+            border: 3px solid #4CAF50;
+            box-shadow: 0 0 15px #4CAF50;
+        }
+        
+        .difficulty-btn {
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .difficulty-btn:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: inherit;
+            filter: blur(10px);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s;
+        }
+        
+        .difficulty-btn.active {
+            transform: scale(1.05);
+        }
+        
+        .difficulty-btn.active:before {
+            opacity: 0.7;
+        }
+        
+        .animal-btn {
+            transition: all 0.3s;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .animal-btn:hover {
+            transform: translateY(-2px);
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .animal-btn.active {
+            transform: scale(1.05);
+            background-color: rgba(126, 87, 194, 0.2);
+            box-shadow: 0 0 10px rgba(126, 87, 194, 0.5);
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            border-radius: 50%;
+            animation: fall 3s ease-in infinite;
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .btn-3d {
+            position: relative;
+            transition: all 0.2s;
+            transform-style: preserve-3d;
+        }
+        
+        .btn-3d:active {
+            transform: translateY(4px);
+        }
+        
+        .btn-3d::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            left: 0;
+            top: 4px;
+            border-radius: inherit;
+            z-index: -1;
+        }
+        
+        .animal-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .puzzle-piece-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, #7e57c2, #3f51b5);
+            border-radius: 3px;
+        }
+        
+        .hint-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 5;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+        
+        .hint-image.show {
+            opacity: 0.4;
+        }
+        
+        .animal-list {
+            max-height: 300px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #7e57c2 rgba(255, 255, 255, 0.5);
+        }
+        
+        .animal-list::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .animal-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+        }
+        
+        .animal-list::-webkit-scrollbar-thumb {
+            background-color: #7e57c2;
+            border-radius: 10px;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .hint-btn {
+            animation: pulse 2s infinite;
+        }
+
+        /* CSS cho menu */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: relative; /* Đổi từ fixed sang relative */
+            background: rgba(0, 0, 0, 0.5); /* Giữ màu nền */
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #4CAF50; /* Màu xanh lá cây khi hover */
+        }
+
+        .cta {
+            background-color: #007bff; /* Màu xanh dương */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta:hover {
+            background-color: #0056b3; /* Màu xanh dương đậm hơn khi hover */
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            height: 3px;
+            width: 25px;
+            background-color: white;
+            margin-bottom: 5px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                position: absolute;
+                top: 70px; /* Adjust based on navbar height */
+                left: 0;
+                padding: 1rem 0;
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                margin: 10px 0;
+            }
+
+            .cta {
+                display: none; /* Hide CTA button on small screens */
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+        }
+    </style>
+</head>
+<body class="p-4">
+    <nav class="navbar">
+        <div class="logo">
+          <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
+          <span class="logo-text">Quân H</span>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <a href="../../index.html">Trang chủ</a>
+          <a href="../../baiviet.html">Bài viết</a>
+          <a href="../../congcu.html">Công cụ</a>
+          <a href="../../video.html">Video</a>
+          <a href="../../trochoi.html">Trò chơi</a>
+          <a href="../../lienhe.html">Liên hệ</a>
+        </div>
+        <a href="../../lienhe.html" class="cta">Liên hệ</a>
+        <div class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+    <div class="max-w-6xl mx-auto">
+        <header class="text-center mb-8">
+            <h1 class="game-title text-5xl md:text-6xl font-bold mb-3">🧩 Ghép Hình Động Vật 🧩</h1>
+            <p class="text-xl text-purple-900 font-semibold">Kéo các mảnh ghép từ khung phải sang khung trái để hoàn thành bức tranh!</p>
+        </header>
+        
+        <div class="flex flex-col md:flex-row gap-8 mb-8">
+            <div class="w-full md:w-1/4 game-container p-6">
+                <h2 class="text-2xl font-bold text-center text-purple-800 mb-6 section-title">Chọn độ khó</h2>
+                <div class="flex flex-col gap-4 mb-8">
+                    <button class="difficulty-btn btn-3d bg-gradient-to-r from-green-400 to-green-600 text-white py-3 px-4 rounded-lg text-xl font-bold active" data-size="2">
+                        Dễ (2x2)
+                    </button>
+                    <button class="difficulty-btn btn-3d bg-gradient-to-r from-yellow-400 to-yellow-600 text-white py-3 px-4 rounded-lg text-xl font-bold" data-size="3">
+                        Trung bình (3x3)
+                    </button>
+                    <button class="difficulty-btn btn-3d bg-gradient-to-r from-red-400 to-red-600 text-white py-3 px-4 rounded-lg text-xl font-bold" data-size="4">
+                        Khó (4x4)
+                    </button>
+                </div>
+                
+                <h2 class="text-2xl font-bold text-center text-purple-800 mb-6 section-title">Chọn động vật</h2>
+                <div class="animal-list mb-8">
+                    <ul class="space-y-2">
+                        <li>
+                            <button class="animal-btn w-full flex items-center p-3 rounded-lg active" data-animal="elephant">
+                                <div class="w-16 h-16 bg-white rounded-lg overflow-hidden flex items-center justify-center mr-4">
+                                    <img src="https://png.pngtree.com/png-vector/20240929/ourmid/pngtree-a-new-picture-of-cartoon-elephant-png-image_13876353.png" alt="Voi" class="h-14 object-contain">
+                                </div>
+                                <span class="text-lg font-bold text-purple-900">Voi</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="animal-btn w-full flex items-center p-3 rounded-lg" data-animal="tiger">
+                                <div class="w-16 h-16 bg-white rounded-lg overflow-hidden flex items-center justify-center mr-4">
+                                    <img src="https://png.pngtree.com/png-clipart/20241110/original/pngtree-cute-cartoon-tiger-clipart-illustration-png-image_16853436.png" alt="Hổ" class="h-14 object-contain">
+                                </div>
+                                <span class="text-lg font-bold text-purple-900">Hổ</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="animal-btn w-full flex items-center p-3 rounded-lg" data-animal="chicken">
+                                <div class="w-16 h-16 bg-white rounded-lg overflow-hidden flex items-center justify-center mr-4">
+                                    <img src="https://png.pngtree.com/png-clipart/20190618/original/pngtree-cute-chick-cartoon-chick-illustration-hand-painted-chick-red-tail-png-image_3902910.jpg" alt="Gà" class="h-14 object-contain">
+                                </div>
+                                <span class="text-lg font-bold text-purple-900">Gà</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="animal-btn w-full flex items-center p-3 rounded-lg" data-animal="turtle">
+                                <div class="w-16 h-16 bg-white rounded-lg overflow-hidden flex items-center justify-center mr-4">
+                                    <img src="https://png.pngtree.com/png-vector/20240515/ourlarge/pngtree-cute-cartoon-turtle-png-image_12460812.png" alt="Rùa" class="h-14 object-contain">
+                                </div>
+                                <span class="text-lg font-bold text-purple-900">Rùa</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="animal-btn w-full flex items-center p-3 rounded-lg" data-animal="dog">
+                                <div class="w-16 h-16 bg-white rounded-lg overflow-hidden flex items-center justify-center mr-4">
+                                    <img src="https://png.pngtree.com/png-clipart/20230413/original/pngtree-puppy-cartoon-illustration-png-image_9049645.png" alt="Chó" class="h-14 object-contain">
+                                </div>
+                                <span class="text-lg font-bold text-purple-900">Chó</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="animal-btn w-full flex items-center p-3 rounded-lg" data-animal="cat">
+                                <div class="w-16 h-16 bg-white rounded-lg overflow-hidden flex items-center justify-center mr-4">
+                                    <img src="https://png.pngtree.com/png-vector/20240602/ourlarge/pngtree-cartoon-cat-png-image_12609740.png" alt="Mèo" class="h-14 object-contain">
+                                </div>
+                                <span class="text-lg font-bold text-purple-900">Mèo</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="animal-btn w-full flex items-center p-3 rounded-lg" data-animal="pig">
+                                <div class="w-16 h-16 bg-white rounded-lg overflow-hidden flex items-center justify-center mr-4">
+                                    <img src="https://png.pngtree.com/png-vector/20240317/ourlarge/pngtree-cartoon-pink-pig-illustration-png-image_12000950.png" alt="Heo" class="h-14 object-contain">
+                                </div>
+                                <span class="text-lg font-bold text-purple-900">Heo</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="animal-btn w-full flex items-center p-3 rounded-lg" data-animal="shark">
+                                <div class="w-16 h-16 bg-white rounded-lg overflow-hidden flex items-center justify-center mr-4">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHP5136w9aWUjAfmi8M6QRw6gOt4-9dfWwSQ&s" alt="Cá mập" class="h-14 object-contain">
+                                </div>
+                                <span class="text-lg font-bold text-purple-900">Cá mập</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="animal-btn w-full flex items-center p-3 rounded-lg" data-animal="dolphin">
+                                <div class="w-16 h-16 bg-white rounded-lg overflow-hidden flex items-center justify-center mr-4">
+                                    <img src="https://png.pngtree.com/png-clipart/20231109/original/pngtree-dolphin-cartoon-animal-png-image_13522000.png" alt="Cá heo" class="h-14 object-contain">
+                                </div>
+                                <span class="text-lg font-bold text-purple-900">Cá heo</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="animal-btn w-full flex items-center p-3 rounded-lg" data-animal="mouse">
+                                <div class="w-16 h-16 bg-white rounded-lg overflow-hidden flex items-center justify-center mr-4">
+                                    <img src="https://img.freepik.com/premium-vector/illustration-cute-cartoon-grey-mouse_119631-365.jpg" alt="Chuột" class="h-14 object-contain">
+                                </div>
+                                <span class="text-lg font-bold text-purple-900">Chuột</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="animal-btn w-full flex items-center p-3 rounded-lg" data-animal="bear">
+                                <div class="w-16 h-16 bg-white rounded-lg overflow-hidden flex items-center justify-center mr-4">
+                                    <img src="https://png.pngtree.com/png-vector/20240919/ourlarge/pngtree-cartoon-bear-png-image_13876075.png" alt="Gấu" class="h-14 object-contain">
+                                </div>
+                                <span class="text-lg font-bold text-purple-900">Gấu</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="mt-4">
+                    <button id="start-game" class="btn-3d w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-4 px-6 rounded-lg text-2xl font-bold">
+                        Bắt đầu chơi!
+                    </button>
+                </div>
+            </div>
+            
+            <div class="w-full md:w-3/4">
+                <div class="game-container p-6">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="w-full md:w-1/2">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-xl font-bold text-purple-800 section-title">Khung ghép hình</h3>
+                                <button id="hint-button" class="hint-btn bg-gradient-to-r from-yellow-400 to-yellow-600 text-white py-2 px-4 rounded-lg font-bold flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                    </svg>
+                                    Gợi ý
+                                </button>
+                            </div>
+                            <div id="puzzle-board" class="puzzle-board w-full aspect-square">
+                                <div id="hint-image" class="hint-image"></div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/2">
+                            <h3 class="text-xl font-bold text-center text-purple-800 mb-4 section-title">Các mảnh ghép</h3>
+                            <div id="pieces-container" class="pieces-container w-full aspect-square"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="completion-message" class="hidden text-center p-8 bg-white bg-opacity-90 rounded-xl shadow-lg max-w-lg mx-auto mt-6 game-container">
+                    <h2 class="text-3xl font-bold text-purple-800 mb-4">🎉 Chúc mừng! 🎉</h2>
+                    <p class="text-xl text-purple-700 mb-4">Bạn đã hoàn thành bức tranh!</p>
+                    
+                    <div class="mb-6 p-4 bg-white rounded-lg shadow-md">
+                        <img id="complete-image" src="" alt="Hình ảnh hoàn chỉnh" class="w-full h-auto rounded">
+                    </div>
+                    
+                    <button id="next-puzzle" class="btn-3d bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-3 px-8 rounded-lg text-xl font-bold">
+                        Chơi tiếp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="click-sound" preload="auto">
+        <source src="https://res.cloudinary.com/dejnvixvn/video/upload/v1743950559/Am_thanh_tieng_click_chuot-www_tiengdong_com_vg4uik.mp3" type="audio/mp3">
+    </audio>
+    <audio id="correct-sound" preload="auto">
+        <source src="https://res.cloudinary.com/dejnvixvn/video/upload/v1743917250/Dung_gy1gdl.mp3" type="audio/mp3">
+    </audio>
+    <audio id="complete-sound" preload="auto">
+        <source src="https://res.cloudinary.com/dejnvixvn/video/upload/v1743950336/Am_thanh_chuc_mung_chien_thang-www_tiengdong_com_tzitdy.mp3" type="audio/mp3">
+    </audio>
+    <audio id="hint-sound" preload="auto">
+        <source src="https://res.cloudinary.com/dejnvixvn/video/upload/v1743950559/Am_thanh_tieng_click_chuot-www_tiengdong_com_vg4uik.mp3" type="audio/mp3">
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Game variables
+            let currentSize = 2;
+            let currentAnimal = 'elephant';
+            let puzzlePieces = [];
+            let correctPieces = 0;
+            let totalPieces = 0;
+            let gameStarted = false;
+            
+            // Animal images
+            const animalImages = {
+                elephant: "https://png.pngtree.com/png-vector/20240929/ourmid/pngtree-a-new-picture-of-cartoon-elephant-png-image_13876353.png",
+                tiger: "https://png.pngtree.com/png-clipart/20241110/original/pngtree-cute-cartoon-tiger-clipart-illustration-png-image_16853436.png",
+                chicken: "https://png.pngtree.com/png-clipart/20190618/original/pngtree-cute-chick-cartoon-chick-illustration-hand-painted-chick-red-tail-png-image_3902910.jpg",
+                turtle: "https://png.pngtree.com/png-vector/20240515/ourlarge/pngtree-cute-cartoon-turtle-png-image_12460812.png",
+                dog: "https://png.pngtree.com/png-clipart/20230413/original/pngtree-puppy-cartoon-illustration-png-image_9049645.png",
+                cat: "https://png.pngtree.com/png-vector/20240602/ourlarge/pngtree-cartoon-cat-png-image_12609740.png",
+                pig: "https://png.pngtree.com/png-vector/20240317/ourlarge/pngtree-cartoon-pink-pig-illustration-png-image_12000950.png",
+                shark: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHP5136w9aWUjAfmi8M6QRw6gOt4-9dfWwSQ&s",
+                dolphin: "https://png.pngtree.com/png-clipart/20231109/original/pngtree-dolphin-cartoon-animal-png-image_13522000.png",
+                mouse: "https://png.pngtree.com/png-vector/20220616/ourmid/pngtree-cute-mouse-cartoon-rat-animal-png-image_5093621",
+                bear: "https://png.pngtree.com/png-vector/20240919/ourlarge/pngtree-cartoon-bear-png-image_13876075.png"
+            };
+            
+            // DOM elements
+            const puzzleBoard = document.getElementById('puzzle-board');
+            const piecesContainer = document.getElementById('pieces-container');
+            const completionMessage = document.getElementById('completion-message');
+            const nextPuzzleBtn = document.getElementById('next-puzzle');
+            const startGameBtn = document.getElementById('start-game');
+            const difficultyBtns = document.querySelectorAll('.difficulty-btn');
+            const animalBtns = document.querySelectorAll('.animal-btn');
+            const hintButton = document.getElementById('hint-button');
+            const hintImage = document.getElementById('hint-image');
+            const completeImage = document.getElementById('complete-image');
+            
+            // Audio elements
+            const clickSound = document.getElementById('click-sound');
+            const correctSound = document.getElementById('correct-sound');
+            const completeSound = document.getElementById('complete-sound');
+            const hintSound = document.getElementById('hint-sound');
+            
+            // Preload images
+            function preloadImages() {
+                Object.values(animalImages).forEach(src => {
+                    const img = new Image();
+                    img.src = src;
+                });
+            }
+            
+            preloadImages();
+            
+            // Initialize the game
+            function initGame() {
+                // Clear previous game
+                puzzleBoard.innerHTML = '';
+                piecesContainer.innerHTML = '';
+                completionMessage.classList.add('hidden');
+                correctPieces = 0;
+                
+                // Add hint image back (it was removed when clearing puzzleBoard)
+                puzzleBoard.appendChild(hintImage);
+                hintImage.style.backgroundImage = `url(${animalImages[currentAnimal]})`;
+                hintImage.classList.remove('show');
+                
+                // Calculate dimensions
+                const boardSize = puzzleBoard.offsetWidth;
+                const pieceSize = boardSize / currentSize;
+                totalPieces = currentSize * currentSize;
+                
+                // Create target positions on the board
+                for (let row = 0; row < currentSize; row++) {
+                    for (let col = 0; col < currentSize; col++) {
+                        const target = document.createElement('div');
+                        target.className = 'puzzle-target';
+                        target.style.width = pieceSize + 'px';
+                        target.style.height = pieceSize + 'px';
+                        target.style.left = (col * pieceSize) + 'px';
+                        target.style.top = (row * pieceSize) + 'px';
+                        target.dataset.row = row;
+                        target.dataset.col = col;
+                        puzzleBoard.appendChild(target);
+                    }
+                }
+                
+                // Create temporary image to get dimensions
+                const tempImg = new Image();
+                tempImg.onload = function() {
+                    createPuzzlePieces(tempImg);
+                };
+                tempImg.onerror = function() {
+                    console.error("Error loading image:", animalImages[currentAnimal]);
+                    // Fallback to create pieces without proper image dimensions
+                    createPuzzlePieces();
+                };
+                tempImg.src = animalImages[currentAnimal];
+            }
+            
+            function createPuzzlePieces(imageObj) {
+                // Create and shuffle pieces
+                const pieces = [];
+                for (let row = 0; row < currentSize; row++) {
+                    for (let col = 0; col < currentSize; col++) {
+                        pieces.push({ row, col });
+                    }
+                }
+                shuffleArray(pieces);
+                
+                // Create puzzle pieces in the pieces container
+                puzzlePieces = [];
+                const piecesContainerSize = piecesContainer.offsetWidth;
+                const piecesPerRow = Math.ceil(Math.sqrt(totalPieces));
+                const pieceMargin = 10; // Increased margin for better visibility
+                
+                // Calculate piece size to fit in container with margins
+                const pieceContainerSize = Math.floor((piecesContainerSize - ((piecesPerRow + 1) * pieceMargin)) / piecesPerRow);
+                
+                pieces.forEach((piece, index) => {
+                    const pieceElement = document.createElement('div');
+                    pieceElement.className = 'puzzle-piece';
+                    pieceElement.style.width = pieceContainerSize + 'px';
+                    pieceElement.style.height = pieceContainerSize + 'px';
+                    
+                    // Position in the pieces container
+                    const row = Math.floor(index / piecesPerRow);
+                    const col = index % piecesPerRow;
+                    const left = col * (pieceContainerSize + pieceMargin) + pieceMargin;
+                    const top = row * (pieceContainerSize + pieceMargin) + pieceMargin;
+                    
+                    pieceElement.style.left = left + 'px';
+                    pieceElement.style.top = top + 'px';
+                    pieceElement.dataset.originalLeft = left + 'px';
+                    pieceElement.dataset.originalTop = top + 'px';
+                    
+                    // Create the image for the piece
+                    const img = document.createElement('img');
+                    img.className = 'puzzle-piece-image';
+                    img.src = animalImages[currentAnimal];
+                    
+                    // Store the correct position
+                    pieceElement.dataset.correctRow = piece.row;
+                    pieceElement.dataset.correctCol = piece.col;
+                    
+                    // Apply proper cropping to show only the piece's portion of the image
+                    if (imageObj) {
+                        // Create a container for the image that will handle the cropping
+                        const imgContainer = document.createElement('div');
+                        imgContainer.style.width = '100%';
+                        imgContainer.style.height = '100%';
+                        imgContainer.style.overflow = 'hidden';
+                        imgContainer.style.position = 'relative';
+                        
+                        // Calculate the scale factor to fit the image properly
+                        const boardSize = puzzleBoard.offsetWidth;
+                        const scaleFactor = boardSize / Math.min(imageObj.width, imageObj.height);
+                        const scaledWidth = imageObj.width * scaleFactor;
+                        const scaledHeight = imageObj.height * scaleFactor;
+                        
+                        // Position the image to show only the correct piece
+                        img.style.position = 'absolute';
+                        img.style.width = scaledWidth + 'px';
+                        img.style.height = scaledHeight + 'px';
+                        img.style.objectFit = 'cover';
+                        img.style.left = -(piece.col * (scaledWidth / currentSize)) + 'px';
+                        img.style.top = -(piece.row * (scaledHeight / currentSize)) + 'px';
+                        img.style.maxWidth = 'none'; // Override any max-width constraints
+                        
+                        imgContainer.appendChild(img);
+                        pieceElement.appendChild(imgContainer);
+                    } else {
+                        // Fallback if image dimensions aren't available
+                        pieceElement.appendChild(img);
+                        pieceElement.style.backgroundColor = '#f0f0f0';
+                    }
+                    
+                    // Make the piece draggable
+                    makeDraggable(pieceElement);
+                    
+                    piecesContainer.appendChild(pieceElement);
+                    puzzlePieces.push(pieceElement);
+                });
+                
+                gameStarted = true;
+            }
+            
+            // Make an element draggable
+            function makeDraggable(element) {
+                let offsetX, offsetY, isDragging = false;
+                let startX, startY;
+                let originalParent, originalLeft, originalTop;
+                
+                element.addEventListener('mousedown', startDrag);
+                element.addEventListener('touchstart', startDrag, { passive: false });
+                
+                function startDrag(e) {
+                    e.preventDefault();
+                    if (element.classList.contains('correct')) return;
+                    
+                    clickSound.currentTime = 0;
+                    clickSound.play().catch(err => console.log('Audio play failed:', err));
+                    
+                    isDragging = true;
+                    originalParent = element.parentNode;
+                    originalLeft = element.style.left;
+                    originalTop = element.style.top;
+                    
+                    // Get cursor position
+                    const pageX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+                    const pageY = e.type.includes('mouse') ? e.pageY : e.touches[0].pageY;
+                    
+                    // Calculate offset
+                    const rect = element.getBoundingClientRect();
+                    offsetX = pageX - rect.left;
+                    offsetY = pageY - rect.top;
+                    startX = rect.left;
+                    startY = rect.top;
+                    
+                    // Move to body for absolute positioning during drag
+                    document.body.appendChild(element);
+                    element.style.position = 'absolute';
+                    element.style.left = startX + 'px';
+                    element.style.top = startY + 'px';
+                    element.style.zIndex = '1000';
+                    
+                    // Add event listeners for drag and end
+                    document.addEventListener('mousemove', drag);
+                    document.addEventListener('touchmove', drag, { passive: false });
+                    document.addEventListener('mouseup', endDrag);
+                    document.addEventListener('touchend', endDrag);
+                }
+                
+                function drag(e) {
+                    if (!isDragging) return;
+                    e.preventDefault();
+                    
+                    // Get cursor position
+                    const pageX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+                    const pageY = e.type.includes('mouse') ? e.pageY : e.touches[0].pageY;
+                    
+                    // Update position
+                    element.style.left = (pageX - offsetX) + 'px';
+                    element.style.top = (pageY - offsetY) + 'px';
+                }
+                
+                function endDrag() {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    
+                    // Check if the piece is over the puzzle board
+                    const pieceRect = element.getBoundingClientRect();
+                    const boardRect = puzzleBoard.getBoundingClientRect();
+                    
+                    if (
+                        pieceRect.right > boardRect.left &&
+                        pieceRect.left < boardRect.right &&
+                        pieceRect.bottom > boardRect.top &&
+                        pieceRect.top < boardRect.bottom
+                    ) {
+                        // The piece is over the board, check if it's in the correct position
+                        checkPlacement(element, boardRect);
+                    } else {
+                        // Return to the pieces container
+                        returnToPiecesContainer(element);
+                    }
+                    
+                    // Remove event listeners
+                    document.removeEventListener('mousemove', drag);
+                    document.removeEventListener('touchmove', drag);
+                    document.removeEventListener('mouseup', endDrag);
+                    document.removeEventListener('touchend', endDrag);
+                }
+            }
+            
+            // Return a piece to the pieces container
+            function returnToPiecesContainer(piece) {
+                piecesContainer.appendChild(piece);
+                piece.style.position = 'absolute';
+                piece.style.left = piece.dataset.originalLeft || '10px';
+                piece.style.top = piece.dataset.originalTop || '10px';
+                piece.style.zIndex = '';
+            }
+            
+            // Check if a piece is placed in the correct position
+            function checkPlacement(piece, boardRect) {
+                const pieceRect = piece.getBoundingClientRect();
+                const pieceX = pieceRect.left - boardRect.left;
+                const pieceY = pieceRect.top - boardRect.top;
+                
+                const correctRow = parseInt(piece.dataset.correctRow);
+                const correctCol = parseInt(piece.dataset.correctCol);
+                
+                // Find the target position
+                const targets = document.querySelectorAll('.puzzle-target');
+                let correctTarget = null;
+                
+                targets.forEach(target => {
+                    const targetRow = parseInt(target.dataset.row);
+                    const targetCol = parseInt(target.dataset.col);
+                    
+                    if (targetRow === correctRow && targetCol === correctCol) {
+                        correctTarget = target;
+                    }
+                });
+                
+                if (correctTarget) {
+                    const targetRect = correctTarget.getBoundingClientRect();
+                    const targetX = targetRect.left - boardRect.left;
+                    const targetY = targetRect.top - boardRect.top;
+                    
+                    // Check if the piece is close enough to the correct position
+                    const threshold = piece.offsetWidth * 0.5;
+                    const distance = Math.sqrt(
+                        Math.pow(pieceX - targetX, 2) + 
+                        Math.pow(pieceY - targetY, 2)
+                    );
+                    
+                    if (distance < threshold) {
+                        // Snap to correct position
+                        puzzleBoard.appendChild(piece);
+                        piece.style.left = targetX + 'px';
+                        piece.style.top = targetY + 'px';
+                        piece.style.zIndex = '';
+                        piece.classList.add('correct');
+                        
+                        correctSound.currentTime = 0;
+                        correctSound.play().catch(err => console.log('Audio play failed:', err));
+                        
+                        correctPieces++;
+                        
+                        // Check if the puzzle is complete
+                        if (correctPieces === totalPieces) {
+                            setTimeout(() => {
+                                completeSound.play().catch(err => console.log('Audio play failed:', err));
+                                showCompletionMessage();
+                                createConfetti();
+                            }, 500);
+                        }
+                    } else {
+                        // Return to the pieces container
+                        returnToPiecesContainer(piece);
+                    }
+                } else {
+                    // Return to the pieces container
+                    returnToPiecesContainer(piece);
+                }
+            }
+            
+            // Show completion message
+            function showCompletionMessage() {
+                completeImage.src = animalImages[currentAnimal];
+                completionMessage.classList.remove('hidden');
+            }
+            
+            // Create confetti effect
+            function createConfetti() {
+                const colors = ['#f44336', '#2196f3', '#ffeb3b', '#4caf50', '#9c27b0', '#ff9800', '#e91e63'];
+                
+                for (let i = 0; i < 150; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.width = Math.random() * 10 + 5 + 'px';
+                    confetti.style.height = Math.random() * 10 + 5 + 'px';
+                    confetti.style.opacity = Math.random() * 0.5 + 0.5;
+                    confetti.style.animationDuration = Math.random() * 2 + 2 + 's';
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    // Remove confetti after animation
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }
+            }
+            
+            // Show hint
+            function showHint() {
+                if (!gameStarted) return;
+                
+                hintSound.currentTime = 0;
+                hintSound.play().catch(err => console.log('Audio play failed:', err));
+                
+                hintImage.classList.add('show');
+                
+                // Hide hint after 5 seconds
+                setTimeout(() => {
+                    hintImage.classList.remove('show');
+                }, 5000);
+            }
+            
+            // Shuffle array (Fisher-Yates algorithm)
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+            
+            // Event listeners
+            startGameBtn.addEventListener('click', initGame);
+            
+            nextPuzzleBtn.addEventListener('click', () => {
+                completionMessage.classList.add('hidden');
+                initGame();
+            });
+            
+            hintButton.addEventListener('click', showHint);
+            
+            difficultyBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    difficultyBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentSize = parseInt(btn.dataset.size);
+                    
+                    if (gameStarted) {
+                        initGame();
+                    }
+                });
+            });
+            
+            animalBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    animalBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentAnimal = btn.dataset.animal;
+                    
+                    if (gameStarted) {
+                        initGame();
+                    }
+                });
+            });
+            
+            // Responsive handling
+            window.addEventListener('resize', () => {
+                if (gameStarted) {
+                    initGame();
+                }
+            });
+        });
+    </script>
+    <script>
+        // Script cho menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            const navbar = document.querySelector('.navbar');
+
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                });
+            }
+
+            // Hide menu on scroll down, show on scroll up
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', function() {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > lastScrollTop) {
+                    // Scrolling down
+                    navbar.style.top = '-80px'; // Adjust based on your navbar height
+                } else {
+                    // Scrolling up
+                    navbar.style.top = '0';
+                }
+                lastScrollTop = scrollTop;
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9571e51272d3dd35',t:'MTc1MTE2MzEwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

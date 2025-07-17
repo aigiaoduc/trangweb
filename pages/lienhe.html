@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông Tin Liên Hệ - Quân H</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            min-height: 10vh;
+            overflow-x: hidden;
+            padding-top: 60px; /* khoảng cho navbar */
+        }
+        .contact-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .contact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .contact-icon {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        .contact-card:hover .contact-icon {
+            transform: scale(1.15) rotate(5deg);
+        }
+        .glow {
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(128, 128, 128, 0.2) 0%, rgba(128, 128, 128, 0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+            filter: blur(30px);
+        }
+        .circuit-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.5) 50%, rgba(128, 128, 128, 0) 100%);
+            z-index: 0;
+            animation: pulse 4s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.3; }
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            z-index: 0;
+            filter: blur(1px);
+        }
+        .icon-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .icon-glow {
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+        .contact-card:hover .icon-glow {
+            opacity: 0.7;
+            filter: blur(10px);
+        }
+        .logo-container {
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+        .logo-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            animation: rotate 20s linear infinite;
+        }
+        .logo-ring:nth-child(1) {
+            width: 280px;
+            height: 280px;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        .logo-ring:nth-child(2) {
+            width: 320px;
+            height: 320px;
+            border-right: 2px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            animation-direction: reverse;
+            animation-duration: 25s;
+        }
+        .logo-ring:nth-child(3) {
+            width: 360px;
+            height: 360px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+            border-left: 2px solid rgba(255, 255, 255, 0.05);
+            animation-duration: 30s;
+        }
+        .logo-image {
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 4px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 60px; } /* Adjust padding for smaller navbar */
+            .contact-card { padding: 1.5rem; } /* Adjust padding for contact cards */
+            .grid { grid-template-columns: 1fr; } /* Ensure grids stack on mobile */
+            .logo-container { transform: scale(0.8); } /* Scale down logo on mobile */
+            .logo-image { width: 180px; height: 180px; }
+            .logo-ring:nth-child(1) { width: 220px; height: 220px; }
+            .logo-ring:nth-child(2) { width: 260px; height: 260px; }
+            .logo-ring:nth-child(3) { width: 300px; height: 300px; }
+        }
+    </style>
+</head>
+<body class="text-white p-4 md:p-8">
+    <div id="menu-placeholder"></div>
+
+    <div class="glow top-0 left-0 opacity-30"></div>
+    <div class="glow bottom-0 right-0 opacity-20"></div>
+    <!-- Circuit lines -->
+    <div class="circuit-line w-1/3 top-1/4 left-0"></div>
+    <div class="circuit-line w-1/2 bottom-1/3 right-0"></div>
+    <div class="circuit-line h-1/3 w-2px top-0 left-1/4" style="width: 2px;"></div>
+    <div class="circuit-line w-1/4 top-2/3 left-1/4"></div>
+    <div class="circuit-line w-1/3 top-1/2 right-1/4"></div>
+    <!-- Particles -->
+    <div id="particles"></div>
+    <div class="max-w-4xl mx-auto relative z-10">
+        <header class="text-center mb-16 mt-10">
+            <div class="logo-container flex justify-center items-center mb-8">
+                <div class="logo-ring"></div>
+                <div class="logo-ring"></div>
+                <div class="logo-ring"></div>
+                <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo" class="logo-image relative z-10">
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-300 via-white to-gray-300 bg-clip-text text-transparent">Thông Tin Liên Hệ</h1>
+            <p class="text-gray-400 mt-4 max-w-2xl mx-auto text-lg">Kết nối với tôi qua các nền tảng mạng xã hội và cộng đồng trực tuyến</p>
+            <div class="w-32 h-1.5 bg-gradient-to-r from-gray-600 via-gray-400 to-gray-600 mx-auto mt-8 rounded-full shadow-lg shadow-black/30"></div>
+        </header>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/tran.hong.quan.216221/" target="_blank" rel="noopener noreferrer" class="contact-card rounded-2xl p-7 flex items-center gap-6 relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-blue-800/30 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="contact-icon bg-gradient-to-br from-blue-600 to-blue-800 text-white p-5 rounded-full relative z-10 w-16 h-16">
+                    <div class="icon-glow bg-blue-500"></div>
+                    <div class="icon-inner">
+                        <i class="fab fa-facebook-f text-2xl"></i>
+                    </div>
+                </div>
+                <div class="relative z-10">
+                    <h3 class="text-xl font-semibold text-blue-200">Facebook</h3>
+                    <p class="text-gray-300 text-sm mt-1">Trần Hồng Quân</p>
+                </div>
+                <div class="ml-auto relative z-10">
+                    <div class="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all">
+                        <i class="fas fa-arrow-right text-sm text-blue-200"></i>
+                    </div>
+                </div>
+            </a>
+            <!-- Youtube -->
+            <a href="https://www.youtube.com/@quanh95/videos" target="_blank" rel="noopener noreferrer" class="contact-card rounded-2xl p-7 flex items-center gap-6 relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-br from-red-900/20 to-red-800/30 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="contact-icon bg-gradient-to-br from-red-600 to-red-800 text-white p-5 rounded-full relative z-10 w-16 h-16">
+                    <div class="icon-glow bg-red-500"></div>
+                    <div class="icon-inner">
+                        <i class="fab fa-youtube text-2xl"></i>
+                    </div>
+                </div>
+                <div class="relative z-10">
+                    <h3 class="text-xl font-semibold text-red-200">YouTube</h3>
+                    <p class="text-gray-300 text-sm mt-1">@quanh95</p>
+                </div>
+                <div class="ml-auto relative z-10">
+                    <div class="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all">
+                        <i class="fas fa-arrow-right text-sm text-red-200"></i>
+                    </div>
+                </div>
+            </a>
+<!-- Zalo -->
+            <a href="https://zalo.me/g/cmqxwt805" target="_blank" class="contact-card p-6 flex items-center gap-4 relative">
+                <div class="contact-icon bg-green-600 text-white p-4 rounded-full relative z-10 w-14 h-14">
+                    <div class="icon-glow bg-green-500"></div>
+                    <div class="icon-inner"><i class="fab fa-hskai text-2xl"></i></div>
+                </div>
+                <div class="relative z-10">
+                    <h3 class="text-lg font-semibold text-green-200">Zalo</h3>
+                    <p class="text-gray-300 text-sm">Zalo Group</p>
+                </div>
+            </a>
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@quanh95" target="_blank" class="contact-card p-6 flex items-center gap-4 relative">
+                <div class="contact-icon bg-black text-white p-4 rounded-full relative z-10 w-14 h-14">
+                    <div class="icon-glow bg-white"></div>
+                    <div class="icon-inner"><i class="fab fa-tiktok text-2xl"></i></div>
+                </div>
+                <div class="relative z-10">
+                    <h3 class="text-lg font-semibold text-gray-200">TikTok</h3>
+                    <p class="text-gray-300 text-sm">@quanh95</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Particle animation (optional, can be removed if performance is an issue)
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.animationDelay = `${Math.random() * 5}s`;
+            particlesContainer.appendChild(particle);
+        }
+
+        // Tải menu.html vào placeholder
+        fetch('../assets/includes/menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu-placeholder').innerHTML = data;
+                // Thêm script cho menu sau khi nội dung được tải
+                const menuToggle = document.getElementById('menuToggle');
+                const navLinks = document.getElementById('navLinks');
+
+                if (menuToggle && navLinks) {
+                    menuToggle.addEventListener('click', () => {
+                        navLinks.classList.toggle('open');
+                        menuToggle.classList.toggle('open');
+                    });
+                } else {
+                    console.error('Menu elements not found after loading menu.html');
+                }
+            });
+    </script>
+</body>
+</html>

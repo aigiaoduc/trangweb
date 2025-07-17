@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini – Trí tuệ nhân tạo đa năng của Google</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS for Navbar */
+        .navbar {
+            position: sticky; top:0; left:0; width:100%;
+            display:flex; justify-content:space-between; align-items:center;
+            padding:1rem 2rem; background:rgba(0,0,0,0.5); z-index:100;
+            backdrop-filter: blur(10px); /* Hiệu ứng làm mờ */
+        }
+        .logo            { display:flex; align-items:center; gap:.75rem; }
+        .logo-img        { width:40px; height:40px; border-radius:50%; border:2px solid #2f73ff; }
+        .logo-text       { font-family:'Inter',sans-serif; font-size:1.5rem; font-weight:700; color:#fff; }
+        .nav-links       { display:flex; gap:2rem; font-weight:600; }
+        .nav-links a     { color:#fff; transition:color .3s; }
+        .nav-links a:hover { color:#2f73ff; }
+        .cta             { padding:.6rem 1.4rem; background:#2f73ff; border-radius:999px; font-weight:600; color:#fff; transition:background .3s; }
+        .cta:hover       { background:#245ad1; }
+
+        /* Custom CSS for responsive and other styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light gray background */
+            color: #333;
+        }
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+            padding: 1.5rem;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .btn-primary {
+            background-color: #2f73ff;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px; /* rounded-full */
+            font-weight: 600;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            background-color: #245ad1;
+            transform: translateY(-2px);
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradient background */
+            color: #fff;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: 2rem;
+            border-bottom-right-radius: 2rem;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: rotate(45deg);
+            animation: float1 10s infinite ease-in-out;
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            transform: rotate(-30deg);
+            animation: float2 12s infinite ease-in-out;
+        }
+        @keyframes float1 {
+            0% { transform: translate(0, 0) rotate(45deg); }
+            50% { transform: translate(20px, 20px) rotate(50deg); }
+            100% { transform: translate(0, 0) rotate(45deg); }
+        }
+        @keyframes float2 {
+            0% { transform: translate(0, 0) rotate(-30deg); }
+            50% { transform: translate(-20px, -20px) rotate(-35deg); }
+            100% { transform: translate(0, 0) rotate(-30deg); }
+        }
+
+        /* Responsive adjustments for Navbar */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem;
+            }
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-top: 1rem;
+                width: 100%;
+                text-align: center;
+            }
+            .nav-links a {
+                padding: 0.5rem 0;
+                width: 100%;
+            }
+            .cta {
+                display: none; /* Hide CTA button on small screens for simplicity */
+            }
+            .logo-img {
+                width: 32px;
+                height: 32px;
+            }
+        }
+
+        /* Responsive adjustments for Hero and Content */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+            .hero-section h1 {
+                font-size: 2rem; /* text-2xl */
+            }
+            .content-grid {
+                grid-template-columns: 1fr; /* grid-cols-1 */
+            }
+            .card {
+                padding: 1rem;
+            }
+            .card h3 {
+                font-size: 1.1rem;
+            }
+            .btn-primary {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) { /* md: */
+            .content-grid {
+                grid-template-columns: repeat(2, 1fr); /* md:grid-cols-2 */
+            }
+        }
+        @media (min-width: 1025px) { /* lg: */
+            .content-grid {
+                grid-template-columns: repeat(3, 1fr); /* lg:grid-cols-3 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png"
+                 alt="Logo Quân H" class="logo-img" />
+            <span class="logo-text">Quân H</span>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html">Trang chủ</a>
+            <a href="../baiviet.html">Bài viết</a>
+            <a href="../congcu.html">Công cụ</a>
+            <a href="../video.html">Video</a>
+            <a href="../lienhe.html">Liên hệ</a>
+        </div>
+        <a href="../lienhe.html" class="cta">Liên hệ</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight">
+            Gemini – Trí tuệ nhân tạo đa năng của Google
+        </h1>
+        <p class="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto opacity-90">
+            Mạnh mẽ, thông minh và dễ tiếp cận
+        </p>
+    </header>
+
+    <main class="container mx-auto p-4 sm:p-6 md:p-8 lg:p-10">
+        <!-- Article Image -->
+        <div class="my-8 text-center">
+            <img src="https://www.gstatic.com/lamda/images/gemini_thumbnail_v2_55a4e3be7b83404a620e5.jpg"
+                 alt="Gemini AI" class="mx-auto rounded-lg shadow-lg max-w-full h-auto md:max-w-xl lg:max-w-2xl" />
+        </div>
+
+        <!-- Introduction -->
+        <section class="mb-12 card border-2 border-blue-400">
+            <h2 class="text-2xl font-bold mb-4">1. Gemini là gì?</h2>
+            <p class="mb-4">
+                Gemini là dòng mô hình trí tuệ nhân tạo tiên tiến do Google phát triển, thuộc thế hệ mô hình lớn (large language model - LLM), tương tự như ChatGPT của OpenAI hay Claude của Anthropic. Điểm mạnh của Gemini là khả năng hiểu và xử lý đa dạng kiểu dữ liệu như:
+            </p>
+            <ul class="list-disc list-inside mb-4 space-y-2">
+                <li>Văn bản (text)</li>
+                <li>Hình ảnh (image)</li>
+                <li>Âm thanh</li>
+                <li>Mã lập trình</li>
+                <li>Video (trong các phiên bản cao cấp)</li>
+            </ul>
+            <p>
+                Không chỉ là chatbot, Gemini có thể trả lời câu hỏi, tóm tắt văn bản, tạo hình ảnh, viết mã, phân tích dữ liệu, và thậm chí kết hợp nhiều loại dữ liệu trong cùng một truy vấn – được gọi là đa phương thức (multimodal).
+            </p>
+        </section>
+
+        <!-- What Gemini can do -->
+        <section class="mb-12 border-2 border-indigo-400 p-6 rounded-xl shadow-md">
+            <h2 class="text-2xl font-bold mb-6 text-center">2. Những gì Gemini có thể làm được</h2>
+            <div class="content-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">Trợ lý viết lách và học thuật</h3>
+                    <p>Viết bài, tóm tắt tài liệu, tạo dàn ý, cải thiện câu từ.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">Hỗ trợ lập trình</h3>
+                    <p>Gợi ý và sửa mã nguồn, phân tích lỗi, giải thích thuật toán.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">Sáng tạo nội dung</h3>
+                    <p>Viết truyện, tạo ý tưởng video, thiết kế kịch bản, tạo hình ảnh từ mô tả.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">Tương tác hình ảnh</h3>
+                    <p>Phân tích ảnh, nhận dạng nội dung trong ảnh, tạo chú thích.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">Hỗ trợ giáo dục</h3>
+                    <p>Giải thích kiến thức một cách dễ hiểu, tạo đề kiểm tra, bài giảng trực quan.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Differences from other AIs -->
+        <section class="mb-12 card border-2 border-purple-400">
+            <h2 class="text-2xl font-bold mb-4">3. Có gì khác biệt so với các AI khác?</h2>
+            <ul class="list-disc list-inside space-y-2">
+                <li><strong>Tích hợp sâu với hệ sinh thái Google:</strong> Gemini có thể hoạt động trong Gmail, Google Docs, Sheets, Slides... giúp người dùng làm việc hiệu quả hơn ngay trong các công cụ quen thuộc.</li>
+                <li><strong>Đa phương thức mạnh mẽ:</strong> Bạn có thể hỏi Gemini bằng văn bản, chèn hình ảnh, hoặc kết hợp cả hai – điều mà không phải AI nào cũng làm tốt.</li>
+                <li><strong>An toàn và kiểm duyệt nội dung:</strong> Google tích hợp các cơ chế kiểm tra nội dung đầu ra, đảm bảo tính an toàn khi sử dụng cho giáo dục hoặc nội dung công khai.</li>
+                <li><strong>Giao diện thân thiện, dễ dùng:</strong> Phù hợp cho cả người mới bắt đầu.</li>
+            </ul>
+        </section>
+
+        <!-- Who should use Gemini -->
+        <section class="mb-12 border-2 border-green-400 p-6 rounded-xl shadow-md">
+            <h2 class="text-2xl font-bold mb-6 text-center">4. Ai nên sử dụng Gemini?</h2>
+            <div class="content-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">Giáo viên</h3>
+                    <p>Soạn bài giảng, tạo bài kiểm tra, tìm hình ảnh minh họa, giải thích kiến thức.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">Học sinh, sinh viên</h3>
+                    <p>Học tập, làm bài tập, tra cứu kiến thức.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">Người sáng tạo nội dung</h3>
+                    <p>Viết blog, làm video, kể chuyện bằng hình ảnh.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">Người đi làm văn phòng</h3>
+                    <p>Soạn email, báo cáo, phân tích dữ liệu, tạo slide.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3">Lập trình viên</h3>
+                    <p>Viết, gỡ lỗi và tối ưu hóa mã.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to use Gemini -->
+        <section class="mb-12 card border-2 border-yellow-400">
+            <h2 class="text-2xl font-bold mb-4">5. Sử dụng Gemini như thế nào?</h2>
+            <p class="mb-4">
+                Gemini hiện có thể sử dụng tại: <a href="https://gemini.google.com" target="_blank" class="text-blue-600 hover:underline">https://gemini.google.com</a>
+            </p>
+            <p class="mb-4">
+                Bạn chỉ cần tài khoản Google để bắt đầu. Với phiên bản miễn phí, bạn đã có thể sử dụng các tính năng cơ bản. Nếu cần xử lý phức tạp hơn (đặc biệt là tạo hình ảnh hoặc xử lý nhiều bước liên tục), bạn có thể nâng cấp lên Gemini Advanced – tương đương GPT-4.
+            </p>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="mb-12 card text-center border-2 border-red-400">
+            <h2 class="text-2xl font-bold mb-4">Kết luận</h2>
+            <p class="mb-4">
+                Gemini không chỉ là một AI trợ lý, mà là một công cụ học tập, làm việc và sáng tạo toàn diện. Dù bạn là giáo viên, học sinh, người làm nội dung hay chỉ đơn giản là người tò mò về công nghệ – Gemini có thể giúp bạn tiết kiệm thời gian, mở rộng ý tưởng và tăng hiệu quả công việc.
+            </p>
+            <p class="mb-8">
+                Đã đến lúc bạn thử sức với Gemini và để trí tuệ nhân tạo hỗ trợ bạn một cách thông minh và linh hoạt nhất.
+            </p>
+            <a href="https://gemini.google.com/" target="_blank" class="btn-primary text-lg">Truy cập ngay</a>
+        </section>
+    </main>
+
+    <footer class="text-center py-8 text-gray-600 text-sm">
+        <p>&copy; 2025 Quân H. All rights reserved.</p>
+    </footer>
+</body>
+</html>

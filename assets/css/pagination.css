@@ -1,0 +1,111 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+.pagination-btn {
+  display: flex;
+  padding: 11px 33px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  background: #6225e6;
+  transition: 1s;
+  border: none;
+  cursor: pointer;
+}
+.pagination-btn:focus {
+  outline: none;
+}
+.pagination-btn:hover {
+  transition: 0.5s;
+}
+.pagination-btn .arrow {
+  transition: 0.5s;
+}
+.pagination-btn:hover .arrow {
+  transition: 0.5s;
+}
+.pagination-btn .text {
+  transform: skewX(15deg);
+  color: white !important;
+  font-weight: bold;
+}
+.pagination-btn .arrow {
+  width: 20px;
+  position: relative;
+  top: 12%;
+}
+.pagination-btn .arrow .one, .pagination-btn .arrow .two, .pagination-btn .arrow .three {
+  transition: 0.4s;
+}
+.pagination-btn:hover .three {
+  animation: color_anim 1s infinite 0.2s;
+}
+.pagination-btn:hover .one {
+  animation: color_anim 1s infinite 0.6s;
+}
+.pagination-btn:hover .two {
+  animation: color_anim 1s infinite 0.4s;
+}
+@keyframes color_anim {
+  0% { fill: white; }
+  50% { fill: #fbc638; }
+  100% { fill: white; }
+}
+/* Next Button */
+.next-btn {
+  transform: skewX(-15deg);
+  box-shadow: 6px 6px 0 black;
+}
+.next-btn:hover {
+  box-shadow: 10px 10px 0 #fbc638;
+}
+.next-btn .arrow {
+  margin-left: 30px;
+}
+.next-btn:hover .arrow {
+  margin-right: -15px; /* Adjust this to move arrow */
+}
+.next-btn .one { transform: translateX(-60%); }
+.next-btn .two { transform: translateX(-30%); }
+.next-btn:hover .one, .next-btn:hover .two {
+  transform: translateX(0%);
+}
+/* Prev Button */
+.prev-btn {
+  transform: skewX(15deg);
+  box-shadow: -6px 6px 0 black;
+}
+.prev-btn:hover {
+  box-shadow: -10px 10px 0 #fbc638;
+}
+.prev-btn .arrow {
+  margin-right: 30px;
+  transform: rotate(180deg);
+}
+.prev-btn:hover .arrow {
+  margin-left: -15px; /* Adjust this to move arrow */
+}
+.prev-btn .one { transform: translateX(60%); }
+.prev-btn .two { transform: translateX(30%); }
+.prev-btn:hover .one, .prev-btn:hover .two {
+  transform: translateX(0%);
+}
+.pagination-btn:disabled {
+  background: #ccc;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.pagination-btn:disabled:hover {
+  box-shadow: none;
+}
+.pagination-btn:disabled .arrow {
+  display: none;
+}
+.pagination span {
+  font-size: 1.1rem;
+  color: #333;
+}

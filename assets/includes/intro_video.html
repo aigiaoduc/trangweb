@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Giới Thiệu Công Nghệ</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #D8D5DB; /* Platium */
+            --secondary-color: #ADACB5; /* French gray */
+            --accent-color: #2D3142; /* Gunmetal */
+            --bg-color: #1a1a1a; /* Darker background for contrast */
+            --text-color: #e0e0e0;
+            --glow-color: #D8D5DB; /* Sử dụng màu dominant cho glow */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto Mono', monospace;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow: hidden; /* Ngăn cuộn */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        .container {
+            width: 900px; /* Kích thước khung PC */
+            height: 600px; /* Kích thước khung PC */
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 30px var(--primary-color), inset 0 0 15px var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            animation: borderGlow 3s infinite alternate;
+        }
+
+        @keyframes borderGlow {
+            from { border-color: var(--primary-color); box-shadow: 0 0 30px var(--primary-color), inset 0 0 15px var(--primary-color); }
+            to { border-color: var(--secondary-color); box-shadow: 0 0 30px var(--secondary-color), inset 0 0 15px var(--secondary-color); }
+        }
+
+        .title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5em;
+            color: var(--primary-color);
+            text-shadow: 0 0 15px var(--primary-color), 0 0 25px var(--primary-color);
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+            animation: textGlow 2s infinite alternate;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 0 0 15px var(--primary-color), 0 0 25px var(--primary-color); }
+            to { text-shadow: 0 0 20px var(--secondary-color), 0 0 30px var(--secondary-color); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            max-width: 150px;
+            height: 150px; /* Đảm bảo chiều cao bằng chiều rộng để tạo hình tròn */
+            object-fit: cover; /* Đảm bảo ảnh không bị méo */
+            border-radius: 50%; /* Chỉnh thành hình tròn */
+            filter: drop-shadow(0 0 10px var(--primary-color));
+            border: 2px solid var(--primary-color); /* Thêm viền để nổi bật */
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: var(--text-color);
+            margin-bottom: 20px; /* Giảm margin để có chỗ cho link */
+            text-align: center;
+            max-width: 80%;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out forwards; /* Thêm hiệu ứng động */
+            animation-delay: 0.5s; /* Trễ để xuất hiện sau tiêu đề */
+            opacity: 0; /* Ban đầu ẩn */
+        }
+
+        .website-link {
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .website-link a {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5em; /* Kích thước lớn */
+            color: var(--secondary-color);
+            text-decoration: none;
+            text-shadow: 0 0 15px var(--secondary-color), 0 0 25px var(--secondary-color);
+            transition: all 0.3s ease;
+            letter-spacing: 3px;
+        }
+
+        .website-link a:hover {
+            color: var(--primary-color);
+            text-shadow: 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        /* Decorations */
+        .decoration-line {
+            position: absolute;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            opacity: 0.5;
+            z-index: 1;
+        }
+
+        .line-top-left {
+            width: 150px;
+            height: 2px;
+            top: 50px;
+            left: -100px;
+            transform: rotate(45deg);
+            animation: lineMoveTopLeft 8s infinite linear;
+        }
+
+        .line-bottom-right {
+            width: 150px;
+            height: 2px;
+            bottom: 50px;
+            right: -100px;
+            transform: rotate(45deg);
+            animation: lineMoveBottomRight 8s infinite linear;
+        }
+
+        @keyframes lineMoveTopLeft {
+            0% { left: -100px; top: 50px; opacity: 0.5; }
+            50% { left: 100%; top: 200px; opacity: 0.8; }
+            100% { left: -100px; top: 50px; opacity: 0.5; }
+        }
+
+        @keyframes lineMoveBottomRight {
+            0% { right: -100px; bottom: 50px; opacity: 0.5; }
+            50% { right: 100%; bottom: 200px; opacity: 0.8; }
+            100% { right: -100px; bottom: 50px; opacity: 0.5; }
+        }
+
+        .decoration-circle {
+            position: absolute;
+            border: 1px solid var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.3;
+            z-index: 1;
+            animation: circlePulse 5s infinite alternate;
+        }
+
+        .circle-1 {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            right: 10%;
+            animation-delay: 0s;
+        }
+
+        .circle-2 {
+            width: 120px;
+            height: 120px;
+            bottom: 15%;
+            left: 15%;
+            animation-delay: 2s;
+        }
+
+        @keyframes circlePulse {
+            from { transform: scale(0.8); opacity: 0.3; border-color: var(--primary-color); }
+            to { transform: scale(1.2); opacity: 0.6; border-color: var(--secondary-color); }
+        }
+
+
+        /* Background Grid Effect */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(0, 240, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            z-index: 0;
+            animation: gridPan 20s linear infinite;
+        }
+
+        @keyframes gridPan {
+            from { background-position: 0 0; }
+            to { background-position: 50px 50px; }
+        }
+
+        /* Particle Effect */
+        .particle {
+            position: absolute;
+            background-color: var(--glow-color);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFade 5s infinite ease-out;
+            z-index: 1;
+        }
+
+        @keyframes particleFade {
+            0% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            80% { opacity: 0.5; }
+            100% { transform: translate(var(--x-end), var(--y-end)) scale(1); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="grid-background"></div>
+        <div class="decoration-line line-top-left"></div>
+        <div class="decoration-line line-bottom-right"></div>
+        <div class="decoration-circle circle-1"></div>
+        <div class="decoration-circle circle-2"></div>
+        <div class="logo-container">
+            <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo">
+        </div>
+        <h1 class="title">QUÂN H</h1>
+        <p class="subtitle">
+            Khám phá tương lai của giáo dục với trí tuệ nhân tạo. 
+            Nền tảng tiên tiến mang đến trải nghiệm học tập đột phá và cá nhân hóa.
+        </p>
+        <div class="website-link">
+            <a href="https://aigiaoduc.github.io" target="_blank">aigiaoduc.github.io</a>
+        </div>
+    </div>
+
+    <script>
+        const container = document.querySelector('.container');
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            container.appendChild(particle);
+
+            const size = Math.random() * 5 + 2; // Kích thước từ 2px đến 7px
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+
+            const startX = Math.random() * container.offsetWidth;
+            const startY = Math.random() * container.offsetHeight;
+            particle.style.setProperty('--x', `${startX}px`);
+            particle.style.setProperty('--y', `${startY}px`);
+
+            const endX = startX + (Math.random() - 0.5) * 200; // Di chuyển ngẫu nhiên
+            const endY = startY + (Math.random() - 0.5) * 200;
+            particle.style.setProperty('--x-end', `${endX}px`);
+            particle.style.setProperty('--y-end', `${endY}px`);
+
+            const duration = Math.random() * 3 + 3; // Thời gian từ 3s đến 6s
+            particle.style.animationDuration = `${duration}s`;
+            particle.style.animationDelay = `${Math.random() * 2}s`; // Trễ ngẫu nhiên
+
+            particle.addEventListener('animationend', () => {
+                particle.remove();
+            });
+        }
+
+        // Tạo hạt liên tục
+        setInterval(createParticle, 200); 
+    </script>
+</body>
+</html>

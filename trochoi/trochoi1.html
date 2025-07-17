@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Memory Card Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&display=swap'); /* Added for navbar styles */
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f0f9ff;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239ee6ff' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            padding-top: 60px; /* Added padding for fixed navbar */
+        }
+        
+        /* Navbar Styles (copied from trang web/index.html for consistency) */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(0,0,0,0.5);
+            z-index: 100;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #2f73ff;
+        }
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .nav-links { display: flex; gap: 2rem; font-weight: 600; }
+        .nav-links a { font-size: 1rem; color: #fff; transition: color 0.3s; }
+        .nav-links a:hover { color: #2f73ff; }
+        .cta {
+            padding: 0.6rem 1.4rem;
+            background: #2f73ff;
+            border-radius: 999px;
+            font-weight: 600;
+            color: #fff;
+            transition: background 0.3s;
+        }
+        .cta:hover { background: #245ad1; }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 0.3rem;
+        }
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+        .menu-toggle.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .menu-toggle.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem; }
+            .nav-links { 
+                display: none; 
+                flex-direction: column; 
+                width: 100%; 
+                background: rgba(0,0,0,0.8); 
+                position: absolute; 
+                top: 60px; 
+                left: 0; 
+                padding: 1rem; 
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: 0.5rem 0; text-align: center; }
+            .cta { display: block; /* Ensure CTA is visible on mobile */
+                   margin-top: 1rem; /* Add some margin */
+                   text-align: center; }
+            .menu-toggle { display: flex; }
+        }
+        
+        .card {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+        
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .card-front {
+            background: linear-gradient(135deg, #6ee7b7, #3b82f6);
+            transform: rotateY(180deg);
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .card-back {
+            background: linear-gradient(135deg, #fde68a, #f97316);
+            font-size: 2rem;
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            animation: confetti-fall 3s ease-in-out infinite;
+            z-index: 100;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        .bounce {
+            animation: bounce 0.5s;
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-8 px-4">
+    <div id="navbar-placeholder"></div>
+
+    <div class="max-w-4xl w-full">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-indigo-600 mb-2">Lật Thẻ – Tìm Tên Động Vật</h1>
+            <p class="text-lg text-gray-600">Hãy Ghép Các Loài Động Vật Với Tên Tiếng Anh Tương Ứng!</p>
+        </header>
+        
+        <div class="bg-white rounded-2xl p-6 shadow-lg mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-gray-700">Số Lần Thử: </span>
+                    <span id="moves" class="text-xl font-bold text-indigo-600 ml-2">0</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-gray-700">Cặp Trùng Khớp: </span>
+                    <span id="pairs" class="text-xl font-bold text-indigo-600 ml-2">0</span>
+                    <span class="text-xl font-bold text-gray-700 ml-1">/ 6</span>
+                </div>
+            </div>
+            
+            <div id="game-board" class="grid grid-cols-3 md:grid-cols-4 gap-4">
+                <!-- Cards will be inserted here by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="flex justify-center">
+            <button id="restart-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg transition-all hover:scale-105 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                New Game
+            </button>
+        </div>
+    </div>
+    
+    <!-- Victory Modal -->
+    <div id="victory-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl fade-in">
+            <div class="text-center">
+                <div class="text-6xl mb-4">🎉</div>
+                <h2 class="text-3xl font-bold text-indigo-600 mb-4">Congratulations!</h2>
+                <p class="text-xl text-gray-700 mb-6">You found all the animal pairs!</p>
+                <p class="text-lg text-gray-600 mb-8">Moves: <span id="final-moves" class="font-bold text-indigo-600"></span></p>
+                <button id="play-again-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg transition-all hover:scale-105">
+                    Play Again
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Script để tải navbar
+        fetch('../menu.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('navbar-placeholder').innerHTML = html;
+                // Re-attach event listeners for the dynamically loaded navbar
+                const menuToggle = document.getElementById('menuToggle');
+                const navLinks = document.getElementById('navLinks');
+
+                if (menuToggle && navLinks) {
+                    menuToggle.addEventListener('click', () => {
+                        navLinks.classList.toggle('open');
+                        menuToggle.classList.toggle('open');
+                    });
+                }
+            });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const gameBoard = document.getElementById('game-board');
+            const movesDisplay = document.getElementById('moves');
+            const pairsDisplay = document.getElementById('pairs');
+            const restartBtn = document.getElementById('restart-btn');
+            const victoryModal = document.getElementById('victory-modal');
+            const finalMovesDisplay = document.getElementById('final-moves');
+            const playAgainBtn = document.getElementById('play-again-btn');
+            
+            let moves = 0;
+            let pairsFound = 0;
+            let flippedCards = [];
+            let canFlip = true;
+            
+            const animals = [
+                { emoji: "🐶", name: "DOG" },
+                { emoji: "🐱", name: "CAT" },
+                { emoji: "🐭", name: "MOUSE" },
+                { emoji: "🐰", name: "RABBIT" },
+                { emoji: "🦁", name: "LION" },
+                { emoji: "🐯", name: "TIGER" },
+                { emoji: "🐘", name: "ELEPHANT" },
+                { emoji: "🦒", name: "GIRAFFE" },
+                { emoji: "🐒", name: "MONKEY" },
+                { emoji: "🦊", name: "FOX" },
+                { emoji: "🐼", name: "PANDA" },
+                { emoji: "🐨", name: "KOALA" }
+            ];
+            
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+            
+            function createGameCards() {
+                gameBoard.innerHTML = '';
+                moves = 0;
+                pairsFound = 0;
+                flippedCards = [];
+                canFlip = true;
+                
+                movesDisplay.textContent = moves;
+                pairsDisplay.textContent = pairsFound;
+                
+                // Select 6 random animals
+                const selectedAnimals = shuffleArray([...animals]).slice(0, 6);
+                
+                // Create pairs - one with emoji, one with name
+                let cardPairs = [];
+                selectedAnimals.forEach(animal => {
+                    cardPairs.push({
+                        id: `emoji-${animal.name}`,
+                        content: animal.emoji,
+                        match: `name-${animal.name}`
+                    });
+                    cardPairs.push({
+                        id: `name-${animal.name}`,
+                        content: animal.name,
+                        match: `emoji-${animal.name}`
+                    });
+                });
+                
+                // Shuffle the cards
+                cardPairs = shuffleArray(cardPairs);
+                
+                // Create card elements
+                cardPairs.forEach((card, index) => {
+                    const cardElement = document.createElement('div');
+                    cardElement.className = 'card aspect-square';
+                    cardElement.dataset.id = card.id;
+                    cardElement.dataset.match = card.match;
+                    
+                    cardElement.innerHTML = `
+                        <div class="card-inner h-full">
+                            <div class="card-front ${card.id.startsWith('emoji') ? 'text-4xl' : 'text-xl'}">
+                                ${card.content}
+                            </div>
+                            <div class="card-back">
+                                <span class="text-3xl">❓</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    cardElement.addEventListener('click', () => flipCard(cardElement));
+                    gameBoard.appendChild(cardElement);
+                });
+            }
+            
+            function flipCard(card) {
+                if (!canFlip || card.classList.contains('flipped') || flippedCards.includes(card)) {
+                    return;
+                }
+                
+                card.classList.add('flipped');
+                flippedCards.push(card);
+                
+                if (flippedCards.length === 2) {
+                    moves++;
+                    movesDisplay.textContent = moves;
+                    canFlip = false;
+                    
+                    const card1 = flippedCards[0];
+                    const card2 = flippedCards[1];
+                    
+                    if (card1.dataset.id === card2.dataset.match || card2.dataset.id === card1.dataset.match) {
+                        // Match found
+                        setTimeout(() => {
+                            card1.classList.add('bounce');
+                            card2.classList.add('bounce');
+                            
+                            pairsFound++;
+                            pairsDisplay.textContent = pairsFound;
+                            
+                            flippedCards = [];
+                            canFlip = true;
+                            
+                            if (pairsFound === 6) {
+                                showVictory();
+                            }
+                        }, 500);
+                    } else {
+                        // No match
+                        setTimeout(() => {
+                            card1.classList.remove('flipped');
+                            card2.classList.remove('flipped');
+                            flippedCards = [];
+                            canFlip = true;
+                        }, 1000);
+                    }
+                }
+            }
+            
+            function showVictory() {
+                finalMovesDisplay.textContent = moves;
+                victoryModal.classList.remove('hidden');
+                createConfetti();
+            }
+            
+            function createConfetti() {
+                const colors = ['#f94144', '#f3722c', '#f8961e', '#f9c74f', '#90be6d', '#43aa8b', '#577590'];
+                
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 3000);
+                }
+            }
+            
+            restartBtn.addEventListener('click', createGameCards);
+            playAgainBtn.addEventListener('click', () => {
+                victoryModal.classList.add('hidden');
+                createGameCards();
+            });
+            
+            // Initialize the game
+            createGameCards();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'956e0d142385f91a',t:'MTc1MTEyMjc5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

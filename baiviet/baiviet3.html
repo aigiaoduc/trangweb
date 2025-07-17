@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABBYY – Công cụ chuyển đổi tài liệu thông minh</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #334155;
+      line-height: 1.6;
+    }
+    
+    .navbar {
+      position: sticky; top:0; left:0; width:100%;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:1rem 2rem; background:rgba(0,0,0,0.5); z-index:100;
+    }
+    .logo            { display:flex; align-items:center; gap:.75rem; }
+    .logo-img        { width:40px; height:40px; border-radius:50%; border:2px solid #2f73ff; }
+    .logo-text       { font-family:'Inter',sans-serif; font-size:1.5rem; font-weight:700; color:#fff; }
+    .nav-links       { display:flex; gap:2rem; font-weight:600; }
+    .nav-links a     { color:#fff; transition:color .3s; }
+    .nav-links a:hover { color:#2f73ff; }
+    .cta             { padding:.6rem 1.4rem; background:#2f73ff; border-radius:999px; font-weight:600; color:#fff; transition:background .3s; }
+    .cta:hover       { background:#245ad1; }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 0.3rem;
+    }
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      border-radius: 5px;
+      transition: all 0.3s ease-in-out;
+    }
+    .menu-toggle.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+    
+    .article-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    
+    .article-header {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: white;
+      border-radius: 1rem;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.5);
+    }
+    
+    .article-title {
+      font-size: 2.25rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #dbeafe;
+    }
+    
+    .feature-card {
+      background-color: white;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid #3b82f6;
+    }
+    
+    .feature-title {
+      font-weight: 600;
+      color: #1e40af;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .user-group {
+      background-color: #f1f5f9;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    
+    .user-title {
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 0.5rem;
+    }
+    
+    .download-button {
+      display: block;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: white;
+      text-align: center;
+      padding: 1rem 2rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      margin: 2rem auto;
+      max-width: 300px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.5);
+    }
+    
+    .download-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.5);
+    }
+    
+    .comparison-section {
+      background-color: white;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .article-title {
+        font-size: 1.75rem;
+      }
+      
+      .article-header {
+        padding: 1.5rem;
+      }
+      .nav-links { 
+        display: none; 
+        flex-direction: column; 
+        width: 100%; 
+        background: rgba(0,0,0,0.8); 
+        position: absolute; 
+        top: 60px; 
+        left: 0; 
+        padding: 1rem; 
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 0.5rem 0; text-align: center; }
+      .cta { display: none; }
+      .menu-toggle { display: flex; }
+      .grid { grid-template-columns: 1fr; } /* Ensure grids stack on mobile */
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png"
+           alt="Logo Quân H" class="logo-img" />
+      <span class="logo-text">Quân H</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html">Trang chủ</a>
+      <a href="../baiviet.html">Bài viết</a>
+      <a href="../congcu.html">Công cụ</a>
+      <a href="../video.html">Video</a>
+      <a href="../lienhe.html">Liên hệ</a>
+    </div>
+    <a href="../lienhe.html" class="cta">Liên hệ</a>
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <div class="article-container">
+    <header class="article-header">
+      <h1 class="article-title">ABBYY – Công cụ chuyển đổi tài liệu thông minh không thể thiếu trong thời đại số</h1>
+      <p class="text-white/90">Bạn có từng mất hàng giờ để gõ lại tài liệu in, lục tìm thông tin trong một file PDF dài hàng trăm trang hay muốn trích xuất văn bản từ hình ảnh chụp? Nếu có, ABBYY sẽ là "trợ thủ" cực kỳ đắc lực cho bạn.</p>
+    </header>
+
+    <section>
+      <h2 class="section-title">ABBYY là gì?</h2>
+      <p>ABBYY là một phần mềm chuyên xử lý tài liệu thông minh, nổi bật với tính năng OCR (Optical Character Recognition – Nhận dạng ký tự quang học). Với ABBYY, bạn có thể:</p>
+      
+      <ul class="list-disc pl-6 mt-3 space-y-2">
+        <li>Biến tài liệu scan, ảnh chụp thành văn bản có thể chỉnh sửa.</li>
+        <li>Chuyển đổi PDF sang Word/Excel mà vẫn giữ nguyên định dạng.</li>
+        <li>Tạo các file PDF có thể tìm kiếm, dễ tra cứu.</li>
+        <li>So sánh nội dung giữa hai tài liệu khác nhau, kể cả khác định dạng.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="section-title">Điểm mạnh của ABBYY</h2>
+      
+      <div class="feature-card">
+        <h3 class="feature-title">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+          </svg>
+          Nhận dạng tiếng Việt cực tốt
+        </h3>
+        <p>ABBYY hỗ trợ hơn 190 ngôn ngữ, trong đó có tiếng Việt. Khả năng OCR của ABBYY thuộc hàng top hiện nay – ngay cả ảnh chụp từ điện thoại cũng có thể nhận dạng tốt nếu đủ sáng và rõ nét.</p>
+      </div>
+      
+      <div class="feature-card">
+        <h3 class="feature-title">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+          </svg>
+          Chuyển đổi định dạng giữ nguyên bố cục
+        </h3>
+        <p>Không còn cảnh "lệch dòng, nhảy chữ" khi chuyển từ PDF sang Word – ABBYY giữ lại gần như hoàn toàn bố cục ban đầu, kể cả bảng biểu, hình ảnh, và font chữ.</p>
+      </div>
+      
+      <div class="feature-card">
+        <h3 class="feature-title">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+          </svg>
+          So sánh và rà soát tài liệu
+        </h3>
+        <p>Tính năng này cực kỳ hữu ích với giáo viên, biên tập viên, nhân viên pháp lý – chỉ cần vài giây là bạn biết hai bản tài liệu có gì khác nhau.</p>
+      </div>
+      
+      <div class="feature-card">
+        <h3 class="feature-title">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+          </svg>
+          Tự động hóa xử lý tài liệu hàng loạt
+        </h3>
+        <p>Bạn có thể xử lý hàng trăm file cùng lúc – tiết kiệm thời gian, đặc biệt hữu ích trong môi trường doanh nghiệp hoặc tổ chức giáo dục.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Ai nên dùng ABBYY?</h2>
+      
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="user-group">
+          <h3 class="user-title">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-1 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            Giáo viên – giảng viên
+          </h3>
+          <p>Số hóa giáo trình, trích xuất câu hỏi, tạo tài liệu PDF tìm kiếm được.</p>
+        </div>
+        
+        <div class="user-group">
+          <h3 class="user-title">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-1 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            Sinh viên – học sinh
+          </h3>
+          <p>Lấy văn bản từ ảnh chụp slide, làm bài tập nhóm từ tài liệu scan.</p>
+        </div>
+        
+        <div class="user-group">
+          <h3 class="user-title">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-1 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            Nhân viên văn phòng
+          </h3>
+          <p>Tự động hóa xử lý báo cáo, hóa đơn, hợp đồng.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="comparison-section">
+      <h2 class="section-title">ABBYY khác gì so với công cụ miễn phí?</h2>
+      <p>So với Google Docs OCR hay các phần mềm online khác, ABBYY cho độ chính xác cao hơn, hỗ trợ chuyển đổi định dạng linh hoạt hơn, và quan trọng là bảo mật hơn – vì tài liệu không bị đưa lên server bên ngoài khi bạn dùng bản cài đặt máy tính.</p>
+    </section>
+
+    <a href="https://kontum01-my.sharepoint.com/:u:/g/personal/quanth_c12sb_st_gdkontum_edu_vn/EaSM_x4dPrxBp_FsZCOcbeQBnhChISHg3xGGp3UBdWwb-g?e=I8URfs" class="download-button">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+      </svg>
+      Tải ABBYY ngay
+    </a>
+    <p class="text-center text-gray-600 text-sm mt-2">mật khẩu giải nén: taiwebs.com</p>
+  </div>
+
+  <footer class="bg-gray-800 text-white py-8 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between">
+        <div class="mb-6 md:mb-0">
+          <div class="flex items-center gap-2 mb-4">
+            <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo" class="w-8 h-8 rounded-full">
+            <span class="text-xl font-bold">Quân H</span>
+          </div>
+          <p class="text-gray-400 max-w-md">Chia sẻ kiến thức công nghệ và các công cụ hữu ích cho người dùng Việt Nam.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-3">Liên kết</h3>
+          <ul class="space-y-2">
+            <li><a href="../index.html" class="text-gray-400 hover:text-white transition">Trang chủ</a></li>
+            <li><a href="../baiviet.html" class="text-gray-400 hover:text-white transition">Bài viết</a></li>
+            <li><a href="../congcu.html" class="text-gray-400 hover:text-white transition">Công cụ</a></li>
+            <li><a href="../video.html" class="text-gray-400 hover:text-white transition">Video</a></li>
+            <li><a href="../lienhe.html" class="text-gray-400 hover:text-white transition">Liên hệ</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+        <p>&copy; 2023 Quân H. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </div>
+  </footer>
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    menuToggle.classList.toggle('open');
+  });
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'95238c98d01606a5',t:'MTc1MDI2NzkwNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

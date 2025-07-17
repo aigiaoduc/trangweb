@@ -1,0 +1,105 @@
+[
+  {
+    "category": "Trợ lý ảo",
+    "tools": [
+      {
+        "title": "ChatGPT",
+        "url": "https://chat.openai.com/",
+        "logo_image": "https://threatconnect.com/wp-content/uploads/2025/02/ChatGpt-logo.png",
+        "desc": "Trợ lý ảo thông minh, giúp bạn viết nội dung, trả lời câu hỏi, lập kế hoạch và sáng tạo ý tưởng một cách nhanh chóng."
+      },
+      {
+        "title": "Grok",
+        "url": "https://grok.x.ai/",
+        "logo_image": "https://www.pacisoft.vn/wp-content/uploads/2025/06/Grok-Logo.png",
+        "desc": "Trợ lý AI do X phát triển, tích hợp trong nền tảng mạng xã hội, cung cấp thông tin thời gian thực và phản hồi theo phong cách hài hước."
+      },
+      {
+        "title": "Gemini",
+        "url": "https://gemini.google.com/",
+        "logo_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/1200px-Google_Gemini_logo.svg.png",
+        "desc": "Trợ lý AI của Google, tích hợp chặt chẽ với các dịch vụ như Gmail, Docs và Search, hỗ trợ tìm kiếm thông minh và xử lý công việc hiệu quả."
+      },
+      {
+        "title": "🤖 DeepSeek",
+        "url": "https://www.deepseek.com/",
+        "logo_image": "https://static.euronews.com/articles/stories/09/00/69/48/1200x675_cmsv2_4b3d5a33-60f6-5a9c-b545-18ffed37b354-9006948.jpg",
+        "desc": "Mô hình AI đa năng của Trung Quốc, nổi bật với khả năng hiểu sâu ngữ cảnh, viết code và xử lý ngôn ngữ tự nhiên chính xác."
+      }
+    ]
+  },
+  {
+    "category": "Thuyết trình & Tạo Slide",
+    "tools": [
+      {
+        "title": "Gamma AI",
+        "url": "https://gamma.app/signup?r=9w76ozpkdhlhi34/",
+        "logo_image": "https://asset.brandfetch.io/idAmHoFYTU/idWyo6kqsa.png",
+        "desc": "Gamma AI là nền tảng giúp bạn tạo bài thuyết trình nhanh, đẹp và logic."
+      }
+    ]
+  },
+  {
+    "category": "Thiết kế & Nghệ thuật AI",
+    "tools": [
+      {
+        "title": "Thiings",
+        "url": "https://www.thiings.co/",
+        "logo_image": "https://www.thiings.co/meta-new.png",
+        "desc": "Thư Viện Biểu Tượng 3D AI Miễn Phí."
+      },
+      {
+        "title": "Raphael AI",
+        "url": "https://raphael.app/vi",
+        "logo_image": "https://raphaelai.org/logo.png",
+        "desc": "Là AI tạo ảnh từ văn bản hoàn toàn miễn phí và không cần đăng ký"
+      }
+    ]
+  },
+  {
+    "category": "Tạo câu hỏi & Trắc nghiệm tự động",
+    "tools": [
+      {
+        "title": "Quizz",
+        "url": "https://wayground.com/",
+        "logo_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOaFEzTCaMlBHo0M7QU7fr6PEqiw67cuKIhQ&s",
+        "desc": "Công cụ tạo câu hỏi trắc nghiệm nhanh chóng, phù hợp cho dạy học, kiểm tra kiến thức và tổ chức trò chơi tương tác."
+      }
+    ]
+  },
+  {
+    "category": "Khám phá & Trải nghiệm AI mới",
+    "tools": [
+      {
+        "title": "🌟 BestList.ai – Trang Web Tổng Hợp Công Cụ AI Hàng Đầu",
+        "url": "https://bestlist.ai/",
+        "logo_image": "https://bestlist.ai/images/logo.png",
+        "desc": "Trong thời đại AI bùng nổ, có hàng ngàn công cụ hỗ trợ từ viết lách, đồ họa, lập trình đến quản lý công việc. Nhưng làm sao để chọn đúng công cụ phù hợp? BestList.ai chính là câu trả lời."
+      }
+    ]
+  },
+  {
+    "category": "Web tiện ích",
+    "tools": [
+      {
+        "title": "🌍 Tra cứu Đơn vị Hành chính Việt Nam – Bản đồ Sáp Nhập 2025",
+        "url": "https://thuvienphapluat.vn/van-ban/Bo-may-hanh-chinh/Nghi-quyet-124-NQ-CP-2024-sap-xep-don-vi-hanh-chinh-cap-huyen-cap-xa-giai-doan-2023-2025-940000.html",
+        "logo_image": "https://thuvienphapluat.vn/favicon.ico",
+        "desc": "Ngày 1/7/2025, sau quyết định sắp xếp hành chính vượt bậc, số lượng tỉnh/thành của Việt Nam được gom lại còn 34 đơn vị, cùng 3.321 phường, xã, đặc khu mới. Điều này không chỉ là dấu mốc đổi mới, mà còn là bước đi quan trọng nâng cao hiệu quả quản lý, tiết kiệm tài nguyên và cải thiện dịch vụ hành chính cho người dân."
+      },
+      {
+        "title": "Google Drive",
+        "url": "https://drive.google.com",
+        "logo_image": "https://www.gstatic.com/images/branding/product/1x/drive_2020q4_48dp.png",
+        "desc": "Lưu trữ và chia sẻ tệp tin trực tuyến"
+      },
+      {
+        "title": "Cobalt.tools",
+        "url": "https://cobalt.tools/",
+        "logo_image": "https://byothe.fr/wp-content/uploads/2025/02/Cobalt.tools_.jpg",
+        "desc": "Giúp bạn tải xuống video, âm thanh, hình ảnh từ các nền tảng như YouTube, TikTok, Instagram…"
+      }
+    ]
+  }
+]
+

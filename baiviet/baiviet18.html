@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2 Cách tắt Windows Security (Windows Defender) trên Windows 11</title>
+    <meta name="description" content="Hướng dẫn chi tiết 2 cách tắt Windows Security (Windows Defender) trên Windows 11 một cách nhanh chóng và dễ dàng.">
+    <meta name="keywords" content="Windows Security, Windows Defender, tắt diệt virus, Windows 11, thủ thuật máy tính">
+    <meta name="author" content="AI Giáo Dục">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="2 Cách tắt Windows Security (Windows Defender) trên Windows 11">
+    <meta property="og:description" content="Hướng dẫn chi tiết 2 cách tắt Windows Security (Windows Defender) trên Windows 11 một cách nhanh chóng và dễ dàng.">
+    <meta property="og:image" content="https://cdn.tgdd.vn//GameApp/1389822//a0-800x419.jpg">
+    <meta property="og:url" content="[URL chuẩn của trang]">
+    <meta property="og:type" content="article">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #ec4899;
+            --background-color: #f8fafc;
+            --text-color: #1e293b;
+            --card-background: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .font-quicksand { font-family: 'Quicksand', sans-serif; }
+
+        .hero-section {
+            background-image: url('https://cdn.tgdd.vn//GameApp/1389822//a0-800x419.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .card {
+            background-color: var(--card-background);
+            border-radius: 16px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .step-image {
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            margin-top: 1.5rem;
+            transition: transform 0.4s ease;
+        }
+        .step-image:hover {
+            transform: scale(1.03);
+        }
+        .custom-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .custom-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+        }
+        .custom-list li::before {
+            content: none; /* Loại bỏ dấu chấm */
+        }
+        .video-button {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            border-radius: 50px;
+            text-align: center;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 20px rgba(79, 70, 229, 0.4);
+        }
+        .video-button:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(236, 72, 153, 0.5);
+        }
+        
+        /* Scroll to top button */
+        #scrollToTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        #scrollToTopBtn.show {
+            display: flex;
+            opacity: 1;
+            transform: scale(1);
+        }
+        #scrollToTopBtn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animated-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .animated-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Menu -->
+    <div id="menu-container"></div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section py-24 md:py-40 text-white text-center">
+            <div class="hero-overlay"></div>
+            <div class="hero-content container mx-auto px-4">
+                <h1 class="text-4xl md:text-6xl font-montserrat font-bold mb-4" style="text-shadow: 2px 2px 10px rgba(0,0,0,0.7);">
+                    2 Cách tắt Windows Security (Windows Defender) trên Windows 11
+                </h1>
+                <p class="text-lg md:text-xl font-quicksand max-w-3xl mx-auto" style="text-shadow: 1px 1px 5px rgba(0,0,0,0.6);">
+                    Phần mềm diệt virus miễn phí và mạnh mẽ từ Microsoft, nhưng đôi khi bạn cần tạm thời vô hiệu hóa nó.
+                </p>
+            </div>
+        </section>
+
+        <!-- Article Content -->
+        <article class="container mx-auto px-4 py-12 md:py-20">
+            <div class="max-w-4xl mx-auto">
+                <div class="card p-6 md:p-10 mb-10 animated-section">
+                    <p class="text-xl leading-relaxed text-slate-600">
+                        Windows Security là một phần mềm diệt virus miễn phí và được cài đặt sẵn trên các dòng máy tính chạy hệ điều hành của nhà Windows và bao gồm cả Windows 11. Với giao diện và cách thao tác hoàn toàn mới như vậy, nếu bạn chưa biết cách tắt phần mềm diệt virus thì bài viết này sẽ hướng dẫn cho bạn cách tắt Windows Security (Windows Defender) trên Windows 11.
+                    </p>
+                </div>
+
+                <!-- Section 1 -->
+                <section class="mb-16 animated-section">
+                    <h2 class="text-3xl md:text-4xl font-bold font-montserrat mb-8 border-l-4 border-indigo-500 pl-4">I. Tắt trong Cài đặt (Settings)</h2>
+                    <div class="card p-6 md:p-8">
+                        <h3 class="text-2xl font-quicksand font-bold mb-4 text-indigo-600">1. Hướng dẫn nhanh</h3>
+                        <ul class="custom-list space-y-3 mb-10">
+                            <li>Mở <strong>Cài đặt (Settings)</strong></li>
+                            <li>Chọn <strong>Privacy & Security</strong> &rarr; <strong>Windows Security</strong></li>
+                            <li>Chọn <strong>Virus & threat protection</strong></li>
+                            <li>Chọn <strong>Manage Settings</strong> tại mục <strong>Virus & threat protection settings</strong></li>
+                            <li>Tắt công tắc mục <strong>Real-time Protection</strong> để tắt Windows Security</li>
+                        </ul>
+
+                        <h3 class="text-2xl font-quicksand font-bold mb-6 text-indigo-600">2. Hướng dẫn chi tiết</h3>
+                        <div class="space-y-10">
+                            <div class="p-4 border-l-2 border-slate-200">
+                                <p class="font-semibold text-lg"><strong>Bước 1:</strong> Vào <strong>Settings > chọn Privacy & Security > chọn tiếp mục Windows Security</strong>.</p>
+                                <img src="https://cdn.tgdd.vn//GameApp/1389822//a1-800x504.jpg" alt="Bước 1 - Chọn Windows Security" class="step-image w-full h-auto">
+                            </div>
+                            <div class="p-4 border-l-2 border-slate-200">
+                                <p class="font-semibold text-lg"><strong>Bước 2:</strong> Tiếp theo, bạn chọn <strong>Virus & threat protection</strong>.</p>
+                                <img src="https://cdn.tgdd.vn//GameApp/1389822//a2-800x540.jpg" alt="Bước 2 - Chọn Virus & threat protection" class="step-image w-full h-auto">
+                            </div>
+                            <div class="p-4 border-l-2 border-slate-200">
+                                <p class="font-semibold text-lg"><strong>Bước 3:</strong> Sau đó, tại mục <strong>Virus & threat protection settings > bạn chọn Manage Settings</strong>.</p>
+                                <img src="https://cdn.tgdd.vn//GameApp/1389822//a3-800x563.jpg" alt="Bước 3 - Chọn Manage Settings" class="step-image w-full h-auto">
+                            </div>
+                            <div class="p-4 border-l-2 border-slate-200">
+                                <p class="font-semibold text-lg"><strong>Bước 4:</strong> Cuối cùng, tắt công tắc mục <strong>Real-time Protection</strong> để tắt Windows Security.</p>
+                                <img src="https://cdn.tgdd.vn//GameApp/1389822//a4-800x562.jpg" alt="Bước 4 - Tắt Real-time Protection" class="step-image w-full h-auto">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2 -->
+                <section class="mb-16 animated-section">
+                    <h2 class="text-3xl md:text-4xl font-bold font-montserrat mb-8 border-l-4 border-pink-500 pl-4">II. Dùng Defender Control</h2>
+                     <div class="card p-6 md:p-8">
+                        <h3 class="text-2xl font-quicksand font-bold mb-4 text-pink-600">1. Hướng dẫn nhanh</h3>
+                        <ul class="custom-list space-y-3 mb-10">
+                            <li>Tải phần mềm Defender Control 2.0 <a href="https://www.sordum.org/downloads/?st-defender-control" target="_blank" class="text-blue-500 hover:underline font-semibold">tại đây</a>.</li>
+                            <li>Giải nén file vừa tải.</li>
+                            <li>Mở tệp <strong>dfControl.exe</strong> > Nhập Password là "sordum" > nhấn OK.</li>
+                            <li>Chọn 1 trong 2 nút: <strong>Disable Windows Defender</strong> (Tắt) hoặc <strong>Enable Windows Defender</strong> (Mở).</li>
+                        </ul>
+
+                        <h3 class="text-2xl font-quicksand font-bold mb-6 text-pink-600">2. Hướng dẫn chi tiết</h3>
+                        <div class="space-y-10">
+                            <div class="p-4 border-l-2 border-slate-200">
+                                <p class="font-semibold text-lg"><strong>Bước 1:</strong> Tải phần mềm Defender Control 2.0 <a href="https://www.sordum.org/downloads/?st-defender-control" target="_blank" class="text-blue-500 hover:underline font-semibold">tại đây</a>.</p>
+                            </div>
+                            <div class="p-4 border-l-2 border-slate-200">
+                                <p class="font-semibold text-lg"><strong>Bước 2:</strong> Tại file vừa tải về, bạn click chuột phải và chọn <strong>Extract All...</strong> để giải nén file.</p>
+                                <img src="https://cdn.tgdd.vn//GameApp/1389822//b1-800x610.jpg" alt="Bước 2 - Giải nén file" class="step-image w-full h-auto">
+                            </div>
+                            <div class="p-4 border-l-2 border-slate-200">
+                                <p class="font-semibold text-lg"><strong>Bước 3:</strong> Mở file vừa giải nén > Mở tệp <strong>dfControl.exe</strong> > Nhập Password là "sordum" > nhấn OK.</p>
+                                <img src="https://cdn.tgdd.vn//GameApp/1389822//b2-800x611-1.jpg" alt="Bước 3 - Mở dfControl.exe" class="step-image w-full h-auto">
+                            </div>
+                            <div class="p-4 border-l-2 border-slate-200">
+                                <p class="font-semibold text-lg"><strong>Bước 4:</strong> Sau khi mở phần mềm, bạn chọn 1 trong 2 nút: <strong>Disable Windows Defender</strong> (Tắt) hoặc <strong>Enable Windows Defender</strong> (Mở).</p>
+                                <img src="https://cdn.tgdd.vn//GameApp/1389822//b3-800x496.jpg" alt="Bước 4 - Chọn Disable hoặc Enable" class="step-image w-full h-auto">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Go to top">↑</button>
+
+    <!-- JavaScript to load Menu and Footer -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Load Menu
+            fetch('../assets/includes/menu.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('menu-container').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading menu:', error));
+
+            // Load Footer
+            fetch('../assets/includes/footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-container').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading footer:', error));
+
+            // Scroll to top button logic
+            const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+            window.onscroll = function() {
+                if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
+                }
+            };
+            scrollToTopBtn.onclick = function() {
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            };
+
+            // Animation on scroll logic
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.animated-section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+
+</body>
+</html>

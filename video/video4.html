@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Tạo Mindmap Từ Bất Kỳ Nội Dung Nào</title>
+    
+    <!-- SEO and Open Graph Tags -->
+    <meta name="description" content="Biến bất kỳ nội dung nào trên web thành sơ đồ tư duy (mindmap) trong tích tắc với tiện ích mở rộng cực hay này. Học nhanh, nhớ lâu, nắm ý chính dễ dàng.">
+    <meta property="og:title" content="Hướng Dẫn Tạo Mindmap Từ Bất Kỳ Nội Dung Nào">
+    <meta property="og:description" content="Biến bất kỳ nội dung nào trên web thành sơ đồ tư duy (mindmap) trong tích tắc!">
+    <meta property="og:image" content="https://res.cloudinary.com/dejnvixvn/image/upload/v1752719626/1sF-w8X7cDU-HD_zpw4e2.jpg">
+    <meta property="og:url" content="[URL chuẩn của trang]">
+    <meta property="og:type" content="article">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .font-quicksand {
+            font-family: 'Quicksand', sans-serif;
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Menu Placeholder -->
+    <div id="menu-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 mt-16">
+        <article class="bg-white rounded-xl shadow-2xl overflow-hidden">
+            <!-- Header Image with Blurred Background Effect -->
+            <div class="relative h-64 md:h-96 overflow-hidden">
+                <!-- Blurred Background -->
+                <div class="absolute inset-0 bg-cover bg-center blur-md scale-110" style="background-image: url('https://res.cloudinary.com/dejnvixvn/image/upload/v1752719626/1sF-w8X7cDU-HD_zpw4e2.jpg');"></div>
+                <!-- Foreground Image -->
+                <div class="absolute inset-0 bg-contain bg-no-repeat bg-center" style="background-image: url('https://res.cloudinary.com/dejnvixvn/image/upload/v1752719626/1sF-w8X7cDU-HD_zpw4e2.jpg');"></div>
+            </div>
+
+            <div class="p-6 md:p-12">
+                <!-- Introduction -->
+                <section class="mb-8">
+                    <p class="text-lg md:text-xl font-quicksand text-gray-600 mb-4">
+                        Bạn có đang mệt mỏi với việc đọc những đoạn văn dài, tài liệu dày cộp mà không biết bắt đầu từ đâu? 😵‍💫
+                    </p>
+                    <p class="text-lg md:text-xl font-quicksand text-gray-600">
+                        Giờ thì dễ rồi! Với tiện ích mở rộng (extension) cực hay này, bạn có thể biến bất kỳ nội dung nào trên web thành sơ đồ tư duy (mindmap) trong tích tắc!
+                    </p>
+                </section>
+
+                <!-- Features -->
+                <section class="mb-8">
+                    <h2 class="text-2xl font-bold mb-6 text-center text-blue-600">Điểm Nổi Bật</h2>
+                    <div class="grid md:grid-cols-3 gap-6 text-center">
+                        <div class="bg-blue-50 p-6 rounded-lg shadow-md card-hover">
+                            <h3 class="text-xl font-semibold mb-2">✅ Dễ Dùng</h3>
+                            <p class="font-quicksand">Chỉ với 1 cú nhấp chuột, mọi nội dung phức tạp đều trở nên đơn giản.</p>
+                        </div>
+                        <div class="bg-green-50 p-6 rounded-lg shadow-md card-hover">
+                            <h3 class="text-xl font-semibold mb-2">✅ Hỗ Trợ Tiếng Việt</h3>
+                            <p class="font-quicksand">Phân tích và tạo sơ đồ tư duy chính xác với nội dung tiếng Việt.</p>
+                        </div>
+                        <div class="bg-yellow-50 p-6 rounded-lg shadow-md card-hover">
+                            <h3 class="text-xl font-semibold mb-2">✅ Học Nhanh - Nhớ Lâu</h3>
+                            <p class="font-quicksand">Giúp bạn nắm bắt ý chính dễ dàng và ghi nhớ thông tin hiệu quả.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Target Audience -->
+                <section class="mb-12">
+                     <h2 class="text-2xl font-bold mb-6 text-center text-purple-600">Dành Cho Ai?</h2>
+                     <ul class="grid md:grid-cols-3 gap-4 text-center font-quicksand text-gray-700">
+                        <li class="bg-gray-100 p-4 rounded-lg"><strong>Học sinh, sinh viên</strong> ôn bài</li>
+                        <li class="bg-gray-100 p-4 rounded-lg"><strong>Giáo viên</strong> thiết kế bài giảng</li>
+                        <li class="bg-gray-100 p-4 rounded-lg"><strong>Người đi làm</strong> tổng hợp tài liệu</li>
+                     </ul>
+                </section>
+
+                <!-- Video Embed -->
+                <section class="mb-12">
+                    <h2 class="text-2xl font-bold mb-6 text-center">📽️ Hướng Dẫn Chi Tiết</h2>
+                    <div class="aspect-video rounded-lg overflow-hidden shadow-lg">
+                        <iframe src="https://www.youtube.com/embed/1sF-w8X7cDU?si=-t2nf3bnrNBZghtg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="w-full h-full"></iframe>
+                    </div>
+                </section>
+
+                <!-- Call to Action -->
+                <section class="text-center">
+                    <p class="mb-6 font-quicksand">👉 Nếu thấy hữu ích, đừng quên thả like, chia sẻ và bình luận nhé!</p>
+                    <a href="https://www.youtube.com/@quanh95" target="_blank" rel="noopener noreferrer" class="inline-block bg-red-600 text-white font-bold py-3 px-8 rounded-full hover:bg-red-700 transition-transform transform hover:scale-105">
+                        Xem thêm video
+                    </a>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Function to fetch and insert HTML content
+        const includeHTML = (elementId, filePath) => {
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error fetching HTML:', error);
+                    document.getElementById(elementId).innerHTML = `<p class="text-center text-red-500">Error loading ${elementId}.</p>`;
+                });
+        };
+
+        // Load Menu and Footer
+        // Note: The paths are relative to the location of video4.html
+        includeHTML('menu-placeholder', '../assets/includes/menu.html');
+        includeHTML('footer-placeholder', '../assets/includes/footer.html');
+    </script>
+</body>
+</html>

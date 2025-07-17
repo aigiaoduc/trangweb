@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ứng Dụng AI Tạo Truyện Tranh Minh Họa Nội Dung - Hệ thống Khóa học</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        .header {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #a7bfe8 0%, #6190e8 100%);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-top: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: moveCircle1 10s infinite alternate;
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: moveCircle2 12s infinite alternate;
+        }
+        @keyframes moveCircle1 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, 50px); }
+        }
+        @keyframes moveCircle2 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-80px, -30px); }
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #e0f2f7 0%, #c2e9fb 100%); /* Màu nền nhẹ nhàng */
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        }
+        .card h4 {
+            color: #007bff; /* Màu xanh dương cho tiêu đề */
+        }
+        .card p {
+            color: #4a5568; /* Màu xám đậm cho mô tả */
+        }
+        .card a {
+            background-color: #4299e1; /* Màu xanh dương cho nút */
+        }
+        .card a:hover {
+            background-color: #3182ce; /* Màu xanh đậm hơn khi hover */
+        }
+        .logout-button {
+            background-color: #ef4444;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .logout-button:hover {
+            background-color: #dc2626;
+            transform: translateY(-2px);
+        }
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        p {
+            font-family: 'Inter', sans-serif;
+        }
+        .content-wrapper {
+            max-width: 1200px; /* Giới hạn chiều rộng của nội dung chính */
+            margin: 0 auto; /* Căn giữa nội dung chính */
+            padding: 0 1rem; /* Thêm padding để nội dung không dính vào mép */
+        }
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                width: 100%;
+            }
+        }
+    </style>
+<script src="script.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        const courseId = 'khoahoc_ungdung_ai_truyentranh'; // ID của khóa học này
+
+        if (isLoggedIn !== 'true' || !currentUser || !currentUser.courses || !currentUser.courses.includes(courseId)) {
+            alert('Bạn không có quyền truy cập khóa học này. Vui lòng đăng nhập hoặc liên hệ quản trị viên.');
+            window.location.href = 'login.html'; // Chuyển hướng về trang đăng nhập
+        }
+    });
+</script>
+</head>
+<body>
+    <header class="header">
+        <div class="container flex justify-between items-center">
+            <h1 class="text-3xl font-bold">Ứng Dụng AI Tạo Truyện Tranh Minh Họa Nội Dung</h1>
+            <nav>
+                <button onclick="logoutUser()" class="logout-button">Đăng xuất</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="content-wrapper">
+        <main class="container my-8">
+            <div class="hero-section">
+                    <h2 class="text-5xl font-bold mb-6">Chào mừng!</h2>
+                    <p class="text-2xl mb-10 leading-relaxed">Ứng dụng Tạo truyện tranh bằng AI là công cụ hỗ trợ người dùng biến ý tưởng thành những câu chuyện tranh sinh động chỉ trong vài bước đơn giản. Với khả năng tự động tạo hình ảnh, nhân vật dựa trên kịch bản nhập vào, ứng dụng giúp tiết kiệm thời gian, đặc biệt phù hợp cho giáo viên, học sinh, người sáng tạo nội dung và những ai yêu thích kể chuyện. Không cần kỹ năng thiết kế – chỉ cần bạn có câu chuyện, ứng dụng sẽ lo phần còn lại!</p>
+                    <a href="https://kontum01-my.sharepoint.com/:u:/g/personal/quanth_c12sb_st_gdkontum_edu_vn/EQZgAdDZ8ntKv3ufZba81KwBSi3LBULd2ZJ84q3MxrqYow?e=7IgBfn" target="_blank" class="inline-block bg-red-600 text-white px-10 py-4 rounded-full text-xl font-bold shadow-lg hover:bg-red-700 transform hover:scale-105 transition duration-300 animate-pulse">Tải ứng dụng ngay!</a>
+                    <a href="#content" class="inline-block bg-white text-blue-600 px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-gray-100 transform hover:scale-105 transition duration-300 ml-4">Bắt đầu học</a>
+                </div>
+
+                <section id="content" class="my-12">
+                    <h3 class="text-4xl font-bold text-center mb-10 text-gray-800">Nội dung Khóa học: Ứng Dụng AI Tạo Truyện Tranh Minh Họa Nội Dung</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="card">
+                            <h4 class="text-2xl font-bold mb-4 text-blue-700">Phần 1. Giới thiệu khóa học</h4>
+                            <p class="text-gray-700">Giới thiệu tổng quan về khóa học và những gì bạn sẽ học được.</p>
+                            <a href="https://kontum01-my.sharepoint.com/:v:/g/personal/quanth_c12sb_st_gdkontum_edu_vn/EZAfH5lTm_hEsQp8pvQC5Q4BiJoOLkW0uUGMkmoJdfVEbw?e=8cHAFF" target="_blank" class="mt-6 inline-block bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Xem video</a>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-2xl font-bold mb-4 text-blue-700">Phần 2. Hướng dẫn cài đặt và sử dụng ứng dụng</h4>
+                            <p class="text-gray-700">Hướng dẫn chi tiết cách cài đặt và bắt đầu sử dụng ứng dụng tạo truyện tranh AI.</p>
+                            <a href="https://kontum01-my.sharepoint.com/:v:/g/personal/quanth_c12sb_st_gdkontum_edu_vn/EfmNu922sWNIpyt4u4Ropc0Bubs6EdGwjSvG46RW4AzhiA?e=LdROct" target="_blank" class="mt-6 inline-block bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Xem video</a>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-2xl font-bold mb-4 text-blue-700">Phần 3. Làm quen với giao diện ứng dụng</h4>
+                            <p class="text-gray-700">Tìm hiểu về các thành phần và chức năng của giao diện người dùng.</p>
+                            <a href="https://kontum01-my.sharepoint.com/:v:/g/personal/quanth_c12sb_st_gdkontum_edu_vn/Ecq1XHLifa1LqR0colSDBcgBGBmwUchrNtYzG_ZOjFCG-Q?e=LclwZJ" target="_blank" class="mt-6 inline-block bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Xem video</a>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-2xl font-bold mb-4 text-blue-700">Phần 4. Tạo kịch bản truyện tranh bằng AI</h4>
+                            <p class="text-gray-700">Hướng dẫn cách sử dụng AI để tạo ra các kịch bản truyện tranh độc đáo.</p>
+                            <a href="https://kontum01-my.sharepoint.com/:v:/g/personal/quanth_c12sb_st_gdkontum_edu_vn/EbJNlYkmFn1Nr6K-SCRfujABxg9WPx_gaVPrQbJsP0t3CQ?e=t51fOR" target="_blank" class="mt-6 inline-block bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Xem video</a>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-2xl font-bold mb-4 text-blue-700">Phần 5. Kết nối API để tạo truyện tự động</h4>
+                            <p class="text-gray-700">Tìm hiểu cách tích hợp API để tự động hóa quá trình tạo truyện tranh.</p>
+                            <a href="https://kontum01-my.sharepoint.com/:v:/g/personal/quanth_c12sb_st_gdkontum_edu_vn/EfOrQVVrLstBr7ySQZEhrnkB1rGiDgiUDjNBwY2VtCADiw?e=T9Zi7f" target="_blank" class="mt-6 inline-block bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Xem video</a>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-2xl font-bold mb-4 text-blue-700">Phần 6. Nhập câu chuyện của bạn vào hệ thống</h4>
+                            <p class="text-gray-700">Hướng dẫn cách đưa câu chuyện của bạn vào hệ thống để bắt đầu quá trình tạo truyện.</p>
+                            <a href="https://kontum01-my.sharepoint.com/:v:/g/personal/quanth_c12sb_st_gdkontum_edu_vn/EQYi4_XdqxVGo7KZi6csIu0BLJ3Fx8dT1rCQGhCKx686Jw?e=uTuyTk" target="_blank" class="mt-6 inline-block bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Xem video</a>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-2xl font-bold mb-4 text-blue-700">Phần 7. Cài đặt hồ sơ và thông tin nhân vật</h4>
+                            <p class="text-gray-700">Thiết lập hồ sơ và tùy chỉnh thông tin cho các nhân vật trong truyện của bạn.</p>
+                            <a href="https://kontum01-my.sharepoint.com/:v:/g/personal/quanth_c12sb_st_gdkontum_edu_vn/EbWJGG9x8LdLqYbdbSkC2PoB0e55717O9pPQbv5KZ4S4Jg?e=fD8K4J" target="_blank" class="mt-6 inline-block bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Xem video</a>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-2xl font-bold mb-4 text-blue-700">Phần 8. Tùy chỉnh phong cách truyện tranh</h4>
+                            <p class="text-gray-700">Khám phá các tùy chọn để thay đổi phong cách hình ảnh và đồ họa của truyện tranh.</p>
+                            <a href="https://kontum01-my.sharepoint.com/:v:/g/personal/quanth_c12sb_st_gdkontum_edu_vn/ESQKHmYMc4FEgXPynonEzRMBY2jPzuDg-JPYvbQhG6QCmQ?e=zki1aG" target="_blank" class="mt-6 inline-block bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Xem video</a>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-2xl font-bold mb-4 text-blue-700">Phần 9. Tạo truyện tranh hoàn chỉnh và tải về</h4>
+                            <p class="text-gray-700">Hoàn tất quá trình tạo truyện tranh và hướng dẫn cách tải về sản phẩm cuối cùng.</p>
+                            <a href="https://kontum01-my.sharepoint.com/:v:/g/personal/quanth_c12sb_st_gdkontum_edu_vn/EXkcGetSTu9AmLA4BzbXyNcBN4bJKMjQZxA4P5IMkSnWBg?e=gnj6wB" target="_blank" class="mt-6 inline-block bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Xem video</a>
+                        </div>
+                        <div class="card">
+                            <h4 class="text-2xl font-bold mb-4 text-blue-700">Phần 10. Kết thúc khóa học</h4>
+                            <p class="text-gray-700">Tổng kết khóa học và các bước tiếp theo để tiếp tục phát triển kỹ năng của bạn.</p>
+                            <a href="https://kontum01-my.sharepoint.com/:v:/g/personal/quanth_c12sb_st_gdkontum_edu_vn/Eb3VnCEf4xNIk5JzZBVawfcBofch1JVY_XM97uLX0b2XHw?e=H2FWlS" target="_blank" class="mt-6 inline-block bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Xem video</a>
+                        </div>
+                    </div>
+                </section>
+            </main>
+    </div>
+
+    <footer class="bg-gray-800 text-white py-6 mt-12">
+        <div class="container text-center">
+            <p>&copy; 2025 Hệ thống Khóa học. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+</body>
+</html>

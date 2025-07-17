@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥1001 Prompt Cho Mọi Ngành – Làm Chủ AI Trong Thời Đại Số</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Gray 50 */
+            color: #1f2937; /* Gray 700 */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero {
+            background-color: #3b82f6; /* Blue 500 */
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 0.75rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            filter: blur(50px);
+            z-index: 1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            filter: blur(30px);
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            line-height: 1.75;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Quicksand', sans-serif;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #3b82f6; /* Blue 500 */
+        }
+
+        .card ul {
+            list-style: none; /* Loại bỏ dấu chấm đầu dòng */
+            padding-left: 0;
+        }
+
+        .card li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem; /* Tạo khoảng trống cho icon */
+        }
+
+        .card li::before {
+            content: "\f00c"; /* FontAwesome check icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #22c55e; /* Green 500 */
+        }
+
+        .download-button {
+            display: inline-block;
+            background-color: #22c55e; /* Green 500 */
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .download-button:hover {
+            background-color: #16a34a; /* Green 600 */
+            transform: translateY(-3px);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .hero {
+                padding: 2rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="1001 Prompt Câu Lệnh 2025 - Dành Cho MỌI Ngành Nghề">
+    <meta property="og:description" content="Khám phá bộ 1001 prompt câu lệnh dành cho mọi ngành nghề, giúp bạn làm chủ AI và đạt được thành công.">
+    <meta property="og:image" content="https://cdn-media.sforum.vn/storage/app/media/chatgpt-prompt-thumbnail.jpeg">
+    <meta property="og:url" content="https://aigiaoduc.github.io/baiviet/baiviet13.html">
+    <meta property="og:type" content="article">
+</head>
+<body>
+    <div id="menu-placeholder"></div>
+    <script>
+        fetch('../assets/includes/menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu-placeholder').innerHTML = data;
+                const menuToggle = document.getElementById('menuToggle');
+                const navLinks = document.getElementById('navLinks');
+                if (menuToggle && navLinks) {
+                    menuToggle.addEventListener('click', () => {
+                        navLinks.classList.toggle('open');
+                        menuToggle.classList.toggle('open');
+                    });
+                }
+            });
+    </script>
+    <div class="container">
+        <section class="hero">
+            <h1>💼 1001 Prompt Câu Lệnh 2025 – Dành Cho MỌI Ngành Nghề</h1>
+            <p>Trong thời đại trí tuệ nhân tạo bùng nổ, prompt không chỉ là "một câu lệnh nhập vào AI" – mà chính là chìa khóa thành công trong mọi lĩnh vực: từ giáo dục, kinh doanh, lập trình đến marketing, hành chính, sáng tạo nội dung...</p>
+        </section>
+
+        <img src="https://cdn-media.sforum.vn/storage/app/media/chatgpt-prompt-thumbnail.jpeg" alt="1001 Prompt Câu Lệnh 2025" class="my-8 mx-auto block">
+        <div class="banner-container" style="text-align: center; margin: 20px 0;">
+            <a href="https://aigiaoduc.io.vn/pages/khoahoconline.html" target="_blank">
+                <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1752286655/Banner_ADS_obhpcy.png" 
+                     alt="Banner Quảng Cáo" 
+                     style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block;">
+            </a>
+        </div>
+
+        <section class="card">
+            <h2>🚀 Có Gì Trong Bộ Prompt Này?</h2>
+            <p>Tài liệu gồm 1001 câu lệnh mẫu dành cho ChatGPT và các trợ lý AI khác (như Gemini, Claude, Copilot...), được phân loại rõ ràng theo lĩnh vực thực tế:</p>
+        </section>
+
+        <section class="card">
+            <h2>👩‍🏫 Giáo dục – Đào tạo</h2>
+            <ul>
+                <li>Soạn giáo án, bài giảng</li>
+                <li>Tạo câu hỏi trắc nghiệm</li>
+                <li>Tóm tắt nội dung sách giáo khoa</li>
+                <li>Viết phản hồi nhận xét học sinh</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>👨‍💻 Lập trình – Công nghệ</h2>
+            <ul>
+                <li>Viết code nhanh</li>
+                <li>Tìm và sửa lỗi</li>
+                <li>Tối ưu thuật toán</li>
+                <li>Sinh dữ liệu giả lập</li>
+            </ul>
+        </section>
+
+
+        <section class="card">
+            <h2>📈 Marketing – Kinh doanh</h2>
+            <ul>
+                <li>Viết nội dung quảng cáo</li>
+                <li>Lên kế hoạch truyền thông</li>
+                <li>Đề xuất chiến lược bán hàng</li>
+                <li>Phân tích hành vi khách hàng</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>✍️ Sáng tạo nội dung</h2>
+            <ul>
+                <li>Viết blog, caption mạng xã hội</li>
+                <li>Biến ý tưởng thành bài viết hoàn chỉnh</li>
+                <li>Tạo kịch bản video, podcast, animation</li>
+                <li>Dịch – viết lại – biến tấu nội dung</li>
+            </ul>
+        </section>
+
+        <img src="https://cdn.prod.website-files.com/6570689047ede483c08b91fc/66fade700d8bfe1b22ab73be_Apresenta%C3%A7%C3%A3o%20B%C3%A1sica%20Simples%20Manchas%20Pastel.png" alt="Prompt" class="my-8 mx-auto block">
+
+        <section class="card">
+            <h2>📊 Hành chính – Văn phòng</h2>
+            <ul>
+                <li>Soạn email chuyên nghiệp</li>
+                <li>Viết báo cáo, biên bản họp</li>
+                <li>Tạo checklist công việc, biểu mẫu</li>
+                <li>Viết đơn từ hành chính chuẩn chỉ</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>⚖️ Luật – Y tế – Tư vấn</h2>
+            <ul>
+                <li>Giải thích thuật ngữ chuyên ngành</li>
+                <li>Viết nội dung phổ thông hóa</li>
+                <li>Chuẩn bị tài liệu tham khảo</li>
+                <li>Gợi ý kịch bản chăm sóc khách hàng</li>
+            </ul>
+        </section>
+
+        <img src="https://img.computing.es/wp-content/uploads/2024/05/30122845/prompt-2.jpg" alt="Prompt" class="my-8 mx-auto block">
+
+        <section class="card">
+            <h2>🔥 Điểm Mạnh Của Tài Liệu</h2>
+            <ul>
+                <li>Dành cho mọi đối tượng: Dù bạn là sinh viên, giáo viên, nhân viên văn phòng hay người làm sáng tạo – đều có phần dành riêng cho bạn.</li>
+                <li>Cập nhật xu hướng 2025: Các prompt được viết theo cấu trúc chuẩn mới – hỗ trợ tốt cho các mô hình AI hiện đại.</li>
+                <li>Sử dụng ngay – không cần chỉnh sửa nhiều: Mỗi prompt đều ngắn gọn, rõ ý và có thể sử dụng trực tiếp.</li>
+                <li>Tùy chỉnh dễ dàng theo mục tiêu cá nhân: Gợi ý thêm cách biến tấu để phù hợp với ngữ cảnh riêng của bạn.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>🌟 Kết Luận</h2>
+            <p>“Người biết dùng AI sẽ thay thế người không biết – và prompt chính là kỹ năng cốt lõi.”</p>
+            <p>1001 Prompt Câu Lệnh 2025 Dành Cho Mọi Ngành Nghề chính là bộ tài liệu bạn nên sở hữu, học và áp dụng ngay từ hôm nay.</p>
+        </section>
+
+        <div class="text-center my-8">
+            <a href="https://kontum01-my.sharepoint.com/:b:/g/personal/quanth_c12sb_st_gdkontum_edu_vn/Eeq-tiJpLL9OrUUISix_q8cBMceicS2h-TVdJqmIp6kheQ?e=LAmPye" class="download-button" target="_blank">�Download Bộ Prompt Tại Đây</a>
+        </div>
+    </div>
+    <div id="footer-placeholder"></div>
+    <script>
+        fetch('../assets/includes/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            });
+    </script>
+</body>
+</html>

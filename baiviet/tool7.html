@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cobalt.tools – Lưu mọi nội dung yêu thích, không giới hạn</title>
+    <meta name="description" content="Cobalt.tools giúp bạn tải xuống video, âm thanh, hình ảnh từ các nền tảng như YouTube, TikTok, Instagram… chỉ bằng cách dán link – không pop-up, không paywall, chỉ thuần công nghệ và trải nghiệm người dùng tốt nhất.">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Cobalt.tools – Lưu mọi nội dung yêu thích, không giới hạn">
+    <meta property="og:description" content="Cobalt.tools giúp bạn tải xuống video, âm thanh, hình ảnh từ các nền tảng như YouTube, TikTok, Instagram… chỉ bằng cách dán link – không pop-up, không paywall, chỉ thuần công nghệ và trải nghiệm người dùng tốt nhất.">
+    <meta property="og:image" content="https://anonyviet.com/wp-content/uploads/2025/02/cobalttools-1-1.jpg">
+    <meta property="og:url" content="https://cobalt.tools/">
+    <meta property="og:type" content="article">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .list-none {
+            list-style: none;
+            padding-left: 0;
+        }
+        .hover-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            font-family: 'Quicksand', sans-serif;
+        }
+        .hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.2), 0 6px 8px -3px rgba(0, 0, 0, 0.1);
+        }
+        .cta-button {
+            background-color: #ff4500; /* OrangeRed */
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 9999px; /* full rounded */
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+            display: inline-block;
+            margin-top: 2rem;
+        }
+        .cta-button:hover {
+            background-color: #e03e00; /* Darker OrangeRed */
+            transform: translateY(-2px);
+        }
+        /* Responsive Navbar adjustments */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            transition: top 0.3s;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .logo-img {
+            height: 40px;
+            margin-right: 0.5rem;
+        }
+        .navbar .logo-text {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        .navbar .nav-links a:hover {
+            color: #ff4500;
+        }
+        .navbar .cta {
+            background-color: #ff4500;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .navbar .cta:hover {
+            background-color: #e03e00;
+        }
+        .navbar .menu-toggle {
+            display: none; /* Hidden on desktop */
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .navbar .menu-toggle span {
+            background: white;
+            height: 3px;
+            width: 25px;
+            margin: 4px 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: rgba(0, 0, 0, 0.8);
+                padding: 1rem 0;
+                text-align: center;
+            }
+            .navbar .nav-links.active {
+                display: flex;
+            }
+            .navbar .nav-links a {
+                padding: 0.75rem 0;
+            }
+            .navbar .cta {
+                display: none; /* Hide CTA button on mobile */
+            }
+            .navbar .menu-toggle {
+                display: flex; /* Show menu toggle on mobile */
+            }
+        }
+    </style>
+</head>
+<body class="pt-20"> <!-- Add padding-top to body to account for fixed navbar -->
+    <!-- Nội dung từ menu.html -->
+    <nav class="navbar" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 100; transition: top 0.3s; background: rgba(0, 0, 0, 0.5);">
+        <div class="logo">
+          <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
+          <span class="logo-text">Quân H</span>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <a href="../index.html">Trang chủ</a>
+          <a href="../baiviet.html">Bài viết</a>
+          <a href="../congcu.html">Công cụ</a>
+          <a href="../video.html">Video</a>
+          <a href="../lienhe.html">Liên hệ</a>
+        </div>
+        <a href="../lienhe.html" class="cta">Liên hệ</a>
+        <div class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+
+    <script>
+        // JavaScript for responsive navbar toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+        });
+    </script>
+
+    <header class="hero-section">
+        <div class="container mx-auto px-4 relative z-10">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 leading-tight">🚀 Cobalt.tools – Lưu mọi nội dung yêu thích, không giới hạn</h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto">Cobalt.tools giúp bạn tải xuống video, âm thanh, hình ảnh từ các nền tảng như YouTube, TikTok, Instagram… chỉ bằng cách dán link – không pop-up, không paywall, chỉ thuần công nghệ và trải nghiệm người dùng tốt nhất.</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 md:py-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="card mb-8">
+                <img src="https://anonyviet.com/wp-content/uploads/2025/02/cobalttools-1-1.jpg" alt="Cobalt.tools Interface" class="w-full h-auto rounded-lg mb-6 shadow-md">
+                <h2 class="text-3xl font-bold mb-4 text-center text-blue-700">✨ Điểm nổi bật</h2>
+                <ul class="list-none space-y-3 text-lg">
+                    <li class="hover-effect p-3 rounded-md bg-blue-50 hover:bg-blue-100">
+                        <span class="font-semibold text-blue-600">Lưu đa phương tiện chỉ với một thao tác:</span> hỗ trợ video, audio, GIF, hình ảnh từ hầu hết các mạng xã hội phổ biến.
+                    </li>
+                    <li class="hover-effect p-3 rounded-md bg-green-50 hover:bg-green-100">
+                        <span class="font-semibold text-green-600">Giao diện tối giản, không quảng cáo, không theo dõi người dùng:</span> trải nghiệm sạch sẽ, nhanh chóng.
+                    </li>
+                    <li class="hover-effect p-3 rounded-md bg-purple-50 hover:bg-purple-100">
+                        <span class="font-semibold text-purple-600">Bảo mật cao – không lưu log cá nhân:</span> cam kết không thu thập thông tin, khóa kết ngang AES-256, tunnel mã hóa hoàn toàn — đảm bảo riêng tư tuyệt đối.
+                    </li>
+                    <li class="hover-effect p-3 rounded-md bg-yellow-50 hover:bg-yellow-100">
+                        <span class="font-semibold text-yellow-600">Xử lý ngay trên thiết bị của bạn nếu có thể:</span> tăng tốc độ và giảm tải cho server; nếu thiết bị không hỗ trợ, server sẽ dùng phương án thay thế an toàn.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card mb-8">
+                <h2 class="text-3xl font-bold mb-4 text-center text-red-700">📦 Hỗ trợ các nền tảng nào?</h2>
+                <p class="text-lg mb-4">Cobalt.tools thao tác hiệu quả với hàng loạt dịch vụ như:</p>
+                <ul class="list-none grid grid-cols-1 md:grid-cols-2 gap-4 text-lg">
+                    <li class="hover-effect p-3 rounded-md bg-red-50 hover:bg-red-100">YouTube (Video, Shorts, Music)</li>
+                    <li class="hover-effect p-3 rounded-md bg-red-50 hover:bg-red-100">TikTok, Instagram, Facebook, Twitter/X, Pinterest, Reddit, Vimeo…</li>
+                    <li class="hover-effect p-3 rounded-md bg-red-50 hover:bg-red-100">SoundCloud, Bilibili, Twitch, Snapchat, LinkedIn, 9GAG… và nhiều nền tảng khác.</li>
+                </ul>
+            </div>
+
+            <div class="card mb-8">
+                <h2 class="text-3xl font-bold mb-4 text-center text-green-700">🛡 Vì sao bạn nên dùng Cobalt?</h2>
+                <ul class="list-none space-y-3 text-lg">
+                    <li class="hover-effect p-3 rounded-md bg-green-50 hover:bg-green-100">
+                        <span class="font-semibold text-green-600">Nhanh & đáng tin cậy:</span> Tốc độ cao, không bị chặn, không quảng cáo gây phiền.
+                    </li>
+                    <li class="hover-effect p-3 rounded-md bg-green-50 hover:bg-green-100">
+                        <span class="font-semibold text-green-600">An toàn & riêng tư:</span> Giao thức bảo mật, không ghi lại lịch sử truy cập.
+                    </li>
+                    <li class="hover-effect p-3 rounded-md bg-green-50 hover:bg-green-100">
+                        <span class="font-semibold text-green-600">Miễn phí & mã nguồn mở:</span> Bạn có thể tự host phiên bản riêng cho cộng đồng.
+                    </li>
+                    <li class="hover-effect p-3 rounded-md bg-green-50 hover:bg-green-100">
+                        <span class="font-semibold text-green-600">Không rườm rà:</span> Chỉ cần copy-paste link là xong.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card mb-8">
+                <h2 class="text-3xl font-bold mb-4 text-center text-purple-700">🧠 Minh họa ý nghĩa</h2>
+                <ul class="list-none space-y-3 text-lg">
+                    <li class="hover-effect p-3 rounded-md bg-purple-50 hover:bg-purple-100">Bạn là giáo viên muốn lưu video giảng dạy từ YouTube;</li>
+                    <li class="hover-effect p-3 rounded-md bg-purple-50 hover:bg-purple-100">Bạn là content creator cần trích âm thanh từ SoundCloud;</li>
+                    <li class="hover-effect p-3 rounded-md bg-purple-50 hover:bg-purple-100">Bạn là học sinh hoặc chuyên viên marketing đang thu thập tài liệu từ TikTok, Reels...</li>
+                </ul>
+                <p class="text-lg mt-4">Chỉ cần dán link vào Cobalt.tools — mọi thứ sẽ xử lý ngay, tiện lợi như bạn mong đợi.</p>
+            </div>
+
+            <div class="card text-center">
+                <h2 class="text-3xl font-bold mb-4 text-blue-700">🎯 Kết luận</h2>
+                <p class="text-lg mb-6">Cobalt.tools không chỉ là một trình tải media—mà còn là công cụ hỗ trợ tận dụng nội dung mở, giữ quyền riêng tư, loại bỏ quảng cáo và gỡ bỏ mọi rào cản kỹ thuật.</p>
+                <p class="text-xl font-semibold mb-8 text-gray-700">Hãy thử ứng dụng ngay hôm nay để lưu những nội dung yêu thích một cách dễ dàng và an toàn!</p>
+                <a href="https://cobalt.tools/" target="_blank" rel="noopener noreferrer" class="cta-button">Truy cập Cobalt Tools</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center p-6 mt-12">
+        <p>&copy; 2025 Cobalt.tools. All rights reserved.</p>
+    </footer>
+</body>
+</html>

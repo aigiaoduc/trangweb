@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiết Kế Ứng Dụng Dạy Học Bằng AI – Dễ Hơn Bạn Nghĩ!</title>
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Thiết Kế Ứng Dụng Dạy Học Bằng AI – Dễ Hơn Bạn Nghĩ!">
+    <meta property="og:description" content="Khóa học giúp thầy cô từng bước làm chủ công cụ, xây dựng nội dung, tích hợp hình ảnh – âm thanh, và xuất bản ứng dụng chỉ trong 1 buổi học!">
+    <meta property="og:image" content="https://aptech.fpt.edu.vn/wp-content/uploads/2022/10/mot-so-ung-dung-cua-lap-trinh-la-gi.jpg">
+    <meta property="og:url" content="[URL_CHUAN_CUA_TRANG_NAY]">
+    <meta property="og:type" content="article">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom styles for fonts and general layout */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light gray background */
+            color: #333;
+            line-height: 1.6;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
+        }
+        .text-quicksand {
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        /* Hero Section specific styles */
+        .hero-section {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 6rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: white; /* Ensure hero text is white */
+        }
+        .hero-section p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Card styles */
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        .card-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #4a90e2; /* Blue for titles */
+            margin-bottom: 1rem;
+        }
+        .card-content ul {
+            list-style: none; /* Remove default bullet points */
+            padding-left: 0;
+        }
+        .card-content ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #555;
+        }
+        .card-content ul li::before {
+            content: '✨'; /* Custom bullet point */
+            position: absolute;
+            left: 0;
+            color: #f5a623; /* Gold color for bullet */
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Image styles */
+        .content-image {
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Button styles */
+        .btn-primary {
+            background-color: #2575fc;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 999px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+            margin-top: 2rem;
+        }
+        .btn-primary:hover {
+            background-color: #6a11cb;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 4rem 1rem;
+                border-bottom-left-radius: 30px;
+                border-bottom-right-radius: 30px;
+            }
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            .hero-section p {
+                font-size: 1rem;
+            }
+            .card {
+                padding: 1rem;
+            }
+            .card-title {
+                font-size: 1.5rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            .hero-section p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Styles for unstyled lists (removing default bullets) */
+        .unstyled-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .unstyled-list li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 0; /* Ensure no default padding */
+        }
+        /* Specific styling for lists that should have custom bullets */
+        .custom-bullet-list li::before {
+            content: '•'; /* Or any other character like '✓', '★', etc. */
+            color: #2575fc; /* Example color */
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu content from menu.html -->
+    <style>
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem 2rem;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.5);
+      transition: top 0.3s;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #2f73ff;
+    }
+    .logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .nav-links { display: flex; gap: 2rem; font-weight: 600; }
+    .nav-links a { font-size: 1rem; color: #fff; text-decoration: none; transition: color 0.3s; }
+    .nav-links a:hover { color: #2f73ff; }
+    .cta {
+      padding: 0.6rem 1.4rem;
+      background: #2f73ff;
+      border-radius: 999px;
+      font-weight: 600;
+      color: #fff;
+      transition: background 0.3s;
+      text-decoration: none;
+    }
+    .cta:hover { background: #245ad1; }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 0.3rem;
+    }
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      border-radius: 5px;
+      transition: all 0.3s ease-in-out;
+    }
+    .menu-toggle.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar { padding: 1rem; }
+      .nav-links { display: none; flex-direction: column; width: 100%; background: rgba(0,0,0,0.8); position: absolute; top: 60px; left: 0; padding: 1rem; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 0.5rem 0; text-align: center; }
+      .cta { display: none; }
+      .menu-toggle { display: flex; }
+    }
+</style>
+<nav class="navbar">
+    <div class="logo">
+      <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
+      <span class="logo-text">Quân H</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html">Trang chủ</a>
+      <a href="../baiviet.html">Bài viết</a>
+      <a href="../congcu.html">Công cụ</a>
+      <a href="../video.html">Video</a>
+      <a href="../trochoi.html">Trò chơi</a>
+      <a href="../thinghiemao.html">Thí nghiệm ảo</a>
+      <a href="../khoahoconline.html">Khóa học</a>
+    </div>
+    <a href="../lienhe.html" class="cta">Liên hệ</a>
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      menuToggle.classList.toggle('open');
+    });
+</script>
+
+    <main class="container mx-auto px-4 py-8 pt-24"> <!-- Added pt-24 to account for fixed navbar -->
+        <!-- Hero Section -->
+        <section class="hero-section mb-12">
+            <h1 class="text-white text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
+                ✨ Thiết Kế Ứng Dụng Dạy Học Bằng AI – Dễ Hơn Bạn Nghĩ!
+            </h1>
+            <p class="text-lg md:text-xl mt-4 mb-6">
+                Trong thời đại công nghệ phát triển nhanh chóng, việc ứng dụng trí tuệ nhân tạo (AI) vào giảng dạy không còn là điều xa vời. Với Canva AI, giờ đây ngay cả những người không biết lập trình cũng có thể tự tay tạo ra ứng dụng dạy học chuyên nghiệp.
+            </p>
+            <p class="text-lg md:text-xl">
+                Và đó cũng chính là lý do khóa học “Thiết kế ứng dụng dạy học bằng AI” ra đời – giúp thầy cô từng bước làm chủ công cụ, xây dựng nội dung, tích hợp hình ảnh – âm thanh, và xuất bản ứng dụng chỉ trong 1 buổi học!
+            </p>
+        </section>
+
+        <!-- Main Content -->
+        <section class="max-w-4xl mx-auto">
+            <img src="https://aptech.fpt.edu.vn/wp-content/uploads/2022/10/mot-so-ung-dung-cua-lap-trinh-la-gi.jpg" alt="Ứng dụng AI trong lập trình" class="content-image w-full md:w-3/4 lg:w-2/3">
+
+            <div class="card mb-8">
+                <h2 class="card-title text-center">🎯 PHẦN CƠ BẢN – Làm chủ nền tảng</h2>
+                <p class="text-center text-gray-600 mb-6">Dành cho người mới bắt đầu, phần này sẽ giúp bạn nắm vững nền tảng sử dụng Canva AI trong thiết kế ứng dụng:</p>
+                <ol class="grid grid-cols-1 md:grid-cols-2 gap-4 list-decimal list-inside">
+                    <li>Khám phá Canva – Giới thiệu tổng quan về công cụ sáng tạo giáo dục phổ biến nhất hiện nay</li>
+                    <li>Đăng nhập & thiết lập tài khoản – Hướng dẫn cách đăng ký, kích hoạt, nhận tài khoản Pro</li>
+                    <li>Chọn nền tảng lập trình ứng dụng bằng Canva AI – Khởi tạo giao diện lập trình đơn giản</li>
+                    <li>Lên ý tưởng với ChatGPT – Học cách sử dụng AI để tạo nội dung hấp dẫn, logic</li>
+                    <li>Tạo ứng dụng tự động bằng cách nhập nội dung – Biến ý tưởng thành giao diện chỉ với vài cú nhấp</li>
+                    <li>Chỉnh sửa nhanh, gọn, hiệu quả – Tùy chỉnh nút bấm, văn bản, bố cục…</li>
+                    <li>Gắn bản quyền cho sản phẩm – Hướng dẫn đóng dấu cá nhân, bảo vệ ứng dụng</li>
+                </ol>
+            </div>
+
+            <img src="https://websitechuyennghiep.vn/data/images/lap-trinh-web-la-gi-cac-buoc-lap-trinh-web-co-ban.jpeg" alt="Lập trình web cơ bản" class="content-image w-full md:w-3/4 lg:w-2/3">
+
+            <div class="card mb-8">
+                <h2 class="card-title text-center">🚀 PHẦN NÂNG CAO – Cá nhân hóa ứng dụng</h2>
+                <p class="text-center text-gray-600 mb-6">Khi đã làm chủ nền tảng, bạn sẽ được hướng dẫn các kỹ thuật nâng cao để biến ứng dụng của mình trở nên sinh động và chuyên nghiệp hơn:</p>
+                <ol class="grid grid-cols-1 md:grid-cols-2 gap-4 list-decimal list-inside">
+                    <li>Tích hợp hình ảnh, âm thanh – Đưa hình minh họa, tiếng nói, nhạc nền vào nội dung</li>
+                    <li>Kết nối với đám mây – Giúp ứng dụng có thể chạy online hoặc lưu trữ an toàn</li>
+                    <li>Chèn hình ảnh vào giao diện Canva AI – Tùy biến ảnh động, icon, sticker theo chủ đề bài học</li>
+                    <li>Thêm âm thanh, giọng đọc vào ứng dụng – Tạo bài giảng có phát thanh tự động</li>
+                    <li>Xuất bản ứng dụng thành website hoặc chia sẻ trực tuyến – Chia sẻ cho học sinh, đồng nghiệp</li>
+                    <li>Tổng kết & định hướng sử dụng – Giúp bạn áp dụng ứng dụng vào thực tiễn giảng dạy hàng ngày</li>
+                </ol>
+            </div>
+
+            <img src="https://mona.media/wp-content/uploads/2023/03/lap-trinh-web-la-gi.jpg" alt="Lập trình web" class="content-image w-full md:w-3/4 lg:w-2/3">
+
+            <div class="card mb-8">
+                <h2 class="card-title text-center">🎁 Lợi ích khi tham gia khóa học</h2>
+                <ul class="unstyled-list custom-bullet-list">
+                    <li>Tặng tài khoản Canva Pro miễn phí</li>
+                    <li>Hỗ trợ kỹ thuật 24/24 qua Zalo/Facebook</li>
+                    <li>Thực hành thực tế – áp dụng ngay trong lớp học</li>
+                    <li>Không cần biết lập trình – ai cũng có thể làm được</li>
+                </ul>
+            </div>
+
+            <div class="card mb-8">
+                <h2 class="card-title text-center">📝 Ai nên tham gia?</h2>
+                <ul class="unstyled-list custom-bullet-list">
+                    <li>Giáo viên tiểu học, THCS, THPT, giảng viên</li>
+                    <li>Người muốn đổi mới phương pháp giảng dạy</li>
+                    <li>Người yêu thích công nghệ, muốn tự tạo ứng dụng mà không phải học code</li>
+                </ul>
+            </div>
+
+            <div class="card text-center mb-8">
+                <h2 class="card-title">🔗 Cách đăng ký</h2>
+                <p class="text-gray-700 mb-4">Khóa học hiện được mở giới hạn và đăng ký trực tiếp với giảng viên.</p>
+                <div id="course-price" class="text-2xl font-bold text-green-600 mb-4"></div>
+                <a href="https://forms.gle/ifscP1ZaJq1cLLqo6" target="_blank" class="btn-primary hover:bg-purple-700 text-xl px-10 py-5">
+                    Đăng ký ngay
+                </a>
+                <p class="text-center text-lg font-bold text-gray-700 mt-6 mb-4">Hoặc</p>
+                <p class="text-lg font-semibold text-quicksand">📞 Liên hệ: Trần Hồng Quân</p>
+                <p class="text-lg font-semibold text-quicksand">💬 Zalo: 0355213107</p>
+                <p class="text-lg font-semibold text-quicksand">💬 Facebook: <a href="https://www.facebook.com/tran.hong.quan.216221/" target="_blank" class="text-blue-600 hover:underline">https://www.facebook.com/tran.hong.quan.216221/</a></p>
+            </div>
+
+            <p class="text-center text-xl font-bold text-quicksand text-purple-700 mt-8 mb-12">
+                🌱 "Học một buổi – ứng dụng cả năm!"
+            </p>
+            <p class="text-center text-gray-700 text-lg mb-8">
+                Nếu bạn từng nghĩ rằng tạo ứng dụng là việc chỉ dành cho lập trình viên, hãy để Canva AI và khóa học này chứng minh điều ngược lại.
+            </p>
+        </section>
+    </main>
+
+    <!-- Footer content from footer.html -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    .ai-gradient {
+        background: linear-gradient(135deg, #0b0b3b 0%, #1a1a6c 50%, #3a0ca3 100%);
+        position: relative;
+        overflow: hidden;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .ai-circuit {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        pointer-events: none;
+    }
+    
+    .logo-glow {
+        filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.8));
+    }
+    
+    .footer-link {
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    
+    .footer-link:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 1px;
+        bottom: -2px;
+        left: 0;
+        background-color: #8a2be2;
+        transition: width 0.3s ease;
+    }
+    
+    .footer-link:hover:after {
+        width: 100%;
+    }
+    
+    .footer-link:hover {
+        color: #a855f7;
+    }
+    
+    .dot-separator {
+        display: inline-block;
+        margin: 0 6px;
+        opacity: 0.7;
+    }
+    
+    .social-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        margin: 0 8px;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        overflow: hidden;
+    }
+    
+    .social-icon:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .social-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 8px;
+    }
+    
+    .social-text {
+        margin-top: 4px;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+    }
+    
+    .social-item:hover .social-text {
+        color: white;
+    }
+    
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .footer-container {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    .icon-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .fb-icon, .yt-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .fb-icon {
+        background-color: #1877F2;
+    }
+    
+    .yt-icon {
+        background-color: #FF0000;
+    }
+    
+    @media (max-width: 768px) {
+        .footer-content {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .footer-links {
+            margin-top: 1rem;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .dot-separator {
+            display: none;
+        }
+        
+        .footer-link {
+            margin: 0.4rem 0;
+        }
+        
+        .description-text {
+            max-width: 100%;
+        }
+        
+        .social-icons {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-item {
+            margin: 8px 0;
+        }
+    }
+    
+    @media (max-width: 640px) {
+        .social-icons {
+            flex-direction: column;
+        }
+    }
+</style>
+<footer class="ai-gradient text-white">
+    <!-- AI Circuit Pattern Background -->
+    <svg class="ai-circuit" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+        <pattern id="circuit-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+            <path d="M10 10 L90 10 L90 90 L10 90 Z" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+            <circle cx="10" cy="10" r="2" fill="#ffffff"/>
+            <circle cx="90" cy="10" r="2" fill="#ffffff"/>
+            <circle cx="90" cy="90" r="2" fill="#ffffff"/>
+            <circle cx="10" cy="90" r="2" fill="#ffffff"/>
+            <path d="M10 50 L40 50 L40 10" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+            <path d="M90 50 L60 50 L60 90" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+            <circle cx="40" cy="50" r="2" fill="#ffffff"/>
+            <circle cx="60" cy="50" r="2" fill="#ffffff"/>
+        </pattern>
+        <rect width="100%" height="100%" fill="url(#circuit-pattern)"/>
+    </svg>
+    
+    <div class="footer-container px-3 py-4">
+        <div class="footer-content flex flex-col items-center justify-center">
+            <!-- Logo and Description -->
+            <div class="flex flex-col items-center mb-2">
+                <div class="logo-glow rounded-full overflow-hidden w-16 h-16 flex-shrink-0 border-2 border-purple-400 mb-3">
+                    <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" 
+                         alt="Quân H Logo" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="text-center max-w-md">
+                    <p class="text-sm md:text-base font-medium description-text">
+                        Quân H – Giảng viên & Youtuber chia sẻ kiến thức AI, công nghệ và giáo dục.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Social Media Icons - Vertical Layout -->
+            <div class="social-icons flex flex-row md:flex-row justify-center flex-wrap">
+                <a href="https://www.facebook.com/tran.hong.quan.216221/" target="_blank" class="social-item">
+                    <div class="social-icon">
+                        <div class="fb-icon">
+                            <i class="fab fa-facebook-f text-white"></i>
+                        </div>
+                    </div>
+                    <span class="social-text">Trần Hồng Quân</span>
+                </a>
+                
+                <a href="javascript:void(0)" class="social-item" onclick="alert('Zalo: 0355.213.107')">
+                    <div class="social-icon p-0">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/768px-Icon_of_Zalo.svg.png" 
+                             alt="Zalo" 
+                             class="icon-img">
+                    </div>
+                    <span class="social-text">0355.213.107</span>
+                </a>
+                
+                <a href="https://www.youtube.com/@quanh95" target="_blank" class="social-item">
+                    <div class="social-icon">
+                        <div class="yt-icon">
+                            <i class="fab fa-youtube text-white"></i>
+                        </div>
+                    </div>
+                    <span class="social-text">Quân H</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="border-t border-purple-900/50 mt-1 pt-3">
+            <div class="flex flex-wrap justify-center md:justify-between items-center text-xs text-purple-200/80">
+                <div class="mb-1 md:mb-0">
+                    © 2025 Quân H.
+                </div>
+                <div class="flex flex-wrap justify-center">
+                    <a href="#" class="footer-link mx-1">Chính sách bảo mật</a>
+                    <span class="dot-separator">•</span>
+                    <a href="#" class="footer-link mx-1">Điều khoản sử dụng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('../khoahoconline.json')
+                .then(response => response.json())
+                .then(data => {
+                    const coursePriceElement = document.getElementById('course-price');
+                    if (data && data.length > 0 && data[0].price) {
+                        coursePriceElement.textContent = `Giá khóa học: ${data[0].price}`;
+                    } else {
+                        coursePriceElement.textContent = 'Giá khóa học: Liên hệ để biết thêm chi tiết';
+                        coursePriceElement.classList.add('text-gray-500');
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi khi fetch dữ liệu khóa học:', error);
+                    const coursePriceElement = document.getElementById('course-price');
+                    coursePriceElement.textContent = 'Không thể tải giá khóa học. Vui lòng thử lại sau.';
+                    coursePriceElement.classList.add('text-red-500');
+                });
+        });
+    </script>
+</body>
+</html>

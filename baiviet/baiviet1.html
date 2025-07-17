@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ứng Dụng Quản Lý Tiếng Ồn Lớp Học - Pokémon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+        }
+        
+        .pokemon-bg {
+            background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%);
+        }
+        
+        .pokemon-card {
+            transition: all 0.3s ease;
+        }
+        
+        .pokemon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(255, 154, 158, 0.3);
+        }
+        
+        .pokemon-evolution {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pokemon-evolution::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            opacity: 0;
+            transform: scale(0);
+            transition: transform 0.6s, opacity 0.6s;
+        }
+        
+        .pokemon-evolution:hover::before {
+            opacity: 0.7;
+            transform: scale(1);
+        }
+
+        /* Navbar styles (copied from index.html and adjusted) */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            width: 100%;
+            padding: 1rem 2rem;
+            z-index: 100;
+            background: rgba(0,0,0,0.5); /* Added background for visibility */
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #2f73ff;
+        }
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .nav-links { 
+            display: flex; 
+            gap: 2rem; 
+            font-weight: 600; 
+        }
+        .nav-links a { 
+            font-size: 1rem; 
+            color: #fff; 
+            transition: color 0.3s; 
+        }
+        .nav-links a:hover { 
+            color: #2f73ff; 
+        }
+        .cta {
+            padding: 0.6rem 1.4rem;
+            background: #2f73ff;
+            border-radius: 999px;
+            font-weight: 600;
+            color: #fff;
+            transition: background 0.3s;
+        }
+        .cta:hover { background: #245ad1; }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 0.3rem;
+        }
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+        .menu-toggle.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .menu-toggle.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+
+        /* Responsive for this specific page */
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem; }
+            .nav-links { 
+                display: none; 
+                flex-direction: column; 
+                width: 100%; 
+                background: rgba(0,0,0,0.8); 
+                position: absolute; 
+                top: 60px; 
+                left: 0; 
+                padding: 1rem; 
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: 0.5rem 0; text-align: center; }
+            .cta { display: none; }
+            .menu-toggle { display: flex; }
+            .grid { grid-template-columns: 1fr; } /* Ensure grids stack on mobile */
+            .container { margin-top: 4rem; padding: 1rem; } /* Adjust container margin for navbar */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
+            <span class="logo-text">Quân H</span>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Trang chủ</a>
+            <a href="baiviet.html">Bài viết</a>
+            <a href="congcu.html">Công cụ</a>
+            <a href="video.html">Video</a>
+            <a href="lienhe.html">Liên hệ</a>
+        </div>
+        <a href="lienhe.html" class="cta">Liên hệ</a>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <div class="min-h-screen">
+        <!-- Header -->
+        <header class="pokemon-bg py-8 px-4 sm:px-6 lg:px-8 shadow-lg">
+            <div class="max-w-5xl mx-auto text-center">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-900 mb-4">
+                    🌟 Ứng Dụng Quản Lý Tiếng Ồn Trong Lớp Học 🌟
+                </h1>
+                <p class="text-xl sm:text-2xl font-semibold text-indigo-700">
+                    Giữ Im Lặng Để Pokémon Tiến Hóa! 🎮📚
+                </p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <!-- Intro Section -->
+            <section class="mb-16">
+                <div class="bg-white rounded-2xl shadow-lg p-8 pokemon-card">
+                    <h2 class="text-2xl font-bold text-indigo-800 mb-6 flex items-center">
+                        <span class="text-3xl mr-2">🎯</span> Một cách mới để giữ trật tự trong lớp học
+                    </h2>
+                    <p class="text-lg mb-6 leading-relaxed">
+                        Bạn là giáo viên và thường xuyên gặp khó khăn khi duy trì trật tự lớp học? Học sinh nói chuyện riêng, làm ồn khiến tiết học thiếu tập trung? Chúng tôi xin giới thiệu một giải pháp hoàn toàn mới – Ứng dụng quản lý tiếng ồn kết hợp trò chơi Pokémon hóa, giúp duy trì sự yên lặng một cách vui vẻ, tích cực và đầy hứng thú!
+                    </p>
+                    
+                    <div class="pokemon-evolution bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 flex flex-col md:flex-row items-center justify-center gap-6">
+                        <div class="w-full md:w-1/2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-full h-auto">
+                                <path fill="#FDE68A" d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zm0 448c-105.9 0-192-86.1-192-192S150.1 64 256 64s192 86.1 192 192-86.1 192-192 192z"/>
+                                <path fill="#4F46E5" d="M256 128c-70.7 0-128 57.3-128 128s57.3 128 128 128 128-57.3 128-128-57.3-128-128-128zm0 208c-44.2 0-80-35.8-80-80s35.8-80 80-80 80 35.8 80 80-35.8 80-80 80z"/>
+                                <path fill="#FFFFFF" d="M256 176c-44.2 0-80 35.8-80 80s35.8 80 80 80 80-35.8 80-80-35.8-80-80-80zm0 112c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32z"/>
+                            </svg>
+                        </div>
+                        <div class="w-full md:w-1/2 text-center md:text-left">
+                            <h3 class="text-xl font-bold text-indigo-700 mb-3">Tưởng tượng một lớp học...</h3>
+                            <p class="text-gray-700">Nơi học sinh tự giác giữ im lặng, không phải vì sợ bị phạt, mà vì muốn giúp Pokémon của lớp mình tiến hóa!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How It Works Section -->
+            <section class="mb-16">
+                <div class="bg-white rounded-2xl shadow-lg p-8 pokemon-card">
+                    <h2 class="text-2xl font-bold text-indigo-800 mb-6 flex items-center">
+                        <span class="text-3xl mr-2">🧠</span> Cách hoạt động của trò chơi
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 rounded-xl p-6 shadow-sm">
+                            <div class="flex items-start mb-4">
+                                <span class="bg-indigo-100 text-indigo-800 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3">1</span>
+                                <p class="text-gray-700">Mỗi tiết học, một Pokémon sẽ xuất hiện trên màn hình – đó chính là "người bạn đồng hành" của cả lớp.</p>
+                            </div>
+                            <div class="flex justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-24 h-24">
+                                    <circle cx="50" cy="50" r="45" fill="#FFD700" stroke="#B8860B" stroke-width="2"/>
+                                    <circle cx="50" cy="50" r="20" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+                                    <circle cx="50" cy="50" r="10" fill="#FF0000" stroke="#8B0000" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-green-50 rounded-xl p-6 shadow-sm">
+                            <div class="flex items-start mb-4">
+                                <span class="bg-green-100 text-green-800 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3">2</span>
+                                <p class="text-gray-700">Nếu lớp giữ im lặng đủ lâu, Pokémon sẽ tích lũy năng lượng và tiến hóa sang cấp độ tiếp theo.</p>
+                            </div>
+                            <div class="flex justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-24 h-24">
+                                    <path d="M50,10 L60,30 L85,35 L67.5,50 L72.5,75 L50,62.5 L27.5,75 L32.5,50 L15,35 L40,30 Z" fill="#4CAF50" stroke="#2E7D32" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-red-50 rounded-xl p-6 shadow-sm">
+                            <div class="flex items-start mb-4">
+                                <span class="bg-red-100 text-red-800 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3">3</span>
+                                <p class="text-gray-700">Nếu lớp ồn ào, năng lượng sẽ giảm xuống – và Pokémon không thể tiến hóa hoặc thậm chí còn bị "thoái hóa".</p>
+                            </div>
+                            <div class="flex justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-24 h-24">
+                                    <path d="M20,35 L80,35 M20,50 L80,50 M20,65 L80,65" stroke="#FF5252" stroke-width="8" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-purple-50 rounded-xl p-6 shadow-sm">
+                            <div class="flex items-start mb-4">
+                                <span class="bg-purple-100 text-purple-800 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3">4</span>
+                                <p class="text-gray-700">Cuối buổi học, giáo viên có thể hiển thị kết quả: Pokémon đạt được cấp nào, lớp có giữ yên lặng tốt không.</p>
+                            </div>
+                            <div class="flex justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-24 h-24">
+                                    <rect x="10" y="20" width="80" height="60" rx="5" fill="#9C27B0" stroke="#6A1B9A" stroke-width="2"/>
+                                    <rect x="20" y="30" width="60" height="40" rx="3" fill="#E1BEE7"/>
+                                    <circle cx="30" cy="50" r="5" fill="#4A148C"/>
+                                    <circle cx="50" cy="50" r="5" fill="#4A148C"/>
+                                    <circle cx="70" cy="50" r="5" fill="#4A148C"/>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-yellow-50 rounded-xl p-6 shadow-sm md:col-span-2">
+                            <div class="flex items-start mb-4">
+                                <span class="bg-yellow-100 text-yellow-800 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3">5</span>
+                                <p class="text-gray-700">Có thể thiết lập bảng xếp hạng các lớp, phần thưởng cho lớp giữ trật tự tốt, hoặc thi đua giữa các tổ.</p>
+                            </div>
+                            <div class="flex justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-24 h-24">
+                                    <rect x="20" y="20" width="60" height="60" rx="5" fill="#FFC107" stroke="#FFA000" stroke-width="2"/>
+                                    <rect x="30" y="30" width="40" height="10" rx="2" fill="#FFFFFF"/>
+                                    <rect x="30" y="45" width="40" height="10" rx="2" fill="#FFFFFF"/>
+                                    <rect x="30" y="60" width="40" height="10" rx="2" fill="#FFFFFF"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Benefits Section -->
+            <section class="mb-16">
+                <div class="bg-white rounded-2xl shadow-lg p-8 pokemon-card">
+                    <h2 class="text-2xl font-bold text-indigo-800 mb-6 flex items-center">
+                        <span class="text-3xl mr-2">🎮</span> Vì sao học sinh lại thích thú?
+                    </h2>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start p-4 bg-indigo-50 rounded-lg">
+                            <div class="flex-shrink-0 bg-indigo-100 rounded-full p-2 mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <p class="text-gray-700">Thay vì bị nhắc nhở liên tục, các em tự ý thức giữ im lặng để không làm ảnh hưởng đến quá trình tiến hóa.</p>
+                        </div>
+                        
+                        <div class="flex items-start p-4 bg-indigo-50 rounded-lg">
+                            <div class="flex-shrink-0 bg-indigo-100 rounded-full p-2 mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <p class="text-gray-700">Cảm giác hồi hộp, mong đợi mỗi lần Pokémon gần tiến hóa tạo ra động lực tự nhiên.</p>
+                        </div>
+                        
+                        <div class="flex items-start p-4 bg-indigo-50 rounded-lg">
+                            <div class="flex-shrink-0 bg-indigo-100 rounded-full p-2 mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <p class="text-gray-700">Kết hợp giữa học tập và game hóa, giúp lớp học trở nên vui vẻ và hiệu quả hơn.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- For Teachers Section -->
+            <section class="mb-16">
+                <div class="bg-white rounded-2xl shadow-lg p-8 pokemon-card">
+                    <h2 class="text-2xl font-bold text-indigo-800 mb-6 flex items-center">
+                        <span class="text-3xl mr-2">🧑‍🏫</span> Dành cho giáo viên
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 rounded-xl p-6 shadow-sm">
+                            <h3 class="font-bold text-lg text-blue-800 mb-3">Dễ sử dụng</h3>
+                            <p class="text-gray-700">Giao diện đơn giản, thân thiện. Chỉ cần vài thao tác đơn giản để thiết lập và bắt đầu sử dụng.</p>
+                        </div>
+                        
+                        <div class="bg-green-50 rounded-xl p-6 shadow-sm">
+                            <h3 class="font-bold text-lg text-green-800 mb-3">Linh hoạt</h3>
+                            <p class="text-gray-700">Có thể dùng trên máy tính hoặc trình chiếu lên TV trong lớp. Phù hợp với mọi không gian lớp học.</p>
+                        </div>
+                        
+                        <div class="bg-purple-50 rounded-xl p-6 shadow-sm">
+                            <h3 class="font-bold text-lg text-purple-800 mb-3">Tùy chỉnh</h3>
+                            <p class="text-gray-700">Cài đặt linh hoạt: Ngưỡng tiếng ồn, thời gian, loại Pokémon,... theo nhu cầu của từng lớp học.</p>
+                        </div>
+                        
+                        <div class="bg-amber-50 rounded-xl p-6 shadow-sm">
+                            <h3 class="font-bold text-lg text-amber-800 mb-3">Không cần internet</h3>
+                            <p class="text-gray-700">Không cần internet, phù hợp với mọi lớp học, kể cả những nơi có kết nối mạng không ổn định.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action Section -->
+            <section>
+                <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl shadow-lg p-8 text-center">
+                    <h2 class="text-2xl font-bold text-white mb-6">
+                        📌 Hãy để lớp học trở thành nơi học sinh vui vẻ – giáo viên nhàn tênh!
+                    </h2>
+                    
+                    <p class="text-white text-lg mb-8">
+                        Bạn đã sẵn sàng để đưa Pokémon vào lớp học chưa?<br>
+                        Tải và trải nghiệm ngay hôm nay – và cùng xem học sinh của bạn tiến hóa ra sao khi học cách… giữ im lặng!
+                    </p>
+                    
+                    <a href="https://kontum01-my.sharepoint.com/:u:/g/personal/quanth_c12sb_st_gdkontum_edu_vn/EWKdnXvdRp1PjH8FLW_neBsBDp0LbEum3hOIGfoBdX9AeQ?e=F0az2L" class="download-btn inline-block py-4 px-8 rounded-full text-xl font-bold text-white shadow-lg transition-all hover:shadow-xl">
+                        <span class="flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            Tải Ứng Dụng Ngay
+                        </span>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-indigo-900 text-white py-8 px-4 mt-16">
+            <div class="max-w-5xl mx-auto text-center">
+                <p class="mb-4">© 2023 Ứng Dụng Quản Lý Tiếng Ồn Lớp Học - Pokémon Edition</p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#" class="hover:text-indigo-300 transition-colors">Điều khoản sử dụng</a>
+                    <a href="#" class="hover:text-indigo-300 transition-colors">Chính sách bảo mật</a>
+                    <a href="#" class="hover:text-indigo-300 transition-colors">Liên hệ</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      menuToggle.classList.toggle('open');
+    });
+</script>
+</body>
+</html>

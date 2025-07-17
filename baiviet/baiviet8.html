@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bộ Sổ Tay Prompt 120 Trang – Kho Tài Nguyên Vàng Cho Người Dùng ChatGPT</title>
+    <meta name="description" content="Một cuốn sổ tay gồm 120 trang tổng hợp các Prompt chuyên sâu theo ngành nghề, giúp bạn tận dụng sức mạnh của ChatGPT hiệu quả và thực tế hơn bao giờ hết.">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Bộ Sổ Tay Prompt 120 Trang – Kho Tài Nguyên Vàng Cho Người Dùng ChatGPT">
+    <meta property="og:description" content="Một cuốn sổ tay gồm 120 trang tổng hợp các Prompt chuyên sâu theo ngành nghề, giúp bạn tận dụng sức mạnh của ChatGPT hiệu quả và thực tế hơn bao giờ hết.">
+    <meta property="og:image" content="https://res.cloudinary.com/dejnvixvn/image/upload/v1750726912/aeb7eaed-306f-4477-9ff8-4fec5232f6f7.png">
+    <meta property="og:url" content="[URL chuẩn của trang]"> <!-- Cần thay thế bằng URL thực tế của trang -->
+    <meta property="og:type" content="article">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: move-circle 10s infinite alternate;
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: move-circle-reverse 12s infinite alternate;
+        }
+        @keyframes move-circle {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, 50px); }
+        }
+        @keyframes move-circle-reverse {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-80px, -30px); }
+        }
+        .list-unstyled {
+            list-style: none;
+            padding-left: 0;
+        }
+        .hover-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            transition: top 0.3s;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            color: white;
+        }
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .logo-img {
+            height: 40px;
+            margin-right: 0.5rem;
+        }
+        .navbar .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-weight: 600;
+        }
+        .navbar .cta {
+            background-color: #4CAF50;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        .navbar .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .navbar .menu-toggle span {
+            background: white;
+            height: 3px;
+            width: 25px;
+            margin: 4px 0;
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 1rem 0;
+            }
+            .navbar .nav-links.active {
+                display: flex;
+            }
+            .navbar .nav-links a {
+                margin: 0.5rem 2rem;
+            }
+            .navbar .cta {
+                display: none;
+            }
+            .navbar .menu-toggle {
+                display: flex;
+            }
+            .hero-section {
+                padding: 2rem 0;
+            }
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            .hero-section p {
+                font-size: 1rem;
+            }
+            .article-image {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 100; transition: top 0.3s; background: rgba(0, 0, 0, 0.5);">
+    <div class="logo">
+      <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
+      <span class="logo-text">Quân H</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html">Trang chủ</a>
+      <a href="../baiviet.html">Bài viết</a>
+      <a href="../congcu.html">Công cụ</a>
+      <a href="../video.html">Video</a>
+      <a href="../lienhe.html">Liên hệ</a>
+    </div>
+    <a href="../lienhe.html" class="cta">Liên hệ</a>
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+    <div class="hero-section">
+        <div class="container mx-auto px-4 py-16 relative z-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">📘 Bộ Sổ Tay Prompt 120 Trang – Kho Tài Nguyên Vàng Cho Người Dùng ChatGPT</h1>
+            <p class="text-xl md:text-2xl font-light">Một cuốn sổ tay gồm 120 trang tổng hợp các Prompt chuyên sâu theo ngành nghề, giúp bạn tận dụng sức mạnh của ChatGPT hiệu quả và thực tế hơn bao giờ hết.</p>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="card mb-8">
+                <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1750726912/aeb7eaed-306f-4477-9ff8-4fec5232f6f7.png" alt="Bộ Sổ Tay Prompt" class="w-full h-auto rounded-lg mb-6 article-image">
+                <h2 class="text-3xl font-semibold mb-4 text-purple-700">🔍 Vì sao bạn nên có cuốn sổ tay này?</h2>
+                <p class="text-lg leading-relaxed mb-4">Nếu bạn đang sử dụng ChatGPT hàng ngày, dù là để làm việc, học tập, sáng tạo nội dung hay lập trình, chắc chắn bạn từng gặp câu hỏi:</p>
+                <p class="text-xl font-bold text-center italic mb-6 text-blue-600">“Làm sao để đặt câu hỏi đúng để AI trả lời thông minh và hiệu quả nhất?”</p>
+                <p class="text-lg leading-relaxed">Câu trả lời nằm ở Prompt – cách bạn tương tác với AI. Và cuốn sổ tay này sẽ giúp bạn không phải mò mẫm nữa.</p>
+            </div>
+
+            <div class="card mb-8">
+                <h2 class="text-3xl font-semibold mb-4 text-green-700">📚 Có gì trong sổ tay này?</h2>
+                <ul class="list-unstyled text-lg leading-relaxed space-y-3">
+                    <li class="flex items-start">
+                        <span class="text-blue-500 mr-2 text-2xl">✨</span>
+                        <span>Hơn 100+ tình huống thực tế, chia theo ngành nghề cụ thể: giáo dục, marketing, lập trình, chăm sóc khách hàng, hành chính, y tế, sáng tạo nội dung, v.v.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 mr-2 text-2xl">✨</span>
+                        <span>Mỗi trang là một tình huống rõ ràng, đi kèm prompt mẫu và gợi ý mở rộng</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 mr-2 text-2xl">✨</span>
+                        <span>Dạng tài liệu dễ in, dễ lưu trữ, dùng online hoặc tải về đều được</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 mr-2 text-2xl">✨</span>
+                        <span>Giúp bạn tăng tốc công việc, gỡ bí nhanh, tiết kiệm thời gian gấp nhiều lần</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card mb-8">
+                <h2 class="text-3xl font-semibold mb-4 text-red-700">🧠 Ai nên sử dụng?</h2>
+                <ul class="list-unstyled text-lg leading-relaxed space-y-3">
+                    <li class="flex items-start">
+                        <span class="text-blue-500 mr-2 text-2xl">💡</span>
+                        <span>Giáo viên, sinh viên, học sinh: tối ưu việc học và giảng dạy</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 mr-2 text-2xl">💡</span>
+                        <span>Dân văn phòng, nhân sự, hành chính: soạn thảo nhanh, viết email gọn gàng</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 mr-2 text-2xl">💡</span>
+                        <span>Người làm sáng tạo, marketing, viết content: tìm ý tưởng, lên chiến dịch</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 mr-2 text-2xl">💡</span>
+                        <span>Lập trình viên: hỗ trợ viết code, debug, tối ưu logic</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 mr-2 text-2xl">💡</span>
+                        <span>Bất kỳ ai muốn tận dụng tối đa sức mạnh của ChatGPT</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card mb-8">
+                <h2 class="text-3xl font-semibold mb-4 text-orange-700">🎁 Đây là tài liệu miễn phí và bạn hoàn toàn có thể:</h2>
+                <ul class="list-unstyled text-lg leading-relaxed space-y-3">
+                    <li class="flex items-start">
+                        <span class="text-blue-500 mr-2 text-2xl">✅</span>
+                        <span>Tải về để tham khảo khi cần</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 mr-2 text-2xl">✅</span>
+                        <span>In ra làm tài liệu học tập hoặc chia sẻ trong nhóm</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 mr-2 text-2xl">✅</span>
+                        <span>Biến nó thành nền tảng cho khóa học AI, workshop hay hướng dẫn</span>
+                    </li>
+                </ul>
+                <p class="text-lg leading-relaxed mt-6 italic text-gray-700">Cuốn sổ này không chỉ là một bộ prompt – nó là một trợ lý ảo mạnh mẽ bên cạnh ChatGPT, giúp bạn biết cách hỏi, để nhận lại những câu trả lời thực sự thông minh.</p>
+            </div>
+
+            <div class="text-center mt-10">
+                <a href="https://kontum01-my.sharepoint.com/:b:/g/personal/quanth_c12sb_st_gdkontum_edu_vn/EUTH6Sxo_OlErxgpbFmRbuUB_hJqTyejltmgnZ52G2USIA?e=O2enjx" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-xl transition duration-300 ease-in-out hover-effect">
+                    Tải tài liệu
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

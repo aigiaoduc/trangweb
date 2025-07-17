@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyển Văn Bản Thành Giọng Nói – Phiên Bản Nâng Cao</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .navbar {
+            position: sticky; top:0; left:0; width:100%;
+            display:flex; justify-content:space-between; align-items:center;
+            padding:1rem 2rem; background:rgba(0,0,0,0.5); z-index:100;
+        }
+        .logo            { display:flex; align-items:center; gap:.75rem; }
+        .logo-img        { width:40px; height:40px; border-radius:50%; border:2px solid #2f73ff; }
+        .logo-text       { font-family:'Inter',sans-serif; font-size:1.5rem; font-weight:700; color:#fff; }
+        .nav-links       { display:flex; gap:2rem; font-weight:600; }
+        .nav-links a     { color:#fff; transition:color .3s; }
+        .nav-links a:hover { color:#2f73ff; }
+        .cta             { padding:.6rem 1.4rem; background:#2f73ff; border-radius:999px; font-weight:600; color:#fff; transition:background .3s; }
+        .cta:hover       { background:#245ad1; }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .nav-links.nav-active {
+            transform: translateX(0%);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(45deg);
+            animation: hero-animate 15s infinite linear;
+        }
+        @keyframes hero-animate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .hero-subtitle {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 2rem auto;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .content-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2f73ff;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .content-section p {
+            margin-bottom: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+        .infographic-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin: 2rem auto;
+            display: block;
+        }
+        .video-button {
+            display: block;
+            width: fit-content;
+            margin: 2rem auto;
+            padding: 0.8rem 2rem;
+            background-color: #ff4d4d;
+            color: white;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            border-radius: 999px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 5px 15px rgba(255,77,77,0.4);
+        }
+        .video-button:hover {
+            background-color: #e60000;
+            transform: translateY(-3px);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-family: 'Quicksand', sans-serif;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2f73ff;
+            margin-bottom: 0.75rem;
+        }
+        .card p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: row; /* Giữ navbar ngang trên mobile để logo và hamburger ở hai bên */
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem;
+            }
+            .nav-links {
+                position: fixed;
+                top: 60px; /* Chiều cao của navbar */
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 60px);
+                background: rgba(0,0,0,0.9);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transform: translateX(100%);
+                transition: transform 0.3s ease-in;
+                z-index: 90;
+            }
+            .nav-links a {
+                padding: 1rem 0;
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+            .cta {
+                display: none; /* Ẩn nút CTA trên mobile */
+            }
+            .hamburger {
+                display: flex; /* Hiển thị hamburger trên mobile */
+            }
+            .logo-img {
+                width: 32px;
+                height: 32px;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            .content-section {
+                padding: 1.5rem;
+                margin: 1.5rem auto;
+            }
+            .content-section h2 {
+                font-size: 1.75rem;
+            }
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            .card h3 {
+                font-size: 1.1rem;
+            }
+            .video-button {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero-title {
+                font-size: 3rem;
+            }
+            .hero-subtitle {
+                font-size: 1.15rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png"
+                 alt="Logo Quân H" class="logo-img" />
+            <span class="logo-text">Quân H</span>
+        </div>
+        <div class="hamburger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="../index.html">Trang chủ</a>
+            <a href="../baiviet.html">Bài viết</a>
+            <a href="../congcu.html">Công cụ</a>
+            <a href="../video.html">Video</a>
+            <a href="../lienhe.html">Liên hệ</a>
+        </div>
+        <a href="../lienhe.html" class="cta" id="ctaButton">Liên hệ</a>
+    </nav>
+
+    <header class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Chuyển Văn Bản Thành Giọng Nói – Phiên Bản Nâng Cao</h1>
+            <p class="hero-subtitle">Làm Chủ Giọng Đọc AI: Từ Cơ Bản Đến Chuyên Nghiệp, Tùy Chỉnh Ngữ Điệu, Cảm Xúc và Hơn Thế Nữa.</p>
+        </div>
+    </header>
+
+    <main class="content-section">
+        <p>Nếu bạn đã từng sử dụng công cụ chuyển văn bản thành giọng nói (Text to Speech), có thể bạn đã thấy sự tiện lợi và nhanh chóng mà nó mang lại.</p>
+        <p>Tuy nhiên, ở phiên bản nâng cao, tính năng này không chỉ đơn thuần là tạo ra một giọng đọc – mà còn cho phép bạn:</p>
+
+        <div class="card-grid">
+            <div class="card">
+                <h3>Tuỳ chỉnh chuyên sâu</h3>
+                <p>Tuỳ chỉnh ngữ điệu, tốc độ, cảm xúc để giọng nói nghe tự nhiên và phù hợp với nội dung hơn.</p>
+            </div>
+            <div class="card">
+                <h3>Chọn giọng đọc phù hợp</h3>
+                <p>Chọn chính xác giọng đọc phù hợp với mục tiêu: từ giọng thuyết minh trang trọng cho đến giọng kể chuyện nhẹ nhàng, dí dỏm.</p>
+            </div>
+            <div class="card">
+                <h3>Kết hợp đa nhân vật</h3>
+                <p>Kết hợp nhiều đoạn thoại, nhiều nhân vật với các giọng khác nhau trong cùng một sản phẩm.</p>
+            </div>
+            <div class="card">
+                <h3>Sử dụng thẻ điều khiển (SSML)</h3>
+                <p>Dùng các thẻ điều khiển (SSML) để ngắt câu, thêm nhấn nhá hoặc mô phỏng cách nói đặc biệt.</p>
+            </div>
+            <div class="card">
+                <h3>Xuất âm thanh chất lượng cao</h3>
+                <p>Xuất âm thanh chất lượng cao để sử dụng trong video chuyên nghiệp, podcast, hoặc sản phẩm thương mại.</p>
+            </div>
+        </div>
+
+        <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1750403760/8ec2981f-6a37-4bf9-863f-4f33f56f28df.png" alt="Infographic Text to Speech" class="infographic-img">
+
+        <h2>Video này dành cho ai?</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h3>Giáo viên</h3>
+                <p>Muốn bài giảng nghe sống động, truyền cảm và không đơn điệu.</p>
+            </div>
+            <div class="card">
+                <h3>Youtuber, Tiktoker, Podcaster</h3>
+                <p>Đang muốn tiết kiệm thời gian thu âm nhưng vẫn giữ chất lượng cao.</p>
+            </div>
+            <div class="card">
+                <h3>Người sáng tạo nội dung</h3>
+                <p>Truyện tranh, hoạt hình, sách nói.</p>
+            </div>
+            <div class="card">
+                <h3>Người làm video</h3>
+                <p>Thuyết trình, quảng cáo hoặc đào tạo nội bộ.</p>
+            </div>
+        </div>
+
+        <h2>Điều gì bạn sẽ học được trong video này?</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h3>Kiểm soát ngữ điệu và cảm xúc</h3>
+                <p>Cách kiểm soát ngữ điệu và cảm xúc trong giọng đọc.</p>
+            </div>
+            <div class="card">
+                <h3>Chia đoạn văn bản</h3>
+                <p>Cách chia đoạn văn bản thành nhiều phần để phối giọng nhân vật.</p>
+            </div>
+            <div class="card">
+                <h3>Mẹo viết văn bản dễ đọc</h3>
+                <p>Mẹo viết văn bản sao cho dễ đọc, dễ nghe khi chuyển thành giọng nói.</p>
+            </div>
+            <div class="card">
+                <h3>Ghép giọng nói vào video</h3>
+                <p>Cách ghép giọng nói vào video hoặc hình ảnh động để tạo thành một sản phẩm hoàn chỉnh.</p>
+            </div>
+            <div class="card">
+                <h3>Gợi ý ứng dụng thực tế</h3>
+                <p>Gợi ý ứng dụng giọng đọc vào các tình huống thực tế: lớp học, quảng bá sản phẩm, kể chuyện cho trẻ em, đào tạo trực tuyến,...</p>
+            </div>
+        </div>
+
+        <a href="https://www.youtube.com/watch?v=L-aPLYx3bCw" target="_blank" class="video-button">Xem video</a>
+
+        <h2>Kết luận</h2>
+        <p>Phiên bản nâng cao của chuyển văn bản thành giọng nói không còn chỉ là một công cụ kỹ thuật, mà là một phương tiện sáng tạo mạnh mẽ.</p>
+        <p>Bạn có thể tạo ra cả một thế giới nội dung – chỉ bằng văn bản và trí tuệ nhân tạo.</p>
+        <p>Bạn có thể thay thế giọng đọc cứng nhắc bằng một lời kể chuyện ấm áp, hay một giọng thuyết minh chuyên nghiệp – mà không cần phòng thu hay micro.</p>
+    </main>
+    <script>
+        const hamburger = document.querySelector(".hamburger");
+        const navLinks = document.getElementById("navLinks");
+        const ctaButton = document.getElementById("ctaButton");
+
+        hamburger.addEventListener("click", () => {
+            navLinks.classList.toggle("nav-active");
+            // Optional: Toggle CTA button visibility if it's part of the mobile menu
+            // ctaButton.classList.toggle("nav-active"); 
+        });
+    </script>
+</body>
+</html>

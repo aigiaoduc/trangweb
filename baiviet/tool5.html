@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Công cụ Tra Cứu Đơn Vị Hành Chính Mới Nhất</title>
+    <meta property="og:title" content="Công cụ Tra Cứu Đơn Vị Hành Chính Mới Nhất Sau Khi Sáp Nhập Tỉnh">
+    <meta property="og:description" content="Cập Nhật Chính Thống, Nhanh Chóng, Dễ Dùng">
+    <meta property="og:image" content="https://res.cloudinary.com/dejnvixvn/image/upload/v1750469959/37f8f25d-ee3a-4354-9f3e-fffa12da486c.png">
+    <meta property="og:url" content="https://funedu.com.vn/tools/tool5.html">
+    <meta property="og:type" content="article">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .navbar {
+            position: sticky; top:0; left:0; width:100%;
+            display:flex; justify-content:space-between; align-items:center;
+            padding:1rem 2rem; background:rgba(0,0,0,0.5); z-index:100;
+        }
+        .logo            { display:flex; align-items:center; gap:.75rem; }
+        .logo-img        { width:40px; height:40px; border-radius:50%; border:2px solid #2f73ff; }
+        .logo-text       { font-family:'Inter',sans-serif; font-size:1.5rem; font-weight:700; color:#fff; }
+        .nav-links       { display:flex; gap:2rem; font-weight:600; }
+        .nav-links a     { color:#fff; transition:color .3s; }
+        .nav-links a:hover { color:#2f73ff; }
+        .cta             { padding:.6rem 1.4rem; background:#2f73ff; border-radius:999px; font-weight:600; color:#fff; transition:background .3s; }
+        .cta:hover       { background:#245ad1; }
+
+        /* Hamburger menu styles */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .nav-links.active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.9);
+            padding: 1rem 0;
+            text-align: center;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .cta {
+                display: none; /* Hide CTA button on mobile */
+            }
+        }
+
+        /* Custom styles for modern design */
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #2f73ff;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
+        }
+        .hover-effect:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background-color: #2f73ff;
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border-radius: 999px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #245ad1;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #2f73ff, #00c6ff);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: rotate(45deg);
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: rotate(-30deg);
+        }
+        .infographic-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 0;
+        }
+        .infographic-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png"
+                 alt="Logo Quân H" class="logo-img" />
+            <span class="logo-text">Quân H</span>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="../index.html">Trang chủ</a>
+            <a href="../baiviet.html">Bài viết</a>
+            <a href="../congcu.html">Công cụ</a>
+            <a href="../video.html">Video</a>
+            <a href="../lienhe.html">Liên hệ</a>
+        </div>
+        <a href="../lienhe.html" class="cta">Liên hệ</a>
+        <div class="hamburger" id="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </nav>
+
+    <header class="hero-section py-20 px-4 text-center">
+        <div class="container mx-auto relative z-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight font-['Montserrat']">
+                Công cụ Tra Cứu Đơn Vị Hành Chính Mới Nhất Sau Khi Sáp Nhập Tỉnh
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 font-['Quicksand']">
+                Cập Nhật Chính Thống, Nhanh Chóng, Dễ Dùng
+            </p>
+        </div>
+    </header>
+
+    <div class="text-center mt-8 mb-12">
+        <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1750469959/37f8f25d-ee3a-4354-9f3e-fffa12da486c.png" alt="Ảnh bài viết" class="mx-auto rounded-lg shadow-lg max-w-full h-auto" style="max-width: 600px;">
+    </div>
+
+    <main class="container mx-auto px-4 py-12">
+        <section class="mb-12">
+            <div class="card">
+                <h2 class="section-title text-3xl mb-6">Giới thiệu</h2>
+                <p class="text-lg leading-relaxed mb-4">
+                    Thời gian gần đây, Việt Nam đã thực hiện việc sáp nhập một số tỉnh, thay đổi tên gọi, mã đơn vị và cấp hành chính ở nhiều khu vực. Việc tra cứu lại thông tin địa phương – như xã, huyện, tỉnh mới – đôi khi gây khó khăn cho cán bộ quản lý, giáo viên, nhân viên văn phòng, và người dân.
+                </p>
+                <p class="text-lg leading-relaxed">
+                    Nhằm hỗ trợ việc cập nhật thông tin sau sáp nhập một cách nhanh chóng, chính xác và thuận tiện, tôi xin giới thiệu trang web Tra Cứu Đơn Vị Hành Chính mới nhất, được xây dựng để:
+                </p>
+                <ul class="list-disc list-inside text-lg leading-relaxed mt-4 space-y-2">
+                    <li>✅ Cập nhật tên gọi và mã đơn vị hành chính mới nhất sau sáp nhập</li>
+                    <li>✅ Hỗ trợ tìm kiếm nhanh theo tên cũ hoặc tên mới</li>
+                    <li>✅ Giao diện thân thiện, dễ dùng, không cần cài đặt phần mềm</li>
+                    <li>✅ Phù hợp cho giáo viên, nhân viên hành chính, học sinh, nhà báo, nghiên cứu viên và bất kỳ ai cần thông tin chuẩn</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <div class="card">
+                <h2 class="section-title text-3xl mb-6">Trang web này có thể giúp bạn:</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-6 bg-blue-50 rounded-lg shadow-sm hover-effect">
+                        <h3 class="font-bold text-xl mb-2 text-blue-700 font-['Quicksand']">Tìm kiếm thông tin địa phương</h3>
+                        <p class="text-lg">Tìm tên xã, phường, thị trấn mới sau sáp nhập.</p>
+                    </div>
+                    <div class="p-6 bg-blue-50 rounded-lg shadow-sm hover-effect">
+                        <h3 class="font-bold text-xl mb-2 text-blue-700 font-['Quicksand']">Xác định địa giới hành chính</h3>
+                        <p class="text-lg">Biết được xã A cũ hiện thuộc huyện/tỉnh nào.</p>
+                    </div>
+                    <div class="p-6 bg-blue-50 rounded-lg shadow-sm hover-effect">
+                        <h3 class="font-bold text-xl mb-2 text-blue-700 font-['Quicksand']">Tra cứu mã hành chính</h3>
+                        <p class="text-lg">Tìm hiểu mã hành chính cấp xã, huyện, tỉnh dùng cho khai báo, thống kê.</p>
+                    </div>
+                    <div class="p-6 bg-blue-50 rounded-lg shadow-sm hover-effect">
+                        <h3 class="font-bold text-xl mb-2 text-blue-700 font-['Quicksand']">Hỗ trợ công việc hành chính</h3>
+                        <p class="text-lg">Tra cứu khi điền biểu mẫu, làm báo cáo, gửi văn bản, cập nhật dữ liệu.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <div class="card">
+                <h2 class="section-title text-3xl mb-6">Ai nên sử dụng?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="p-6 bg-green-50 rounded-lg shadow-sm hover-effect">
+                        <h3 class="font-bold text-xl mb-2 text-green-700 font-['Quicksand']">🏫 Giáo viên – cán bộ trường học</h3>
+                        <p class="text-lg">Cập nhật thông tin học sinh, nơi cư trú, hồ sơ sổ sách.</p>
+                    </div>
+                    <div class="p-6 bg-green-50 rounded-lg shadow-sm hover-effect">
+                        <h3 class="font-bold text-xl mb-2 text-green-700 font-['Quicksand']">🧾 Nhân viên hành chính – kế toán</h3>
+                        <p class="text-lg">Điền biểu mẫu đúng thông tin địa giới.</p>
+                    </div>
+                    <div class="p-6 bg-green-50 rounded-lg shadow-sm hover-effect">
+                        <h3 class="font-bold text-xl mb-2 text-green-700 font-['Quicksand']">📚 Học sinh, sinh viên</h3>
+                        <p class="text-lg">Tra cứu khi làm bài tập, báo cáo thực tế.</p>
+                    </div>
+                    <div class="p-6 bg-green-50 rounded-lg shadow-sm hover-effect">
+                        <h3 class="font-bold text-xl mb-2 text-green-700 font-['Quicksand']">🧑‍💼 Cán bộ địa phương</h3>
+                        <p class="text-lg">Tra cứu mã đơn vị chính xác để phục vụ nghiệp vụ.</p>
+                    </div>
+                    <div class="p-6 bg-green-50 rounded-lg shadow-sm hover-effect">
+                        <h3 class="font-bold text-xl mb-2 text-green-700 font-['Quicksand']">✍️ Người viết báo, làm truyền thông, nghiên cứu chính sách</h3>
+                        <p class="text-lg">Cần thông tin chính xác cho các bài viết và nghiên cứu.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="mb-12">
+            <div class="card">
+                <h2 class="section-title text-3xl mb-6">Dễ dùng – Miễn phí – Cập nhật liên tục</h2>
+                <p class="text-lg leading-relaxed mb-4">
+                    Bạn không cần tải app hay tài khoản. Chỉ cần truy cập là có thể bắt đầu tra cứu. Tất cả thông tin đều được tổng hợp theo các quyết định chính thức của nhà nước, đảm bảo tính pháp lý và độ chính xác cao.
+                </p>
+                <div class="text-center mt-8">
+                    <a href="https://funedu.com.vn/apps/tracuu/dvhc/index.html" target="_blank" class="btn-primary inline-block text-xl hover-effect">
+                        Truy cập công cụ ngay!
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12 text-center">
+            <a href="https://funedu.com.vn/" target="_blank">
+                <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1749542432/Screenshot_2025-06-10_145924_nixzns.png" alt="Banner quảng cáo" class="mx-auto rounded-lg shadow-lg max-w-full h-auto">
+            </a>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center py-6">
+        <p>&copy; 2025 Quân H. Tất cả quyền được bảo lưu.</p>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
