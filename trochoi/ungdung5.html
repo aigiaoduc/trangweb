@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học từ vựng cùng thầy Quân</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+        }
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .font-quicksand { font-family: 'Quicksand', sans-serif; }
+        
+        .flashcard { perspective: 1000px; }
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        .flashcard.flipped .card-inner { transform: rotateY(180deg); }
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        .card-back { transform: rotateY(180deg); }
+
+        .topic-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .topic-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .topic-card.selected {
+            transform: translateY(-8px);
+            box-shadow: 0 0 0 4px #3b82f6; /* blue-500 */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+
+        .quiz-option.correct {
+            background-color: #10b981; /* emerald-500 */
+            color: white;
+            border-color: #10b981;
+        }
+        .quiz-option.incorrect {
+            background-color: #ef4444; /* red-500 */
+            color: white;
+            border-color: #ef4444;
+        }
+
+        .floating-robot {
+            position: fixed;
+            width: 120px;
+            height: auto;
+            z-index: 9999;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+            filter: drop-shadow(8px 12px 18px rgba(0,0,0,0.3)); /* Đổ bóng rõ hơn */
+            animation: verySmoothFloat 25s infinite ease-in-out;
+        }
+
+        @keyframes verySmoothFloat {
+            0%   { transform: translate(5vw, 15vh) rotate(5deg) scale(1); }
+            15%  { transform: translate(40vw, 30vh) rotate(-5deg) scale(1.05); }
+            30%  { transform: translate(calc(100vw - 150px), 20vh) rotate(8deg) scale(1); }
+            45%  { transform: translate(80vw, 70vh) rotate(0deg) scale(1.1); }
+            60%  { transform: translate(50vw, 80vh) rotate(-10deg) scale(1); }
+            75%  { transform: translate(10vw, 60vh) rotate(10deg) scale(1.05); }
+            90%  { transform: translate(20vw, 30vh) rotate(-2deg) scale(1); }
+            100% { transform: translate(5vw, 15vh) rotate(5deg) scale(1); }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Sound Effects -->
+    <audio id="sound-flip" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1753019956/Am_thanh_hieu_ung_vo_giay_trai_giay-www_tiengdong_com_mp3cut.net_ewa63a.mp3" preload="auto"></audio>
+    <audio id="sound-correct" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1744012356/success_sound_effect-www_tiengdong_com_qvaff1.mp3" preload="auto"></audio>
+    <audio id="sound-incorrect" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1743950341/Am_thanh_tra_loi_sai-www_tiengdong_com_r160v8.mp3" preload="auto"></audio>
+    <audio id="sound-click" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1743950559/Am_thanh_tieng_click_chuot-www_tiengdong_com_vg4uik.mp3" preload="auto"></audio>
+
+    <!-- Floating Robot Assistant -->
+    <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1753020317/11260846-unscreen_qyupez.gif" alt="Floating Robot" class="floating-robot">
+
+    <header id="menu-container"></header>
+
+    <main class="flex-grow container mx-auto px-4 pt-24 pb-8">
+        <!-- Hero Section -->
+        <section id="hero-section" class="text-center fade-in">
+            <h1 class="font-montserrat text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Học từ vựng cùng thầy Quân</h1>
+            <p class="font-quicksand text-slate-600 mt-4 max-w-2xl mx-auto">Chọn một chủ đề để bắt đầu hành trình chinh phục từ vựng của bạn!</p>
+            
+            <div id="topic-selection-container" class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <!-- Topic cards will be inserted here by JS -->
+            </div>
+
+            <button id="start-learning-btn" class="mt-8 bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 disabled:bg-slate-400 disabled:cursor-not-allowed" disabled>
+                <i class="fas fa-play-circle mr-2"></i> Bắt đầu học
+            </button>
+        </section>
+
+        <!-- Learning Section -->
+        <section id="learning-section" class="hidden mt-8">
+            <!-- Flashcard display is generated by JS -->
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz-section" class="hidden mt-8 max-w-2xl mx-auto">
+            <!-- Quiz display is generated by JS -->
+        </section>
+    </main>
+
+    <footer id="footer-container"></footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- DOM Elements ---
+        const heroSection = document.getElementById('hero-section');
+        const learningSection = document.getElementById('learning-section');
+        const quizSection = document.getElementById('quiz-section');
+        const topicSelectionContainer = document.getElementById('topic-selection-container');
+        const startLearningBtn = document.getElementById('start-learning-btn');
+
+        // --- State ---
+        let allData = {};
+        let currentWords = [];
+        let currentCardIndex = 0;
+        let currentQuizIndex = 0;
+        let score = 0;
+        let selectedTopicIndex = null;
+        const topicIcons = [
+            'fa-apple-whole', 'fa-paw', 'fa-palette', 'fa-user-doctor', 'fa-car-side',
+            'fa-book-open', 'fa-users', 'fa-cloud-sun', 'fa-futbol'
+        ];
+
+        // --- Templates ---
+        const learningHTML = `
+            <div class="fade-in">
+                <div class="flex items-center justify-center gap-4 md:gap-8">
+                    <button id="prev-card-btn" class="bg-white p-3 rounded-full shadow-md hover:bg-slate-200 transition disabled:opacity-50"><i class="fas fa-chevron-left text-slate-600 w-6 h-6"></i></button>
+                    <div id="flashcard" class="flashcard w-64 h-80 md:w-80 md:h-96 cursor-pointer">
+                        <div class="card-inner rounded-2xl shadow-2xl">
+                            <div id="card-front" class="card-front bg-gradient-to-br from-teal-400 to-blue-500 text-white flex items-center justify-center text-4xl font-bold p-4 rounded-2xl"></div>
+                            <div id="card-back" class="card-back bg-gradient-to-br from-blue-600 to-indigo-700 text-white flex flex-col items-center justify-center p-4 rounded-2xl">
+                                <h3 id="card-vietnamese" class="text-3xl font-bold font-quicksand"></h3>
+                                <p id="card-phonetic" class="mt-2 text-lg italic"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="next-card-btn" class="bg-white p-3 rounded-full shadow-md hover:bg-slate-200 transition disabled:opacity-50"><i class="fas fa-chevron-right text-slate-600 w-6 h-6"></i></button>
+                </div>
+                <div id="card-counter" class="text-center text-slate-500 mt-4 font-semibold"></div>
+                <div class="text-center mt-8">
+                    <button id="start-quiz-btn" class="bg-amber-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-amber-600 transition-transform transform hover:scale-105"><i class="fas fa-file-alt mr-2"></i> Kiểm tra</button>
+                </div>
+            </div>`;
+
+        const quizHTML = (word, index, total) => `
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-xl fade-in">
+                <div class="flex justify-between items-center">
+                    <h2 class="font-montserrat text-2xl font-bold text-slate-800">Bài kiểm tra</h2>
+                    <span class="bg-blue-100 text-blue-800 text-sm font-bold px-3 py-1 rounded-full">${index + 1} / ${total}</span>
+                </div>
+                <div class="bg-slate-100 p-6 rounded-lg mt-6 text-center">
+                    <p class="text-lg text-slate-600">Từ sau đây có nghĩa là gì?</p>
+                    <h3 class="font-quicksand text-4xl font-bold text-blue-600 my-3">"${word}"</h3>
+                </div>
+                <div id="quiz-options" class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                <div id="quiz-feedback" class="text-center mt-4 h-16 flex flex-col justify-center items-center"></div>
+            </div>`;
+
+        const quizResultHTML = (score, total) => `
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg text-center fade-in">
+                <i class="fas fa-trophy text-yellow-400 text-6xl"></i>
+                <h2 class="font-montserrat text-3xl font-bold text-slate-800 mt-4">Hoàn thành!</h2>
+                <p class="text-slate-600 mt-2 text-lg">Kết quả của bạn:</p>
+                <p class="font-bold text-5xl text-green-500 my-4">${score} / ${total}</p>
+                <div class="flex justify-center gap-4 mt-6">
+                    <button id="continue-learning-btn" class="bg-blue-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-600 transition">Học lại</button>
+                    <button id="new-topic-btn" class="bg-slate-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-slate-700 transition">Chọn chủ đề khác</button>
+                </div>
+            </div>`;
+
+        // --- Functions ---
+        const loadComponent = (url, elementId) => {
+            fetch(url)
+                .then(response => response.ok ? response.text() : '')
+                .then(data => { document.getElementById(elementId).innerHTML = data; })
+                .catch(error => console.error(`Error loading ${url}:`, error));
+        };
+        
+        const playSound = (id) => {
+            const sound = document.getElementById(id);
+            if (sound) {
+                sound.currentTime = 0;
+                sound.play().catch(e => console.error("Lỗi phát âm thanh:", e));
+            }
+        };
+        
+        const fetchData = () => {
+            fetch('du_lieu_ungdung5.json')
+                .then(response => response.json())
+                .then(data => {
+                    allData = data;
+                    displayTopics();
+                })
+                .catch(error => console.error('Error loading data:', error));
+        };
+
+        const displayTopics = () => {
+            topicSelectionContainer.innerHTML = '';
+            allData['chủ đề'].forEach((topic, index) => {
+                const iconClass = topicIcons[index % topicIcons.length] || 'fa-star';
+                const card = document.createElement('div');
+                card.className = 'topic-card cursor-pointer bg-white p-6 rounded-xl shadow-md flex flex-col items-center justify-center';
+                card.dataset.index = index;
+                card.innerHTML = `
+                    <i class="fas ${iconClass} text-4xl text-blue-500 mb-4"></i>
+                    <h3 class="font-montserrat text-xl font-bold text-slate-700">${topic.tên}</h3>
+                `;
+                card.addEventListener('click', () => {
+                    playSound('sound-click');
+                    selectTopic(index, card);
+                });
+                topicSelectionContainer.appendChild(card);
+            });
+        };
+
+        const selectTopic = (index, cardElement) => {
+            selectedTopicIndex = index;
+            document.querySelectorAll('.topic-card').forEach(card => card.classList.remove('selected'));
+            cardElement.classList.add('selected');
+            startLearningBtn.disabled = false;
+        };
+
+        const startLearning = () => {
+            if (selectedTopicIndex === null) return;
+            playSound('sound-click');
+            const topic = allData['chủ đề'][selectedTopicIndex];
+            currentWords = topic['từ vựng'].slice(0, 5);
+            currentCardIndex = 0;
+            
+            heroSection.classList.add('hidden');
+            quizSection.classList.add('hidden');
+            learningSection.innerHTML = learningHTML;
+            learningSection.classList.remove('hidden');
+            
+            attachLearningEventListeners();
+            displayCard();
+        };
+
+        const displayCard = () => {
+            const word = currentWords[currentCardIndex];
+            const flashcard = document.getElementById('flashcard');
+            flashcard.classList.remove('flipped');
+            
+            setTimeout(() => {
+                document.getElementById('card-front').textContent = word['tiếng Anh'];
+                document.getElementById('card-vietnamese').textContent = word['tiếng Việt'];
+                document.getElementById('card-phonetic').textContent = word['phiên âm'];
+            }, 150);
+
+            document.getElementById('card-counter').textContent = `Thẻ ${currentCardIndex + 1} / ${currentWords.length}`;
+            document.getElementById('prev-card-btn').disabled = currentCardIndex === 0;
+            document.getElementById('next-card-btn').disabled = currentCardIndex === currentWords.length - 1;
+        };
+
+        const startQuiz = () => {
+            learningSection.classList.add('hidden');
+            quizSection.classList.remove('hidden');
+            currentQuizIndex = 0;
+            score = 0;
+            currentWords.sort(() => Math.random() - 0.5); // Shuffle questions
+            displayQuizQuestion();
+        };
+
+        const displayQuizQuestion = () => {
+            if (currentQuizIndex >= currentWords.length) {
+                displayQuizResult();
+                return;
+            }
+            const word = currentWords[currentQuizIndex];
+            quizSection.innerHTML = quizHTML(word['tiếng Anh'], currentQuizIndex, currentWords.length);
+            
+            const options = generateOptions(word);
+            const optionsContainer = document.getElementById('quiz-options');
+            options.forEach(optionText => {
+                const button = document.createElement('button');
+                button.textContent = optionText;
+                button.className = 'quiz-option w-full text-left p-4 border-2 border-slate-300 rounded-lg hover:bg-sky-100 hover:border-sky-500 transition-all duration-200 font-semibold text-slate-700';
+                button.onclick = () => {
+                    playSound('sound-click');
+                    checkAnswer(optionText, word['tiếng Việt'], button);
+                };
+                optionsContainer.appendChild(button);
+            });
+        };
+
+        const checkAnswer = (selectedAnswer, correctAnswer, button) => {
+            document.querySelectorAll('.quiz-option').forEach(btn => btn.disabled = true);
+            const feedbackDiv = document.getElementById('quiz-feedback');
+            let isCorrect = selectedAnswer === correctAnswer;
+
+            if (isCorrect) {
+                score++;
+                playSound('sound-correct');
+                button.classList.add('correct');
+                feedbackDiv.innerHTML = `<p class="font-bold text-green-500">Chính xác!</p>`;
+            } else {
+                playSound('sound-incorrect');
+                button.classList.add('incorrect');
+                feedbackDiv.innerHTML = `<p class="font-bold text-red-500">Chưa đúng. Đáp án là: ${correctAnswer}</p>`;
+                // Highlight the correct answer
+                document.querySelectorAll('.quiz-option').forEach(btn => {
+                    if (btn.textContent === correctAnswer) {
+                        btn.classList.add('correct');
+                    }
+                });
+            }
+
+            const nextButton = document.createElement('button');
+            nextButton.textContent = currentQuizIndex === currentWords.length - 1 ? 'Xem kết quả' : 'Câu tiếp theo';
+            nextButton.className = 'mt-4 bg-blue-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-600 transition animate-pulse';
+            nextButton.onclick = () => {
+                currentQuizIndex++;
+                displayQuizQuestion();
+            };
+            feedbackDiv.appendChild(nextButton);
+        };
+
+        const generateOptions = (correctWord) => {
+            let options = [correctWord['tiếng Việt']];
+            let allMeanings = allData['chủ đề'].flatMap(t => t['từ vựng']).map(w => w['tiếng Việt']);
+            let wrongMeanings = [...new Set(allMeanings)].filter(m => m !== correctWord['tiếng Việt']);
+            wrongMeanings.sort(() => Math.random() - 0.5);
+            for (let i = 0; i < 3 && i < wrongMeanings.length; i++) {
+                options.push(wrongMeanings[i]);
+            }
+            return options.sort(() => Math.random() - 0.5);
+        };
+
+        const displayQuizResult = () => {
+            quizSection.innerHTML = quizResultHTML(score, currentWords.length);
+            document.getElementById('continue-learning-btn').onclick = () => {
+                playSound('sound-click');
+                startLearning();
+            };
+            document.getElementById('new-topic-btn').onclick = () => {
+                playSound('sound-click');
+                quizSection.classList.add('hidden');
+                heroSection.classList.remove('hidden');
+                startLearningBtn.disabled = true;
+                document.querySelectorAll('.topic-card').forEach(card => card.classList.remove('selected'));
+                selectedTopicIndex = null;
+            };
+        };
+
+        // --- Event Listeners ---
+        const attachLearningEventListeners = () => {
+            document.getElementById('flashcard').addEventListener('click', (e) => {
+                playSound('sound-flip');
+                e.currentTarget.classList.toggle('flipped');
+            });
+            document.getElementById('prev-card-btn').addEventListener('click', () => {
+                playSound('sound-click');
+                if (currentCardIndex > 0) { currentCardIndex--; displayCard(); }
+            });
+            document.getElementById('next-card-btn').addEventListener('click', () => {
+                playSound('sound-click');
+                if (currentCardIndex < currentWords.length - 1) { currentCardIndex++; displayCard(); }
+            });
+            document.getElementById('start-quiz-btn').addEventListener('click', () => {
+                playSound('sound-click');
+                startQuiz();
+            });
+        };
+
+        startLearningBtn.addEventListener('click', startLearning);
+
+        // --- Initial Load ---
+        loadComponent('../assets/includes/menu.html', 'menu-container');
+        loadComponent('../assets/includes/footer.html', 'footer-container');
+        fetchData();
+    });
+    </script>
+
+</body>
+</html>
