@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -113,10 +114,17 @@
                 <!-- Topic cards will be inserted here by JS -->
             </div>
 
-            <button id="start-learning-btn" class="mt-8 bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 disabled:bg-slate-400 disabled:cursor-not-allowed" disabled>
+            <button id="start-learning-btn" class="mt-8 bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 disabled:bg-slate-400 disabled:cursor-not-allowed hidden md:inline-block" disabled>
                 <i class="fas fa-play-circle mr-2"></i> Bắt đầu học
             </button>
         </section>
+
+        <!-- Sticky Start Button for Mobile -->
+        <div id="sticky-start-button-container" class="sticky bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-sm border-t border-slate-200 md:hidden hidden">
+            <button id="mobile-start-learning-btn" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105">
+                <i class="fas fa-play-circle mr-2"></i> Bắt đầu học
+            </button>
+        </div>
 
         <!-- Learning Section -->
         <section id="learning-section" class="hidden mt-8">
@@ -139,6 +147,8 @@
         const quizSection = document.getElementById('quiz-section');
         const topicSelectionContainer = document.getElementById('topic-selection-container');
         const startLearningBtn = document.getElementById('start-learning-btn');
+        const stickyStartButtonContainer = document.getElementById('sticky-start-button-container');
+        const mobileStartLearningBtn = document.getElementById('mobile-start-learning-btn');
 
         // --- State ---
         let allData = {};
@@ -159,7 +169,7 @@
                     <button id="prev-card-btn" class="bg-white p-3 rounded-full shadow-md hover:bg-slate-200 transition disabled:opacity-50"><i class="fas fa-chevron-left text-slate-600 w-6 h-6"></i></button>
                     <div id="flashcard" class="flashcard w-64 h-80 md:w-80 md:h-96 cursor-pointer">
                         <div class="card-inner rounded-2xl shadow-2xl">
-                            <div id="card-front" class="card-front bg-gradient-to-br from-teal-400 to-blue-500 text-white flex items-center justify-center text-4xl font-bold p-4 rounded-2xl"></div>
+                            <div id="card-front" class="card-front bg-gradient-to-br from-teal-400 to-blue-500 text-white flex items-center justify-center text-4xl font-bold p-4 rounded-2xl text-center"></div>
                             <div id="card-back" class="card-back bg-gradient-to-br from-blue-600 to-indigo-700 text-white flex flex-col items-center justify-center p-4 rounded-2xl">
                                 <h3 id="card-vietnamese" class="text-3xl font-bold font-quicksand"></h3>
                                 <p id="card-phonetic" class="mt-2 text-lg italic"></p>
@@ -169,7 +179,8 @@
                     <button id="next-card-btn" class="bg-white p-3 rounded-full shadow-md hover:bg-slate-200 transition disabled:opacity-50"><i class="fas fa-chevron-right text-slate-600 w-6 h-6"></i></button>
                 </div>
                 <div id="card-counter" class="text-center text-slate-500 mt-4 font-semibold"></div>
-                <div class="text-center mt-8">
+                <div class="text-center mt-8 flex justify-center gap-4">
+                    <button id="speak-btn" class="bg-sky-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-sky-600 transition-transform transform hover:scale-105"><i class="fas fa-volume-high mr-2"></i> Phát âm</button>
                     <button id="start-quiz-btn" class="bg-amber-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-amber-600 transition-transform transform hover:scale-105"><i class="fas fa-file-alt mr-2"></i> Kiểm tra</button>
                 </div>
             </div>`;
@@ -215,6 +226,32 @@
                 sound.play().catch(e => console.error("Lỗi phát âm thanh:", e));
             }
         };
+
+        const speakWord = (word) => {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(word);
+                // Tìm giọng nữ US
+                const voices = window.speechSynthesis.getVoices();
+                const femaleVoice = voices.find(voice => voice.lang === 'en-US' && (voice.name.includes('Female') || voice.name.includes('Zira') || voice.name.includes('Google US English')));
+                
+                if (femaleVoice) {
+                    utterance.voice = femaleVoice;
+                } else {
+                    utterance.lang = 'en-US'; // Nếu không tìm thấy, dùng giọng mặc định
+                }
+                
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('Trình duyệt của bạn không hỗ trợ chức năng phát âm.');
+            }
+        };
+
+        // Tải danh sách giọng nói khi khởi động
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                window.speechSynthesis.getVoices();
+            };
+        }
         
         const fetchData = () => {
             fetch('du_lieu_ungdung5.json')
@@ -250,13 +287,24 @@
             document.querySelectorAll('.topic-card').forEach(card => card.classList.remove('selected'));
             cardElement.classList.add('selected');
             startLearningBtn.disabled = false;
+            stickyStartButtonContainer.classList.remove('hidden');
         };
 
         const startLearning = () => {
             if (selectedTopicIndex === null) return;
             playSound('sound-click');
             const topic = allData['chủ đề'][selectedTopicIndex];
-            currentWords = topic['từ vựng'].slice(0, 5);
+            
+            // Xáo trộn mảng từ vựng và lấy 5 từ đầu tiên
+            
+            const shuffledWords = [...topic['từ vựng']];
+            for (let i = shuffledWords.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledWords[i], shuffledWords[j]] = [shuffledWords[j], shuffledWords[i]];
+            }
+            currentWords = shuffledWords.slice(0, 5);
+
+            
             currentCardIndex = 0;
             
             heroSection.classList.add('hidden');
@@ -380,6 +428,11 @@
                 playSound('sound-flip');
                 e.currentTarget.classList.toggle('flipped');
             });
+
+            document.getElementById('speak-btn').addEventListener('click', (e) => {
+                const wordToSpeak = currentWords[currentCardIndex]['tiếng Anh'];
+                speakWord(wordToSpeak);
+            });
             document.getElementById('prev-card-btn').addEventListener('click', () => {
                 playSound('sound-click');
                 if (currentCardIndex > 0) { currentCardIndex--; displayCard(); }
@@ -395,6 +448,7 @@
         };
 
         startLearningBtn.addEventListener('click', startLearning);
+        mobileStartLearningBtn.addEventListener('click', startLearning);
 
         // --- Initial Load ---
         loadComponent('../assets/includes/menu.html', 'menu-container');
