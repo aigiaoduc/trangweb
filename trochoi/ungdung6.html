@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đĩa Quay Gọi Tên</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f0f2f5;
+        }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .hero-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: -30px;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+        }
+        #wheelCanvas {
+            transition: transform 4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .wheel-container {
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+        .wheel-container::after {
+            content: '▼';
+            font-size: 50px;
+            color: #ef4444; /* red-500 */
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .winner-text-animate {
+            animation: pop-in 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        @keyframes pop-in {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div id="menu-placeholder"></div>
+    
+    <!-- Spacer for fixed menu -->
+    <div class="h-20 bg-black"></div>
+
+    <!-- Hero Section -->
+    <header class="hero-bg text-white p-6 md:p-12 text-center">
+        <h1 class="font-montserrat font-bold text-4xl md:text-6xl mb-2">Đĩa Quay Gọi Tên</h1>
+        <p class="font-quicksand text-lg md:text-xl max-w-2xl mx-auto">Một công cụ đơn giản và vui nhộn để chọn tên ngẫu nhiên.</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+        
+        <!-- Hướng dẫn sử dụng -->
+        <section id="instructions" class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-8 font-montserrat">Cách Sử Dụng</h2>
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="card p-6">
+                    <div class="text-4xl mb-4">✏️</div>
+                    <h3 class="text-xl font-bold mb-2 font-inter">1. Nhập Tên</h3>
+                    <p>Nhập danh sách tên vào ô bên dưới. Mỗi tên trên một dòng.</p>
+                </div>
+                <div class="card p-6">
+                    <div class="text-4xl mb-4">🔄</div>
+                    <h3 class="text-xl font-bold mb-2 font-inter">2. Bắt Đầu Quay</h3>
+                    <p>Nhấn nút "Quay" để đĩa quay ma thuật bắt đầu xoay.</p>
+                </div>
+                <div class="card p-6">
+                    <div class="text-4xl mb-4">🏆</div>
+                    <h3 class="text-xl font-bold mb-2 font-inter">3. Xem Kết Quả</h3>
+                    <p>Tên được chọn sẽ hiển thị ngay khi đĩa quay dừng lại.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Giao diện chính -->
+        <section id="app" class="flex flex-col lg:flex-row gap-8 md:gap-12 items-center lg:items-start">
+            
+            <!-- Panel điều khiển -->
+            <div class="card p-6 md:p-8 w-full max-w-md lg:w-1/3">
+                <h3 class="text-2xl font-bold mb-4 font-inter">Danh sách tham gia</h3>
+                <textarea id="nameInput" class="w-full h-48 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" placeholder="Nhập tên học sinh, mỗi tên một dòng...&#10;An&#10;Bình&#10;Cường&#10;Dũng"></textarea>
+                <button id="spinButton" class="mt-4 w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-transform transform hover:scale-105 active:scale-100">
+                    Quay!
+                </button>
+            </div>
+
+            <!-- Đĩa quay và GIF -->
+            <div class="w-full lg:w-2/3 flex flex-col md:flex-row items-center justify-center gap-8 mt-8 lg:mt-0">
+                <!-- Cột đĩa quay và robot -->
+                <div class="relative flex-shrink-0">
+                    <div class="wheel-container relative w-full max-w-[288px] sm:max-w-[320px] md:max-w-[384px] aspect-square">
+                        <canvas id="wheelCanvas" width="400" height="400" class="w-full h-full"></canvas>
+                    </div>
+                    <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1753670256/vR6mwrGRsr-unscreen_azgouv.gif" alt="Cheering GIF" class="w-24 sm:w-32 h-auto absolute top-0 left-0">
+                </div>
+                <!-- Cột kết quả -->
+                <div class="mt-8 md:mt-0">
+                    <div id="result" class="bg-white rounded-xl shadow-lg p-6 text-center w-64 sm:w-80">
+                        <p class="text-gray-500 font-semibold">Người được chọn là:</p>
+                        <p id="resultText" class="font-bold text-3xl text-indigo-600 font-montserrat h-24 mt-2 flex items-center justify-center break-words"></p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <audio id="spinSound" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1753669645/Am_thanh_vong_quay_may_man_ngan-www_tiengdong_com_rdesga.mp3" preload="auto"></audio>
+    <audio id="winSound" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1743950336/Am_thanh_chuc_mung_chien_thang-www_tiengdong_com_tzitdy.mp3" preload="auto"></audio>
+
+    <script>
+        const nameInput = document.getElementById('nameInput');
+        const spinButton = document.getElementById('spinButton');
+        const canvas = document.getElementById('wheelCanvas');
+        const resultText = document.getElementById('resultText');
+        const ctx = canvas.getContext('2d');
+        const spinSound = document.getElementById('spinSound');
+        const winSound = document.getElementById('winSound');
+
+        let names = [];
+        let currentRotation = 0;
+        let isSpinning = false;
+
+        const colors = ["#6366F1", "#8B5CF6", "#EC4899", "#F59E0B", "#10B981", "#3B82F6", "#D946EF"];
+
+        function getNames() {
+            return nameInput.value.split('\n').filter(name => name.trim() !== '');
+        }
+
+        function drawWheel() {
+            names = getNames();
+            if (names.length === 0) {
+                names = ['?'];
+            }
+            
+            const arcSize = 2 * Math.PI / names.length;
+            const radius = canvas.width / 2 - 5;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+
+            // Draw slices
+            for (let i = 0; i < names.length; i++) {
+                const angle = i * arcSize;
+                
+                // Draw slice
+                ctx.beginPath();
+                ctx.fillStyle = colors[i % colors.length];
+                ctx.moveTo(0, 0);
+                ctx.arc(0, 0, radius, angle, angle + arcSize);
+                ctx.closePath();
+                ctx.fill();
+
+                // Draw slice border
+                ctx.strokeStyle = "#fff";
+                ctx.lineWidth = 3;
+                ctx.stroke();
+
+                // Draw text
+                ctx.save();
+                ctx.fillStyle = "white";
+
+                // --- Logic tự động điều chỉnh chữ ---
+                let fontSize = 16;
+                if (names.length > 20) {
+                    fontSize = 10;
+                } else if (names.length > 10) {
+                    fontSize = 12;
+                }
+
+                let displayName = names[i];
+                // Cắt bớt tên nếu quá dài
+                const maxLen = names.length > 15 ? 15 : 20;
+                if (displayName.length > maxLen) {
+                    displayName = displayName.substring(0, maxLen - 1) + '…';
+                }
+                // --- Kết thúc logic ---
+
+                ctx.font = `bold ${fontSize}px Quicksand`;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.rotate(angle + arcSize / 2);
+                ctx.fillText(displayName, radius * 0.6, 0);
+                ctx.restore();
+            }
+
+            // Draw center hub
+            ctx.beginPath();
+            ctx.fillStyle = 'white';
+            ctx.arc(0, 0, 20, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.fillStyle = '#764ba2';
+            ctx.arc(0, 0, 15, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        function spin() {
+            if (isSpinning) return;
+            names = getNames();
+            if (names.length < 2) {
+                alert("Vui lòng nhập ít nhất 2 tên để quay.");
+                return;
+            }
+
+            isSpinning = true;
+            spinButton.disabled = true;
+            resultText.textContent = '';
+            resultText.classList.remove('winner-text-animate');
+            spinButton.textContent = 'Đang quay...';
+            spinSound.currentTime = 0;
+            spinSound.play();
+
+            const randomSpins = Math.floor(Math.random() * 5) + 5; // 5 to 10 full spins
+            const stopAngle = Math.random() * 2 * Math.PI; // Random stop angle
+            const totalRotation = randomSpins * 2 * Math.PI + stopAngle;
+
+            canvas.style.transition = 'transform 4s cubic-bezier(0.25, 1, 0.5, 1)';
+            canvas.style.transform = `rotate(${totalRotation}rad)`;
+
+            setTimeout(() => {
+                spinSound.pause();
+                winSound.play();
+
+                const actualStopAngle = totalRotation % (2 * Math.PI);
+                const arcSize = 2 * Math.PI / names.length;
+                
+                // The pointer is at the top (pointing down), which is at 3*PI/2 or -PI/2
+                const pointerAngle = 2 * Math.PI - actualStopAngle + (3 * Math.PI / 2);
+                const winnerIndex = Math.floor(pointerAngle % (2 * Math.PI) / arcSize);
+
+                resultText.textContent = names[winnerIndex];
+                resultText.classList.add('winner-text-animate');
+                isSpinning = false;
+                spinButton.disabled = false;
+                spinButton.textContent = 'Quay!';
+                
+                // Confetti effect!
+                confetti({
+                    particleCount: 150,
+                    spread: 90,
+                    origin: { y: 0.6 }
+                });
+
+                // Reset transform for next spin
+                canvas.style.transition = 'none';
+                canvas.style.transform = `rotate(${actualStopAngle}rad)`;
+
+            }, 4000);
+        }
+
+        nameInput.addEventListener('input', drawWheel);
+        spinButton.addEventListener('click', spin);
+
+        // Function to load HTML content and execute scripts
+        function loadComponent(url, placeholderId) {
+            fetch(url)
+                .then(response => response.ok ? response.text() : Promise.reject('File not found'))
+                .then(data => {
+                    const placeholder = document.getElementById(placeholderId);
+                    placeholder.innerHTML = data;
+                    
+                    // Find and execute any scripts within the loaded content
+                    const scripts = placeholder.querySelectorAll('script');
+                    scripts.forEach(oldScript => {
+                        const newScript = document.createElement('script');
+                        // Copy attributes
+                        Array.from(oldScript.attributes).forEach(attr => {
+                            newScript.setAttribute(attr.name, attr.value);
+                        });
+                        // Copy content
+                        newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                        // Append to the document to execute
+                        document.body.appendChild(newScript);
+                    });
+                })
+                .catch(error => console.error(`Error loading ${placeholderId}:`, error));
+        }
+
+        // Load menu and footer
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponent('../assets/includes/menu.html', 'menu-placeholder');
+            loadComponent('../assets/includes/footer.html', 'footer-placeholder');
+            
+            // Initial draw
+            nameInput.value = "An\nBình\nCường\nDũng\nEm\nGiang";
+            drawWheel();
+        });
+    </script>
+
+</body>
+</html>
