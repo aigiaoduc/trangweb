@@ -1,0 +1,194 @@
+[
+  {
+    "cauhoi": [
+      "giờ học",
+      "học lúc mấy giờ",
+      "lịch bắt đầu học",
+      "giờ vào lớp",
+      "trường bắt đầu học khi nào"
+    ],
+    "traloi": "Buổi học mỗi ngày khởi động vào lúc 7h00 sáng, mở đầu bằng 15 phút sinh hoạt nhẹ nhàng, giúp học sinh sẵn sàng bước vào giờ học chính thức lúc 7h15 – tràn đầy năng lượng và tinh thần hứng khởi."
+  },
+  {
+    "cauhoi": [
+      "nghỉ lễ",
+      "khi nào được nghỉ",
+      "bao giờ nghỉ học",
+      "lịch nghỉ lễ",
+      "ngày lễ có nghỉ không"
+    ],
+    "traloi": "Mọi thông báo liên quan đến nghỉ lễ sẽ được cập nhật trên trang Facebook của nhà trường – hãy thường xuyên theo dõi để không bỏ lỡ bất kỳ thông tin quan trọng nào.<br>👉 <a href='https://www.facebook.com/share/17JKCgFgev/?mibextid=wwXIfr' target='_blank'>Truy cập trang Facebook nhà trường</a>"
+  },
+  {
+    "cauhoi": [
+      "đồng phục",
+      "mặc gì đi học",
+      "đồng phục học sinh",
+      "quy định về đồng phục",
+      "có bắt buộc mặc đồng phục không"
+    ],
+    "traloi": "Học sinh được yêu cầu mặc đồng phục theo đúng quy định: áo trắng tinh khôi kết hợp cùng quần xanh lịch sự – thể hiện sự gọn gàng, kỷ luật và niềm tự hào học đường."
+  },
+  {
+    "cauhoi": [
+      "học online",
+      "học trực tuyến",
+      "có được học online không",
+      "trường có hỗ trợ học online không",
+      "học từ xa"
+    ],
+    "traloi": "Trong những trường hợp đặc biệt, nhà trường luôn sẵn lòng hỗ trợ học trực tuyến, giúp học sinh không bỏ lỡ kiến thức dù ở bất kỳ đâu."
+  },
+  {
+    "cauhoi": [
+      "vào học",
+      "khai giảng khi nào",
+      "ngày nhập học",
+      "bắt đầu năm học",
+      "ngày đầu tiên đi học"
+    ],
+    "traloi": "Lễ khai giảng năm học mới – sự kiện thiêng liêng đánh dấu một chặng đường học tập mới – dự kiến sẽ được tổ chức vào đầu tháng 9, hứa hẹn nhiều cảm xúc và khởi đầu đáng nhớ."
+  },
+  {
+    "cauhoi": [
+      "học sinh mới",
+      "hướng dẫn nhập học",
+      "thủ tục cho học sinh mới",
+      "đăng ký nhập học",
+      "học sinh mới cần làm gì"
+    ],
+    "traloi": "Để hoàn tất thủ tục nhập học, vui lòng đến phòng Văn thư và liên hệ Cô Đặng Thị Minh Huế sẽ hướng dẫn bạn từng bước."
+  },
+  {
+    "cauhoi": [
+      "wifi",
+      "trường có wifi không",
+      "mạng internet trong trường",
+      "wifi miễn phí",
+      "kết nối mạng ở trường"
+    ],
+    "traloi": "Khuôn viên trường cung cấp wifi miễn phí cho học sinh sử dụng vào mục đích học tập."
+  },
+  {
+    "cauhoi": [
+      "ăn trưa",
+      "có bán trú không",
+      "trường có bữa trưa không",
+      "học sinh có ăn trưa ở trường không",
+      "dịch vụ bán trú"
+    ],
+    "traloi": "Nhà trường không tổ chức bán trú – phụ huynh và học sinh vui lòng chủ động sắp xếp thời gian phù hợp cho việc đưa đón."
+  },
+  {
+    "cauhoi": [
+      "giáo viên trường",
+      "có những giáo viên nào",
+      "danh sách giáo viên",
+      "cô thầy ở trường là ai",
+      "giáo viên dạy ở đây",
+      "thầy cô giảng dạy",
+      "ai là giáo viên của trường"
+    ],
+    "traloi": "👉 <a href='#' target='_blank'>Truy cập danh sách giáo viên nhà trường tại đây</a>"
+  },
+  {
+    "cauhoi": [
+      "thư viện",
+      "giờ mở thư viện",
+      "thư viện mở cửa khi nào",
+      "mượn sách ở đâu",
+      "thư viện hoạt động ra sao"
+    ],
+    "traloi": "Thư viện nhà trường mở cửa từ 7h00 đến 17h00 mỗi ngày học – nơi đây luôn sẵn sàng chào đón các bạn đến mượn sách, học tập và khám phá tri thức."
+  },
+  {
+    "cauhoi": [
+      "thể dục",
+      "học thể dục ở đâu",
+      "môn thể dục",
+      "đồng phục thể dục",
+      "giờ thể dục"
+    ],
+    "traloi": "Môn Thể dục được tổ chức tại sân trường. Học sinh cần mặc đồng phục thể thao vào các ngày có lịch học môn này theo thời khóa biểu."
+  },
+  {
+    "cauhoi": [
+      "y tế",
+      "bị bệnh thì sao",
+      "có phòng y tế không",
+      "sơ cứu",
+      "trường có y tá không"
+    ],
+    "traloi": "Nếu học sinh cảm thấy không khỏe, hãy đến phòng y tế tại phòng Hội đồng nhà trường – nơi luôn có cán bộ y tế túc trực để hỗ trợ kịp thời."
+  },
+  {
+    "cauhoi": [
+      "bảo vệ",
+      "ai trông trường",
+      "liên hệ bảo vệ",
+      "an ninh trường học",
+      "gửi đồ nhờ bảo vệ"
+    ],
+    "traloi": "Đội ngũ bảo vệ luôn túc trực 24/7 tại cổng chính – đảm bảo an toàn và hỗ trợ học sinh, phụ huynh khi cần thiết."
+  },
+  {
+    "cauhoi": [
+      "giữ xe",
+      "gửi xe đạp ở đâu",
+      "có bãi giữ xe không",
+      "xe học sinh",
+      "gửi xe học sinh"
+    ],
+    "traloi": "Học sinh gửi xe tại khu vực giữ xe phía sau trường – có người trông coi, an toàn và tiện lợi cho việc đi lại."
+  },
+  {
+    "cauhoi": [
+      "thi cử",
+      "lịch kiểm tra",
+      "thi học kỳ khi nào",
+      "có thi giữa kỳ không",
+      "kiểm tra định kỳ"
+    ],
+    "traloi": "Lịch kiểm tra giữa kỳ và cuối kỳ sẽ được thông báo cụ thể theo từng học kỳ – học sinh cần theo dõi trên bảng tin hoặc qua giáo viên chủ nhiệm."
+  },
+  {
+    "cauhoi": [
+      "bảng tin",
+      "xem thông báo ở đâu",
+      "thông báo trường",
+      "tin tức trường",
+      "thông tin nhà trường"
+    ],
+    "traloi": "Mọi thông báo quan trọng được đăng tải trên trang Facebook chính thức của trường.<br>👉 <a href='https://www.facebook.com/share/17JKCgFgev/?mibextid=wwXIfr' target='_blank'>Truy cập trang Facebook nhà trường</a>"
+  },
+  {
+    "cauhoi": [
+      "phụ huynh",
+      "liên hệ phụ huynh",
+      "họp phụ huynh",
+      "phụ huynh có được vào trường không",
+      "phụ huynh tham gia hoạt động trường"
+    ],
+    "traloi": "Nhà trường luôn khuyến khích sự đồng hành của phụ huynh – mọi hoạt động liên quan sẽ được thông báo trực tiếp qua giáo viên chủ nhiệm hoặc trang Facebook nhà trường.<br>👉 <a href='https://www.facebook.com/share/17JKCgFgev/?mibextid=wwXIfr' target='_blank'>Truy cập trang Facebook nhà trường</a>"
+  },
+  {
+    "cauhoi": [
+      "tư vấn học đường",
+      "học sinh gặp khó khăn thì sao",
+      "tư vấn tâm lý",
+      "tâm lý học đường",
+      "ai giúp học sinh khi có vấn đề"
+    ],
+    "traloi": "Phòng Tư vấn học đường luôn sẵn sàng lắng nghe và hỗ trợ học sinh – hãy mạnh dạn chia sẻ để được đồng hành và tháo gỡ khó khăn trong học tập và cuộc sống."
+  },
+  {
+    "cauhoi": [
+      "số điện thoại",
+      "liên hệ",
+      "gọi cho trường",
+      "trường có số điện thoại không",
+      "liên hệ với trường bằng cách nào"
+    ],
+    "traloi": "Bạn có thể liên hệ với nhà trường qua các số điện thoại sau để được hỗ trợ nhanh chóng và chính xác:<br><ul><li>Thầy Hiệu trưởng: 0388.107.999</li><li>Cô Hiệu Phó: 0972.297.357</li></ul>Ngoài ra, đừng quên theo dõi trang Facebook chính thức để cập nhật thông tin mới nhất."
+  }
+]

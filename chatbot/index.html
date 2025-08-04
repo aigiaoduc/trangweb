@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="top-links-container">
+    <a href="https://www.facebook.com/share/17JKCgFgev/?mibextid=wwXIfr" target="_blank" class="top-link-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        <span>Truy cập Facebook</span>
+    </a>
+    <a href="http://ththcssabinh.sgdkt.edu.vn/" target="_blank" class="top-link-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+        <span>Truy cập Website</span>
+    </a>
+</div>
+
+<div class="main-wrapper">
+    <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1754274406/Blue_and_White_Modern_AI_Chatbot_Integration_Services_Poster_xxymkn.png" alt="Chatbot Poster" class="info-poster">
+    <div id="chatbot-container">
+        <div id="chatbot-header">
+            <h2>Chatbot Hỗ trợ</h2>
+            <div class="header-links">
+                <a href="https://www.facebook.com/share/17JKCgFgev/?mibextid=wwXIfr" target="_blank" title="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+                <a href="http://ththcssabinh.sgdkt.edu.vn/" target="_blank" title="Website">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                </a>
+            </div>
+        </div>
+        <div id="chatbot-messages">
+            <div class="message bot-message">
+                <p>Chào bạn! Tôi có thể giúp gì cho bạn?</p>
+            </div>
+            <!-- Typing indicator will be injected here by JS -->
+        </div>
+        <div id="chatbot-suggestions">
+            <!-- Suggestion buttons will be injected here by JS -->
+        </div>
+        <div id="chatbot-input-container">
+            <input type="text" id="chatbot-input" placeholder="Nhập câu hỏi của bạn...">
+            <button id="chatbot-send">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+        </div>
+    </div>
+    <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1753670256/vR6mwrGRsr-unscreen_azgouv.gif" alt="Robot Assistant" class="robot-assistant">
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
