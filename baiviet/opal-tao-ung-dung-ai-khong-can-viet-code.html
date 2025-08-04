@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opal: Tạo ứng dụng AI không cần viết code</title>
+    <meta name="description" content="Khám phá Opal, công cụ AI từ Google tạo ứng dụng chỉ bằng lời nói, không cần code. Biến mọi ý tưởng thành hiện thực trong nháy mắt.">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Opal: Tạo ứng dụng AI không cần viết code">
+    <meta property="og:description" content="Khám phá Opal, công cụ AI từ Google tạo ứng dụng chỉ bằng lời nói, không cần code. Biến mọi ý tưởng thành hiện thực trong nháy mắt.">
+    <meta property="og:image" content="https://anonyviet.com/wp-content/uploads/2025/08/opal-4.jpg">
+    <meta property="og:url" content="https://trangweb.com/baiviet/opal-tao-ung-dung-ai-khong-can-viet-code.html">
+    <meta property="og:type" content="article">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .hero-section {
+            background-image: url('https://anonyviet.com/wp-content/uploads/2025/08/opal-4.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+        .hero-content h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        .list-unstyled {
+            list-style: none;
+            padding-left: 0;
+        }
+        .list-unstyled li {
+            margin-bottom: 0.5rem;
+        }
+        .hover-effect {
+            font-family: 'Quicksand', sans-serif;
+            transition: color 0.3s ease-in-out;
+        }
+        .hover-effect:hover {
+            color: #3498db; /* Example hover color */
+        }
+        .menu-placeholder {
+            background-color: black;
+            height: 64px; /* Adjust based on your menu's actual height */
+            width: 100%;
+        }
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .card {
+                padding: 1.5rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .card {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div id="menu-placeholder" class="menu-placeholder"></div>
+    <div id="menu-container"></div>
+
+    <header class="hero-section">
+        <div class="hero-content">
+            <h1 class="text-white text-5xl font-bold drop-shadow-lg">Opal: Tạo ứng dụng AI không cần viết code</h1>
+            <p class="text-xl mt-4">Khám phá Opal, công cụ AI từ Google tạo ứng dụng chỉ bằng lời nói, không cần code. Biến mọi ý tưởng thành hiện thực trong nháy mắt.</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 max-w-4xl">
+        <section class="card">
+            <p class="text-lg leading-relaxed mb-4">
+                Opal, công cụ AI thử nghiệm mới nhất từ Google, đang tạo nên một làn sóng phấn khích khi hứa hẹn biến bất kỳ ai cũng có thể trở thành nhà phát triển ứng dụng. Bạn có một ý tưởng độc đáo nhưng lại e ngại vì không biết một dòng code nào? Với Opal, rào cản đó sẽ sớm chỉ còn là quá khứ, mở ra một kỷ nguyên sáng tạo không giới hạn cho tất cả mọi người.
+            </p>
+            <h2 class="section-title text-3xl mt-8 mb-4">Opal: Tạo ứng dụng AI không cần viết code</h2>
+            <p class="text-lg leading-relaxed mb-4">
+                Vào ngày 24 tháng 7, Google đã chính thức vén màn bí mật về Opal, một công cụ trí tuệ nhân tạo mang tính thử nghiệm với khả năng vô cùng ấn tượng: cho phép người dùng tạo ra các ứng dụng nhỏ chỉ bằng cách mô tả yêu cầu của mình bằng ngôn ngữ tự nhiên.
+            </p>
+            <img src="https://anonyviet.com/wp-content/uploads/2025/08/opal-3.jpg" alt="Opal Interface" class="w-full rounded-lg shadow-md my-6">
+            <p class="text-lg leading-relaxed mb-4">
+                Đúng vậy, bạn không cần phải gõ một dòng mã lệnh nào cả. Toàn bộ quá trình từ việc phân tích yêu cầu, xây dựng logic đến tạo ra giao diện đều do AI đảm nhiệm. Mục tiêu của Google là để bất kỳ ai, dù không có kiến thức nền tảng về lập trình, cũng có thể tự mình bắt đầu.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title text-3xl mt-8 mb-4">Cách thức hoạt động kỳ diệu của Opal</h2>
+            <p class="text-lg leading-relaxed mb-4">
+                Sức mạnh của Opal nằm ở ý tưởng cốt lõi: Chuyển đổi một ý tưởng được diễn đạt bằng lời nói thành một ứng dụng có thể hoạt động được thông qua một giao diện trực quan.
+            </p>
+            <img src="https://anonyviet.com/wp-content/uploads/2025/08/opal-5.jpg" alt="Opal Workflow" class="w-full rounded-lg shadow-md my-6">
+            <p class="text-lg leading-relaxed mb-4">
+                Khi bạn đưa ra một yêu cầu, ví dụ như “Tạo một ứng dụng gợi ý thực đơn dựa trên những nguyên liệu còn lại trong tủ lạnh”, công cụ sẽ tự động tạo ra một quy trình làm việc (workflow) bao gồm nhiều khối logic nối tiếp nhau. Mỗi khối đại diện cho một hành động cụ thể như: nhận dữ liệu đầu vào từ người dùng, tạo phản hồi, hiển thị kết quả,…
+            </p>
+            <p class="text-lg leading-relaxed mb-4">
+                Giao diện của công cụ được thiết kế thông minh và chia thành hai khu vực chính:
+            </p>
+            <ul class="list-unstyled">
+                <li class="mb-2 hover-effect">
+                    <strong class="text-blue-600">Khu vực biên tập (Editor):</strong> Đây là nơi bạn có thể xem và chỉnh sửa toàn bộ quy trình hoạt động của ứng dụng dưới dạng các khối được kết nối với nhau. Bạn hoàn toàn có thể nhấp vào từng khối để chỉnh sửa hoặc thay thế nó bằng cách mô tả sự thay đổi bạn muốn.
+                </li>
+                <li class="mb-2 hover-effect">
+                    <strong class="text-blue-600">Khu vực xem trước (App):</strong> Chế độ này hiển thị ứng dụng dưới góc nhìn của người dùng cuối, là phiên bản đã được hoàn thiện và có thể kiểm tra ngay lập tức để đảm bảo mọi thứ hoạt động đúng như mong đợi.
+                </li>
+            </ul>
+            <p class="text-lg leading-relaxed mb-4">
+                Người dùng có thể tự do chuyển đổi qua lại giữa hai chế độ xem này, tinh chỉnh các bước một cách linh hoạt và thậm chí thêm các hướng dẫn mới thông qua thanh lệnh tích hợp. Tất cả đều diễn ra mượt mà mà không đòi hỏi bất kỳ kiến thức nào về code.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title text-3xl mt-8 mb-4">Khơi nguồn sáng tạo với thư viện mẫu có sẵn</h2>
+            <p class="text-lg leading-relaxed mb-4">
+                Đối với những người dùng còn đang thiếu ý tưởng hoặc chỉ đơn giản là muốn khám phá khả năng của công cụ, Opal cung cấp một thư viện các ví dụ đa dạng. Tại đây có sẵn một số ứng dụng nhỏ đã được hoàn thiện, bạn có thể thử nghiệm trực tiếp hoặc tùy chỉnh lại theo nhu cầu của mình.
+            </p>
+            <img src="https://anonyviet.com/wp-content/uploads/2025/08/opal-6.jpg" alt="Opal Sample Library" class="w-full rounded-lg shadow-md my-6">
+            <p class="text-lg leading-relaxed mb-4">
+                Mỗi dự án mẫu đều có thể trở thành nền tảng cho tác phẩm của riêng bạn. Chỉ cần một cú nhấp chuột, bạn có thể xem cách nó được xây dựng, thay đổi một vài khối lệnh hoặc lời nhắc (prompt), và bạn sẽ có ngay một phiên bản tùy chỉnh chỉ trong vài giây. Đây là một cách tuyệt vời để hiểu cơ chế của Opal mà không cần phải bắt đầu từ con số không.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title text-3xl mt-8 mb-4">Chia sẻ dễ dàng và tạo mã siêu tốc</h2>
+            <p class="text-lg leading-relaxed mb-4">
+                Một khi ứng dụng nhỏ của bạn đã hoàn tất, Opal giúp việc chia sẻ trở nên vô cùng đơn giản. Chỉ với một cú nhấp chuột, bạn sẽ nhận được một đường dẫn URL duy nhất. Bạn có thể gửi liên kết này cho bạn bè hoặc đồng nghiệp để họ thử nghiệm sản phẩm của bạn bằng chính tài khoản Google của họ. Không cần cài đặt, không cần xuất bản lên cửa hàng ứng dụng, mọi thứ đều diễn ra trực tuyến.
+            </p>
+            <div class="relative w-full h-96 my-6 rounded-lg overflow-hidden shadow-md">
+                <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/E0hrcDO3Noc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p class="text-lg leading-relaxed mb-4">
+                Đây chính là thế mạnh cốt lõi của Opal: Chỉ trong vài phút, bạn có thể đi từ một ý tưởng chợt nảy ra đến một phiên bản có thể hoạt động, kiểm tra và chia sẻ được. Dù đó là một dự án cá nhân, một bản thử nghiệm ý tưởng (proof of concept), hay một công cụ “cây nhà lá vườn” để sử dụng hàng ngày, mọi thứ đều được thiết kế để diễn ra nhanh chóng mà không cần bận tâm đến code.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title text-3xl mt-8 mb-4">Khi nào Opal triển khai ở Việt Nam?</h2>
+            <p class="text-lg leading-relaxed mb-4">
+                Điểm trừ duy nhất ở thời điểm hiện tại là Opal mới chỉ được triển khai tại Hoa Kỳ thông qua chương trình Google Labs. Điều này có nghĩa là người dùng ở các khu vực khác, trong đó có Việt Nam, vẫn phải đứng ngoài và chờ đợi một đợt triển khai rộng rãi hơn trong tương lai.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title text-3xl mt-8 mb-4">Kết bài</h2>
+            <p class="text-lg leading-relaxed mb-4">
+                Tóm lại, Opal đang định hình một tương lai đầy hứa hẹn, nơi việc tạo ra các công cụ số không còn là đặc quyền của riêng giới lập trình. Dù vẫn còn trong giai đoạn thử nghiệm và giới hạn khu vực, tiềm năng của nó là không thể phủ nhận. Chúng ta hãy cùng chờ xem ngày mà công cụ Opal chính thức ra mắt toàn cầu và trao sức mạnh sáng tạo vào tay tất cả mọi người nhé!
+            </p>
+        </section>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script>
+        // Load menu
+        fetch('/assets/includes/menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu-container').innerHTML = data;
+                // Adjust the height of the placeholder based on the actual menu height
+                const menuHeight = document.getElementById('menu-container').offsetHeight;
+                document.getElementById('menu-placeholder').style.height = `${menuHeight}px`;
+            })
+            .catch(error => console.error('Error loading menu:', error));
+
+        // Load footer
+        fetch('/assets/includes/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+</body>
+</html>
