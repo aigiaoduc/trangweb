@@ -58,301 +58,259 @@
             list-style-type: none;
             padding-left: 0;
         }
-        /* .menu-placeholder has been removed */
     </style>
 </head>
 <body class="bg-gray-100">
 
     <div id="menu-container"></div>
-    
 
     <header class="hero-section text-white text-center py-24 px-4">
         <div class="hero-content">
-            <h1 class="text-2xl md:text-5xl font-bold font-montserrat" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">💁 20 Ý TƯỞNG TRÒ CHƠI HỌC TẬP CHO TIỂU HỌC</h1>
+            <h1 class="text-4xl md:text-6xl font-bold font-montserrat" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">💁 20 CÂU LỆNH (PROMPT) Ý TƯỞNG TRÒ CHƠI HỌC TẬP DÀNH CHO HỌC SINH TIỂU HỌC</h1>
             <p class="mt-4 text-lg md:text-xl font-inter">Câu lệnh (Prompt) dùng trên Canva AI hoặc Gemini</p>
         </div>
     </header>
 
     <main class="container mx-auto p-4 md:p-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
             <!-- Trò chơi 1 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-blue-600 mb-3">1. Phép Tính Nhanh ⚡️🔢</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Rèn luyện kỹ năng tính nhẩm các phép tính cộng, trừ, nhân, chia.</p>
-                        <p><strong>Cơ chế chơi:</strong> Trắc nghiệm lựa chọn.</p>
-                        <p><strong>Mô tả:</strong> Mỗi màn chơi hiển thị một phép tính (ví dụ: "15 + 8 = ?") với 4 đáp án. Người chơi phải nhấp vào đáp án đúng trong 15 giây.</p>
-                        <p><strong>Icon AI:</strong> Dùng ✅ cho đúng, ❌ cho sai. Tiêu đề có thể có icon ➕➖✖️➗.</p>
-                        <p><strong>Kết thúc:</strong> Hiển thị tổng điểm sau 15 câu.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-blue-600 mb-4">Trò chơi 1 – Phép Tính Nhanh ⚡️🔢</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Rèn luyện kỹ năng tính nhẩm các phép tính cộng, trừ, nhân, chia.</p>
+                    <p><strong>Cơ chế chơi:</strong> Trắc nghiệm lựa chọn.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Mỗi màn chơi hiển thị một câu hỏi dạng phép tính (ví dụ: "15 + 8 = ?"). Bên dưới có 4 ô chứa các đáp án số. Người chơi phải nhấp vào ô có đáp án đúng. Có thanh thời gian đếm ngược 15 giây cho mỗi câu.</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Không sử dụng icon cho các đáp án. Chỉ sử dụng icon cho phản hồi: icon dấu tick xanh ✅ cho câu trả lời đúng và icon dấu chéo đỏ ❌ cho câu trả lời sai. Có thể thêm các icon cộng ➕, trừ ➖, nhân ✖️, chia ➗ ở tiêu đề trò chơi.</p>
+                    <p><strong>Kết thúc:</strong> Sau 15 câu, hiển thị tổng điểm.</p>
                 </div>
             </div>
 
             <!-- Trò chơi 2 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-green-600 mb-3">2. Chọn Từ Đúng ✍️🔍</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Phân biệt các cặp từ dễ lẫn lộn (l/n, s/x, ch/tr).</p>
-                        <p><strong>Cơ chế chơi:</strong> Trắc nghiệm lựa chọn.</p>
-                        <p><strong>Mô tả:</strong> Một câu có từ bị trống, người chơi chọn từ đúng để điền vào. Ví dụ: "Bầu trời hôm nay rất... (trong / chong)".</p>
-                        <p><strong>Icon AI:</strong> Dùng icon ✏️ hoặc 📚 ở tiêu đề. Không dùng icon cho từ và đáp án.</p>
-                        <p><strong>Kết thúc:</strong> Hiển thị số câu đúng sau 10 câu.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-green-600 mb-4">Trò chơi 2 – Chọn Từ Đúng ✍️🔍</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Phân biệt các cặp từ dễ lẫn lộn (l/n, s/x, ch/tr).</p>
+                    <p><strong>Cơ chế chơi:</strong> Trắc nghiệm lựa chọn.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Mỗi màn chơi hiển thị một câu có một từ bị để trống và hai lựa chọn bên cạnh. Người chơi phải chọn từ đúng để điền vào. Ví dụ: "Bầu trời hôm nay rất... (trong / chong)".</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Sử dụng icon bút chì ✏️ hoặc icon sách vở 📚 ở tiêu đề trò chơi. Không sử dụng icon cho các từ trong câu hỏi và đáp án để tránh gây nhiễu.</p>
+                    <p><strong>Kết thúc:</strong> Sau 10 câu, hiển thị số câu đúng.</p>
                 </div>
             </div>
 
             <!-- Trò chơi 3 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-purple-600 mb-3">3. Sắp Xếp Câu 🧩📝</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Rèn luyện kỹ năng sắp xếp từ thành câu hoàn chỉnh.</p>
-                        <p><strong>Cơ chế chơi:</strong> Kéo và thả.</p>
-                        <p><strong>Mô tả:</strong> Kéo các khối chữ bị xáo trộn vào các ô trống được đánh số để tạo thành câu hoàn chỉnh.</p>
-                        <p><strong>Icon AI:</strong> Dùng icon 🧩 hoặc ➡️ để minh họa. Không dùng icon cho khối chữ.</p>
-                        <p><strong>Kết thúc:</strong> Hoàn thành 10 câu.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-purple-600 mb-4">Trò chơi 3 – Sắp Xếp Câu 🧩📝</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Rèn luyện kỹ năng sắp xếp từ ngữ thành câu hoàn chỉnh.</p>
+                    <p><strong>Cơ chế chơi:</strong> Kéo và thả.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Màn hình có các ô trống được đánh số. Phía dưới là các khối chữ bị xáo trộn. Người chơi kéo từng khối chữ thả vào các ô trống theo đúng thứ tự.</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Sử dụng các icon khối xếp hình 🧩 hoặc icon mũi tên ➡️ để minh họa cho hành động sắp xếp. Không dùng icon cho các khối chữ.</p>
+                    <p><strong>Kết thúc:</strong> Hoàn thành 10 câu.</p>
                 </div>
             </div>
 
             <!-- Trò chơi 4 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-red-600 mb-3">4. Khám Phá Vũ Trụ 🚀🪐</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Nhận biết tên và đặc điểm các hành tinh.</p>
-                        <p><strong>Cơ chế chơi:</strong> Trắc nghiệm với icon.</p>
-                        <p><strong>Mô tả:</strong> Câu hỏi dạng "Hành tinh nào được gọi là 'Hành tinh Đỏ'?", đáp án là các icon hành tinh.</p>
-                        <p><strong>Icon AI:</strong> Dùng icon đúng hành tinh (🌍, 🪐). Dùng icon màu cho các hành tinh khác. Trang trí bằng 🚀, 👨‍🚀, ⭐️.</p>
-                        <p><strong>Kết thúc:</strong> Hiển thị điểm sau 10 câu.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-red-600 mb-4">Trò chơi 4 – Khám Phá Vũ Trụ 🚀🪐</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Nhận biết tên gọi và đặc điểm cơ bản của các hành tinh.</p>
+                    <p><strong>Cơ chế chơi:</strong> Trắc nghiệm với icon.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Câu hỏi dạng: "Hành tinh nào được gọi là 'Hành tinh Đỏ'?" Các đáp án là các icon của hành tinh.</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Chỉ thị này rất quan trọng: Phải sử dụng các icon mô tả đúng hành tinh được hỏi hoặc các vật thể vũ trụ. Cụ thể: Với Trái Đất, dùng icon Trái Đất 🌍. Với Sao Thổ, dùng icon Sao Thổ 🪐. Với các hành tinh khác, dùng icon vòng tròn màu tương ứng (Màu đỏ cho Sao Hỏa, màu xanh cho Sao Hải Vương...). Sử dụng icon tên lửa 🚀, icon phi hành gia 👨‍🚀, icon ngôi sao ⭐️ để trang trí.</p>
+                    <p><strong>Kết thúc:</strong> Sau 10 câu hỏi, hiển thị điểm.</p>
                 </div>
             </div>
 
             <!-- Trò chơi 5 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-orange-600 mb-3">5. Phân Số Vui Nhộn 🍕🍰</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Nhận biết phân số qua hình ảnh trực quan.</p>
-                        <p><strong>Cơ chế chơi:</strong> Trắc nghiệm với icon.</p>
-                        <p><strong>Mô tả:</strong> Màn hình hiển thị icon được chia phần (pizza 🍕, bánh 🍰), câu hỏi "Icon này biểu thị phân số nào?".</p>
-                        <p><strong>Icon AI:</strong> Dùng các icon có thể chia phần trực quan như 🍕, 📊, 🍫.</p>
-                        <p><strong>Kết thúc:</strong> Hiển thị điểm sau 15 câu.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-orange-600 mb-4">Trò chơi 5 – Phân Số Vui Nhộn 🍕🍰</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Nhận biết phân số qua hình ảnh trực quan.</p>
+                    <p><strong>Cơ chế chơi:</strong> Trắc nghiệm với icon.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Màn hình hiển thị một icon được chia phần và tô màu. Câu hỏi: "Icon này biểu thị phân số nào?".</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Phải sử dụng các icon đồ vật có thể chia được một cách trực quan. Ví dụ: icon bánh pizza 🍕, icon hình tròn được chia phần 📊, icon thanh sô-cô-la 🍫.</p>
+                    <p><strong>Kết thúc:</strong> Sau 15 câu, hiển thị điểm số.</p>
                 </div>
             </div>
 
             <!-- Trò chơi 6 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-yellow-600 mb-3">6. Dòng Chảy Lịch Sử 📜👑</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Ghi nhớ thứ tự các sự kiện lịch sử.</p>
-                        <p><strong>Cơ chế chơi:</strong> Kéo và thả để sắp xếp.</p>
-                        <p><strong>Mô tả:</strong> Sắp xếp các icon biểu thị sự kiện lịch sử vào các ô trống được đánh số theo đúng thứ tự.</p>
-                        <p><strong>Icon AI:</strong> Dùng các icon gợi nhớ lịch sử như 👑, 🛡️, 🐎, 📜.</p>
-                        <p><strong>Kết thúc:</strong> Vượt qua 5-7 màn sắp xếp.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-yellow-600 mb-4">Trò chơi 6 – Dòng Chảy Lịch Sử 📜👑</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Ghi nhớ thứ tự các sự kiện lịch sử.</p>
+                    <p><strong>Cơ chế chơi:</strong> Kéo và thả để sắp xếp.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Màn hình có các ô trống đánh số. Bên dưới là các icon biểu thị sự kiện lịch sử để người chơi sắp xếp.</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Sử dụng các icon gợi nhớ đến lịch sử. Ví dụ: icon vương miện 👑 cho thời vua chúa, icon lính 🛡️ hoặc icon ngựa 🐎 cho các trận chiến, icon cuộn giấy da 📜 cho các văn bản cổ. Với các sự kiện cụ thể, hãy dùng icon mô tả đúng nhất có thể.</p>
+                    <p><strong>Kết thúc:</strong> Vượt qua 5-7 màn sắp xếp.</p>
                 </div>
             </div>
 
             <!-- Trò chơi 7 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-teal-600 mb-3">7. Cặp Từ Trái Nghĩa ↔️</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Mở rộng vốn từ về các cặp từ trái nghĩa.</p>
-                        <p><strong>Cơ chế chơi:</strong> Ghép nối.</p>
-                        <p><strong>Mô tả:</strong> Nối từ ở cột này với từ trái nghĩa ở cột kia.</p>
-                        <p><strong>Icon AI:</strong> Dùng icon mô tả đúng nghĩa của từ. Ví dụ: Nóng ☀️, Lạnh ❄️, Vui 😊, Buồn 😢.</p>
-                        <p><strong>Kết thúc:</strong> Hoàn thành 5-7 bảng ghép nối.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-teal-600 mb-4">Trò chơi 7 – Cặp Từ Trái Nghĩa ↔️</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Mở rộng vốn từ vựng về các cặp từ trái nghĩa.</p>
+                    <p><strong>Cơ chế chơi:</strong> Ghép nối.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Màn hình có hai cột từ. Người chơi nối từ ở cột này với từ trái nghĩa ở cột kia.</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Sử dụng icon mô tả đúng nghĩa của từ để minh họa. Ví dụ: bên cạnh từ "Nóng", dùng icon mặt trời ☀️; bên cạnh từ "Lạnh", dùng icon bông tuyết ❄️. Bên cạnh từ "Vui", dùng icon mặt cười 😊; bên cạnh từ "Buồn", dùng icon mặt buồn 😢.</p>
+                    <p><strong>Kết thúc:</strong> Hoàn thành 5-7 bảng ghép nối.</p>
                 </div>
             </div>
 
             <!-- Trò chơi 8 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-pink-600 mb-3">8. Thủ Đô Các Nước 🗺️❓</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Ghi nhớ thủ đô của một số quốc gia.</p>
-                        <p><strong>Cơ chế chơi:</strong> Trắc nghiệm.</p>
-                        <p><strong>Mô tả:</strong> Câu hỏi "Thủ đô của Việt Nam là gì?", dưới đó là 4 đáp án tên thành phố.</p>
-                        <p><strong>Icon AI:</strong> Dùng icon lá cờ của quốc gia trong câu hỏi (🇻🇳, 🇯🇵).</p>
-                        <p><strong>Kết thúc:</strong> Hiển thị điểm sau 15 câu.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-pink-600 mb-4">Trò chơi 8 – Thủ Đô Các Nước 🗺️❓</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Ghi nhớ thủ đô của một số quốc gia.</p>
+                    <p><strong>Cơ chế chơi:</strong> Trắc nghiệm.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Câu hỏi: "Thủ đô của Việt Nam là gì?". Dưới đó là 4 đáp án tên thành phố.</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Trong câu hỏi, hãy sử dụng icon lá cờ của quốc gia đó. Ví dụ: Với câu hỏi về Việt Nam, dùng icon cờ Việt Nam 🇻🇳. Với câu hỏi về Nhật Bản, dùng icon cờ Nhật Bản 🇯🇵.</p>
+                    <p><strong>Kết thúc:</strong> Sau 15 câu hỏi, hiển thị điểm số.</p>
                 </div>
             </div>
 
             <!-- Trò chơi 9 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-indigo-600 mb-3">9. Giải Toán Đố 🧠💡</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Rèn kỹ năng giải toán có lời văn.</p>
-                        <p><strong>Cơ chế chơi:</strong> Trắc nghiệm.</p>
-                        <p><strong>Mô tả:</strong> Hiển thị bài toán đố ngắn kèm icon minh họa. Ví dụ: "An có 5 🍎, mẹ cho thêm 3 🍎. Hỏi An có mấy quả?".</p>
-                        <p><strong>Icon AI:</strong> Dùng icon mô tả chính xác đối tượng trong bài toán (🍎, 🚗).</p>
-                        <p><strong>Kết thúc:</strong> Hiển thị điểm sau 10 bài toán.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-indigo-600 mb-4">Trò chơi 9 – Giải Toán Đố 🧠💡</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Rèn kỹ năng giải toán có lời văn.</p>
+                    <p><strong>Cơ chế chơi:</strong> Trắc nghiệm.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Hiển thị bài toán đố ngắn kèm icon minh họa. Ví dụ: "An có 5 icon quả táo 🍎. Mẹ cho An thêm 3 icon quả táo 🍎 nữa. Hỏi An có tất cả bao nhiêu quả táo?".</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Phải sử dụng icon mô tả chính xác đối tượng được nhắc đến trong bài toán. Ví dụ: bài toán về quả táo thì dùng icon quả táo 🍎, bài toán về ô tô thì dùng icon ô tô 🚗.</p>
+                    <p><strong>Kết thúc:</strong> Sau 10 bài toán, hiển thị điểm.</p>
                 </div>
             </div>
 
             <!-- Trò chơi 10 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-lime-600 mb-3">10. Biệt Đội Phân Loại Rác ♻️🗑️</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Phân loại rác.</p>
-                        <p><strong>Cơ chế chơi:</strong> Kéo và thả.</p>
-                        <p><strong>Mô tả:</strong> Có 3 thùng rác cố định. Các icon rác hiện ra để người chơi kéo vào đúng thùng.</p>
-                        <p><strong>Icon AI:</strong> Thùng rác dùng ♻️, 🌿. Rác dùng icon chính xác: 🍎, 🍌, 🍾, 📰, 🔋.</p>
-                        <p><strong>Kết thúc:</strong> Phân loại đúng 15-20 loại rác.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-lime-600 mb-4">Trò chơi 10 – Biệt Đội Phân Loại Rác ♻️🗑️</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Phân loại rác.</p>
+                    <p><strong>Cơ chế chơi:</strong> Kéo và thả.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Có 3 thùng rác cố định. Các icon rác hiện ra để người chơi kéo vào đúng thùng.</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Thùng rác: dùng icon tái chế ♻️, icon lá cây 🌿 (cho rác hữu cơ). Các loại rác: phải dùng icon mô tả chính xác vật thể. Ví dụ: icon lõi táo 🍎, icon vỏ chuối 🍌, icon chai nhựa 🍾, icon tờ báo 📰, icon pin 🔋.</p>
+                    <p><strong>Kết thúc:</strong> Phân loại đúng 15-20 loại rác.</p>
                 </div>
             </div>
 
             <!-- Trò chơi 11 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-cyan-600 mb-3">11. Ngôi Nhà Từ Loại 🏠🅰️</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Phân biệt Danh từ, Động từ, Tính từ.</p>
-                        <p><strong>Cơ chế chơi:</strong> Kéo và thả.</p>
-                        <p><strong>Mô tả:</strong> Kéo từ hiện ra vào đúng ngôi nhà "Danh từ", "Động từ", hoặc "Tính từ".</p>
-                        <p><strong>Icon AI:</strong> Dùng 🏠 cho khu vực thả. Từ cần phân loại có icon đi kèm (bàn 🪑, chạy 🏃, sách 📖).</p>
-                        <p><strong>Kết thúc:</strong> Sau khi phân loại 15 từ.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-cyan-600 mb-4">Trò chơi 11 – Ngôi Nhà Từ Loại 🏠🅰️</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Phân biệt Danh từ, Động từ, Tính từ.</p>
+                    <p><strong>Cơ chế chơi:</strong> Kéo và thả.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Màn hình có 3 "ngôi nhà" cố định. Một từ sẽ hiện ra ở giữa màn hình. Người chơi kéo từ đó thả vào đúng ngôi nhà "Danh từ", "Động từ", hoặc "Tính từ".</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Sử dụng icon ngôi nhà 🏠 để làm nền cho các khu vực thả. Trên mỗi ngôi nhà, ghi rõ "Danh từ", "Động từ", "Tính từ". Với các từ cần phân loại, hãy thêm một icon minh họa bên cạnh nếu có thể. Ví dụ: Từ "cái bàn": thêm icon cái bàn (có thể dùng 🪑 hoặc 🖥️ tùy ngữ cảnh). Từ "chạy": thêm icon người chạy 🏃. Từ "xinh đẹp": thêm icon lấp lánh ✨. Từ "quyển sách": thêm icon sách 📖. Điều này giúp học sinh vừa học từ loại, vừa liên kết từ với hình ảnh.</p>
+                    <p><strong>Kết thúc:</strong> Sau khi phân loại 15 từ.</p>
                 </div>
             </div>
 
             <!-- Trò chơi 12 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-gray-600 mb-3">12. Mấy Giờ Rồi Nhỉ? ⏰</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Rèn kỹ năng xem đồng hồ kim.</p>
-                        <p><strong>Cơ chế chơi:</strong> Trắc nghiệm.</p>
-                        <p><strong>Mô tả:</strong> Hiển thị icon đồng hồ kim chỉ một giờ. Câu hỏi "Đồng hồ chỉ mấy giờ?".</p>
-                        <p><strong>Icon AI:</strong> Chỉ dùng icon ⏰ hoặc 🕰️ cho câu hỏi. Không dùng icon khác ở câu hỏi và đáp án.</p>
-                        <p><strong>Kết thúc:</strong> Sau 10 câu.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-gray-600 mb-4">Trò chơi 12 – Mấy Giờ Rồi Nhỉ? ⏰</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Rèn kỹ năng xem đồng hồ kim.</p>
+                    <p><strong>Cơ chế chơi:</strong> Trắc nghiệm.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Màn hình hiển thị một icon đồng hồ kim chỉ một giờ nhất định. Câu hỏi: "Đồng hồ chỉ mấy giờ?". Dưới đó là 4 đáp án dạng chữ hoặc số (ví dụ: "Ba giờ mười lăm phút" hoặc "03:15").</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Chỉ thị tuyệt đối: Chỉ sử dụng icon đồng hồ kim ⏰ hoặc icon đồng hồ báo thức 🕰️ cho câu hỏi. Không được sử dụng bất kỳ icon nào khác trong phần câu hỏi và đáp án để đảm bảo học sinh tập trung hoàn toàn vào việc đọc giờ trên đồng hồ. Có thể dùng icon dấu tick xanh ✅ cho đáp án đúng và icon dấu chéo đỏ ❌ cho đáp án sai.</p>
+                    <p><strong>Kết thúc:</strong> Sau 10 câu.</p>
                 </div>
             </div>
 
             <!-- Trò chơi 13 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-brown-600 mb-3">13. Ai Ăn Gì? 🌿🐇🦊</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Tìm hiểu về chuỗi thức ăn đơn giản.</p>
-                        <p><strong>Cơ chế chơi:</strong> Trắc nghiệm với icon.</p>
-                        <p><strong>Mô tả:</strong> Câu hỏi "Con... ăn gì?" với icon con vật. Bên dưới là 3 icon thức ăn để chọn.</p>
-                        <p><strong>Icon AI:</strong> Dùng icon chính xác cho con vật và thức ăn (khỉ 🐒 ăn chuối 🍌, gấu trúc 🐼 ăn tre 🎍).</p>
-                        <p><strong>Kết thúc:</strong> Sau 10 câu hỏi.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-brown-600 mb-4">Trò chơi 13 – Ai Ăn Gì? 🌿🐇🦊</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Tìm hiểu về chuỗi thức ăn đơn giản.</p>
+                    <p><strong>Cơ chế chơi:</strong> Trắc nghiệm với icon.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Màn hình hiển thị một icon con vật và câu hỏi "Con... ăn gì?". Ví dụ, icon con khỉ và câu hỏi "Con khỉ ăn gì?". Bên dưới là 3 icon thức ăn để chọn.</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Phải sử dụng icon mô tả chính xác con vật trong câu hỏi và các loại thức ăn trong đáp án. Ví dụ: Câu hỏi về khỉ: dùng icon con khỉ 🐒. Đáp án lựa chọn: icon quả chuối 🍌, icon khúc xương 🦴, icon con cá 🐟. Câu hỏi về gấu trúc: dùng icon gấu trúc 🐼. Đáp án lựa chọn: icon cây tre 🎍, icon con ong 🐝, icon quả táo 🍎. Điều này giúp học sinh học kiến thức sinh học một cách trực quan.</p>
+                    <p><strong>Kết thúc:</strong> Sau 10 câu hỏi về chuỗi thức ăn.</p>
                 </div>
             </div>
 
             <!-- Trò chơi 14 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-amber-700 mb-3">14. Điền Vào Thành Ngữ 📜✍️</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Làm quen với thành ngữ, tục ngữ Việt Nam.</p>
-                        <p><strong>Cơ chế chơi:</strong> Trắc nghiệm.</p>
-                        <p><strong>Mô tả:</strong> Hiển thị một câu thành ngữ bị khuyết một từ. Ví dụ: "Ăn quả nhớ kẻ ... cây."</p>
-                        <p><strong>Icon AI:</strong> Dùng 📜 hoặc 📖 ở tiêu đề. Không dùng icon trong câu thành ngữ và đáp án.</p>
-                        <p><strong>Kết thúc:</strong> Sau 10 câu.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-amber-700 mb-4">Trò chơi 14 – Điền Vào Thành Ngữ 📜✍️</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Làm quen với thành ngữ, tục ngữ Việt Nam.</p>
+                    <p><strong>Cơ chế chơi:</strong> Trắc nghiệm.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Hiển thị một câu thành ngữ bị khuyết một từ. Ví dụ: "Ăn quả nhớ kẻ ... cây.". Dưới đó là 4 đáp án để chọn.</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Để tạo không khí cổ xưa, hãy dùng icon cuộn giấy 📜 hoặc icon sách mở 📖 ở phần tiêu đề. Tuyệt đối không sử dụng icon bên cạnh các từ trong câu thành ngữ hoặc đáp án, vì điều này sẽ làm mất đi tính "đố chữ" và làm lộ câu trả lời. Trò chơi này cần tập trung vào ngôn ngữ.</p>
+                    <p><strong>Kết thúc:</strong> Sau 10 câu.</p>
                 </div>
             </div>
 
             <!-- Trò chơi 15 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-red-700 mb-3">15. English Spelling 🐝</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Luyện đánh vần từ vựng tiếng Anh cơ bản.</p>
-                        <p><strong>Cơ chế chơi:</strong> Kéo và thả để sắp xếp chữ cái.</p>
-                        <p><strong>Mô tả:</strong> Hiển thị một icon và các ô trống. Người chơi kéo các chữ cái bị xáo trộn vào ô.</p>
-                        <p><strong>Icon AI:</strong> Hiển thị icon chính xác cho từ cần đánh vần (cat 🐱, car 🚗, star ⭐). Dùng 🐝 làm biểu tượng game.</p>
-                        <p><strong>Kết thúc:</strong> Sau khi đánh vần 15 từ.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-red-700 mb-4">Trò chơi 15 – English Spelling 🐝</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Luyện đánh vần từ vựng tiếng Anh cơ bản.</p>
+                    <p><strong>Cơ chế chơi:</strong> Kéo và thả để sắp xếp chữ cái.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Màn hình hiển thị một icon và các ô trống tương ứng với số chữ cái. Bên dưới là các chữ cái bị xáo trộn để người chơi kéo vào ô.</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Với mỗi từ cần đánh vần, phải hiển thị một icon mô tả chính xác từ đó. Ví dụ: Khi đánh vần từ "cat", hiển thị icon con mèo 🐱. Khi đánh vần từ "car", hiển thị icon ô tô 🚗. Khi đánh vần từ "star", hiển thị icon ngôi sao ⭐. Sử dụng icon con ong 🐝 làm biểu tượng của trò chơi.</p>
+                    <p><strong>Kết thúc:</strong> Sau khi đánh vần 15 từ.</p>
                 </div>
             </div>
 
             <!-- Trò chơi 16 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-violet-700 mb-3">16. Tìm Vật Khác Nhóm 🍎🥕✈️</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Rèn luyện tư duy phân loại logic.</p>
-                        <p><strong>Cơ chế chơi:</strong> Trắc nghiệm với icon.</p>
-                        <p><strong>Mô tả:</strong> Hiển thị 4 icon, trong đó có một icon khác nhóm. Người chơi phải tìm ra icon đó.</p>
-                        <p><strong>Icon AI:</strong> Dùng icon chính xác. Ví dụ: 🚗, 🚆, ✈️, 🐶 (chọn 🐶).</p>
-                        <p><strong>Kết thúc:</strong> Sau 15 câu.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-violet-700 mb-4">Trò chơi 16 – Tìm Vật Khác Nhóm 🍎🥕✈️</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Rèn luyện tư duy phân loại logic.</p>
+                    <p><strong>Cơ chế chơi:</strong> Trắc nghiệm với icon.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Màn hình hiển thị 4 icon. Ba icon thuộc cùng một nhóm, một icon khác nhóm. Người chơi phải tìm ra icon khác nhóm đó.</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Phải sử dụng icon mô tả đúng các đối tượng được liệt kê. Ví dụ: Nhóm "Phương tiện giao thông" và "Con vật": icon ô tô 🚗, icon tàu hỏa 🚆, icon máy bay ✈️, icon con chó 🐶 (chọn con chó). Nhóm "Rau củ" và "Trái cây": icon cà rốt 🥕, icon bông cải xanh 🥦, icon khoai tây 🥔, icon quả dâu 🍓 (chọn quả dâu). Việc chọn icon chính xác là yếu tố quyết định của trò chơi này.</p>
+                    <p><strong>Kết thúc:</strong> Sau 15 câu.</p>
                 </div>
             </div>
 
             <!-- Trò chơi 17 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-rose-700 mb-3">17. Biển Báo Giao Thông 🚦</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Nhận biết ý nghĩa các biển báo giao thông cơ bản.</p>
-                        <p><strong>Cơ chế chơi:</strong> Trắc nghiệm.</p>
-                        <p><strong>Mô tả:</strong> Hiển thị một icon biển báo và câu hỏi về ý nghĩa của nó.</p>
-                        <p><strong>Icon AI:</strong> Dùng icon chuẩn xác cho biển báo (🛑, ⛔, 🚶, 🚦).</p>
-                        <p><strong>Kết thúc:</strong> Sau 10-15 biển báo.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-rose-700 mb-4">Trò chơi 17 – Biển Báo Giao Thông 🚦</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Nhận biết ý nghĩa các biển báo giao thông cơ bản.</p>
+                    <p><strong>Cơ chế chơi:</strong> Trắc nghiệm.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Màn hình hiển thị một icon biển báo giao thông và câu hỏi "Biển báo này có ý nghĩa gì?". Bên dưới là 3-4 đáp án dạng chữ.</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Phải sử dụng các icon mô tả đúng và chuẩn xác các biển báo giao thông theo luật. Ví dụ: Biển báo dừng lại: icon hình bát giác màu đỏ có chữ STOP 🛑. Biển báo cấm đi ngược chiều: icon hình tròn đỏ có gạch ngang trắng ⛔. Biển báo dành cho người đi bộ: icon hình vuông xanh có hình người đi bộ 🚶. Đèn giao thông: icon đèn giao thông 🚦.</p>
+                    <p><strong>Kết thúc:</strong> Sau 10-15 biển báo.</p>
                 </div>
             </div>
 
             <!-- Trò chơi 18 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-emerald-700 mb-3">18. Vòng Đời Của Bướm 🐛🦋</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Hiểu về vòng đời của một sinh vật.</p>
-                        <p><strong>Cơ chế chơi:</strong> Kéo và thả để sắp xếp.</p>
-                        <p><strong>Mô tả:</strong> Kéo các icon biểu thị các giai đoạn phát triển vào ô theo đúng thứ tự.</p>
-                        <p><strong>Icon AI:</strong> Dùng icon đúng giai đoạn: Trứng 🥚 trên lá 🍃, Sâu 🐛, Nhộng 🥜, Bướm 🦋.</p>
-                        <p><strong>Kết thúc:</strong> Hoàn thành 1-2 vòng đời.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-emerald-700 mb-4">Trò chơi 18 – Vòng Đời Của Bướm 🐛🦋</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Hiểu về vòng đời của một sinh vật (ví dụ: bướm).</p>
+                    <p><strong>Cơ chế chơi:</strong> Kéo và thả để sắp xếp.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Màn hình có 4 ô trống đánh số. Bên dưới là các icon biểu thị các giai đoạn phát triển. Người chơi kéo các icon vào ô theo đúng thứ tự.</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Phải sử dụng icon mô tả đúng các giai đoạn của vòng đời con bướm. Giai đoạn 1 (Trứng): Dùng icon trứng 🥚 trên một icon lá cây 🍃. Giai đoạn 2 (Sâu bướm): Dùng icon con sâu 🐛. Giai đoạn 3 (Nhộng): Dùng icon cái kén (có thể dùng icon hạt đậu 🥜 để mô phỏng hình dáng nếu không có icon kén). Giai đoạn 4 (Bướm trưởng thành): Dùng icon con bướm 🦋.</p>
+                    <p><strong>Kết thúc:</strong> Hoàn thành 1-2 vòng đời của các sinh vật.</p>
                 </div>
             </div>
 
             <!-- Trò chơi 19 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-sky-700 mb-3">19. Đoán Tên Con Vật 🦁❓</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Luyện khả năng suy luận từ mô tả.</p>
-                        <p><strong>Cơ chế chơi:</strong> Trắc nghiệm với icon.</p>
-                        <p><strong>Mô tả:</strong> Hiển thị 2-3 câu mô tả về một con vật, người chơi chọn icon con vật đúng.</p>
-                        <p><strong>Icon AI:</strong> Đáp án là các icon chính xác (🐘, 🦒, 🦛, 🦁). Có thể phát âm thanh khi trả lời đúng.</p>
-                        <p><strong>Kết thúc:</strong> Sau 10 câu đố.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-sky-700 mb-4">Trò chơi 19 – Đoán Tên Con Vật 🦁❓</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Luyện khả năng suy luận từ mô tả.</p>
+                    <p><strong>Cơ chế chơi:</strong> Trắc nghiệm với icon.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Màn hình hiển thị 2-3 câu mô tả về một con vật. Bên dưới là 4 icon con vật để người chơi chọn.</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Phần đáp án lựa chọn phải là các icon mô tả chính xác các con vật được liệt kê. Ví dụ: Câu đố về con voi: các đáp án lựa chọn là icon con voi 🐘, icon con hươu cao cổ 🦒, icon hà mã 🦛, icon sư tử 🦁. Khi trả lời đúng, có thể phát ra âm thanh tiếng kêu của con vật đó.</p>
+                    <p><strong>Kết thúc:</strong> Sau 10 câu đố.</p>
                 </div>
             </div>
 
             <!-- Trò chơi 20 -->
-            <div class="content-card p-5">
-                <div class="card-content">
-                    <h2 class="text-xl font-bold font-montserrat text-fuchsia-700 mb-3">20. Ghép Cặp Anh - Việt 🤝</h2>
-                    <div class="text-sm space-y-2">
-                        <p><strong>Mục tiêu:</strong> Học từ vựng tiếng Anh cơ bản.</p>
-                        <p><strong>Cơ chế chơi:</strong> Ghép nối.</p>
-                        <p><strong>Mô tả:</strong> Nối từ tiếng Anh ở cột trái với nghĩa tiếng Việt ở cột phải.</p>
-                        <p><strong>Icon AI:</strong> Cột tiếng Anh có icon đi kèm (House 🏠, Tree 🌳, Book 📖). Cột tiếng Việt chỉ có chữ.</p>
-                        <p><strong>Kết thúc:</strong> Sau khi hoàn thành 5-7 bảng từ vựng.</p>
-                    </div>
+            <div class="content-card p-6">
+                <h2 class="text-2xl font-bold font-montserrat text-fuchsia-700 mb-4">Trò chơi 20 – Ghép Cặp Tiếng Anh - Tiếng Việt 🤝</h2>
+                <div class="space-y-2 text-sm">
+                    <p><strong>Mục tiêu:</strong> Học từ vựng tiếng Anh cơ bản.</p>
+                    <p><strong>Cơ chế chơi:</strong> Ghép nối.</p>
+                    <p><strong>Mô tả chi tiết:</strong> Màn hình có hai cột. Cột trái là các từ tiếng Anh. Cột phải là nghĩa tiếng Việt tương ứng bị xáo trộn. Người chơi nối các cặp từ đúng.</p>
+                    <p><strong>Yêu cầu về Icon (dành cho AI):</strong> Để tăng tính trực quan, cột chứa từ tiếng Anh phải có một icon mô tả chính xác từ đó đi kèm. Ví dụ: Bên cạnh từ "House" (tiếng Anh), hiển thị icon ngôi nhà 🏠. Bên cạnh từ "Tree" (tiếng Anh), hiển thị icon cây xanh 🌳. Bên cạnh từ "Book" (tiếng Anh), hiển thị icon sách 📖. Cột tiếng Việt chỉ cần hiển thị chữ.</p>
+                    <p><strong>Kết thúc:</strong> Sau khi hoàn thành 5-7 bảng từ vựng.</p>
                 </div>
             </div>
 
