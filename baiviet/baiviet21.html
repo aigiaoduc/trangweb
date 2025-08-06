@@ -16,6 +16,7 @@
     <style>
         body {
             font-family: 'Quicksand', sans-serif;
+            padding-top: 80px; /* Height of the fixed navbar */
         }
         .hero-section {
             background-image: url('https://t4.ftcdn.net/jpg/09/84/34/03/360_F_984340340_wc05fFdhfcYUWek6iFWJNuY2hcwyNfEK.jpg');
@@ -52,16 +53,13 @@
             list-style-type: none;
             padding-left: 0;
         }
-        .menu-placeholder {
-            background-color: black;
-            height: 64px; /* Adjust this height to match your menu's height */
-        }
+        /* .menu-placeholder has been removed */
     </style>
 </head>
 <body class="bg-gray-50">
 
     <div id="menu-container"></div>
-    <div class="menu-placeholder"></div>
+    
 
     <header class="hero-section text-white text-center py-20 px-4">
         <div class="hero-content">
@@ -455,14 +453,23 @@
 
     <script>
         // Load Menu
-        fetch('../assets/includes/menu.html')
+        fetch('/assets/includes/menu.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('menu-container').innerHTML = data;
+                // Initialize menu script after loading content
+                const menuToggle = document.getElementById('menuToggle');
+                const navLinks = document.getElementById('navLinks');
+                if (menuToggle && navLinks) {
+                    menuToggle.addEventListener('click', () => {
+                        navLinks.classList.toggle('open');
+                        menuToggle.classList.toggle('open');
+                    });
+                }
             });
 
         // Load Footer
-        fetch('../assets/includes/footer.html')
+        fetch('/assets/includes/footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('footer-container').innerHTML = data;
