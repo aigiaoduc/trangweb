@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="main-wrapper">
+    <div id="chatbot-container">
+        <div id="chatbot-header">
+            <h2>Thư ký Bơ và Gạo</h2>
+        </div>
+        <div id="chatbot-messages">
+            <div class="message bot-message">
+                <p>Chào ba! Tụi con có thể giúp gì cho ba?</p>
+            </div>
+            <!-- Typing indicator will be injected here by JS -->
+        </div>
+        <div id="chatbot-input-container">
+            <button id="command-list-btn" title="Danh sách câu lệnh">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+            </button>
+            <input type="text" id="chatbot-input" placeholder="Ba nhập câu hỏi tại đây...">
+            <button id="chatbot-send">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+        </div>
+    </div>
+    <div id="command-list-modal" class="hidden">
+        <div class="modal-content">
+            <div id="command-list-header">
+                <h3>Danh sách câu lệnh</h3>
+            </div>
+            <ul id="command-list">
+                <!-- Commands will be injected here by JS -->
+            </ul>
+            <div id="command-list-footer">
+                <button id="close-modal-btn">&times;</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

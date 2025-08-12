@@ -1,25 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- DOM Elements ---
     const sendBtn = document.getElementById('chatbot-send');
     const userInput = document.getElementById('chatbot-input');
     const messagesContainer = document.getElementById('chatbot-messages');
-    const suggestionsContainer = document.getElementById('chatbot-suggestions');
+    const commandListBtn = document.getElementById('command-list-btn');
+    const commandModal = document.getElementById('command-list-modal');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const commandList = document.getElementById('command-list');
 
+    // --- State and Data ---
     const dataUrl = 'data.json';
     let fuse;
     let chatData = [];
-    let userInteracted = false;
-
-    // --- Suggestions ---
-    const suggestions = ["Giờ vào học", "Danh sách giáo viên", "Số điện thoại trường", "Danh sách học sinh"];
 
     // --- Fuse.js Options ---
     const options = {
         keys: ['cauhoi'],
         includeScore: true,
-        threshold: 0.5, // Looser threshold to find near matches
+        threshold: 0.4, // Adjusted threshold
     };
 
-    // --- Fetch and Parse Data ---
+    // --- Fetch Data and Initialize ---
     fetch(dataUrl)
         .then(response => {
             if (!response.ok) {
@@ -30,8 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             chatData = data;
             fuse = new Fuse(chatData, options);
-            renderSuggestions();
-            console.log('Data loaded and Fuse.js initialized.');
+            populateCommandList();
+            console.log('Data loaded, Fuse.js initialized, and command list populated.');
         })
         .catch(error => {
             console.error('Error fetching or parsing data:', error);
@@ -39,41 +40,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // --- Event Listeners ---
-    sendBtn.addEventListener('click', handleUserMessage);
+    sendBtn.addEventListener('click', () => handleUserMessage());
     userInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             handleUserMessage();
         }
     });
 
-    // --- Functions ---
+    commandListBtn.addEventListener('click', () => {
+        commandModal.classList.remove('hidden');
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+        commandModal.classList.add('hidden');
+    });
+
+    // Close modal if clicking outside of it
+    window.addEventListener('click', (event) => {
+        if (event.target === commandModal) {
+            commandModal.classList.add('hidden');
+        }
+    });
+
+    // --- Core Functions ---
     function handleUserMessage(predefinedQuery = null) {
         const query = predefinedQuery || userInput.value.trim();
         if (query === '') return;
-
-        if (!userInteracted) {
-            suggestionsContainer.style.display = 'none';
-            userInteracted = true;
-        }
 
         addMessage(query, 'user');
         userInput.value = '';
         showTypingIndicator();
 
-        // Find the best match
+        // Find the best match using Fuse.js
         setTimeout(() => {
             const results = fuse.search(query);
             let response;
 
-            if (results.length === 0) {
-                response = 'Xin lỗi, tôi không tìm thấy câu trả lời phù hợp. Bạn có thể thử một từ khóa khác.';
+            if (results.length > 0 && results[0].score < options.threshold) {
+                response = results[0].item.traloi;
             } else {
-                const bestResult = results[0];
-                if (bestResult.score < 0.3) { // Good match (lower score is better)
-                    response = bestResult.item.traloi;
-                } else { // Not a great match
-                    response = `Tôi không chắc lắm, có phải bạn muốn hỏi về: "<strong>${bestResult.item.cauhoi}</strong>"?`;
-                }
+                response = 'Xin lỗi, tôi không tìm thấy câu trả lời phù hợp. Bạn có thể xem danh sách câu lệnh hoặc thử một từ khóa khác.';
             }
             hideTypingIndicator();
             addMessage(response, 'bot');
@@ -92,17 +98,23 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollToBottom();
     }
 
-    function renderSuggestions() {
-        suggestionsContainer.innerHTML = '';
-        suggestions.forEach(text => {
-            const btn = document.createElement('button');
-            btn.className = 'suggestion-btn';
-            btn.textContent = text;
-            btn.onclick = () => handleUserMessage(text);
-            suggestionsContainer.appendChild(btn);
+    function populateCommandList() {
+        commandList.innerHTML = '';
+        chatData.forEach(item => {
+            if (item.cauhoi && item.cauhoi.length > 0) {
+                const commandText = item.cauhoi[0]; // Take the first question as the command
+                const li = document.createElement('li');
+                li.textContent = commandText;
+                li.addEventListener('click', () => {
+                    handleUserMessage(commandText);
+                    commandModal.classList.add('hidden');
+                });
+                commandList.appendChild(li);
+            }
         });
     }
 
+    // --- Utility Functions ---
     function showTypingIndicator() {
         if (document.querySelector('.typing-indicator')) return;
         const indicator = document.createElement('div');
