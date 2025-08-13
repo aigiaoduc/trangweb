@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng dẫn sử dụng chatbot AI của Bộ Công an</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://vneid.gov.vn/cam-nang-vneid">
+    <meta property="og:title" content="Hướng dẫn sử dụng chatbot AI của Bộ Công an">
+    <meta property="og:description" content="Khám phá cách sử dụng chatbot AI của Bộ Công an để giải đáp mọi thắc mắc về thủ tục hành chính trên điện thoại và máy tính.">
+    <meta property="og:image" content="https://anonyviet.com/wp-content/uploads/2025/07/chatbot-ai-cua-bo-cong-an-350x250.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vneid.gov.vn/cam-nang-vneid">
+    <meta property="twitter:title" content="Hướng dẫn sử dụng chatbot AI của Bộ Công an">
+    <meta property="twitter:description" content="Khám phá cách sử dụng chatbot AI của Bộ Công an để giải đáp mọi thắc mắc về thủ tục hành chính trên điện thoại và máy tính.">
+    <meta property="twitter:image" content="https://anonyviet.com/wp-content/uploads/2025/07/chatbot-ai-cua-bo-cong-an-350x250.jpg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        quicksand: ['Quicksand', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'custom-card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'hero-shadow': '0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.5)',
+                    },
+                    screens: {
+                        'xs': '480px', // Extra small screens
+                        'sm': '640px', // Small screens
+                        'md': '768px', // Medium screens
+                        'lg': '1024px', // Large screens
+                        'xl': '1280px', // Extra large screens
+                        '2xl': '1536px', // 2x extra large screens
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom styles for hero section */
+        .hero-section {
+            position: relative; /* Keep position relative for positioning children */
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            overflow: hidden; /* Ensure blur doesn't leak */
+        }
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://anonyviet.com/wp-content/uploads/2025/07/chatbot-ai-cua-bo-cong-an-350x250.jpg'); /* Explicitly set background image */
+            background-size: cover;
+            background-position: center;
+            filter: blur(15px); /* Blur is applied here to the background layer */
+            z-index: -1; /* Place behind content */
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1; /* Ensure content is above background */
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Remove default list styles */
+        ul, ol {
+            list-style: none;
+            padding-left: 0;
+        }
+        /* Add some spacing for list items if needed */
+        li {
+            margin-bottom: 3rem;
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-100">
+
+    <div id="menu-placeholder" class="fixed top-0 left-0 right-0 z-50 bg-black h-16 flex items-center">
+        <!-- Menu will be loaded here -->
+    </div>
+
+    <main class="pt-16"> <!-- Add padding-top to avoid content being hidden by fixed menu -->
+        <section class="hero-section h-64 md:h-80 lg:h-96 flex items-center justify-center relative overflow-hidden">
+            <div class="hero-background"></div>
+            <div class="hero-content text-center px-4">
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-montserrat mb-2 drop-shadow-lg">Hướng dẫn sử dụng chatbot AI của Bộ Công an</h1>
+                <p class="text-lg md:text-xl font-light">Khám phá cách sử dụng chatbot AI của Bộ Công an để giải đáp mọi thắc mắc về thủ tục hành chính trên điện thoại và máy tính.</p>
+                <p class="text-sm font-inter mt-1">Tác giả: Trần Hồng Quân</p>
+            </div>
+        </section>
+
+        <article class="container mx-auto px-4 py-8 max-w-4xl">
+            <p class="mb-4">Chatbot AI của Bộ Công an vừa được ra mắt, mở ra một kỷ nguyên mới trong việc tương tác và giải quyết các thủ tục hành chính công. Giờ đây, thay vì phải tìm kiếm thông tin phức tạp, người dân có thể dễ dàng “trò chuyện” với trợ lý ảo để được hướng dẫn tận tình. Hãy cùng AnonyViet khám phá cách khai thác tối đa công cụ tiện ích này qua bài viết dưới đây.</p>
+
+            <h2 class="text-2xl font-montserrat font-bold mb-3 text-gray-800">Chatbot AI của Bộ Công an là gì?</h2>
+            <p class="mb-4">Đây là một trợ lý ảo thông minh được phát triển bởi Cục Cảnh sát quản lý hành chính về Trật tự Xã hội (C06), hoạt động tương tự các chatbot nổi tiếng như ChatGPT hay Gemini. Công cụ này được tạo ra với mục tiêu trở thành một kênh thông tin chính thống, giúp người dân tiếp cận các dịch vụ công một cách dễ dàng và minh bạch hơn.</p>
+            <p class="mb-4">Thay vì phải gọi điện đến tổng đài hay trực tiếp đến cơ quan chức năng, bạn có thể nhận được câu trả lời ngay lập tức cho nhiều vấn đề, cụ thể như:</p>
+            <ul class="list-disc pl-5 mb-4">
+                <li>Giải đáp mọi thắc mắc liên quan đến thủ tục hành chính, từ quy trình làm hộ chiếu online, đăng ký tạm trú, cho đến các tính năng trên ứng dụng VNeID.</li>
+                <li>Dễ dàng tra cứu thông tin về các đơn vị hành chính đã được sáp nhập, ví dụ như một xã hoặc phường cụ thể giờ đây thuộc về đơn vị nào, địa chỉ mới của cơ quan hành chính ở đâu.</li>
+                <li>Trợ lý ảo còn là một kênh thông tin chính thống giúp cảnh báo về các thủ đoạn lừa đảo tinh vi, đặc biệt là những chiêu trò lợi dụng việc sắp xếp lại đơn vị hành chính để trục lợi.</li>
+            </ul>
+            <img src="https://anonyviet.com/wp-content/uploads/2025/07/chatbot-ai-cua-bo-cong-an-1.jpg" alt="Chatbot AI Bộ Công an" class="w-full rounded-lg shadow-custom-card mb-4">
+
+            <h2 class="text-2xl font-montserrat font-bold mb-3 text-gray-800">Hướng dẫn cách sử dụng chatbot trên máy tính</h2>
+            <p class="mb-4">Việc sử dụng trợ lý ảo trên máy tính vô cùng đơn giản và không yêu cầu bạn phải đăng ký hay đăng nhập bất kỳ tài khoản nào.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white p-6 rounded-lg shadow-custom-card">
+                    <h3 class="text-xl font-montserrat font-semibold mb-3 text-gray-800">Bước 1: Mở trình duyệt web</h3>
+                    <p>Truy cập vào trang Cẩm nang VNeID theo địa chỉ chính thức: <a href="https://vneid.gov.vn/cam-nang-vneid" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">https://vneid.gov.vn/cam-nang-vneid</a></p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-custom-card">
+                    <h3 class="text-xl font-montserrat font-semibold mb-3 text-gray-800">Bước 2: Tìm biểu tượng Trợ lý AI</h3>
+                    <p>Tìm và nhấp vào biểu tượng “Trợ lý AI” thường xuất hiện ở góc dưới bên phải màn hình.</p>
+                    <img src="https://anonyviet.com/wp-content/uploads/2025/07/chatbot-ai-cua-bo-cong-an-2.jpg" alt="Biểu tượng Trợ lý AI" class="w-full rounded-lg shadow-custom-card mt-3">
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white p-6 rounded-lg shadow-custom-card">
+                    <h3 class="text-xl font-montserrat font-semibold mb-3 text-gray-800">Bước 3: Bắt đầu trò chuyện</h3>
+                    <p>Một cửa sổ trò chuyện sẽ hiện ra. Bây giờ, bạn chỉ cần gõ câu hỏi của mình vào ô chat và nhấn gửi.</p>
+                    <img src="https://anonyviet.com/wp-content/uploads/2025/07/chatbot-ai-cua-bo-cong-an-3.jpg" alt="Cửa sổ trò chuyện Chatbot AI" class="w-full rounded-lg shadow-custom-card mt-3">
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-custom-card">
+                    <h3 class="text-xl font-montserrat font-semibold mb-3 text-gray-800">Ví dụ câu hỏi</h3>
+                    <p>Bạn có thể hỏi về quy trình, hồ sơ cần chuẩn bị, hoặc tra cứu thông tin địa phương sau sáp nhập.</p>
+                    <img src="https://anonyviet.com/wp-content/uploads/2025/07/chatbot-ai-cua-bo-cong-an-4.jpg" alt="Ví dụ câu hỏi Chatbot AI" class="w-full rounded-lg shadow-custom-card mt-3">
+                </div>
+            </div>
+
+            <h2 class="text-2xl font-montserrat font-bold mb-3 text-gray-800">Cách truy cập chatbot AI của Bộ Công an trên điện thoại</h2>
+            <p class="mb-4">Đối với người dùng điện thoại thông minh, bạn có hai cách để tiếp cận trợ lý ảo này một cách nhanh chóng.</p>
+
+            <h3 class="text-xl font-montserrat font-semibold mb-3 text-gray-800">Cách 1: Truy cập trực tiếp qua trình duyệt</h3>
+            <p class="mb-4">Bạn chỉ cần mở trình duyệt trên điện thoại (Chrome, Safari…) và truy cập vào đường link <a href="https://vneid.gov.vn/cam-nang-vneid" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">https://vneid.gov.vn/cam-nang-vneid</a> tương tự như trên máy tính.</p>
+
+            <h3 class="text-xl font-montserrat font-semibold mb-3 text-gray-800">Cách 2: Truy cập thông qua ứng dụng VNeID (Khuyến khích)</h3>
+            <p class="mb-4">Đây là cách tiện lợi hơn vì bạn không cần phải nhớ địa chỉ trang web.</p>
+            <div class="bg-white p-6 rounded-lg shadow-custom-card mb-6">
+                <h4 class="text-lg font-montserrat font-semibold mb-2 text-gray-800">Bước 1: Mở ứng dụng VNeID</h4>
+                <p>Mở ứng dụng VNeID trên điện thoại và đăng nhập vào tài khoản của bạn.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-custom-card mb-6">
+                <h4 class="text-lg font-montserrat font-semibold mb-2 text-gray-800">Bước 2: Tìm mục “Định danh tổ chức”</h4>
+                <p>Tại giao diện chính, bạn tìm đến mục “Định danh tổ chức” và vuốt qua các banner hình ảnh cho đến khi thấy banner có tên “Cẩm nang hướng dẫn tổng thể“.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-custom-card mb-6">
+                <h4 class="text-lg font-montserrat font-semibold mb-2 text-gray-800">Bước 3: Nhấn vào banner</h4>
+                <p>Nhấn vào banner đó, ứng dụng sẽ tự động chuyển bạn đến trang Sổ tay VNeID. Tại đây, bạn chỉ cần nhấn vào biểu tượng Trợ lý AI ở góc dưới để bắt đầu cuộc trò chuyện.</p>
+                <img src="https://anonyviet.com/wp-content/uploads/2025/07/chatbot-ai-cua-bo-cong-an-5.jpg" alt="Giao diện VNeID" class="w-full rounded-lg shadow-custom-card mt-3">
+            </div>
+
+            <h2 class="text-2xl font-montserrat font-bold mb-3 text-gray-800">Một số lưu ý quan trọng</h2>
+            <p class="mb-4">Để có trải nghiệm tốt nhất với công cụ mới này, bạn nên ghi nhớ một vài điểm sau:</p>
+            <ul class="list-disc pl-5 mb-4">
+                <li>Hệ thống có thể gặp tình trạng quá tải tạm thời do mới ra mắt và có lượng người dùng truy cập cao, nếu gặp lỗi bạn hãy kiên nhẫn thử lại sau ít phút.</li>
+                <li>Để đảm bảo hoạt động ổn định, bạn chỉ nên mở trang web trên một tab duy nhất của trình duyệt khi sử dụng trên máy tính.</li>
+            </ul>
+            <img src="https://anonyviet.com/wp-content/uploads/2025/07/chatbot-ai-cua-bo-cong-an-6.jpg" alt="Lưu ý sử dụng Chatbot AI" class="w-full rounded-lg shadow-custom-card mb-6">
+
+            <h2 class="text-2xl font-montserrat font-bold mb-3 text-gray-800">Kết bài</h2>
+            <p class="mb-8">Với sự ra đời của chatbot AI của Bộ Công an, việc tra cứu thông tin hành chính đã trở nên đơn giản và thuận tiện hơn bao giờ hết. Công cụ này không chỉ tiết kiệm thời gian mà còn đảm bảo người dân tiếp cận được nguồn thông tin chính xác, đáng tin cậy.</p>
+
+            <div class="text-center">
+                <a href="https://vneid.gov.vn/cam-nang-vneid" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 font-quicksand text-lg">
+                    Truy cập công cụ
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <div id="footer-placeholder">
+        <!-- Footer will be loaded here -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load Menu
+            fetch('../assets/includes/menu.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('menu-placeholder').innerHTML = data;
+                    // Ensure menu is styled correctly after loading
+                    const menuDiv = document.getElementById('menu-placeholder');
+                    if (menuDiv) {
+                        menuDiv.classList.add('fixed', 'top-0', 'left-0', 'right-0', 'z-50', 'bg-black', 'h-16', 'flex', 'items-center');
+                        // Add mobile menu toggle functionality if needed (assuming menu.html has the structure for it)
+                        // Example: If menu.html has a button with id="menuToggle"
+                        const menuButton = menuDiv.querySelector('#menuToggle');
+                        // The menu itself is the nav-links div, which needs to be toggled
+                        const mobileMenu = menuDiv.querySelector('#navLinks');
+                        if (menuButton && mobileMenu) {
+                            menuButton.addEventListener('click', () => {
+                                mobileMenu.classList.toggle('hidden');
+                            });
+                        }
+                    }
+                })
+                .catch(error => console.error('Error loading menu:', error));
+
+            // Load Footer
+            fetch('../assets/includes/footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-placeholder').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading footer:', error));
+        });
+    </script>
+</body>
+</html>
