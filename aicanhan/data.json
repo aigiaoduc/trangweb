@@ -14,5 +14,25 @@
       "pass phòng bóng bàn"
     ],
     "traloi": "Mật khẩu khóa số phòng bóng bàn là: 13569"
+  },
+  {
+    "cauhoi": [
+      "Thời gian làm việc?",
+      "thời gian tăng thâm niên?",
+      "ngày vào đảng?"
+    ],
+    "traloi": "Thời gian tăng thâm niên: 10/09/2025 (7%). Thời gian nâng bậc lương gần nhất: 10/09/2024 (Bậc 3, Hệ số 3,00. Nghạch V07.04.32). Thời gian vào ngành: 10/09/2018. Ngày vào Đảng: 20/07/2023. Ngày vào Đảng chính thức: 20/07/2024."
+  },
+  {
+    "cauhoi": [
+      "ngày kỷ niệm",
+      "ngày cưới",
+      "ngày đăng ký kết hôn",
+      "đám hỏi",
+      "lần đầu quen nhau",
+      "sinh nhật vợ",
+      "sinh nhật Huy-Hoàng"
+    ],
+    "traloi": "Ngày cưới: 15/05 | Đăng ký kết hôn: 30/06 | Đám hỏi: 17/07 | Lần đầu quen nhau: 06/10 | Sinh nhật vợ: 25/11/1996 | Sinh nhật Huy-Hoàng: 19/03/2024"
   }
 ]

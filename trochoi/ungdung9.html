@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thám Hiểm Vương Quốc Tri Thức</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .game-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .welcome-screen {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            animation: slideIn 0.8s ease-out;
+        }
+        
+        .welcome-screen h1 {
+            color: #4a5568;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .welcome-screen p {
+            color: #718096;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .name-input {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .name-input input {
+            padding: 15px 20px;
+            border: 3px solid #e2e8f0;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 600;
+            outline: none;
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+        
+        .name-input input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .start-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Nunito', sans-serif;
+        }
+        
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .game-screen {
+            display: none;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .game-header {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .player-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #4a5568;
+        }
+        
+        .game-stats {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #718096;
+            font-weight: 600;
+        }
+        
+        .progress-bar {
+            width: 200px;
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .game-area {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            min-height: 500px;
+        }
+        
+        .level-title {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #4a5568;
+            margin-bottom: 30px;
+        }
+        
+        .game-board {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .items-container {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 20px;
+            border: 3px dashed #cbd5e0;
+        }
+        
+        .container-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #4a5568;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .draggable-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .draggable-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: grab;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            user-select: none;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .draggable-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .draggable-item.dragging {
+            opacity: 0.5;
+            transform: rotate(5deg);
+        }
+        
+        .drop-zones {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .drop-zone {
+            background: #edf2f7;
+            border: 3px dashed #cbd5e0;
+            border-radius: 15px;
+            padding: 20px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .drop-zone.drag-over {
+            border-color: #667eea;
+            background: #e6fffa;
+            transform: scale(1.02);
+        }
+        
+        .drop-zone.correct {
+            border-color: #48bb78;
+            background: #f0fff4;
+            animation: correctPulse 0.6s ease;
+        }
+        
+        .drop-zone.incorrect {
+            border-color: #f56565;
+            background: #fff5f5;
+            animation: shake 0.5s ease;
+        }
+        
+        .zone-label {
+            font-weight: 700;
+            color: #4a5568;
+            font-size: 1.1rem;
+        }
+        
+        .dropped-item {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin: 5px;
+            animation: dropIn 0.5s ease;
+        }
+        
+        .timer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #4a5568;
+            z-index: 1000;
+        }
+        
+        .timer.warning {
+            background: #fed7d7;
+            color: #c53030;
+            animation: pulse 1s infinite;
+        }
+        
+        .complete-screen {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            animation: bounceIn 0.8s ease;
+        }
+        
+        .complete-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #48bb78;
+            margin-bottom: 20px;
+        }
+        
+        .final-score {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #667eea;
+            margin: 20px 0;
+        }
+        
+        .next-btn, .restart-btn {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Nunito', sans-serif;
+            margin: 10px;
+        }
+        
+        .next-btn:hover, .restart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(72, 187, 120, 0.3);
+        }
+        
+        .restart-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        @keyframes dropIn {
+            from { transform: scale(0) rotate(180deg); opacity: 0; }
+            to { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .game-container {
+                padding: 10px;
+            }
+            
+            .welcome-screen {
+                padding: 20px;
+            }
+            
+            .welcome-screen h1 {
+                font-size: 2rem;
+            }
+            
+            .game-board {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .game-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .timer {
+                position: static;
+                margin-bottom: 20px;
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+<body>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1754036911359335"
+     crossorigin="anonymous"></script>
+<!-- Quảng cáo 1 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1754036911359335"
+     data-ad-slot="5721678428"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    <div class="game-container">
+        <!-- Welcome Screen -->
+        <div class="welcome-screen" id="welcomeScreen">
+            <h1>🏰 Thám Hiểm Vương Quốc Tri Thức</h1>
+            <p>Chào mừng bạn đến với cuộc phiêu lưu học tập thú vị! Hãy nhập tên để bắt đầu hành trình khám phá.</p>
+            <div class="name-input">
+                <input type="text" id="playerName" placeholder="Nhập tên của bạn..." maxlength="20">
+                <button class="start-btn" onclick="startGame()">🚀 Bắt Đầu Phiêu Lưu</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div class="game-screen" id="gameScreen">
+            <div class="timer" id="timer">⏰ 60s</div>
+            
+            <div class="game-header">
+                <div class="player-info">
+                    <div class="avatar" id="avatar">🧑‍🎓</div>
+                    <div class="player-name" id="displayName">Thám hiểm gia</div>
+                </div>
+                
+                <div class="game-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="score">0</div>
+                        <div class="stat-label">Điểm</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="level">1</div>
+                        <div class="stat-label">Cấp độ</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="lives">3</div>
+                        <div class="stat-label">Cơ hội</div>
+                    </div>
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <div class="game-area">
+                <h2 class="level-title" id="levelTitle">Vương Quốc Số Học - Cấp độ 1</h2>
+                
+                <div class="game-board">
+                    <div class="items-container">
+                        <div class="container-title">🎯 Kéo các số vào đúng nhóm</div>
+                        <div class="draggable-items" id="draggableItems">
+                            <!-- Items will be generated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="items-container">
+                        <div class="container-title">📦 Thả vào đây</div>
+                        <div class="drop-zones" id="dropZones">
+                            <!-- Drop zones will be generated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Complete Screen -->
+        <div class="complete-screen" id="completeScreen">
+            <h1 class="complete-title">🎉 Xuất Sắc!</h1>
+            <p style="font-size: 1.3rem; color: #4a5568; margin-bottom: 20px;">Bạn đã hoàn thành cấp độ này!</p>
+            <div class="final-score" id="finalScore">0</div>
+            <p style="color: #718096; font-size: 1.1rem;">điểm</p>
+            <div style="margin-top: 30px;">
+                <button class="next-btn" onclick="nextLevel()">➡️ Cấp Độ Tiếp Theo</button>
+                <button class="restart-btn" onclick="restartGame()">🔄 Chơi Lại</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game state
+        let gameState = {
+            playerName: '',
+            currentLevel: 1,
+            score: 0,
+            lives: 3,
+            timeLeft: 60,
+            timer: null,
+            currentLevelData: null
+        };
+
+        // Level data
+        const levels = [
+            {
+                title: "Vương Quốc Số Học - Cấp độ 1",
+                instruction: "Phân loại số chẵn và số lẻ",
+                items: ['2', '5', '8', '11', '14', '17'],
+                zones: [
+                    { label: 'Số Chẵn 🎯', accepts: ['2', '8', '14'] },
+                    { label: 'Số Lẻ 🎲', accepts: ['5', '11', '17'] }
+                ]
+            },
+            {
+                title: "Vương Quốc Số Học - Cấp độ 2", 
+                instruction: "Phân loại số nguyên tố và hợp số",
+                items: ['2', '4', '7', '9', '11', '15'],
+                zones: [
+                    { label: 'Số Nguyên Tố 💎', accepts: ['2', '7', '11'] },
+                    { label: 'Hợp Số 🔧', accepts: ['4', '9', '15'] }
+                ]
+            },
+            {
+                title: "Vương Quốc Ngôn Từ - Cấp độ 1",
+                instruction: "Phân loại từ loại",
+                items: ['chạy', 'đẹp', 'sách', 'nhanh', 'học', 'bàn'],
+                zones: [
+                    { label: 'Động Từ 🏃', accepts: ['chạy', 'học'] },
+                    { label: 'Tính Từ ✨', accepts: ['đẹp', 'nhanh'] },
+                    { label: 'Danh Từ 📚', accepts: ['sách', 'bàn'] }
+                ]
+            },
+            {
+                title: "Vương Quốc Khoa Học - Cấp độ 1",
+                instruction: "Phân loại trạng thái vật chất",
+                items: ['nước', 'đá', 'hơi nước', 'sắt', 'khí oxy', 'thủy ngân'],
+                zones: [
+                    { label: 'Chất Rắn 🧊', accepts: ['đá', 'sắt'] },
+                    { label: 'Chất Lỏng 💧', accepts: ['nước', 'thủy ngân'] },
+                    { label: 'Chất Khí ☁️', accepts: ['hơi nước', 'khí oxy'] }
+                ]
+            },
+            {
+                title: "Vương Quốc Địa Lý - Cấp độ 1",
+                instruction: "Phân loại địa hình",
+                items: ['núi', 'sông', 'biển', 'đồng bằng', 'cao nguyên', 'hồ'],
+                zones: [
+                    { label: 'Địa Hình Cao ⛰️', accepts: ['núi', 'cao nguyên'] },
+                    { label: 'Địa Hình Thấp 🏞️', accepts: ['đồng bằng'] },
+                    { label: 'Thủy Văn 🌊', accepts: ['sông', 'biển', 'hồ'] }
+                ]
+            }
+        ];
+
+        // Sound effects (using Web Audio API for better compatibility)
+        function playSound(type) {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            let frequency;
+            
+            switch(type) {
+                case 'correct':
+                    frequency = 800;
+                    break;
+                case 'incorrect':
+                    frequency = 300;
+                    break;
+                case 'complete':
+                    frequency = 1000;
+                    break;
+                default:
+                    frequency = 500;
+            }
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = frequency;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.5);
+        }
+
+        function startGame() {
+            const nameInput = document.getElementById('playerName');
+            if (!nameInput.value.trim()) {
+                alert('Vui lòng nhập tên của bạn!');
+                return;
+            }
+            
+            gameState.playerName = nameInput.value.trim();
+            document.getElementById('displayName').textContent = gameState.playerName;
+            
+            document.getElementById('welcomeScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
+            
+            loadLevel(gameState.currentLevel);
+            startTimer();
+        }
+
+        function loadLevel(levelIndex) {
+            if (levelIndex > levels.length) {
+                showGameComplete();
+                return;
+            }
+            
+            gameState.currentLevelData = levels[levelIndex - 1];
+            gameState.lives = 3;
+            gameState.timeLeft = 60;
+            
+            updateUI();
+            generateGameElements();
+        }
+
+        function updateUI() {
+            document.getElementById('level').textContent = gameState.currentLevel;
+            document.getElementById('score').textContent = gameState.score;
+            document.getElementById('lives').textContent = gameState.lives;
+            document.getElementById('levelTitle').textContent = gameState.currentLevelData.title;
+            
+            const progress = (gameState.currentLevel - 1) / levels.length * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function generateGameElements() {
+            const itemsContainer = document.getElementById('draggableItems');
+            const zonesContainer = document.getElementById('dropZones');
+            
+            // Clear existing elements
+            itemsContainer.innerHTML = '';
+            zonesContainer.innerHTML = '';
+            
+            // Shuffle items for variety
+            const shuffledItems = [...gameState.currentLevelData.items].sort(() => Math.random() - 0.5);
+            
+            // Generate draggable items
+            shuffledItems.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'draggable-item';
+                itemElement.draggable = true;
+                itemElement.textContent = item;
+                itemElement.dataset.value = item;
+                
+                itemElement.addEventListener('dragstart', handleDragStart);
+                itemElement.addEventListener('dragend', handleDragEnd);
+                
+                itemsContainer.appendChild(itemElement);
+            });
+            
+            // Generate drop zones
+            gameState.currentLevelData.zones.forEach((zone, index) => {
+                const zoneElement = document.createElement('div');
+                zoneElement.className = 'drop-zone';
+                zoneElement.dataset.zoneIndex = index;
+                zoneElement.innerHTML = `<div class="zone-label">${zone.label}</div>`;
+                
+                zoneElement.addEventListener('dragover', handleDragOver);
+                zoneElement.addEventListener('drop', handleDrop);
+                zoneElement.addEventListener('dragleave', handleDragLeave);
+                
+                zonesContainer.appendChild(zoneElement);
+            });
+        }
+
+        function handleDragStart(e) {
+            e.dataTransfer.setData('text/plain', e.target.dataset.value);
+            e.target.classList.add('dragging');
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.currentTarget.classList.add('drag-over');
+        }
+
+        function handleDragLeave(e) {
+            e.currentTarget.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('drag-over');
+            
+            const droppedValue = e.dataTransfer.getData('text/plain');
+            const zoneIndex = parseInt(e.currentTarget.dataset.zoneIndex);
+            const zone = gameState.currentLevelData.zones[zoneIndex];
+            
+            // Check if the drop is correct
+            if (zone.accepts.includes(droppedValue)) {
+                // Correct drop
+                playSound('correct');
+                e.currentTarget.classList.add('correct');
+                
+                // Add dropped item to zone
+                const droppedItem = document.createElement('div');
+                droppedItem.className = 'dropped-item';
+                droppedItem.textContent = droppedValue;
+                e.currentTarget.appendChild(droppedItem);
+                
+                // Remove from draggable items
+                const draggedElement = document.querySelector(`[data-value="${droppedValue}"]`);
+                if (draggedElement) {
+                    draggedElement.remove();
+                }
+                
+                // Calculate score based on remaining time and attempts
+                const timeBonus = Math.max(0, gameState.timeLeft * 5);
+                const baseScore = gameState.lives === 3 ? 100 : gameState.lives === 2 ? 70 : 50;
+                gameState.score += baseScore + timeBonus;
+                
+                // Check if level is complete
+                if (document.querySelectorAll('.draggable-item').length === 0) {
+                    setTimeout(() => {
+                        completeLevel();
+                    }, 1000);
+                }
+                
+                setTimeout(() => {
+                    e.currentTarget.classList.remove('correct');
+                }, 1000);
+                
+            } else {
+                // Incorrect drop
+                playSound('incorrect');
+                e.currentTarget.classList.add('incorrect');
+                gameState.lives--;
+                
+                if (gameState.lives <= 0) {
+                    gameOver();
+                } else {
+                    updateUI();
+                }
+                
+                setTimeout(() => {
+                    e.currentTarget.classList.remove('incorrect');
+                }, 1000);
+            }
+            
+            updateUI();
+        }
+
+        function startTimer() {
+            gameState.timer = setInterval(() => {
+                gameState.timeLeft--;
+                const timerElement = document.getElementById('timer');
+                timerElement.textContent = `⏰ ${gameState.timeLeft}s`;
+                
+                if (gameState.timeLeft <= 10) {
+                    timerElement.classList.add('warning');
+                } else {
+                    timerElement.classList.remove('warning');
+                }
+                
+                if (gameState.timeLeft <= 0) {
+                    gameOver();
+                }
+            }, 1000);
+        }
+
+        function completeLevel() {
+            clearInterval(gameState.timer);
+            playSound('complete');
+            
+            // Bonus for completing level
+            gameState.score += 500;
+            
+            document.getElementById('finalScore').textContent = gameState.score;
+            document.getElementById('gameScreen').style.display = 'none';
+            document.getElementById('completeScreen').style.display = 'block';
+        }
+
+        function nextLevel() {
+            gameState.currentLevel++;
+            document.getElementById('completeScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
+            
+            loadLevel(gameState.currentLevel);
+            startTimer();
+        }
+
+        function gameOver() {
+            clearInterval(gameState.timer);
+            alert(`Hết giờ hoặc hết cơ hội! Điểm của bạn: ${gameState.score}`);
+            restartGame();
+        }
+
+        function showGameComplete() {
+            alert(`🎉 Chúc mừng ${gameState.playerName}! Bạn đã hoàn thành tất cả các cấp độ với ${gameState.score} điểm!`);
+            restartGame();
+        }
+
+        function restartGame() {
+            gameState = {
+                playerName: '',
+                currentLevel: 1,
+                score: 0,
+                lives: 3,
+                timeLeft: 60,
+                timer: null,
+                currentLevelData: null
+            };
+            
+            clearInterval(gameState.timer);
+            document.getElementById('completeScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'none';
+            document.getElementById('welcomeScreen').style.display = 'block';
+            document.getElementById('playerName').value = '';
+        }
+
+        // Initialize game
+        document.getElementById('playerName').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                startGame();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96b3ca175273fcdf',t:'MTc1NDUzODQxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
