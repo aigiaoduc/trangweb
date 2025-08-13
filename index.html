@@ -221,7 +221,7 @@
 
   <div class="container">
     <div class="section">
-      <h2>Bài viết</h2>
+      <h2><i class="fas fa-newspaper"></i> Bài viết</h2>
       <div class="grid" id="posts-grid"></div>
       <a href="pages/baiviet.html" class="view-all view-all-btn">
         Xem tất cả bài viết
@@ -230,7 +230,16 @@
     </div>
 
     <div class="section">
-      <h2>Video</h2>
+      <h2><i class="fas fa-book-open"></i> Ứng dụng học tập</h2>
+      <div class="grid" id="learning-apps-grid"></div>
+      <a href="pages/ungdunghoctap.html" class="view-all view-all-btn">
+        Xem tất cả ứng dụng học tập
+        <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+      </a>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-video"></i> Video</h2>
       <div class="grid" id="videos-grid"></div>
       <a href="pages/video.html" class="view-all view-all-btn">
         Xem tất cả video
@@ -239,7 +248,7 @@
     </div>
 
     <div class="section">
-      <h2>Công cụ AI</h2>
+      <h2><i class="fas fa-robot"></i> Công cụ AI</h2>
       <div class="grid" id="tools-grid"></div>
       <a href="pages/congcu.html" class="view-all view-all-btn">
         Xem tất cả công cụ AI
@@ -248,7 +257,7 @@
     </div>
 
     <div class="section">
-      <h2>Thí nghiệm ảo</h2>
+      <h2><i class="fas fa-flask"></i> Thí nghiệm ảo</h2>
       <div class="grid" id="experiments-grid"></div>
       <a href="pages/thinghiemao.html" class="view-all view-all-btn">
         Xem tất cả thí nghiệm
@@ -257,7 +266,7 @@
     </div>
 
     <div class="section">
-      <h2>Khóa học</h2>
+      <h2><i class="fas fa-graduation-cap"></i> Khóa học</h2>
       <div class="grid" id="courses-grid"></div>
       <a href="pages/khoahoconline.html" class="view-all view-all-btn">
         Xem tất cả khóa học
@@ -325,6 +334,7 @@
 
     renderSection('data/posts.json', 'posts-grid', 4);
     renderSection('data/videos.json', 'videos-grid', 4);
+    renderSection('data/ungdunghoctap.json', 'learning-apps-grid', 4);
     renderToolsSection('data/congcu.json', 'tools-grid', 4);
     renderSection('data/games.json', 'games-grid', 4);
     renderSection('data/thinghiemao.json', 'experiments-grid', 4);

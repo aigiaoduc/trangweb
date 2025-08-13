@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo Sách Lật Tuyệt Đẹp Chỉ Với AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.75rem;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .btn-primary {
+            background-color: #4f46e5;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-family: 'Quicksand', sans-serif;
+        }
+        .btn-primary:hover {
+            background-color: #4338ca;
+            transform: translateY(-2px);
+        }
+        .text-quicksand {
+            font-family: 'Quicksand', sans-serif;
+        }
+        .text-montserrat {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .text-inter {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom CSS for unstyled lists */
+        ul.unstyled-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        ul.unstyled-list li::before {
+            content: none;
+        }
+
+        /* Fixed height div for menu placeholder */
+        .menu-placeholder {
+            background-color: black;
+            height: 64px; /* Approximate height of a typical menu */
+            width: 100%;
+        }
+
+        /* Responsive adjustments for mobile menu */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+            .card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Tạo Sách Lật Tuyệt Đẹp Chỉ Với AI">
+    <meta property="og:description" content="Hướng dẫn chi tiết cách tạo flipbook đẹp mắt chỉ với AI, biến tài liệu học tập, câu chuyện thành sách điện tử lật trang độc đáo.">
+    <meta property="og:image" content="https://example.com/images/ai-flipbook.jpg"> <!-- Thay thế bằng URL hình ảnh thực tế -->
+    <meta property="og:url" content="https://example.com/video/video8.html"> <!-- Thay thế bằng URL chuẩn của trang -->
+    <meta property="og:type" content="article">
+</head>
+<body class="bg-gray-100">
+    <div id="menu-container"></div>
+    <div class="menu-placeholder"></div> <!-- Placeholder for fixed menu height -->
+
+    <header class="hero-section">
+        <div class="container relative z-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-montserrat">Tạo Sách Lật Tuyệt Đẹp Chỉ Với AI</h1>
+            <p class="text-lg md:text-xl text-inter">Dùng Ai tạo thành những cuốn sách điện tử lật trang đẹp mắt.</p>
+        </div>
+    </header>
+
+    <main class="container my-8">
+        <section class="card">
+            <h2 class="text-3xl font-bold mb-6 text-montserrat text-center text-purple-700">Giới Thiệu Video</h2>
+            <div class="video-container mb-8">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/Q7j8_kh6NUA?si=EO2pVOVbLhvLOklr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <p class="text-lg leading-relaxed mb-6 text-inter">
+                Trong video này mình sẽ hướng dẫn bạn cách tạo ra flipbook tuyệt đẹp chỉ với AI. Đây là một hướng dẫn đơn giản nhưng đầy sáng tạo, phù hợp cho các bạn muốn biến tài liệu học tập, câu chuyện, hoặc sản phẩm sáng tạo thành những cuốn sách điện tử lật trang đẹp mắt chỉ trong vài thao tác!
+            </p>
+            <p class="text-lg leading-relaxed mb-6 text-inter">
+                Mình sẽ trình bày rõ từng bước – từ thiết kế, bố cục cho đến cách tạo hiệu ứng trang lật – giúp bạn dễ dàng bắt đầu, kể cả khi không am hiểu nhiều về công nghệ. Mời bạn xem và khám phá cách thức sáng tạo mới mẻ, trực quan để tăng sự hấp dẫn cho nội dung bạn muốn truyền tải. Cùng mình làm nên những ấn phẩm e-book độc đáo nhé!
+            </p>
+            <div class="text-center mt-8">
+                <a href="https://youtu.be/Q7j8_kh6NUA?si=EO2pVOVbLhvLOklr" target="_blank" class="btn-primary">Xem video</a>
+            </div>
+        </section>
+
+        <!-- Example of a section for "steps" if content were available -->
+        <!-- <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="card">
+                <h3 class="text-2xl font-semibold mb-4 text-montserrat">Bước 1: Chuẩn bị</h3>
+                <p class="text-inter">Mô tả bước chuẩn bị...</p>
+            </div>
+            <div class="card">
+                <h3 class="text-2xl font-semibold mb-4 text-montserrat">Bước 2: Thiết kế</h3>
+                <p class="text-inter">Mô tả bước thiết kế...</p>
+            </div>
+            <div class="card">
+                <h3 class="text-2xl font-semibold mb-4 text-montserrat">Bước 3: Hoàn thiện</h3>
+                <p class="text-inter">Mô tả bước hoàn thiện...</p>
+            </div>
+        </section> -->
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script>
+        // Load menu
+        fetch('../assets/includes/menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading menu:', error));
+
+        // Load footer
+        fetch('../assets/includes/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+
+        // Ensure menu is clickable on mobile (assuming menu.html contains the necessary JS for toggling)
+        // If menu.html does not contain JS, you might need to add it here or in a separate script.
+        // For example, a simple toggle for a mobile menu:
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     const menuButton = document.querySelector('.menu-button'); // Assuming a button with this class
+        //     const mobileMenu = document.querySelector('.mobile-menu'); // Assuming a mobile menu with this class
+        //     if (menuButton && mobileMenu) {
+        //         menuButton.addEventListener('click', () => {
+        //             mobileMenu.classList.toggle('hidden'); // Toggle hidden class
+        //         });
+        //     }
+        // });
+    </script>
+</body>
+</html>
