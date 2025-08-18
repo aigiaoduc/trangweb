@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     // --- Event Listeners ---
-    sendBtn.addEventListener('click', handleUserMessage);
+    sendBtn.addEventListener('click', () => handleUserMessage());
     userInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             handleUserMessage();
