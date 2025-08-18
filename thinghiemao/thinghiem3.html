@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thí Nghiệm Mô Phỏng Sóng Âm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Thêm thư viện icon Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Màu nền nhẹ nhàng, tinh tế */
+            padding-top: 60px; /* Đẩy nội dung xuống để tránh bị che bởi menu cố định */
+            min-height: 100vh; /* Đảm bảo body chiếm toàn bộ chiều cao viewport */
+            display: flex; /* Sử dụng flexbox cho body */
+            flex-direction: column; /* Sắp xếp các phần tử con theo cột */
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            padding: 24px;
+            flex-grow: 1; /* Cho phép container mở rộng để đẩy footer xuống */
+        }
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 24px;
+            /* height: calc(100vh - 120px); */ /* Xóa thuộc tính này để nội dung tự điều chỉnh chiều cao */
+        }
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+        }
+        .panel {
+            background-color: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .graph-area {
+            background-color: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            position: relative;
+            flex-grow: 1;
+            min-height: 400px; 
+            /* max-height: 600px; */ /* Xóa thuộc tính này */
+        }
+        .results-table-area {
+            background-color: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            /* max-height: 300px; */ /* Xóa thuộc tính này */
+            overflow-y: auto;
+        }
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #1e3a8a, #3b82f6); /* Hiệu ứng gradient cho tiêu đề */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #4b5563;
+        }
+        .slider-group label {
+            font-weight: 600;
+            color: #1f2937;
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px; 
+            background: #d1d5db;
+            border-radius: 5px;
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px; 
+            height: 24px;
+            background: #2563eb; 
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: #1d4ed8;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        .status-ready { color: #16a34a; }
+        .status-running { color: #3b82f6; }
+        .status-paused { color: #ea580c; }
+
+        .button-group button {
+            transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .button-group button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        .button-group #startButton:hover { background-color: #2563eb; }
+        .button-group #pauseButton:hover { background-color: #4b5563; }
+        .button-group #recordButton:hover { background-color: #22c55e; }
+        .button-group #resetButton:hover { background-color: #fbbf24; }
+        #clearResultsButton:hover { background-color: #ef4444; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        th {
+            background-color: #f3f4f6;
+            font-weight: 600;
+            color: #475569;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .wave-params {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            right: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8); 
+            backdrop-filter: blur(5px); 
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .wave-param-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1; 
+        }
+        .wave-param-label {
+            font-weight: 600;
+            color: #475569;
+            font-size: 0.875rem;
+        }
+        .wave-param-value {
+            font-weight: 700;
+            color: #1e3a8a;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <style>
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem 2rem;
+      z-index: 100;
+      background: rgba(0, 0, 0, 1);
+      transition: top 0.3s;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #2f73ff;
+    }
+    .logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .nav-links { display: flex; gap: 2rem; font-weight: 600; }
+    .nav-links a { font-size: 1rem; color: #fff; text-decoration: none; transition: color 0.3s; }
+    .nav-links a:hover { color: #2f73ff; }
+    .cta {
+      padding: 0.6rem 1.4rem;
+      background: #2f73ff;
+      border-radius: 999px;
+      font-weight: 600;
+      color: #fff;
+      transition: background 0.3s;
+      text-decoration: none;
+    }
+    .cta:hover { background: #245ad1; }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 0.3rem;
+    }
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      border-radius: 5px;
+      transition: all 0.3s ease-in-out;
+    }
+    .menu-toggle.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar { padding: 1rem; }
+      .nav-links { display: none; flex-direction: column; width: 100%; background: rgba(0,0,0,0.8); position: absolute; top: 60px; left: 0; padding: 1rem; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 0.5rem 0; text-align: center; }
+      .cta { display: none; }
+      .menu-toggle { display: flex; }
+    }
+</style>
+<nav class="navbar">
+    <div class="logo">
+      <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
+      <span class="logo-text">Quân H</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="/index.html">Trang chủ</a>
+      <a href="/pages/baiviet.html">Bài viết</a>
+      <a href="/pages/congcu.html">Công cụ AI</a>
+      <a href="/pages/video.html">Video</a>
+      <a href="/pages/ungdunghoctap.html">Ứng dụng học tập</a>
+      <a href="/pages/thinghiemao.html">Thí nghiệm ảo</a>
+      <a href="/pages/khoahoconline.html">Khóa học</a>
+    </div>
+    <a href="/pages/lienhe.html" class="cta">Liên hệ</a>
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+    <div class="container bg-gray-50 rounded-xl max-w-7xl mx-auto shadow-2xl">
+        <header class="text-center">
+            <h1 class="header-title">Thí Nghiệm Mô Phỏng Sóng Âm</h1>
+            <h2 class="text-xl font-semibold text-gray-600 mt-2">Khám phá tần số và biên độ sóng âm</h2>
+        </header>
+
+        <div class="main-content">
+            <!-- Control Panel -->
+            <div id="control-panel" class="panel">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-700">Bảng điều khiển</h3>
+
+                    <!-- Frequency Slider -->
+                    <div class="slider-group mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <label for="frequencySlider">Tần số (Hz)</label>
+                            <span id="frequencyValue" class="text-lg font-bold text-indigo-600">440 Hz</span>
+                        </div>
+                        <input type="range" id="frequencySlider" min="20" max="20000" value="440" class="w-full">
+                    </div>
+
+                    <!-- Amplitude Slider -->
+                    <div class="slider-group mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <label for="amplitudeSlider">Biên độ (%)</label>
+                            <span id="amplitudeValue" class="text-lg font-bold text-indigo-600">50 %</span>
+                        </div>
+                        <input type="range" id="amplitudeSlider" min="0" max="100" value="50" class="w-full">
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="button-group flex flex-col gap-3 mb-6">
+                        <button id="startButton" class="px-6 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                            <i class="ph-play-fill"></i> Bắt Đầu
+                        </button>
+                        <button id="pauseButton" class="px-6 py-3 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50">
+                            <i class="ph-pause-fill"></i> Dừng
+                        </button>
+                        <button id="recordButton" class="px-6 py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+                            <i class="ph-clipboard-text-fill"></i> Ghi Kết Quả
+                        </button>
+                        <button id="resetButton" class="px-6 py-3 bg-yellow-600 text-white font-bold rounded-lg hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50">
+                            <i class="ph-arrow-counter-clockwise-fill"></i> Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Status Display -->
+                <div>
+                    <span class="font-semibold text-gray-700">Trạng thái: </span>
+                    <span id="statusDisplay" class="font-bold status-ready">Sẵn sàng</span>
+                </div>
+            </div>
+
+            <!-- Right Section: Graph and Results Table -->
+            <div class="right-section">
+                <!-- Waveform Graph Area -->
+                <div id="graph-area" class="graph-area">
+                    <canvas id="waveformCanvas" class="w-full h-full"></canvas>
+                    <div class="absolute top-8 left-8 text-gray-800 bg-white bg-opacity-75 p-2 rounded-md">
+                        <p class="font-bold">Tần số: <span id="currentFreqDisplay">440</span> Hz</p>
+                        <p class="font-bold">Biên độ: <span id="currentAmpDisplay">50</span></p>
+                    </div>
+                    <div class="wave-params">
+                        <div class="wave-param-item">
+                            <span class="wave-param-label">Tần số:</span>
+                            <span id="calculatedFreq" class="wave-param-value">440 Hz</span>
+                        </div>
+                        <div class="wave-param-item">
+                            <span class="wave-param-label">Chu kỳ:</span>
+                            <span id="calculatedPeriod" class="wave-param-value">2.27 ms</span>
+                        </div>
+                        <div class="wave-param-item">
+                            <span class="wave-param-label">Bước sóng:</span>
+                            <span id="calculatedWavelength" class="wave-param-value">78.0 cm</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experiment Results Table -->
+                <div id="results-table-area" class="results-table-area">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-2xl font-bold text-gray-700">Bảng kết quả thí nghiệm</h3>
+                        <button id="clearResultsButton" class="px-4 py-2 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
+                            <i class="ph-trash-fill"></i> Xóa Kết Quả
+                        </button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tần số (Hz)</th>
+                                    <th>Biên độ (%)</th>
+                                    <th>Chu kỳ (ms)</th>
+                                    <th>Bước sóng (cm)</th>
+                                    <th>Thời gian ghi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultsTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Lấy các tham chiếu đến các phần tử HTML
+        const frequencySlider = document.getElementById('frequencySlider');
+        const amplitudeSlider = document.getElementById('amplitudeSlider');
+        const frequencyValueDisplay = document.getElementById('frequencyValue');
+        const amplitudeValueDisplay = document.getElementById('amplitudeValue');
+        const startButton = document.getElementById('startButton');
+        const pauseButton = document.getElementById('pauseButton');
+        const recordButton = document.getElementById('recordButton');
+        const resetButton = document.getElementById('resetButton');
+        const clearResultsButton = document.getElementById('clearResultsButton');
+        const statusDisplay = document.getElementById('statusDisplay');
+        const canvas = document.getElementById('waveformCanvas');
+        const ctx = canvas.getContext('2d');
+        const currentFreqDisplay = document.getElementById('currentFreqDisplay');
+        const currentAmpDisplay = document.getElementById('currentAmpDisplay');
+        const calculatedFreqDisplay = document.getElementById('calculatedFreq');
+        const calculatedPeriodDisplay = document.getElementById('calculatedPeriod');
+        const calculatedWavelengthDisplay = document.getElementById('calculatedWavelength');
+        const resultsTableBody = document.getElementById('resultsTableBody');
+
+        // Định nghĩa các hằng số và biến trạng thái
+        const SOUND_SPEED = 343; // Tốc độ âm thanh (m/s)
+        let animationFrameId = null;
+        let isRunning = false;
+        let isPaused = false;
+        let timeOffset = 0;
+        let recordCount = 0;
+
+        // Cập nhật giá trị khi thanh trượt thay đổi
+        function updateSliderValues() {
+            const frequency = frequencySlider.value;
+            const amplitude = amplitudeSlider.value;
+            frequencyValueDisplay.textContent = `${frequency} Hz`;
+            amplitudeValueDisplay.textContent = `${amplitude} %`;
+            
+            updateCalculatedValues(frequency);
+            if (isRunning && !isPaused) {
+                // Đồ thị sẽ tự cập nhật trong vòng lặp animationFrame
+            } else {
+                 // Nếu không chạy, cập nhật đồ thị tĩnh
+                drawWave(frequency, amplitude, 0);
+            }
+        }
+
+        // Cập nhật các giá trị tính toán
+        function updateCalculatedValues(frequency) {
+            const T_s = 1 / frequency;
+            const T_ms = T_s * 1000;
+            const lambda_cm = SOUND_SPEED * T_s * 100;
+            
+            currentFreqDisplay.textContent = frequency;
+            currentAmpDisplay.textContent = amplitudeSlider.value;
+            calculatedFreqDisplay.textContent = `${frequency} Hz`;
+            calculatedPeriodDisplay.textContent = `${T_ms.toFixed(2)} ms`;
+            calculatedWavelengthDisplay.textContent = `${lambda_cm.toFixed(1)} cm`;
+        }
+
+        // Hàm vẽ đồ thị sóng âm
+        function drawWave(frequency, amplitude, time) {
+            const width = canvas.width;
+            const height = canvas.height;
+            const centerY = height / 2;
+            const maxAmplitude = centerY * (amplitude / 100);
+
+            // Xóa canvas
+            ctx.clearRect(0, 0, width, height);
+
+            // Vẽ đường sóng
+            ctx.beginPath();
+            ctx.strokeStyle = '#2563eb'; /* Màu đường sóng */
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            
+            const numPoints = 1000;
+            for (let i = 0; i < numPoints; i++) {
+                const x = (i / numPoints) * width;
+                const phase = (2 * Math.PI * frequency * (time + x / width * 100)) / 1000;
+                const y = centerY - maxAmplitude * Math.sin(phase);
+                
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.stroke();
+
+            // Vẽ trục tọa độ
+            ctx.strokeStyle = '#d1d5db';
+            ctx.lineWidth = 1;
+            // Trục X
+            ctx.beginPath();
+            ctx.moveTo(0, centerY);
+            ctx.lineTo(width, centerY);
+            ctx.stroke();
+            // Trục Y
+            ctx.beginPath();
+            ctx.moveTo(width / 2, 0);
+            ctx.lineTo(width / 2, height);
+            ctx.stroke();
+        }
+
+        // Vòng lặp animation
+        function animate() {
+            if (!isRunning || isPaused) {
+                return;
+            }
+            const time = performance.now() - timeOffset;
+            const frequency = frequencySlider.value;
+            const amplitude = amplitudeSlider.value;
+            
+            drawWave(frequency, amplitude, time);
+            
+            // Yêu cầu frame tiếp theo
+            animationFrameId = requestAnimationFrame(animate);
+        }
+
+        // Hàm bắt đầu mô phỏng
+        function startSimulation() {
+            if (!isRunning) {
+                isRunning = true;
+                isPaused = false;
+                statusDisplay.textContent = "Đang chạy";
+                statusDisplay.className = "font-bold status-running";
+                timeOffset = performance.now();
+                animate();
+            } else if (isPaused) {
+                isPaused = false;
+                statusDisplay.textContent = "Đang chạy";
+                statusDisplay.className = "font-bold status-running";
+                // Tiếp tục vòng lặp animation với thời gian hiện tại
+                animate();
+            }
+        }
+
+        // Hàm tạm dừng mô phỏng
+        function pauseSimulation() {
+            if (isRunning && !isPaused) {
+                isPaused = true;
+                statusDisplay.textContent = "Tạm dừng";
+                statusDisplay.className = "font-bold status-paused";
+                cancelAnimationFrame(animationFrameId);
+            }
+        }
+
+        // Hàm ghi kết quả vào bảng
+        function recordResult() {
+            const frequency = frequencySlider.value;
+            const amplitude = amplitudeSlider.value;
+            const T_s = 1 / frequency;
+            const T_ms = T_s * 1000;
+            const lambda_cm = SOUND_SPEED * T_s * 100;
+
+            recordCount++;
+            const now = new Date();
+            const timeString = `${now.toLocaleTimeString()} ${now.toLocaleDateString()}`;
+
+            const newRow = resultsTableBody.insertRow();
+            newRow.innerHTML = `
+                <td>${recordCount}</td>
+                <td>${frequency}</td>
+                <td>${amplitude}</td>
+                <td>${T_ms.toFixed(2)}</td>
+                <td>${lambda_cm.toFixed(1)}</td>
+                <td>${timeString}</td>
+            `;
+        }
+
+        // Hàm reset tất cả
+        function resetAll() {
+            // Dừng mô phỏng
+            if (isRunning) {
+                cancelAnimationFrame(animationFrameId);
+            }
+            isRunning = false;
+            isPaused = false;
+            
+            // Đặt lại các thanh trượt về giá trị mặc định
+            frequencySlider.value = 440;
+            amplitudeSlider.value = 50;
+
+            // Cập nhật hiển thị
+            updateSliderValues();
+            statusDisplay.textContent = "Sẵn sàng";
+            statusDisplay.className = "font-bold status-ready";
+            
+            // Xóa đồ thị
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawWave(440, 50, 0);
+
+            // Xóa bảng kết quả
+            resultsTableBody.innerHTML = '';
+            recordCount = 0;
+        }
+
+        // Hàm xóa kết quả
+        function clearResults() {
+            resultsTableBody.innerHTML = '';
+            recordCount = 0;
+        }
+
+        // Gắn các sự kiện
+        frequencySlider.addEventListener('input', updateSliderValues);
+        amplitudeSlider.addEventListener('input', updateSliderValues);
+        startButton.addEventListener('click', startSimulation);
+        pauseButton.addEventListener('click', pauseSimulation);
+        recordButton.addEventListener('click', recordResult);
+        resetButton.addEventListener('click', resetAll);
+        clearResultsButton.addEventListener('click', clearResults);
+
+        // Khởi tạo ứng dụng
+        window.onload = function() {
+            // Đảm bảo canvas có kích thước chính xác
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+            window.addEventListener('resize', () => {
+                canvas.width = canvas.parentElement.offsetWidth;
+                canvas.height = canvas.parentElement.offsetHeight;
+                updateSliderValues(); // Vẽ lại đồ thị khi thay đổi kích thước
+            });
+
+            // Khởi tạo giá trị ban đầu và vẽ đồ thị
+            updateSliderValues();
+            drawWave(frequencySlider.value, amplitudeSlider.value, 0);
+
+            // JavaScript cho menu responsive
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('open');
+                    menuToggle.classList.toggle('open');
+                });
+            }
+        };
+    </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    .ai-gradient {
+        background: linear-gradient(135deg, #0b0b3b 0%, #1a1a6c 50%, #3a0ca3 100%);
+        position: relative;
+        overflow: hidden;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .ai-circuit {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        pointer-events: none;
+    }
+    
+    .logo-glow {
+        filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.8));
+    }
+    
+    .footer-link {
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    
+    .footer-link:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 1px;
+        bottom: -2px;
+        left: 0;
+        background-color: #8a2be2;
+        transition: width 0.3s ease;
+    }
+    
+    .footer-link:hover:after {
+        width: 100%;
+    }
+    
+    .footer-link:hover {
+        color: #a855f7;
+    }
+    
+    .dot-separator {
+        display: inline-block;
+        margin: 0 6px;
+        opacity: 0.7;
+    }
+    
+    .social-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        margin: 0 8px;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        overflow: hidden;
+    }
+    
+    .social-icon:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .social-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 8px;
+    }
+    
+    .social-text {
+        margin-top: 4px;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+    }
+    
+    .social-item:hover .social-text {
+        color: white;
+    }
+    
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .footer-container {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    .icon-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .fb-icon, .yt-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .fb-icon {
+        background-color: #1877F2;
+    }
+    
+    .yt-icon {
+        background-color: #FF0000;
+    }
+    
+    @media (max-width: 768px) {
+        .footer-content {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .footer-links {
+            margin-top: 1rem;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .dot-separator {
+            display: none;
+        }
+        
+        .footer-link {
+            margin: 0.4rem 0;
+        }
+        
+        .description-text {
+            max-width: 100%;
+        }
+        
+        .social-icons {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-item {
+            margin: 8px 0;
+        }
+    }
+    
+    @media (max-width: 640px) {
+        .social-icons {
+            flex-direction: column;
+        }
+    }
+</style>
+<footer class="ai-gradient text-white">
+    <!-- AI Circuit Pattern Background -->
+    <svg class="ai-circuit" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+        <pattern id="circuit-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+            <path d="M10 10 L90 10 L90 90 L10 90 Z" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+            <circle cx="10" cy="10" r="2" fill="#ffffff"/>
+            <circle cx="90" cy="10" r="2" fill="#ffffff"/>
+            <circle cx="90" cy="90" r="2" fill="#ffffff"/>
+            <circle cx="10" cy="90" r="2" fill="#ffffff"/>
+            <path d="M10 50 L40 50 L40 10" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+            <path d="M90 50 L60 50 L60 90" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+            <circle cx="40" cy="50" r="2" fill="#ffffff"/>
+            <circle cx="60" cy="50" r="2" fill="#ffffff"/>
+        </pattern>
+        <rect width="100%" height="100%" fill="url(#circuit-pattern)"/>
+    </svg>
+    
+    <div class="footer-container px-3 py-4">
+        <div class="footer-content flex flex-col items-center justify-center">
+            <!-- Logo and Description -->
+            <div class="flex flex-col items-center mb-2">
+                <div class="logo-glow rounded-full overflow-hidden w-16 h-16 flex-shrink-0 border-2 border-purple-400 mb-3">
+                    <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" 
+                         alt="Quân H Logo" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="text-center max-w-md">
+                    <p class="text-sm md:text-base font-medium description-text">
+                        Quân H – Giảng viên & Youtuber chia sẻ kiến thức AI, công nghệ và giáo dục.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Social Media Icons - Vertical Layout -->
+            <div class="social-icons flex flex-row md:flex-row justify-center flex-wrap">
+                <a href="https://www.facebook.com/tran.hong.quan.216221/" target="_blank" class="social-item">
+                    <div class="social-icon">
+                        <div class="fb-icon">
+                            <i class="fab fa-facebook-f text-white"></i>
+                        </div>
+                    </div>
+                    <span class="social-text">Trần Hồng Quân</span>
+                </a>
+                
+                <a href="javascript:void(0)" class="social-item" onclick="alert('Zalo: 0355.213.107')">
+                    <div class="social-icon p-0">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/768px-Icon_of_Zalo.svg.png" 
+                             alt="Zalo" 
+                             class="icon-img">
+                    </div>
+                    <span class="social-text">0355.213.107</span>
+                </a>
+                
+                <a href="https://www.youtube.com/@quanh95" target="_blank" class="social-item">
+                    <div class="social-icon">
+                        <div class="yt-icon">
+                            <i class="fab fa-youtube text-white"></i>
+                        </div>
+                    </div>
+                    <span class="social-text">Quân H</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="border-t border-purple-900/50 mt-1 pt-3">
+            <div class="flex flex-wrap justify-center md:justify-between items-center text-xs text-purple-200/80">
+                <div class="mb-1 md:mb-0">
+                    © 2025 Quân H.
+                </div>
+                <div class="flex flex-wrap justify-center">
+                    <a href="#" class="footer-link mx-1">Chính sách bảo mật</a>
+                    <span class="dot-separator">•</span>
+                    <a href="#" class="footer-link mx-1">Điều khoản sử dụng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
