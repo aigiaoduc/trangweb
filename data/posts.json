@@ -182,7 +182,7 @@
   {
     "title": "🔍 AI chống lừa đảo – “Lá chắn” thông minh giúp bạn an toàn trên không gian mạng",
     "url": "../baiviet/baiviet20.html",
-    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDqdjcE4AtlIu91nMbVdAoZ04-tGhl2mpJfzvw_kUpypaziyh2-pZp4TShxHOTlyhK0k&usqp=CAU",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDqdjcE4AtlIu91nMbVdAoZ04-tGhl2mpJfzvw_kUpypaziyh2-pZp4TShxHOTlyK0k&usqp=CAU",
     "desc": "AI.ChongLuaDao.vn – một dự án cộng đồng được xây dựng nhằm giúp người dùng kiểm tra mức độ đáng tin cậy của một liên kết (URL) nhanh chóng, dễ dàng và miễn phí."
   },
   {
@@ -208,5 +208,11 @@
     "url": "../baiviet/baiviet23.html",
     "image": "https://anonyviet.com/wp-content/uploads/2025/07/chatbot-ai-cua-bo-cong-an-350x250.jpg",
     "desc": "Khám phá cách sử dụng chatbot AI của Bộ Công an để giải đáp mọi thắc mắc về thủ tục hành chính trên điện thoại và máy tính."
+  },
+  {
+    "title": "Cách cài đặt GPT-OSS trên Windows 11 dùng AI không cần internet",
+    "url": "../baiviet/cach-cai-dat-gpt-oss-tren-windows-11.html",
+    "image": "https://anonyviet.com/wp-content/uploads/2025/08/cach-cai-dat-gpt-oss-tren-windows-11-1.jpg",
+    "desc": "Khám phá cách cài đặt GPT-OSS trên Windows 11 để chạy AI offline, giúp bạn trải nghiệm mô hình miễn phí mới nhất từ OpenAI ngay tại nhà."
   }
 ]

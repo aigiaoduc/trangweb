@@ -1,3 +1,6 @@
+<!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 <style>
     /* Navbar */
     .navbar {
@@ -10,40 +13,48 @@
       width: 100%;
       padding: 1rem 2rem;
       z-index: 100;
-      background: rgba(0, 0, 0, 1);
+      background-color: #2f73ff; /* Updated background color */
       transition: top 0.3s;
+      font-family: 'Montserrat', sans-serif;
     }
     .logo {
       display: flex;
       align-items: center;
       gap: 0.75rem;
     }
-    .logo-img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #2f73ff;
+    .logo-icon {
+      font-size: 2.5rem; /* Increased icon size */
+      color: #2ECD71; /* Green color for the robot icon */
     }
     .logo-text {
-      font-family: 'Montserrat', sans-serif;
       font-size: 1.5rem;
       font-weight: 700;
       color: #fff;
     }
-    .nav-links { display: flex; gap: 2rem; font-weight: 600; }
-    .nav-links a { font-size: 1rem; color: #fff; text-decoration: none; transition: color 0.3s; }
-    .nav-links a:hover { color: #2f73ff; }
-    .cta {
-      padding: 0.6rem 1.4rem;
-      background: #2f73ff;
-      border-radius: 999px;
-      font-weight: 600;
-      color: #fff;
-      transition: background 0.3s;
-      text-decoration: none;
+    .nav-links { 
+      display: flex; 
+      gap: 2.5rem; /* Increased gap */
+      font-weight: 600; 
+      align-items: center;
     }
-    .cta:hover { background: #245ad1; }
+    .nav-links a { 
+      font-size: 0.9rem; 
+      color: #fff; 
+      text-decoration: none; 
+      transition: color 0.3s, transform 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem; /* Space between icon and text */
+    }
+    .nav-links a:hover { 
+      color: #f0f0f0;
+      transform: scale(1.05);
+    }
+    
+    /* Removing the CTA button style as it's not in the image */
+    .cta {
+        display: none;
+    }
 
     .menu-toggle {
       display: none;
@@ -65,28 +76,27 @@
     /* Responsive */
     @media (max-width: 768px) {
       .navbar { padding: 1rem; }
-      .nav-links { display: none; flex-direction: column; width: 100%; background: rgba(0,0,0,0.8); position: absolute; top: 60px; left: 0; padding: 1rem; }
+      .nav-links { display: none; flex-direction: column; width: 100%; background: #6462E0; position: absolute; top: 70px; left: 0; padding: 1rem; }
       .nav-links.open { display: flex; }
-      .nav-links a { padding: 0.5rem 0; text-align: center; }
-      .cta { display: none; }
+      .nav-links a { padding: 0.75rem 0; justify-content: center; }
       .menu-toggle { display: flex; }
     }
 </style>
 <nav class="navbar">
     <div class="logo">
-      <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
+      <i class="fas fa-robot logo-icon"></i> <!-- Robot Icon -->
       <span class="logo-text">Quân H</span>
     </div>
     <div class="nav-links" id="navLinks">
-      <a href="/index.html">Trang chủ</a>
-      <a href="/pages/baiviet.html">Bài viết</a>
-      <a href="/pages/congcu.html">Công cụ AI</a>
-      <a href="/pages/video.html">Video</a>
-      <a href="/pages/ungdunghoctap.html">Ứng dụng học tập</a>
-      <a href="/pages/thinghiemao.html">Thí nghiệm ảo</a>
-      <a href="/pages/khoahoconline.html">Khóa học</a>
+      <a href="/index.html"><i class="fas fa-home"></i> Trang chủ</a>
+      <a href="/pages/baiviet.html"><i class="fas fa-newspaper"></i> Bài viết</a>
+      <a href="/pages/ungdunghoctap.html"><i class="fas fa-mobile-alt"></i> Ứng dụng học tập</a>
+      <a href="/pages/video.html"><i class="fas fa-video"></i> Video</a>
+      <a href="/pages/congcu.html"><i class="fas fa-cogs"></i> Công cụ AI</a>
+      <a href="/pages/thinghiemao.html"><i class="fas fa-flask"></i> Thí nghiệm ảo</a>
+      <a href="/pages/khoahoconline.html"><i class="fas fa-graduation-cap"></i> Khóa học</a>
+      <a href="/pages/lienhe.html"><i class="fas fa-user"></i> Giới thiệu</a>
     </div>
-    <a href="/pages/lienhe.html" class="cta">Liên hệ</a>
     <div class="menu-toggle" id="menuToggle">
       <span></span>
       <span></span>

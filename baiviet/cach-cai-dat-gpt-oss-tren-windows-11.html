@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cách cài đặt GPT-OSS trên Windows 11 dùng AI không cần internet</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .hero-section {
+            background-image: url('https://anonyviet.com/wp-content/uploads/2025/08/cach-cai-dat-gpt-oss-tren-windows-11-1.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            padding: 8rem 0;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .hero-description {
+            font-size: 1.25rem;
+            font-weight: 400;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .content-section {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #1a202c;
+            margin-bottom: 1rem;
+        }
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .step-card {
+            background-color: #f8fafc;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+        .step-card h4 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+        }
+        .step-card code {
+            background-color: #e2e8f0;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-family: monospace;
+            color: #c53030;
+        }
+        ul {
+            list-style: none; /* Loại bỏ dấu chấm mặc định */
+            padding-left: 0; /* Loại bỏ padding mặc định */
+        }
+        ul li {
+            margin-bottom: 0.5rem;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.25rem;
+            }
+            .hero-description {
+                font-size: 1rem;
+            }
+            h2 {
+                font-size: 1.75rem;
+            }
+            h3 {
+                font-size: 1.25rem;
+            }
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+        #menu-placeholder {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+        #footer-placeholder {
+            width: 100%;
+        }
+        .main-content {
+            padding-top: 0; /* Sẽ được điều chỉnh bằng JS sau khi menu load */
+        }
+    </style>
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Cách cài đặt GPT-OSS trên Windows 11 dùng AI không cần internet">
+    <meta property="og:description" content="Khám phá cách cài đặt GPT-OSS trên Windows 11 để chạy AI offline, giúp bạn trải nghiệm mô hình miễn phí mới nhất từ OpenAI ngay tại nhà.">
+    <meta property="og:image" content="https://anonyviet.com/wp-content/uploads/2025/08/cach-cai-dat-gpt-oss-tren-windows-11-1.jpg">
+    <meta property="og:url" content="[URL chuẩn của trang]"> <!-- Cần cập nhật URL chuẩn -->
+    <meta property="og:type" content="article">
+</head>
+<body>
+    <div id="menu-placeholder"></div>
+
+    <div class="container mx-auto px-4 py-8 main-content">
+        <header class="hero-section rounded-lg mb-8">
+            <div class="hero-content">
+                <h1 class="hero-title">Cách cài đặt GPT-OSS trên Windows 11 dùng AI không cần internet</h1>
+                <p class="hero-description">Khám phá cách cài đặt GPT-OSS trên Windows 11 để chạy AI offline, giúp bạn trải nghiệm mô hình miễn phí mới nhất từ OpenAI ngay tại nhà.</p>
+            </div>
+        </header>
+
+        <main>
+            <section class="content-section">
+                <p>Cách cài đặt GPT-OSS trên Windows 11 đang là một chủ đề cực nóng, đặc biệt là với những ai thích vọc vạch công nghệ. Tin vui là OpenAI vừa cho ra mắt hai mô hình AI mới, cho phép bạn sử dụng chúng ngay trên máy tính của mình mà không cần mạng và hoàn toàn miễn phí. Bài viết này sẽ hướng dẫn bạn từng bước một cách dễ hiểu nhất để mang “trợ lý AI” này về nhà.</p>
+
+                <h2>GPT-OSS là gì?</h2>
+                <p>OpenAI vừa khuấy động thế giới AI bằng việc tung ra hai “chiến binh” mã nguồn mở mới mang tên gpt-oss-120b và gpt-oss-20b. Quyết định này được xem là một động thái chiến lược, đáp trả lại sức ép cạnh tranh từ các đối thủ, đặc biệt là các công ty Trung Quốc vốn rất mạnh trong việc phát hành các mô hình AI chi phí thấp.</p>
+                <p>Điểm đặc biệt là các mô hình này thuộc dạng “open-weight”, cho phép cộng đồng tự do tải về, sử dụng, tùy chỉnh và phân phối lại mà không mất phí. Phiên bản gpt-oss-20b thậm chí còn có thể chạy mượt mà trên một chiếc laptop thông thường chỉ với 16GB RAM, biến giấc mơ sở hữu một trợ lý AI mạnh mẽ, riêng tư và hoàn toàn ngoại tuyến trở thành hiện thực.</p>
+                <img src="https://anonyviet.com/wp-content/uploads/2025/08/cach-cai-dat-gpt-oss-tren-windows-11-1.jpg" alt="GPT-OSS trên Windows 11">
+
+                <h2>GPT-OSS có gì hay ho?</h2>
+                <p>Không chỉ miễn phí và chạy offline, hai mô hình này còn sở hữu những công nghệ ấn tượng, thể hiện cam kết của OpenAI trong việc đưa AI phục vụ lợi ích nhân loại.</p>
+                <ul>
+                    <li>Chúng được trang bị công nghệ “suy luận theo chuỗi tư duy” (chain-of-thought reasoning), cho phép AI thực hiện nhiều bước suy nghĩ logic trước khi đưa ra câu trả lời, giúp tăng độ chính xác và sâu sắc cho phản hồi.</li>
+                    <li>Chúng có khả năng hoạt động như một AI agent thông minh, có thể thực thi code, duyệt web để tìm thông tin, và thậm chí gọi các mô hình đám mây khác để hỗ trợ công việc phức tạp.</li>
+                    <li>Hiệu suất của chúng cực kỳ đáng nể, đặc biệt phiên bản gpt-oss-120b được đánh giá có sức mạnh tương đương với các mô hình độc quyền như o3-mini và o4-mini của chính OpenAI.</li>
+                    <li>Chúng được phát hành kèm bộ Tokenizer 4o mã nguồn mở, một công cụ xử lý văn bản hiệu quả bậc nhất, giúp các mô hình AI của OpenAI có chi phí vận hành thấp. Đặc biệt, công cụ này giúp GPT hiểu tiếng Việt tự nhiên như tiếng Anh mà không cần huấn luyện thêm.</li>
+                </ul>
+                <img src="https://anonyviet.com/wp-content/uploads/2025/08/cach-cai-dat-gpt-oss-tren-windows-11-3.jpg" alt="Tính năng GPT-OSS">
+
+                <h2>Cần chuẩn bị những gì để cài đặt?</h2>
+                <p>Để quá trình cài đặt diễn ra suôn sẻ, bạn cần một công cụ hỗ trợ là Ollama. Đây là một ứng dụng mã nguồn mở tuyệt vời, đóng vai trò như một cầu nối giúp bạn dễ dàng tải và chạy các mô hình ngôn ngữ lớn (LLM) ngay trên máy tính cá nhân.</p>
+                <p>Về cấu hình, bạn cần lưu ý:</p>
+                <ul>
+                    <li>Với mô hình gpt-oss-20b: Một máy tính có tối thiểu 16GB RAM là đủ để trải nghiệm.</li>
+                    <li>Với mô hình gpt-oss-120b: Đây là phiên bản lớn và mạnh hơn, đòi hỏi cấu hình phần cứng rất cao như GPU chuyên dụng (ví dụ NVIDIA có 80GB VRAM), RAM từ 256GB trở lên. Do đó, phiên bản 20b là lựa chọn phù hợp nhất cho người dùng phổ thông.</li>
+                </ul>
+                <img src="https://anonyviet.com/wp-content/uploads/2025/08/cach-cai-dat-gpt-oss-tren-windows-11-2.jpg" alt="Yêu cầu cấu hình">
+
+                <h2>Hướng dẫn cách cài đặt GPT-OSS trên Windows 11</h2>
+                <p>Bạn có thể chọn một trong hai phương pháp sau: sử dụng giao diện đồ họa (GUI) hoặc dòng lệnh (CLI). Cả hai đều rất đơn giản.</p>
+
+                <h3>Cách 1: Cài đặt qua giao diện Ollama</h3>
+                <div class="step-card">
+                    <h4>Bước 1</h4>
+                    <p>Bạn mở Start, gõ Terminal hoặc Command Prompt, sau đó nhấn chuột phải và chọn Run as administrator (chạy với quyền quản trị).</p>
+                </div>
+                <div class="step-card">
+                    <h4>Bước 2</h4>
+                    <p>Copy và dán dòng lệnh này vào rồi nhấn Enter:</p>
+                    <code>winget install –id Ollama.Ollama</code>
+                    <img src="https://anonyviet.com/wp-content/uploads/2025/08/cach-cai-dat-gpt-oss-tren-windows-11-4.jpg" alt="Cài đặt Ollama qua Winget">
+                </div>
+                <div class="step-card">
+                    <h4>Bước 3</h4>
+                    <p>Sau khi cài xong, bạn mở ứng dụng Ollama lên từ menu Start > Chọn mô hình GPT-OSS:20b.</p>
+                    <img src="https://anonyviet.com/wp-content/uploads/2025/08/cach-cai-dat-gpt-oss-tren-windows-11-4.jpg" alt="Chọn mô hình GPT-OSS trong Ollama">
+                    <p>Lần đầu tiên, Ollama sẽ tự động tải mô hình này về máy. Bạn chỉ cần chờ một chút là xong. Từ giờ, bạn có thể trò chuyện với AI bất cứ lúc nào.</p>
+                    <img src="https://anonyviet.com/wp-content/uploads/2025/08/cach-cai-dat-gpt-oss-tren-windows-11-6.jpg" alt="Ollama đang tải mô hình">
+                </div>
+
+                <h3>Cách 2: Cài đặt bằng dòng lệnh</h3>
+                <div class="step-card">
+                    <h4>Bước 1</h4>
+                    <p>Cài đặt Ollama y hệt như cách trên.</p>
+                </div>
+                <div class="step-card">
+                    <h4>Bước 2</h4>
+                    <p>Mở Command Prompt hoặc Terminal với quyền quản trị.</p>
+                    <p>Để tải phiên bản nhỏ, bạn gõ lệnh sau và nhấn Enter:</p>
+                    <code>ollama pull gpt-oss:20b</code>
+                    <p>Nếu bạn có một cỗ máy cực mạnh và muốn thử phiên bản lớn hơn, dùng lệnh:</p>
+                    <code>ollama pull gpt-oss:120b</code>
+                    <img src="https://anonyviet.com/wp-content/uploads/2025/08/cach-cai-dat-gpt-oss-tren-windows-11-7.jpg" alt="Cài đặt Ollama qua dòng lệnh">
+                </div>
+                <div class="step-card">
+                    <h4>Bước 3</h4>
+                    <p>Sau khi quá trình tải hoàn tất, gõ lệnh sau để bắt đầu phiên trò chuyện:</p>
+                    <code>ollama run gpt-oss:20b</code>
+                    <p>Từ đây, bạn có thể nhập bất kỳ câu hỏi nào và AI sẽ trả lời trực tiếp trong cửa sổ dòng lệnh.</p>
+                </div>
+
+                <h2>Một số lưu ý quan trọng khi sử dụng</h2>
+                <ul>
+                    <li>Hiệu suất phụ thuộc vào phần cứng: Nếu máy tính của bạn không có card đồ họa (GPU) hoặc bộ xử lý thần kinh (NPU) chuyên dụng, thời gian AI phản hồi có thể sẽ hơi chậm.</li>
+                    <li>Bảo mật và riêng tư tuyệt đối: Vì mô hình chạy hoàn toàn trên máy của bạn, mọi dữ liệu và cuộc trò chuyện đều được bảo mật, không bị gửi đến bất kỳ máy chủ nào.</li>
+                    <li>Tự do tùy chỉnh: Các mô hình được phát hành dưới giấy phép Apache 2.0, cho phép bạn tự do sử dụng cho mục đích thương mại, tinh chỉnh (fine-tuning) và phân phối lại.</li>
+                </ul>
+
+                <h2>Kết bài</h2>
+                <p>Vậy là xong! Giờ bạn đã biết cách cài đặt GPT-OSS trên Windows 11 rồi đấy. Đây là một cơ hội tuyệt vời để tự mình trải nghiệm công nghệ AI tiên tiến một cách an toàn và hoàn toàn miễn phí. Hãy thử ngay và xem trợ lý AI cá nhân này có thể giúp gì cho công việc và cuộc sống của bạn nhé!</p>
+            </section>
+        </main>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Load menu and footer
+        async function loadHTML(url, elementId) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+            } catch (error) {
+                console.error(`Could not load ${url}:`, error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadHTML('../assets/includes/menu.html', 'menu-placeholder');
+            await loadHTML('../assets/includes/footer.html', 'footer-placeholder');
+
+            // Adjust main content padding after menu loads
+            const menuHeight = document.getElementById('menu-placeholder').offsetHeight;
+            document.querySelector('.main-content').style.paddingTop = `${menuHeight + 20}px`; // Add some extra space
+        });
+    </script>
+</body>
+</html>
