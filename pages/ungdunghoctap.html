@@ -86,7 +86,6 @@
 
   <div class="container">
     <div class="section">
-      <h2>Tất cả ứng dụng</h2>
       <div class="grid" id="apps-grid"></div>
       <div class="pagination">
         <button id="prevPage" class="pagination-btn prev-btn">
@@ -119,7 +118,7 @@
   <script>
     let allApps = [];
     let currentPage = 1;
-    const itemsPerPage = 3; // Hiển thị 3 bài mỗi trang
+    const itemsPerPage = 6; // Hiển thị 6 bài mỗi trang
 
     async function fetchData() {
       const res = await fetch('../data/ungdunghoctap.json');

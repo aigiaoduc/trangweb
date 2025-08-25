@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kết quả tìm kiếm - Quân H</title>
+  <!-- Font và CSS chung -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/button.css">
+  <link rel="stylesheet" href="../assets/css/pagination.css">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',sans-serif; background:#111; color:#fff; }
+    a { text-decoration:none; color:inherit; }
+
+    .container { max-width:1200px; margin:6rem auto 2rem; padding:2rem; background:#f6f9fc; border-radius:8px; color:#333; margin-top: 80px; /* Adjust for fixed navbar height */ }
+    h1 { 
+      font-family:'Montserrat',sans-serif; 
+      font-size:2.5rem; /* Tăng kích thước font */
+      font-weight: 800; /* Làm đậm hơn */
+      margin-bottom:2rem; /* Tăng khoảng cách dưới */
+      color:#111; 
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center; /* Căn giữa theo chiều dọc */
+      gap: 0.75rem; /* Tăng khoảng cách giữa các phần tử */
+      padding-bottom: 0.5rem; /* Thêm padding dưới */
+      border-bottom: 3px solid #2f73ff; /* Thêm đường gạch chân màu xanh */
+    }
+    h1 #searchTermDisplay {
+      color: #2f73ff; /* Màu xanh nổi bật cho từ khóa */
+      font-weight: 900; /* Rất đậm */
+      text-transform: uppercase; /* Chữ hoa */
+      letter-spacing: 1px; /* Khoảng cách chữ */
+      background-color: #e0f2fe; /* Nền nhẹ cho từ khóa */
+      padding: 0.2rem 0.6rem;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    h1 #resultsCount {
+      font-size: 1.3rem; /* Tăng kích thước font */
+      color: #666; /* Màu xám đậm hơn */
+      margin-left: 1.5rem; /* Tăng khoảng cách trái */
+      font-weight: 600;
+    }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.5rem; }
+    .card { 
+      background:#fff; 
+      border-radius:8px; 
+      overflow:hidden; 
+      box-shadow:0 4px 12px rgba(0,0,0,0.1); 
+      display: flex;
+      flex-direction: column;
+    }
+    .card img { width:100%; height:180px; object-fit:cover; }
+    .card-content { 
+      padding:1rem; 
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .card-content h3 { font-size:1.25rem; margin-bottom:.5rem; color:#111; }
+    .card-content p { font-size:.95rem; line-height:1.5; color:#555; margin-bottom:1rem; flex-grow: 1; }
+    .card-content a { font-weight:600; margin-top: auto; align-self: flex-start; }
+    .back { margin-top:2rem; display:inline-block; color:#2f73ff; }
+    .back:hover { color:#245ad1; }
+
+    .pagination span {
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    @media (max-width: 768px) {
+      .container { margin-top: 4rem; padding: 1rem; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="menu-placeholder"></div>
+
+  <div class="container">
+    <h1>Kết quả tìm kiếm cho: <span id="searchTermDisplay"></span> <span id="resultsCount"></span></h1>
+    <div class="grid" id="search-results-grid"></div>
+    <div class="pagination">
+      <button id="prevPage" class="pagination-btn prev-btn">
+        <div class="arrow">
+          <svg height="20" width="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.004 8.635l10.522.001.001-3.292 7.478 4.645-7.478 4.645-.001-3.292-10.522.001z" class="three"></path>
+            <path d="M1.004 8.635l10.522.001.001-3.292 7.478 4.645-7.478 4.645-.001-3.292-10.522.001z" class="two"></path>
+            <path d="M1.004 8.635l10.522.001.001-3.292 7.478 4.645-7.478 4.645-.001-3.292-10.522.001z" class="one"></path>
+          </svg>
+        </div>
+        <span class="text">Trước</span>
+      </button>
+      <span id="pageInfo">Trang 1</span>
+      <button id="nextPage" class="pagination-btn next-btn">
+        <span class="text">Tiếp</span>
+        <div class="arrow">
+          <svg height="20" width="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.004 8.635l10.522.001.001-3.292 7.478 4.645-7.478 4.645-.001-3.292-10.522.001z" class="three"></path>
+            <path d="M1.004 8.635l10.522.001.001-3.292 7.478 4.645-7.478 4.645-.001-3.292-10.522.001z" class="two"></path>
+            <path d="M1.004 8.635l10.522.001.001-3.292 7.478 4.645-7.478 4.645-.001-3.292-10.522.001z" class="one"></path>
+          </svg>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <script>
+    let allSearchResults = [];
+    let currentPage = 1;
+    const itemsPerPage = 9;
+
+    async function fetchData(url) {
+      const res = await fetch(url);
+      return res.json();
+    }
+
+    function createCard(item, type = 'default') {
+      const card = document.createElement('div');
+      card.className = 'card';
+      const imageSrc = type === 'tool' ? item.logo_image : item.image;
+      const linkText = type === 'tool' ? 'Truy cập' : 'Xem chi tiết';
+      const target = type === 'tool' ? '_blank' : '_self';
+      const url = item.url || '#';
+
+      card.innerHTML = `
+        <img src="${imageSrc}" alt="${item.title}">
+        <div class="card-content">
+          <h3>${item.title}</h3>
+          <p>${item.desc}</p>
+          <a href="${url}" target="${target}" class="detail-btn">${linkText}</a>
+        </div>
+      `;
+      return card;
+    }
+
+    function displayResults() {
+      const grid = document.getElementById('search-results-grid');
+      grid.innerHTML = '';
+
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      const resultsToShow = allSearchResults.slice(startIndex, endIndex);
+
+      if (resultsToShow.length === 0) {
+        grid.innerHTML = '<p>Không tìm thấy kết quả nào.</p>';
+      } else {
+        resultsToShow.forEach(item => grid.appendChild(createCard(item, item.isTool ? 'tool' : 'default')));
+      }
+      updatePaginationControls();
+      window.scrollTo(0, 0);
+    }
+
+    function updatePaginationControls() {
+      const prevButton = document.getElementById('prevPage');
+      const nextButton = document.getElementById('nextPage');
+      const pageInfo = document.getElementById('pageInfo');
+
+      const totalPages = Math.ceil(allSearchResults.length / itemsPerPage);
+      pageInfo.textContent = `Trang ${currentPage} / ${totalPages}`;
+
+      prevButton.disabled = currentPage === 1;
+      nextButton.disabled = currentPage === totalPages || totalPages === 0;
+    }
+
+    async function loadAllSearchableData() {
+      const posts = await fetchData('../data/posts.json');
+      const videos = await fetchData('../data/videos.json');
+      const learningApps = await fetchData('../data/ungdunghoctap.json');
+      const toolsData = await fetchData('../data/congcu.json');
+      const experiments = await fetchData('../data/thinghiemao.json');
+      const courses = await fetchData('../data/khoahoconline.json');
+
+      let allTools = [];
+      toolsData.forEach(category => {
+          allTools = allTools.concat(category.tools);
+      });
+
+      return [
+        ...posts.map(item => ({ ...item, type: 'Bài viết', url: `baiviet/${item.url.split('/').pop()}` })),
+        ...videos.map(item => ({ ...item, type: 'Video', url: `video/${item.url.split('/').pop()}` })),
+        ...learningApps.map(item => ({ ...item, type: 'Ứng dụng học tập', url: `ungdunghoctap/${item.url.split('/').pop()}` })),
+        ...allTools.map(item => ({ ...item, type: 'Công cụ AI', url: item.url, isTool: true })),
+        ...experiments.map(item => ({ ...item, type: 'Thí nghiệm ảo', url: `thinghiemao/${item.url.split('/').pop()}` })),
+        ...courses.map(item => ({ ...item, type: 'Khóa học', url: `khoahoc/${item.url.split('/').pop()}` }))
+      ];
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Tải menu.html vào placeholder
+      fetch('../assets/includes/menu.html')
+          .then(response => response.text())
+          .then(data => {
+              document.getElementById('menu-placeholder').innerHTML = data;
+              const menuToggle = document.getElementById('menuToggle');
+              const navLinks = document.getElementById('navLinks');
+              if (menuToggle && navLinks) {
+                  menuToggle.addEventListener('click', () => {
+                      navLinks.classList.toggle('open');
+                      menuToggle.classList.toggle('open');
+                  });
+              } else {
+                  console.error('Menu elements not found after loading menu.html');
+              }
+          });
+
+      // Tải footer.html vào placeholder
+      fetch('../assets/includes/footer.html')
+          .then(response => response.text())
+          .then(data => {
+              document.getElementById('footer-placeholder').innerHTML = data;
+          });
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const searchTerm = urlParams.get('q');
+      const searchTermDisplay = document.getElementById('searchTermDisplay');
+
+      if (searchTerm) {
+        searchTermDisplay.textContent = searchTerm;
+        const allData = await loadAllSearchableData();
+        allSearchResults = allData.filter(item =>
+          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          (item.desc && item.desc.toLowerCase().includes(searchTerm.toLowerCase()))
+        );
+        document.getElementById('resultsCount').textContent = `(${allSearchResults.length} kết quả)`;
+        displayResults();
+      } else {
+        searchTermDisplay.textContent = 'Không có từ khóa';
+        document.getElementById('search-results-grid').innerHTML = '<p>Vui lòng nhập từ khóa tìm kiếm.</p>';
+        document.getElementById('resultsCount').textContent = ''; // Xóa số lượng kết quả nếu không có từ khóa
+        document.querySelector('.pagination').style.display = 'none';
+      }
+
+      document.getElementById('prevPage').addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage--;
+          displayResults();
+        }
+      });
+
+      document.getElementById('nextPage').addEventListener('click', () => {
+        const totalPages = Math.ceil(allSearchResults.length / itemsPerPage);
+        if (currentPage < totalPages) {
+          currentPage++;
+          displayResults();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
