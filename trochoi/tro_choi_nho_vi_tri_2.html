@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhớ Vị Trí - Phiên bản Số</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Style for Menu Integration -->
+    <style>
+        body {
+            /* Add padding to prevent the fixed menu from overlapping game content */
+            padding-top: 100px;
+        }
+    </style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .game-container {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            height: 90vh;
+            max-height: 700px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #a18cd1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .score-container {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-around;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 10px;
+        }
+
+        .score {
+            font-weight: bold;
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 15px;
+            margin: 15px auto;
+            max-width: 400px;
+            flex-grow: 1;
+            aspect-ratio: 1;
+        }
+
+        .number-button {
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .number-button:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .number-button:hover:before {
+            opacity: 1;
+        }
+
+        .number-button.active {
+            transform: scale(0.95);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+
+        .number-1 {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        }
+
+        .number-2 {
+            background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+        }
+
+        .number-3 {
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+        }
+
+        .number-4 {
+            background: linear-gradient(135deg, #d4fc79, #96e6a1);
+        }
+
+        .controls {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        button {
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        .game-over {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .game-over.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .game-over h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ff9a9e;
+            text-shadow: 0 0 10px rgba(255, 154, 158, 0.7);
+        }
+
+        .game-over p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .game-over button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+        }
+
+        .instructions {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .status-message {
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .status-message.watching {
+            color: #a1c4fd;
+        }
+
+        .status-message.playing {
+            color: #d4fc79;
+        }
+
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .score-container {
+                font-size: 1.1rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            button {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .number-button {
+                font-size: 2.5rem;
+            }
+            
+            .instructions {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="menu-container"></div>
+    <div class="game-container">
+        <h1>Nhớ Vị Trí - Số</h1>
+        
+        <div class="score-container">
+            <div>Điểm: <span class="score" id="score">0</span></div>
+            <div>Cao nhất: <span class="score" id="high-score">0</span></div>
+        </div>
+        
+        <div class="status-message" id="status-message">Nhấn "Bắt đầu" để chơi</div>
+        
+        <div class="game-board">
+            <button class="number-button number-1" data-number="1">1</button>
+            <button class="number-button number-2" data-number="2">2</button>
+            <button class="number-button number-3" data-number="3">3</button>
+            <button class="number-button number-4" data-number="4">4</button>
+        </div>
+        
+        <div class="controls">
+            <button id="start-btn">Bắt đầu</button>
+            <button id="reset-btn">Reset</button>
+        </div>
+        
+        <div class="instructions">
+            <p><strong>Hướng dẫn:</strong> Game sẽ hiển thị một chuỗi số. Nhớ và nhấn lại đúng thứ tự các số để ghi điểm!</p>
+        </div>
+    </div>
+    
+    <div class="game-over" id="game-over">
+        <h2>Game Over!</h2>
+        <p>Điểm của bạn: <span id="final-score">0</span></p>
+        <button id="restart-btn">Chơi lại</button>
+    </div>
+
+    <script>
+        // Game elements
+        const numberButtons = document.querySelectorAll('.number-button');
+        const startBtn = document.getElementById('start-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const scoreElement = document.getElementById('score');
+        const highScoreElement = document.getElementById('high-score');
+        const gameOverScreen = document.getElementById('game-over');
+        const finalScoreElement = document.getElementById('final-score');
+        const statusMessage = document.getElementById('status-message');
+        
+        // Game variables
+        let sequence = [];
+        let playerSequence = [];
+        let score = 0;
+        let highScore = localStorage.getItem('simonHighScore') || 0;
+        let level = 0;
+        let isPlaying = false;
+        let isPlayerTurn = false;
+        
+        // Sound frequencies for each number
+        const soundFrequencies = {
+            1: 261.63,    // C4
+            2: 329.63,    // E4
+            3: 392.00,    // G4
+            4: 523.25     // C5
+        };
+        
+        // Initialize high score display
+        highScoreElement.textContent = highScore;
+        
+        // Audio context for sound
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        // Function to play sound
+        function playSound(frequency) {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.type = 'sine';
+            oscillator.frequency.value = frequency;
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.5);
+        }
+        
+        // Function to light up a button
+        function lightUpButton(number) {
+            const button = document.querySelector(`.number-${number}`);
+            button.classList.add('active');
+            playSound(soundFrequencies[number]);
+            
+            setTimeout(() => {
+                button.classList.remove('active');
+            }, 500);
+        }
+        
+        // Function to play sequence
+        function playSequence() {
+            isPlayerTurn = false;
+            statusMessage.textContent = "Hãy chú ý...";
+            statusMessage.className = "status-message watching";
+            
+            let i = 0;
+            
+            const interval = setInterval(() => {
+                if (i < sequence.length) {
+                    lightUpButton(sequence[i]);
+                    i++;
+                } else {
+                    clearInterval(interval);
+                    isPlayerTurn = true;
+                    statusMessage.textContent = "Lượt của bạn!";
+                    statusMessage.className = "status-message playing";
+                }
+            }, 800);
+        }
+        
+        // Function to add next number to sequence
+        function nextRound() {
+            const numbers = [1, 2, 3, 4];
+            const randomNumber = numbers[Math.floor(Math.random() * numbers.length)];
+            
+            sequence.push(randomNumber);
+            playerSequence = [];
+            level++;
+            
+            scoreElement.textContent = level;
+            
+            setTimeout(() => {
+                playSequence();
+            }, 1000);
+        }
+        
+        // Function to check player sequence
+        function checkSequence() {
+            const currentIndex = playerSequence.length - 1;
+            
+            // Check if the current button press matches the sequence
+            if (playerSequence[currentIndex] !== sequence[currentIndex]) {
+                gameOver();
+                return;
+            }
+            
+            // If player has completed the entire sequence correctly
+            if (playerSequence.length === sequence.length) {
+                statusMessage.textContent = "Đúng rồi! Chuỗi tiếp theo...";
+                statusMessage.className = "status-message";
+                
+                setTimeout(() => {
+                    nextRound();
+                }, 1000);
+            }
+        }
+        
+        // Function to start the game
+        function startGame() {
+            sequence = [];
+            playerSequence = [];
+            score = 0;
+            level = 0;
+            isPlaying = true;
+            
+            scoreElement.textContent = score;
+            startBtn.disabled = true;
+            
+            nextRound();
+        }
+        
+        // Function to end the game
+        function gameOver() {
+            isPlaying = false;
+            isPlayerTurn = false;
+            
+            // Update high score
+            if (score > highScore) {
+                highScore = score;
+                highScoreElement.textContent = highScore;
+                localStorage.setItem('simonHighScore', highScore);
+            }
+            
+            finalScoreElement.textContent = score;
+            gameOverScreen.classList.add('show');
+            startBtn.disabled = false;
+            statusMessage.textContent = "Game Over!";
+            statusMessage.className = "status-message";
+        }
+        
+        // Function to reset the game
+        function resetGame() {
+            sequence = [];
+            playerSequence = [];
+            score = 0;
+            level = 0;
+            isPlaying = false;
+            isPlayerTurn = false;
+            
+            scoreElement.textContent = score;
+            startBtn.disabled = false;
+            gameOverScreen.classList.remove('show');
+            statusMessage.textContent = "Nhấn 'Bắt đầu' để chơi";
+            statusMessage.className = "status-message";
+        }
+        
+        // Event listeners
+        startBtn.addEventListener('click', startGame);
+        resetBtn.addEventListener('click', resetGame);
+        restartBtn.addEventListener('click', () => {
+            resetGame();
+            startGame();
+        });
+        
+        // Number button event listeners
+        numberButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (!isPlaying || !isPlayerTurn) return;
+                
+                const number = parseInt(button.getAttribute('data-number'));
+                playerSequence.push(number);
+                
+                lightUpButton(number);
+                checkSequence();
+            });
+        });
+        
+        // Initialize game
+        resetGame();
+    </script>
+    <!-- Script to fetch and inject Menu -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const menuContainer = document.getElementById('menu-container');
+
+        // Fetch and insert Menu from the relative path
+        fetch('../assets/includes/menu.html')
+          .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok for menu.html');
+            return response.text();
+          })
+          .then(data => {
+            menuContainer.innerHTML = data;
+            
+            // Activate the mobile menu toggle script after it's loaded
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            if (menuToggle && navLinks) {
+              menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('open');
+                menuToggle.classList.toggle('open');
+              });
+            }
+          })
+          .catch(error => console.error('Error fetching menu:', error));
+      });
+    </script>
+</body>
+</html>

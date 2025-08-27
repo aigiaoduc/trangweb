@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhớ Vị Trí - Simon Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding-top: 80px; /* Push content down to avoid menu overlap */
+        }
+
+        .game-container {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            margin-bottom: 2rem; /* Add some space before the footer */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #a18cd1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .score-container {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-around;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        .score {
+            font-weight: bold;
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 15px;
+            margin: 30px auto;
+            max-width: 400px;
+            aspect-ratio: 1;
+        }
+
+        .color-button {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-button:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .color-button:hover:before {
+            opacity: 1;
+        }
+
+        .color-button.active {
+            transform: scale(0.95);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+
+        .red {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+        }
+
+        .blue {
+            background: linear-gradient(135deg, #2193b0, #6dd5ed);
+        }
+
+        .yellow {
+            background: linear-gradient(135deg, #f7971e, #ffd200);
+        }
+
+        .green {
+            background: linear-gradient(135deg, #56ab2f, #a8e063);
+        }
+
+        .controls {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        .game-over {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .game-over.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .game-over h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ff416c;
+            text-shadow: 0 0 10px rgba(255, 65, 108, 0.7);
+        }
+
+        .game-over p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .game-over button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+        }
+
+        .instructions {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .score-container {
+                font-size: 1.2rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+        }
+
+        #footer-container {
+            width: 100%;
+        }
+
+        /* Tailwind CSS Override Fixes */
+        .game-container {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .controls button {
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+        }
+        
+        .game-over button {
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+        }
+
+        .controls button:hover, .game-over button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .controls button:active, .game-over button:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body>
+    <div id="menu-container"></div>
+
+    <div class="game-container">
+        <h1>Nhớ Vị Trí</h1>
+        
+        <div class="score-container">
+            <div>Điểm: <span class="score" id="score">0</span></div>
+            <div>Cao nhất: <span class="score" id="high-score">0</span></div>
+        </div>
+        
+        <div class="game-board">
+            <button class="color-button red" data-color="red"></button>
+            <button class="color-button blue" data-color="blue"></button>
+            <button class="color-button yellow" data-color="yellow"></button>
+            <button class="color-button green" data-color="green"></button>
+        </div>
+        
+        <div class="controls">
+            <button id="start-btn">Bắt đầu</button>
+            <button id="reset-btn">Reset</button>
+        </div>
+        
+        <div class="instructions">
+            <p><strong>Hướng dẫn:</strong> Nhấn "Bắt đầu" để chơi. Game sẽ hiển thị một chuỗi màu. Nhấn lại đúng thứ tự các màu để ghi điểm!</p>
+        </div>
+    </div>
+    
+    <div class="game-over" id="game-over">
+        <h2>Game Over!</h2>
+        <p>Điểm của bạn: <span id="final-score">0</span></p>
+        <button id="restart-btn">Chơi lại</button>
+    </div>
+
+    <div id="footer-container"></div>
+
+    <script>
+        // Game elements
+        const colorButtons = document.querySelectorAll('.color-button');
+        const startBtn = document.getElementById('start-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const scoreElement = document.getElementById('score');
+        const highScoreElement = document.getElementById('high-score');
+        const gameOverScreen = document.getElementById('game-over');
+        const finalScoreElement = document.getElementById('final-score');
+        
+        // Game variables
+        let sequence = [];
+        let playerSequence = [];
+        let score = 0;
+        let highScore = localStorage.getItem('simonHighScore') || 0;
+        let level = 0;
+        let isPlaying = false;
+        let isPlayerTurn = false;
+        
+        // Sound frequencies for each color
+        const soundFrequencies = {
+            red: 261.63,    // C4
+            blue: 329.63,   // E4
+            yellow: 392.00, // G4
+            green: 523.25   // C5
+        };
+        
+        // Initialize high score display
+        highScoreElement.textContent = highScore;
+        
+        // Audio context for sound
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        // Function to play sound
+        function playSound(frequency) {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.type = 'sine';
+            oscillator.frequency.value = frequency;
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.5);
+        }
+        
+        // Function to light up a button
+        function lightUpButton(color) {
+            const button = document.querySelector(`.${color}`);
+            button.classList.add('active');
+            playSound(soundFrequencies[color]);
+            
+            setTimeout(() => {
+                button.classList.remove('active');
+            }, 500);
+        }
+        
+        // Function to play sequence
+        function playSequence() {
+            isPlayerTurn = false;
+            let i = 0;
+            
+            const interval = setInterval(() => {
+                if (i < sequence.length) {
+                    lightUpButton(sequence[i]);
+                    i++;
+                } else {
+                    clearInterval(interval);
+                    isPlayerTurn = true;
+                }
+            }, 800);
+        }
+        
+        // Function to add next color to sequence
+        function nextRound() {
+            const colors = ['red', 'blue', 'yellow', 'green'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            sequence.push(randomColor);
+            playerSequence = [];
+            level++;
+            
+            scoreElement.textContent = level;
+            
+            setTimeout(() => {
+                playSequence();
+            }, 1000);
+        }
+        
+        // Function to check player sequence
+        function checkSequence() {
+            for (let i = 0; i < playerSequence.length; i++) {
+                if (playerSequence[i] !== sequence[i]) {
+                    gameOver();
+                    return;
+                }
+            }
+            
+            if (playerSequence.length === sequence.length) {
+                // Player completed the sequence correctly
+                score = level;
+                scoreElement.textContent = score;
+                setTimeout(() => {
+                    nextRound();
+                }, 1000);
+            }
+        }
+        
+        // Function to start the game
+        function startGame() {
+            sequence = [];
+            playerSequence = [];
+            score = 0;
+            level = 0;
+            isPlaying = true;
+            
+            scoreElement.textContent = score;
+            startBtn.disabled = true;
+            
+            nextRound();
+        }
+        
+        // Function to end the game
+        function gameOver() {
+            isPlaying = false;
+            isPlayerTurn = false;
+            
+            // Update high score
+            if (score > highScore) {
+                highScore = score;
+                highScoreElement.textContent = highScore;
+                localStorage.setItem('simonHighScore', highScore);
+            }
+            
+            finalScoreElement.textContent = score;
+            gameOverScreen.classList.add('show');
+            startBtn.disabled = false;
+        }
+        
+        // Function to reset the game
+        function resetGame() {
+            sequence = [];
+            playerSequence = [];
+            score = 0;
+            level = 0;
+            isPlaying = false;
+            isPlayerTurn = false;
+            
+            scoreElement.textContent = score;
+            startBtn.disabled = false;
+            gameOverScreen.classList.remove('show');
+        }
+        
+        // Event listeners
+        startBtn.addEventListener('click', startGame);
+        resetBtn.addEventListener('click', resetGame);
+        restartBtn.addEventListener('click', () => {
+            resetGame();
+            startGame();
+        });
+        
+        // Color button event listeners
+        colorButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (!isPlaying || !isPlayerTurn) return;
+                
+                const color = button.getAttribute('data-color');
+                playerSequence.push(color);
+                
+                lightUpButton(color);
+                checkSequence();
+            });
+        });
+        
+        // Initialize game
+        resetGame();
+
+        // Load Menu and Footer
+        document.addEventListener("DOMContentLoaded", function() {
+            // Fetch and insert Menu
+            fetch('../assets/includes/menu.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('menu-container').innerHTML = data;
+                    // Add event listener for the mobile menu toggle
+                    const menuToggle = document.getElementById('menuToggle');
+                    const navLinks = document.getElementById('navLinks');
+                    if (menuToggle && navLinks) {
+                        menuToggle.addEventListener('click', () => {
+                            navLinks.classList.toggle('open');
+                            menuToggle.classList.toggle('open');
+                        });
+                    }
+                })
+                .catch(error => console.error('Error loading menu:', error));
+
+            // Fetch and insert Footer
+            fetch('../assets/includes/footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-container').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading footer:', error));
+        });
+    </script>
+</body>
+</html>

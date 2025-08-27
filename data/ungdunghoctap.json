@@ -52,5 +52,17 @@
     "image": "https://blog.limewire.com/content/images/size/w1200/2023/11/A-Robot-Writing-AI-Prompts.jpg",
     "desc": "Công cụ giúp giáo viên tạo prompt để xây dựng ma trận đề kiểm tra định kỳ một cách nhanh chóng, khoa học và chính xác theo các quy định mới nhất.",
     "url": "../Ung_dung_prompt/prompt_builder/index.html"
+  },
+  {
+    "title": "Trò Chơi Nhớ Vị Trí (Màu Sắc)",
+    "image": "https://k4.games/thumbs/color-sequence-512x512.jpg",
+    "desc": "Rèn luyện trí nhớ của bạn bằng cách lặp lại chuỗi màu sắc và âm thanh ngày càng dài. Một trò chơi cổ điển và hấp dẫn để kiểm tra sự tập trung và khả năng ghi nhớ.",
+    "url": "../trochoi/tro_choi_nho_vi_tri.html"
+  },
+  {
+    "title": "Trò Chơi Nhớ Vị Trí (Con Số)",
+    "image": "https://ecdn.teacherspayteachers.com/thumbitem/-1-Deal-Number-Match-A-Memory-Game--4591750-1657322825/original-4591750-3.jpg",
+    "desc": "Phiên bản mới của trò chơi trí nhớ, lần này là với các con số. Thử thách bản thân với các chuỗi số phức tạp hơn!",
+    "url": "../trochoi/tro_choi_nho_vi_tri_2.html"
   }
 ]
