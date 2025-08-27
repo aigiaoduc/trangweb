@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1754036911359335"
+     crossorigin="anonymous"></script>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BHVRLSVE04"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BHVRLSVE04');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Cá Nhân - Quân H</title>
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&family=Roboto:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/button.css">
+  <style>
+    /* Variables */
+    :root {
+      --color-navy: #1E3A8A;
+      --color-blue-light: #2563EB;
+      --color-gray-light: #E5E7EB;
+      --color-dark: #111827;
+      --color-white: #ffffff;
+      --color-text-dark: #374151;
+      --color-text-light: #6B7280;
+    }
+
+    /* Reset */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Open Sans', sans-serif; 
+      background: var(--color-gray-light); 
+      color: var(--color-text-dark); 
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* Hero */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 40vh; /* Giảm chiều cao của banner */
+      padding: 0 2rem;
+      background: url('https://res.cloudinary.com/dejnvixvn/image/upload/v1750259721/cf49c82a-0b48-4f49-98d3-1bbe1d3d_u0fwxn.jpg') center/cover no-repeat;
+      position: relative;
+      margin-top: 72px; /* Adjust for fixed navbar height */
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(30,58,138,0.7); /* Xanh navy với độ trong suốt */
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 800px;
+    }
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: 0.5rem;
+    }
+    .hero p {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1.125rem;
+      color: var(--color-gray-light);
+      margin-bottom: 2rem;
+    }
+    .btn-hero {
+      padding: 0.8rem 1.6rem;
+      background: var(--color-blue-light);
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-white);
+      transition: background 0.3s;
+    }
+    .btn-hero:hover { background: #1D4ED8; } /* Màu xanh đậm hơn khi hover */
+
+    /* Content Section */
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: var(--color-white);
+      border-radius: 8px;
+      color: var(--color-text-dark);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .section {
+      background: var(--color-white);
+      border: 1px solid var(--color-gray-light);
+      border-left: 6px solid var(--color-blue-light);
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .section h2 {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--color-navy); /* Thay đổi màu sắc để nổi bật hơn */
+      border-bottom: 3px solid var(--color-blue-light); /* Thêm gạch chân */
+      padding-bottom: 0.5rem; /* Khoảng cách giữa chữ và gạch chân */
+      display: inline-block; /* Đảm bảo gạch chân chỉ dưới văn bản */
+    }
+    .about-section-content {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap; /* Cho phép xuống dòng trên màn hình nhỏ */
+    }
+    .about-section-content img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--color-blue-light);
+      flex-shrink: 0; /* Ngăn ảnh bị co lại */
+    }
+    .about-section-text {
+      flex: 1;
+      text-align: justify; /* Căn đều dòng */
+    }
+    @media (max-width: 768px) {
+      .about-section-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .about-section-text {
+        text-align: justify; /* Căn đều dòng trên màn hình nhỏ */
+      }
+    }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .card {
+      background: var(--color-white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease-in-out;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card img { width: 100%; height: 200px; object-fit: cover; }
+    .card-content { padding: 1rem; flex: 1; display: flex; flex-direction: column; }
+    .card-content h3 { 
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.25rem; 
+      margin-bottom: 0.5rem; 
+      color: var(--color-dark); 
+    }
+    .card-content p {
+      flex: 1;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--color-text-light);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; /* Giới hạn 3 dòng */
+      -webkit-box-orient: vertical;
+    }
+    .card-content a { 
+      margin-top: 1rem; 
+      font-weight: 600; 
+      color: var(--color-blue-light); 
+      transition: color 0.3s;
+    }
+    .card-content a:hover {
+      color: var(--color-navy);
+    }
+    .view-all {
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+    /* From Uiverse.io by adeladel522 */ 
+    .view-all-btn {
+      position: relative;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+      padding-block: 0.5rem;
+      padding-inline: 1.25rem;
+      background-color: var(--color-blue-light); /* Updated background color */
+      border-radius: 9999px;
+      display: inline-flex; /* Changed to inline-flex for centering */
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--color-white);
+      gap: 10px;
+      font-weight: bold;
+      border: 3px solid rgba(255, 255, 255, 0.3); /* Updated border color */
+      outline: none;
+      overflow: hidden;
+      font-size: 15px;
+      text-decoration: none;
+    }
+
+    .view-all-btn .icon {
+      width: 24px;
+      height: 24px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .view-all-btn:hover {
+      transform: scale(1.05);
+      border-color: rgba(255, 255, 255, 0.6); /* Updated border color on hover */
+    }
+
+    .view-all-btn:hover .icon {
+      transform: translate(4px);
+    }
+
+    .view-all-btn:hover::before {
+      animation: shine 1.5s ease-out infinite;
+    }
+
+    .view-all-btn::before {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 100%;
+      background-image: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 30%,
+        rgba(255, 255, 255, 0.8),
+        rgba(255, 255, 255, 0) 70%
+      );
+      top: 0;
+      left: -100px;
+      opacity: 0.6;
+    }
+
+    @keyframes shine {
+      0% {
+        left: -100px;
+      }
+
+      60% {
+        left: 100%;
+      }
+
+      to {
+        left: 100%;
+      }
+    }
+
+    /* Search Section */
+    .search-section {
+      /* background-color: var(--color-navy); */ /* Đã bỏ nền xanh */
+      padding: 0; /* Đã bỏ padding */
+      text-align: center;
+      margin-top: 2rem; /* Điều chỉnh lại margin-top */
+      position: sticky;
+      top: 0;
+      z-index: 100; /* Đảm bảo nó nằm trên các phần tử khác khi cuộn */
+      background-color: transparent; /* Xóa màu nền */
+      padding-top: 1rem; /* Thêm padding để tạo khoảng cách với mép trên */
+      padding-bottom: 1rem; /* Thêm padding để tạo khoảng cách với nội dung bên dưới */
+    }
+    .search-input-container {
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .search-input {
+      width: 100%;
+      padding: 0.8rem 1.2rem;
+      padding-right: 3rem; /* Space for icon */
+      border: 2px solid #333; /* Viền đen đậm hơn */
+      border-radius: 999px;
+      font-size: 1rem;
+      font-family: 'Open Sans', sans-serif;
+      color: var(--color-text-dark);
+      background-color: var(--color-white);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25); /* Tăng đổ bóng mạnh hơn */
+      outline: none;
+      transition: all 0.3s ease;
+    }
+    .search-input:focus {
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.5), 0 6px 18px rgba(0,0,0,0.25); /* Giữ đổ bóng và thêm focus ring */
+    }
+    .search-icon {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--color-text-light);
+      font-size: 1.2rem;
+    }
+    .search-results-grid {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .search-results-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: var(--color-white);
+      border-radius: 8px;
+      color: var(--color-text-dark);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      display: none; /* Mặc định ẩn */
+    }
+    .search-results-container h2 {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--color-navy);
+      border-bottom: 3px solid var(--color-blue-light);
+      padding-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .container { margin: 1rem; padding: 1rem; }
+      .grid { grid-template-columns: 1fr; }
+      .search-section { margin-top: 60px; /* Adjust for smaller navbar on mobile */ }
+    }
+  </style>
+</head>
+<body>
+  <div id="menu-placeholder"></div>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Ứng dụng Ai và Giáo dục</h1>
+      <p>Khám phá bài viết, video và công cụ hỗ trợ hành trình học tập và sáng tạo của bạn.</p>
+      <a href="pages/baiviet.html" class="btn-hero">Xem bài viết</a>
+    </div>
+  </section>
+
+  <div class="container">
+    <!-- Giới thiệu ngắn -->
+    <div class="section" style="background-color: var(--color-gray-light); border-left-color: var(--color-navy);">
+      <h2 style="color: var(--color-navy); border-bottom-color: var(--color-blue-light);">Giới thiệu ngắn</h2>
+      <div class="about-section-content">
+        <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1755348190/z5706588547072_0de12807137e6c2dfcfdb04c463c9969_vrl1fl.jpg" alt="Ảnh cá nhân Quân H">
+        <p class="about-section-text" style="font-family: 'Open Sans', sans-serif; color: var(--color-text-dark);">
+          Chào mừng bạn đến với trang web cá nhân của Quân H, nơi tôi chia sẻ kiến thức và kinh nghiệm về ứng dụng AI, công nghệ và giáo dục. Mục tiêu của tôi là giúp bạn khám phá những công cụ hữu ích, các bài viết chuyên sâu và video hướng dẫn để nâng cao kỹ năng và tối ưu hóa quá trình học tập, làm việc. Hãy cùng nhau khám phá thế giới công nghệ đầy tiềm năng này!
+        </p>
+      </div>
+    </div>
+
+    <!-- Search Section -->
+    <div class="search-section" style="margin-top: 2rem; margin-bottom: 3rem;">
+      <div class="search-input-container">
+        <form action="pages/search_results.html" method="GET">
+          <input type="text" name="q" id="searchInput" class="search-input" placeholder="Tìm kiếm bài viết, video, công cụ...">
+          <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer; position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-search search-icon" style="color: var(--color-text-light); font-size: 1.2rem;"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bài viết nổi bật -->
+    <div class="section">
+      <h2><i class="fas fa-newspaper"></i> Bài viết</h2>
+      <div class="grid" id="posts-grid"></div>
+      <a href="pages/baiviet.html" class="view-all view-all-btn">
+        Xem tất cả bài viết
+        <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+      </a>
+    </div>
+
+    <!-- Ứng dụng học tập -->
+    <div class="section">
+      <h2><i class="fas fa-book-open"></i> Ứng dụng học tập</h2>
+      <div class="grid" id="learning-apps-grid"></div>
+      <a href="pages/ungdunghoctap.html" class="view-all view-all-btn">
+        Xem tất cả ứng dụng học tập
+        <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+      </a>
+    </div>
+
+    <!-- Video nổi bật -->
+    <div class="section">
+      <h2><i class="fas fa-video"></i> Video</h2>
+      <div class="grid" id="videos-grid"></div>
+      <a href="pages/video.html" class="view-all view-all-btn">
+        Xem tất cả video
+        <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+      </a>
+    </div>
+
+    <!-- Công cụ AI -->
+    <div class="section">
+      <h2><i class="fas fa-robot"></i> Công cụ AI</h2>
+      <div class="grid" id="tools-grid"></div>
+      <a href="pages/congcu.html" class="view-all view-all-btn">
+        Xem tất cả công cụ AI
+        <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+      </a>
+    </div>
+
+    <!-- Thí nghiệm ảo -->
+    <div class="section">
+      <h2><i class="fas fa-flask"></i> Thí nghiệm ảo</h2>
+      <div class="grid" id="experiments-grid"></div>
+      <a href="pages/thinghiemao.html" class="view-all view-all-btn">
+        Xem tất cả thí nghiệm
+        <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+      </a>
+    </div>
+
+    <!-- Khóa học -->
+    <div class="section">
+      <h2><i class="fas fa-graduation-cap"></i> Khóa học</h2>
+      <div class="grid" id="courses-grid"></div>
+      <a href="pages/khoahoconline.html" class="view-all view-all-btn">
+        Xem tất cả khóa học
+        <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+      </a>
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <script>
+    async function fetchData(url) {
+      const res = await fetch(url);
+      return res.json();
+    }
+    function createCard(item, type = 'default') {
+      const card = document.createElement('div');
+      card.className = 'card';
+      // Sử dụng logo_image cho tool và image cho các loại khác
+      const imageSrc = type === 'tool' ? item.logo_image : item.image;
+      const linkText = type === 'tool' ? 'Truy cập' : 'Xem chi tiết';
+      const target = type === 'tool' ? '_blank' : '_self';
+      const url = item.url || '#';
+
+      card.innerHTML = `
+<img src="${imageSrc}" alt="${item.title}" style="height: 200px; object-fit: cover;">
+        <div class="card-content">
+          <h3>${item.title}</h3>
+          <p>${item.desc}</p>
+          <a href="${url}" target="${target}" class="detail-btn">${linkText}</a>
+        </div>
+      `;
+      return card;
+    }
+
+    async function renderSection(jsonFile, gridId, limit) {
+      try {
+        const data = await fetchData(jsonFile);
+        const grid = document.getElementById(gridId);
+        if (!grid) return;
+        grid.innerHTML = '';
+        const recentItems = data.slice(-limit);
+        recentItems.reverse().forEach(item => grid.appendChild(createCard(item)));
+      } catch (error) {
+        console.error(`Error rendering section for ${jsonFile}:`, error);
+      }
+    }
+
+    async function renderToolsSection(jsonFile, gridId, limit) {
+      try {
+        const data = await fetchData(jsonFile);
+        const grid = document.getElementById(gridId);
+        if (!grid) return;
+        grid.innerHTML = '';
+        let allTools = [];
+        data.forEach(category => {
+            allTools = allTools.concat(category.tools);
+        });
+        const recentItems = allTools.slice(-limit);
+        recentItems.reverse().forEach(item => grid.appendChild(createCard(item, 'tool')));
+      } catch (error) {
+        console.error(`Error rendering tools section for ${jsonFile}:`, error);
+      }
+    }
+
+    renderSection('data/posts.json', 'posts-grid', 6);
+    renderSection('data/videos.json', 'videos-grid', 6);
+    renderSection('data/ungdunghoctap.json', 'learning-apps-grid', 6);
+    renderToolsSection('data/congcu.json', 'tools-grid', 6);
+    renderSection('data/games.json', 'games-grid', 6);
+    renderSection('data/thinghiemao.json', 'experiments-grid', 6);
+    renderSection('data/khoahoconline.json', 'courses-grid', 6);
+
+    // Tải menu.html vào placeholder
+    fetch('assets/includes/menu.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('menu-placeholder').innerHTML = data;
+            // Thêm script cho menu sau khi nội dung được tải
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('open');
+                    menuToggle.classList.toggle('open');
+                });
+            } else {
+                console.error('Menu elements not found after loading menu.html');
+            }
+        });
+    
+    // Tải footer.html vào placeholder
+    fetch('assets/includes/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-placeholder').innerHTML = data;
+        });
+
+    // Tải tất cả dữ liệu khi DOM đã sẵn sàng
+    document.addEventListener('DOMContentLoaded', () => {
+      // Tải menu.html vào placeholder
+      fetch('assets/includes/menu.html')
+          .then(response => response.text())
+          .then(data => {
+              document.getElementById('menu-placeholder').innerHTML = data;
+              // Thêm script cho menu sau khi nội dung được tải
+              const menuToggle = document.getElementById('menuToggle');
+              const navLinks = document.getElementById('navLinks');
+
+              if (menuToggle && navLinks) {
+                  menuToggle.addEventListener('click', () => {
+                      navLinks.classList.toggle('open');
+                      menuToggle.classList.toggle('open');
+                  });
+              } else {
+                  console.error('Menu elements not found after loading menu.html');
+              }
+          });
+      
+      // Tải footer.html vào placeholder
+      fetch('assets/includes/footer.html')
+          .then(response => response.text())
+          .then(data => {
+              document.getElementById('footer-placeholder').innerHTML = data;
+          });
+    });
+  </script>
+</body>
+</html>

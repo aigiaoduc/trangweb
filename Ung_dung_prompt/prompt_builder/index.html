@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Công Cụ Tạo Ma Trận Đề Kiểm Tra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fa-solid fa-table-list"></i> Công Cụ Tạo Prompt Ma Trận Đề Kiểm Tra</h1>
+        <p>Nhập các thông tin dưới đây để tạo prompt hoàn chỉnh cho AI.</p>
+
+        <form id="matrix-form">
+            <h2><i class="fa-solid fa-circle-info"></i> 1. THÔNG SỐ CHUNG CỦA BÀI KIỂM TRA</h2>
+            
+            <div class="form-group">
+                <label for="subject">Môn học:</label>
+                <input type="text" id="subject" placeholder="Ví dụ: Khoa học tự nhiên 9" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="exam-time">Thời gian làm bài (phút):</label>
+                <input type="number" id="exam-time" value="90" required>
+            </div>
+
+            <h3>Cơ cấu điểm (Tổng 10 điểm)</h3>
+            <div class="form-group">
+                <label for="mcq-points">Điểm Trắc nghiệm (TN):</label>
+                <input type="number" id="mcq-points" step="0.1" value="7.0" required>
+            </div>
+            <div class="form-group sub-group">
+                <label for="mcq-multiple-choice">1. Nhiều lựa chọn:</label>
+                <input type="number" id="mcq-multiple-choice" step="0.1" value="3.0" required>
+            </div>
+            <div class="form-group sub-group">
+                <label for="mcq-true-false">2. Đúng - Sai:</label>
+                <input type="number" id="mcq-true-false" step="0.1" value="2.0" required>
+            </div>
+            <div class="form-group sub-group">
+                <label for="mcq-short-answer">3. Trả lời ngắn:</label>
+                <input type="number" id="mcq-short-answer" step="0.1" value="2.0" required>
+            </div>
+            <div class="form-group">
+                <label for="essay-points">Điểm Tự luận (TL):</label>
+                <input type="number" id="essay-points" step="0.1" value="3.0" required>
+            </div>
+
+            <h3>Tỉ lệ điểm theo mức độ nhận thức</h3>
+            <div class="form-group">
+                <label for="level-knowledge">1. Nhận biết (%):</label>
+                <input type="number" id="level-knowledge" value="40" required>
+            </div>
+            <div class="form-group">
+                <label for="level-comprehension">2. Thông hiểu (%):</label>
+                <input type="number" id="level-comprehension" value="30" required>
+            </div>
+            <div class="form-group">
+                <label for="level-application">3. Vận dụng (%):</label>
+                <input type="number" id="level-application" value="30" required>
+            </div>
+
+            <h3>Định dạng điểm cho mỗi câu hỏi</h3>
+            <div class="form-group">
+                <label for="points-multiple-choice">1. Điểm mỗi câu Nhiều lựa chọn:</label>
+                <input type="text" id="points-multiple-choice" value="0.25" required>
+            </div>
+            <div class="form-group">
+                <label for="points-true-false">2. Điểm mỗi câu Đúng-Sai (gồm 4 ý nhỏ):</label>
+                <input type="text" id="points-true-false" value="1.0 điểm/câu, mỗi ý đúng được 0.25 điểm" required>
+            </div>
+            <div class="form-group">
+                <label for="points-short-answer">3. Điểm mỗi câu Trả lời ngắn:</label>
+                <input type="text" id="points-short-answer" value="0.5" required>
+            </div>
+            <div class="form-group">
+                <label for="points-essay">4. Điểm cho các câu Tự luận:</label>
+                <input type="text" id="points-essay" placeholder="Ví dụ: Câu 1: 1.0 điểm; Câu 2: 1.0 điểm;..." required>
+            </div>
+
+            <h2><i class="fa-solid fa-list-check"></i> 2. THÔNG TIN CÁC CHỦ ĐỀ VÀ TRỌNG SỐ</h2>
+            <div id="topics-container">
+                <!-- Chủ đề sẽ được thêm vào đây bằng JavaScript -->
+            </div>
+            <button type="button" id="add-topic-btn" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> Thêm Chủ đề</button>
+            
+            <hr>
+
+            <button type="button" id="generate-btn" class="btn btn-primary"><i class="fa-solid fa-wand-magic-sparkles"></i> Tạo Prompt Hoàn Chỉnh</button>
+        </form>
+
+        <div id="result-container" style="display:none;">
+            <h2><i class="fa-solid fa-paste"></i> Prompt Hoàn Chỉnh</h2>
+            <textarea id="output-prompt" rows="20" readonly></textarea>
+            <button id="copy-btn" class="btn btn-success"><i class="fa-solid fa-copy"></i> Sao chép Prompt</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

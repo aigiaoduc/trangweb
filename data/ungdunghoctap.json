@@ -48,9 +48,9 @@
     "url": "../trochoi/ungdung9.html"
   },
   {
-    "title": "🚀 Trợ lý tạo ma trận",
-    "image": "https://image.lexica.art/full_webp/902e7be7-b7c4-40b6-addb-777e8bce5d49",
-    "desc": "Công cụ tạo prompt ma trận đề kiểm tra định kỳ theo Chương trình Giáo dục phổ thông 2018",
-    "url": "../pages/prompt_matrix_builder.html"
+    "title": "📝 Công Cụ Tạo Ma Trận Đề Kiểm Tra",
+    "image": "https://blog.limewire.com/content/images/size/w1200/2023/11/A-Robot-Writing-AI-Prompts.jpg",
+    "desc": "Công cụ giúp giáo viên tạo prompt để xây dựng ma trận đề kiểm tra định kỳ một cách nhanh chóng, khoa học và chính xác theo các quy định mới nhất.",
+    "url": "../Ung_dung_prompt/prompt_builder/index.html"
   }
 ]
