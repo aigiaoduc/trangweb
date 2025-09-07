@@ -160,21 +160,3 @@ Bảng ma trận gồm 6 cột chính:
 ##2. Cấu trúc bảng phải giống hệt file mẫu, tuyệt đối không thay đổi thứ tự hay tên gọi các cột.
 ##3. Tất cả các số liệu (số câu, điểm số, tỉ lệ %) phải được tính toán chính xác và khớp với nhau ở các hàng và cột tổng cộng.
 ##4. Ma trận phải phản ánh đúng năng lực cần đánh giá của học sinh theo Chương trình Giáo dục phổ thông 2018.
-        `;
-
-        outputPromptTextarea.value = finalPrompt.trim();
-        resultContainer.style.display = 'block';
-        outputPromptTextarea.style.height = 'auto';
-        outputPromptTextarea.style.height = (outputPromptTextarea.scrollHeight) + 'px';
-
-    });
-
-    copyBtn.addEventListener('click', () => {
-        outputPromptTextarea.select();
-        document.execCommand('copy');
-        copyBtn.textContent = 'Đã sao chép!';
-        setTimeout(() => {
-            copyBtn.textContent = 'Sao chép Prompt';
-        }, 2000);
-    });
-});

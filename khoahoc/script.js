@@ -7,11 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'dashboard.html';
     }
     // Nếu đang ở trang nội dung khóa học và chưa đăng nhập, chuyển hướng về login
-    else if (isLoggedIn !== 'true' && (window.location.pathname.includes('khoahoc_ungdungcanva.html') || window.location.pathname.includes('khoahoc_ungdung_ai_truyentranh.html') || window.location.pathname.includes('dashboard.html'))) {
+    else if (isLoggedIn !== 'true' && (window.location.pathname.includes('khoahoc_ungdungcanva.html') || window.location.pathname.includes('khoahoc_ungdung_ai_truyentranh.html') || window.location.pathname.includes('khoahoc_thietkewebcanhan.html') || window.location.pathname.includes('dashboard.html'))) {
         window.location.href = 'login.html';
     }
     // Nếu đang ở trang khóa học cụ thể, kiểm tra quyền truy cập
-    else if (isLoggedIn === 'true' && (window.location.pathname.includes('khoahoc_ungdungcanva.html') || window.location.pathname.includes('khoahoc_ungdung_ai_truyentranh.html'))) {
+    else if (isLoggedIn === 'true' && (window.location.pathname.includes('khoahoc_ungdungcanva.html') || window.location.pathname.includes('khoahoc_ungdung_ai_truyentranh.html') || window.location.pathname.includes('khoahoc_thietkewebcanhan.html'))) {
         const courseId = window.location.pathname.split('/').pop().replace('.html', '');
         if (!currentUser || !currentUser.courses || !currentUser.courses.includes(courseId)) {
             alert('Bạn không có quyền truy cập khóa học này.');
@@ -25,8 +25,15 @@ async function loginUser() {
     const passwordInput = document.getElementById('passwordInput');
     const errorMessage = document.getElementById('errorMessage');
 
-    const username = usernameInput.value;
-    const password = passwordInput.value;
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    // Kiểm tra xem các trường có trống không
+    if (username === '' || password === '') {
+        errorMessage.textContent = 'Vui lòng điền đầy đủ tên đăng nhập và mật khẩu.';
+        errorMessage.style.display = 'block';
+        return; // Dừng hàm nếu thông tin không hợp lệ
+    }
 
     try {
         const response = await fetch('users.json');
@@ -40,6 +47,7 @@ async function loginUser() {
             localStorage.setItem('currentUser', JSON.stringify(user)); // Lưu thông tin người dùng
             window.location.href = 'dashboard.html'; // Chuyển hướng đến trang tổng quan khóa học
         } else {
+            errorMessage.textContent = 'Tên đăng nhập hoặc mật khẩu không đúng.'; // Đặt lại thông báo lỗi mặc định
             errorMessage.style.display = 'block';
         }
     } catch (error) {

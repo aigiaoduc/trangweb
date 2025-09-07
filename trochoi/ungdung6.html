@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đĩa Quay Gọi Tên</title>
+    <meta property="og:image" content="https://tienichhay.net/assets/images/vong-quay-random-ten.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -84,6 +85,7 @@
     </style>
 </head>
 <body class="text-gray-800">
+    <div style="max-height:0; overflow:hidden;"><img src="https://tienichhay.net/assets/images/vong-quay-random-ten.jpg" /></div>
 
     <div id="menu-placeholder"></div>
     
@@ -153,7 +155,7 @@
         </section>
     </main>
 
-    <div id="footer-placeholder"></div>
+    
 
     <audio id="spinSound" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1753669645/Am_thanh_vong_quay_may_man_ngan-www_tiengdong_com_rdesga.mp3" preload="auto"></audio>
     <audio id="winSound" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1743950336/Am_thanh_chuc_mung_chien_thang-www_tiengdong_com_tzitdy.mp3" preload="auto"></audio>
@@ -304,35 +306,9 @@
         nameInput.addEventListener('input', drawWheel);
         spinButton.addEventListener('click', spin);
 
-        // Function to load HTML content and execute scripts
-        function loadComponent(url, placeholderId) {
-            fetch(url)
-                .then(response => response.ok ? response.text() : Promise.reject('File not found'))
-                .then(data => {
-                    const placeholder = document.getElementById(placeholderId);
-                    placeholder.innerHTML = data;
-                    
-                    // Find and execute any scripts within the loaded content
-                    const scripts = placeholder.querySelectorAll('script');
-                    scripts.forEach(oldScript => {
-                        const newScript = document.createElement('script');
-                        // Copy attributes
-                        Array.from(oldScript.attributes).forEach(attr => {
-                            newScript.setAttribute(attr.name, attr.value);
-                        });
-                        // Copy content
-                        newScript.appendChild(document.createTextNode(oldScript.innerHTML));
-                        // Append to the document to execute
-                        document.body.appendChild(newScript);
-                    });
-                })
-                .catch(error => console.error(`Error loading ${placeholderId}:`, error));
-        }
+        
 
-        // Load menu and footer
         document.addEventListener('DOMContentLoaded', () => {
-            loadComponent('../assets/includes/menu.html', 'menu-placeholder');
-            loadComponent('../assets/includes/footer.html', 'footer-placeholder');
             
             // Initial draw
             nameInput.value = "An\nBình\nCường\nDũng\nEm\nGiang";

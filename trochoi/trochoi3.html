@@ -255,139 +255,12 @@
             animation: pulse 2s infinite;
         }
 
-        /* CSS cho menu */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            position: relative; /* Đổi từ fixed sang relative */
-            background: rgba(0, 0, 0, 0.5); /* Giữ màu nền */
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-img {
-            height: 40px;
-            margin-right: 10px;
-        }
-
-        .logo-text {
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #4CAF50; /* Màu xanh lá cây khi hover */
-        }
-
-        .cta {
-            background-color: #007bff; /* Màu xanh dương */
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-
-        .cta:hover {
-            background-color: #0056b3; /* Màu xanh dương đậm hơn khi hover */
-        }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .menu-toggle span {
-            height: 3px;
-            width: 25px;
-            background-color: white;
-            margin-bottom: 5px;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                background: rgba(0, 0, 0, 0.8);
-                position: absolute;
-                top: 70px; /* Adjust based on navbar height */
-                left: 0;
-                padding: 1rem 0;
-                text-align: center;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links a {
-                margin: 10px 0;
-            }
-
-            .cta {
-                display: none; /* Hide CTA button on small screens */
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-
-            .menu-toggle.active span:nth-child(1) {
-                transform: rotate(-45deg) translate(-5px, 6px);
-            }
-
-            .menu-toggle.active span:nth-child(2) {
-                opacity: 0;
-            }
-
-            .menu-toggle.active span:nth-child(3) {
-                transform: rotate(45deg) translate(-5px, -6px);
-            }
-        }
+        
     </style>
 </head>
 <body class="p-4">
-    <nav class="navbar">
-        <div class="logo">
-          <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
-          <span class="logo-text">Quân H</span>
-        </div>
-        <div class="nav-links" id="navLinks">
-          <a href="../../index.html">Trang chủ</a>
-          <a href="../../baiviet.html">Bài viết</a>
-          <a href="../../congcu.html">Công cụ</a>
-          <a href="../../video.html">Video</a>
-          <a href="../../trochoi.html">Trò chơi</a>
-          <a href="../../lienhe.html">Liên hệ</a>
-        </div>
-        <a href="../../lienhe.html" class="cta">Liên hệ</a>
-        <div class="menu-toggle" id="menuToggle">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </nav>
+    <div style="max-height:0; overflow:hidden;"><img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1751163556/6159d8c6-aa2b-4743-aab9-82fcbbf98a01.png" /></div>
+    
     <div class="max-w-6xl mx-auto">
         <header class="text-center mb-8">
             <h1 class="game-title text-5xl md:text-6xl font-bold mb-3">🧩 Ghép Hình Động Vật 🧩</h1>
@@ -1006,34 +879,6 @@
             });
         });
     </script>
-    <script>
-        // Script cho menu
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.getElementById('menuToggle');
-            const navLinks = document.getElementById('navLinks');
-            const navbar = document.querySelector('.navbar');
-
-            if (menuToggle && navLinks) {
-                menuToggle.addEventListener('click', function() {
-                    navLinks.classList.toggle('active');
-                    menuToggle.classList.toggle('active');
-                });
-            }
-
-            // Hide menu on scroll down, show on scroll up
-            let lastScrollTop = 0;
-            window.addEventListener('scroll', function() {
-                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                if (scrollTop > lastScrollTop) {
-                    // Scrolling down
-                    navbar.style.top = '-80px'; // Adjust based on your navbar height
-                } else {
-                    // Scrolling up
-                    navbar.style.top = '0';
-                }
-                lastScrollTop = scrollTop;
-            });
-        });
-    </script>
+    
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9571e51272d3dd35',t:'MTc1MTE2MzEwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

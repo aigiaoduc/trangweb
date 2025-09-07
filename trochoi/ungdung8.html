@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Game Prompt Generator</title>
+    <meta property="og:image" content="https://image.lexica.art/full_webp/136a6e3d-ed15-475c-bca8-60b3fabcf106">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
@@ -79,7 +80,8 @@
     </style>
 </head>
 <body class="font-quicksand bg-gray-100">
-    <div id="menu-placeholder" class="bg-black"></div>
+    <div style="max-height:0; overflow:hidden;"><img src="https://image.lexica.art/full_webp/136a6e3d-ed15-475c-bca8-60b3fabcf106" /></div>
+ 
 
     <div class="min-h-screen flex flex-col items-center justify-center p-4 lg:p-8">
         
@@ -153,8 +155,6 @@
         </div>
     </div>
     
-    <div id="footer-placeholder"></div>
-
     <script>
         // Get references to DOM elements
         const contentObjectiveInput = document.getElementById('contentObjective');
@@ -281,33 +281,6 @@ Hãy trình bày ý tưởng trò chơi theo các phần sau:
         // Add event listeners to buttons
         generatePromptBtn.addEventListener('click', generatePrompt);
         copyPromptBtn.addEventListener('click', copyPromptToClipboard);
-
-        // Function to load HTML content into a placeholder
-        function loadHTML(url, placeholderId) {
-            fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById(placeholderId).innerHTML = data;
-                    if (placeholderId === 'menu-placeholder') {
-                        // Add logic for mobile menu toggle after menu is loaded
-                        const menuToggle = document.getElementById('menuToggle');
-                        const navLinks = document.getElementById('navLinks');
-                        if (menuToggle && navLinks) {
-                            menuToggle.addEventListener('click', () => {
-                                navLinks.classList.toggle('open');
-                                menuToggle.classList.toggle('open');
-                            });
-                        }
-                    }
-                })
-                .catch(error => console.error('Error loading HTML:', error));
-        }
-
-        // Load menu and footer
-        document.addEventListener('DOMContentLoaded', () => {
-            loadHTML('../assets/includes/menu.html', 'menu-placeholder');
-            loadHTML('../assets/includes/footer.html', 'footer-placeholder');
-        });
     </script>
 </body>
 </html>

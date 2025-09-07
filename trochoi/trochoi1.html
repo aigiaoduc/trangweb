@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animal Memory Card Game</title>
+    <meta property="og:image" content="https://i.etsystatic.com/27759810/r/il/f178f4/3661501502/il_fullxfull.3661501502_3dzo.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
@@ -13,88 +14,6 @@
             font-family: 'Nunito', sans-serif;
             background-color: #f0f9ff;
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239ee6ff' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            padding-top: 60px; /* Added padding for fixed navbar */
-        }
-        
-        /* Navbar Styles (copied from trang web/index.html for consistency) */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 1rem 2rem;
-            background: rgba(0,0,0,0.5);
-            z-index: 100;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        .logo-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #2f73ff;
-        }
-        .logo-text {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #fff;
-        }
-        .nav-links { display: flex; gap: 2rem; font-weight: 600; }
-        .nav-links a { font-size: 1rem; color: #fff; transition: color 0.3s; }
-        .nav-links a:hover { color: #2f73ff; }
-        .cta {
-            padding: 0.6rem 1.4rem;
-            background: #2f73ff;
-            border-radius: 999px;
-            font-weight: 600;
-            color: #fff;
-            transition: background 0.3s;
-        }
-        .cta:hover { background: #245ad1; }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 0.3rem;
-        }
-        .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: #fff;
-            border-radius: 5px;
-            transition: all 0.3s ease-in-out;
-        }
-        .menu-toggle.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
-        .menu-toggle.open span:nth-child(2) { opacity: 0; }
-        .menu-toggle.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
-
-        @media (max-width: 768px) {
-            .navbar { padding: 1rem; }
-            .nav-links { 
-                display: none; 
-                flex-direction: column; 
-                width: 100%; 
-                background: rgba(0,0,0,0.8); 
-                position: absolute; 
-                top: 60px; 
-                left: 0; 
-                padding: 1rem; 
-            }
-            .nav-links.open { display: flex; }
-            .nav-links a { padding: 0.5rem 0; text-align: center; }
-            .cta { display: block; /* Ensure CTA is visible on mobile */
-                   margin-top: 1rem; /* Add some margin */
-                   text-align: center; }
-            .menu-toggle { display: flex; }
         }
         
         .card {
@@ -188,8 +107,7 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center py-8 px-4">
-    <div id="navbar-placeholder"></div>
-
+    <div style="max-height:0; overflow:hidden;"><img src="https://i.etsystatic.com/27759810/r/il/f178f4/3661501502/il_fullxfull.3661501502_3dzo.jpg"/></div>
     <div class="max-w-4xl w-full">
         <header class="text-center mb-8">
             <h1 class="text-4xl md:text-5xl font-bold text-indigo-600 mb-2">Lật Thẻ – Tìm Tên Động Vật</h1>
@@ -240,23 +158,6 @@
     </div>
     
     <script>
-        // Script để tải navbar
-        fetch('../menu.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('navbar-placeholder').innerHTML = html;
-                // Re-attach event listeners for the dynamically loaded navbar
-                const menuToggle = document.getElementById('menuToggle');
-                const navLinks = document.getElementById('navLinks');
-
-                if (menuToggle && navLinks) {
-                    menuToggle.addEventListener('click', () => {
-                        navLinks.classList.toggle('open');
-                        menuToggle.classList.toggle('open');
-                    });
-                }
-            });
-
         document.addEventListener('DOMContentLoaded', () => {
             const gameBoard = document.getElementById('game-board');
             const movesDisplay = document.getElementById('moves');

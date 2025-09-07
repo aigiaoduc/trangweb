@@ -92,6 +92,7 @@
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
+    <div style="max-height:0; overflow:hidden;"><img src="https://img.freepik.com/free-vector/flat-cute-weather-flash-cards-preschool-kids_88138-1026.jpg?semt=ais_hybrid&w=740" /></div>
 
     <!-- Sound Effects -->
     <audio id="sound-flip" src="https://res.cloudinary.com/dejnvixvn/video/upload/v1753019956/Am_thanh_hieu_ung_vo_giay_trai_giay-www_tiengdong_com_mp3cut.net_ewa63a.mp3" preload="auto"></audio>
@@ -102,7 +103,7 @@
     <!-- Floating Robot Assistant -->
     <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1753020317/11260846-unscreen_qyupez.gif" alt="Floating Robot" class="floating-robot">
 
-    <header id="menu-container"></header>
+    
 
     <main class="flex-grow container mx-auto px-4 pt-24 pb-8">
         <!-- Hero Section -->
@@ -137,7 +138,7 @@
         </section>
     </main>
 
-    <footer id="footer-container"></footer>
+    
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -212,12 +213,7 @@
             </div>`;
 
         // --- Functions ---
-        const loadComponent = (url, elementId) => {
-            fetch(url)
-                .then(response => response.ok ? response.text() : '')
-                .then(data => { document.getElementById(elementId).innerHTML = data; })
-                .catch(error => console.error(`Error loading ${url}:`, error));
-        };
+        
         
         const playSound = (id) => {
             const sound = document.getElementById(id);
@@ -451,8 +447,6 @@
         mobileStartLearningBtn.addEventListener('click', startLearning);
 
         // --- Initial Load ---
-        loadComponent('../assets/includes/menu.html', 'menu-container');
-        loadComponent('../assets/includes/footer.html', 'footer-container');
         fetchData();
     });
     </script>

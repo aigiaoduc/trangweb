@@ -1,11 +1,10 @@
-
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đua Xe Giải Đố Toán Học</title>
+    <meta property="og:image" content="https://res.cloudinary.com/dejnvixvn/image/upload/v1751152585/def0ccdd-83ee-43fa-8541-04c7be9d44b4.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
@@ -15,7 +14,6 @@
             background: linear-gradient(to bottom, #1e3c72, #2a5298);
             min-height: 100vh;
             overflow-x: hidden;
-            padding-top: 80px; /* Thêm padding-top để tạo không gian cho menu cố định */
         }
         
         .car {
@@ -83,138 +81,10 @@
             0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
             100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
-
-        /* CSS cho menu */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-img {
-            height: 40px;
-            margin-right: 10px;
-        }
-
-        .logo-text {
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #4CAF50; /* Màu xanh lá cây khi hover */
-        }
-
-        .cta {
-            background-color: #007bff; /* Màu xanh dương */
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-
-        .cta:hover {
-            background-color: #0056b3; /* Màu xanh dương đậm hơn khi hover */
-        }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .menu-toggle span {
-            height: 3px;
-            width: 25px;
-            background-color: white;
-            margin-bottom: 5px;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                background: rgba(0, 0, 0, 0.8);
-                position: absolute;
-                top: 70px; /* Adjust based on navbar height */
-                left: 0;
-                padding: 1rem 0;
-                text-align: center;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links a {
-                margin: 10px 0;
-            }
-
-            .cta {
-                display: none; /* Hide CTA button on small screens */
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-
-            .menu-toggle.active span:nth-child(1) {
-                transform: rotate(-45deg) translate(-5px, 6px);
-            }
-
-            .menu-toggle.active span:nth-child(2) {
-                opacity: 0;
-            }
-
-            .menu-toggle.active span:nth-child(3) {
-                transform: rotate(45deg) translate(-5px, -6px);
-            }
-        }
     </style>
 </head>
 <body class="text-white">
-    <nav class="navbar" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 100; transition: top 0.3s; background: rgba(0, 0, 0, 0.5);">
-        <div class="logo">
-          <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
-          <span class="logo-text">Quân H</span>
-        </div>
-        <div class="nav-links" id="navLinks">
-          <a href="../../index.html">Trang chủ</a>
-          <a href="../../baiviet.html">Bài viết</a>
-          <a href="../../congcu.html">Công cụ</a>
-          <a href="../../video.html">Video</a>
-          <a href="../../trochoi.html">Trò chơi</a>
-          <a href="../../lienhe.html">Liên hệ</a>
-        </div>
-        <a href="../../lienhe.html" class="cta">Liên hệ</a>
-        <div class="menu-toggle" id="menuToggle">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </nav>
+    <div style="max-height:0; overflow:hidden;"><img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1751152585/def0ccdd-83ee-43fa-8541-04c7be9d44b4.png" /></div>
     <!-- Game Container -->
     <div class="container mx-auto px-4 py-8 max-w-4xl">
         <!-- Game Title -->
@@ -346,8 +216,7 @@
         </div>
         
         <!-- Result Modal (Initially Hidden) -->
-        <div id="resultModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-            <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+        <div id="resultModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 hidden">
             <div class="bg-gradient-to-br from-blue-900 to-purple-900 p-8 rounded-2xl shadow-2xl z-10 max-w-md w-full mx-4 border border-white/20">
                 <div id="resultContent" class="text-center">
                     <!-- Content will be dynamically inserted -->
@@ -769,35 +638,6 @@
             // Clear any remaining confetti
             document.querySelectorAll('.confetti').forEach(el => el.remove());
         }
-    </script>
-    <script>
-        // Script cho menu
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.getElementById('menuToggle');
-            const navLinks = document.getElementById('navLinks');
-            const navbar = document.querySelector('.navbar');
-
-            if (menuToggle && navLinks) {
-                menuToggle.addEventListener('click', function() {
-                    navLinks.classList.toggle('active');
-                    menuToggle.classList.toggle('active');
-                });
-            }
-
-            // Hide menu on scroll down, show on scroll up
-            let lastScrollTop = 0;
-            window.addEventListener('scroll', function() {
-                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                if (scrollTop > lastScrollTop) {
-                    // Scrolling down
-                    navbar.style.top = '-80px'; // Adjust based on your navbar height
-                } else {
-                    // Scrolling up
-                    navbar.style.top = '0';
-                }
-                lastScrollTop = scrollTop;
-            });
-        });
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9570d9e506ff4098',t:'MTc1MTE1MjE1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Công Cụ Tạo Ma Trận Đề Kiểm Tra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #0056b3;
+    --primary-hover: #004494;
+    --secondary-color: #6c757d;
+    --secondary-hover: #5a6268;
+    --danger-color: #dc3545;
+    --danger-hover: #c82333;
+    --success-color: #28a745;
+    --success-hover: #218838;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --white-color: #fff;
+    --border-color: #dee2e6;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --border-radius: 8px;
+}
+
+body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    line-height: 1.7;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    margin: 0;
+    padding: 2rem;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--white-color);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+h1, h2, h3 {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+}
+
+h1 i, h2 i {
+    margin-right: 0.75rem;
+}
+
+h2 {
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.75rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.2rem;
+    color: #1d3557;
+    margin-top: 1.5rem;
+}
+
+p {
+    text-align: center;
+    color: var(--secondary-color);
+    margin-bottom: 2.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group.sub-group {
+    margin-left: 1.5rem;
+}
+
+label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #495057;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 1rem;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+    border-color: var(--primary-color);
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(0, 86, 179, .25);
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--white-color);
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: var(--border-radius);
+    transition: all 0.2s ease-in-out;
+    margin-top: 0.5rem;
+}
+
+.btn i {
+    line-height: 1;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 0.8rem;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-hover);
+    border-color: var(--secondary-hover);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.9rem;
+}
+
+.btn-danger:hover {
+    background-color: var(--danger-hover);
+    border-color: var(--danger-hover);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+}
+
+.btn-success:hover {
+    background-color: var(--success-hover);
+    border-color: var(--success-hover);
+}
+
+#result-container {
+    margin-top: 2.5rem;
+}
+
+textarea#output-prompt {
+    width: 100%;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: #e9ecef;
+    font-family: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 14px;
+    white-space: pre;
+    overflow-x: auto;
+    line-height: 1.5;
+}
+
+#copy-btn {
+    margin-top: 1rem;
+}
+
+hr {
+    margin: 2.5rem 0;
+    border: 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.topic-block {
+    background-color: #f8f9fa;
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    border-radius: var(--border-radius);
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.topic-block h3 {
+    margin-top: 0;
+    border-bottom: 1px solid #ced4da;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.topic-block .btn-danger {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}</style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fa-solid fa-table-list"></i> Công Cụ Tạo Prompt Ma Trận Đề Kiểm Tra</h1>
+        <p>Nhập các thông tin dưới đây để tạo prompt hoàn chỉnh cho AI.</p>
+
+        <form id="matrix-form">
+            <h2><i class="fa-solid fa-circle-info"></i> 1. THÔNG SỐ CHUNG CỦA BÀI KIỂM TRA</h2>
+            
+            <div class="form-group">
+                <label for="subject">Môn học:</label>
+                <input type="text" id="subject" placeholder="Ví dụ: Khoa học tự nhiên 9" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="exam-time">Thời gian làm bài (phút):</label>
+                <input type="number" id="exam-time" value="90" required>
+            </div>
+
+            <h3>Cơ cấu điểm (Tổng 10 điểm)</h3>
+            <div class="form-group">
+                <label for="mcq-points">Điểm Trắc nghiệm (TN):</label>
+                <input type="number" id="mcq-points" step="0.1" value="7.0" required>
+            </div>
+            <div class="form-group sub-group">
+                <label for="mcq-multiple-choice">1. Nhiều lựa chọn:</label>
+                <input type="number" id="mcq-multiple-choice" step="0.1" value="3.0" required>
+            </div>
+            <div class="form-group sub-group">
+                <label for="mcq-true-false">2. Đúng - Sai:</label>
+                <input type="number" id="mcq-true-false" step="0.1" value="2.0" required>
+            </div>
+            <div class="form-group sub-group">
+                <label for="mcq-short-answer">3. Trả lời ngắn:</label>
+                <input type="number" id="mcq-short-answer" step="0.1" value="2.0" required>
+            </div>
+            <div class="form-group">
+                <label for="essay-points">Điểm Tự luận (TL):</label>
+                <input type="number" id="essay-points" step="0.1" value="3.0" required>
+            </div>
+
+            <h3>Tỉ lệ điểm theo mức độ nhận thức</h3>
+            <div class="form-group">
+                <label for="level-knowledge">1. Nhận biết (%):</label>
+                <input type="number" id="level-knowledge" value="40" required>
+            </div>
+            <div class="form-group">
+                <label for="level-comprehension">2. Thông hiểu (%):</label>
+                <input type="number" id="level-comprehension" value="30" required>
+            </div>
+            <div class="form-group">
+                <label for="level-application">3. Vận dụng (%):</label>
+                <input type="number" id="level-application" value="30" required>
+            </div>
+
+            <h3>Định dạng điểm cho mỗi câu hỏi</h3>
+            <div class="form-group">
+                <label for="points-multiple-choice">1. Điểm mỗi câu Nhiều lựa chọn:</label>
+                <input type="text" id="points-multiple-choice" value="0.25" required>
+            </div>
+            <div class="form-group">
+                <label for="points-true-false">2. Điểm mỗi câu Đúng-Sai (gồm 4 ý nhỏ):</label>
+                <input type="text" id="points-true-false" value="1.0 điểm/câu, mỗi ý đúng được 0.25 điểm" required>
+            </div>
+            <div class="form-group">
+                <label for="points-short-answer">3. Điểm mỗi câu Trả lời ngắn:</label>
+                <input type="text" id="points-short-answer" value="0.5" required>
+            </div>
+            <div class="form-group">
+                <label for="points-essay">4. Điểm cho các câu Tự luận:</label>
+                <input type="text" id="points-essay" placeholder="Ví dụ: Câu 1: 1.0 điểm; Câu 2: 1.0 điểm;..." required>
+            </div>
+
+            <h2><i class="fa-solid fa-list-check"></i> 2. THÔNG TIN CÁC CHỦ ĐỀ VÀ TRỌNG SỐ</h2>
+            <div id="topics-container">
+                <!-- Chủ đề sẽ được thêm vào đây bằng JavaScript -->
+            </div>
+            <button type="button" id="add-topic-btn" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> Thêm Chủ đề</button>
+            
+            <hr>
+
+            <button type="button" id="generate-btn" class="btn btn-primary"><i class="fa-solid fa-wand-magic-sparkles"></i> Tạo Prompt Hoàn Chỉnh</button>
+        </form>
+
+        <div id="result-container" style="display:none;">
+            <h2><i class="fa-solid fa-paste"></i> Prompt Hoàn Chỉnh</h2>
+            <textarea id="output-prompt" rows="20" readonly></textarea>
+            <button id="copy-btn" class="btn btn-success"><i class="fa-solid fa-copy"></i> Sao chép Prompt</button>
+        </div>
+    </div>
+
+    <script>document.addEventListener('DOMContentLoaded', () => {
+    const addTopicBtn = document.getElementById('add-topic-btn');
+    const topicsContainer = document.getElementById('topics-container');
+    const generateBtn = document.getElementById('generate-btn');
+    const resultContainer = document.getElementById('result-container');
+    const outputPromptTextarea = document.getElementById('output-prompt');
+    const copyBtn = document.getElementById('copy-btn');
+
+    let topicCounter = 0;
+
+    // Thêm một chủ đề ngay từ đầu
+    addTopic();
+
+    addTopicBtn.addEventListener('click', addTopic);
+
+    function addTopic() {
+        topicCounter++;
+        const topicId = topicCounter;
+        const topicBlock = document.createElement('div');
+        topicBlock.className = 'topic-block';
+        topicBlock.setAttribute('data-id', topicId);
+
+        topicBlock.innerHTML = "`
+            <h3>Chủ đề ${topicId}</h3>
+            <button type=\"button\" class=\"btn btn-danger remove-topic-btn\"><i class=\"fa-solid fa-trash-can\"></i> Xóa</button>
+            <div class=\"form-group\">
+                <label for=\"topic-name-${topicId}\">Tên chủ đề:</label>
+                <input type=\"text\" id=\"topic-name-${topicId}\" placeholder=\"Ví dụ: Gene là trung tâm của di truyền học\" required>
+            </div>
+            <div class=\"form-group\">
+                <label for=\"topic-duration-${topicId}\">Thời lượng giảng dạy (tiết):</label>
+                <input type=\"number\" id=\"topic-duration-${topicId}\" placeholder=\"Ví dụ: 5\" required>
+            </div>
+            <div class=\"form-group\">
+                <label for=\"topic-content-${topicId}\">Nội dung/đơn vị kiến thức:</label>
+                <textarea id=\"topic-content-${topicId}\" placeholder=\"Liệt kê các nội dung kiến thức chính, mỗi nội dung trên một dòng\" required rows=\"4\"></textarea>
+            </div>
+        ";
+
+        topicsContainer.appendChild(topicBlock);
+
+        topicBlock.querySelector('.remove-topic-btn').addEventListener('click', () => {
+            topicBlock.remove();
+            updateTopicTitles();
+        });
+    }
+    
+    function updateTopicTitles() {
+        const allTopics = topicsContainer.querySelectorAll('.topic-block');
+        allTopics.forEach((topic, index) => {
+            topic.querySelector('h3').textContent = `Chủ đề ${index + 1}`;
+        });
+    }
+
+
+    generateBtn.addEventListener('click', () => {
+        if (!document.getElementById('matrix-form').checkValidity()) {
+            alert('Vui lòng điền đầy đủ các trường thông tin bắt buộc.');
+            return;
+        }
+
+        const subject = document.getElementById('subject').value;
+        const examTime = document.getElementById('exam-time').value;
+        const mcqPoints = document.getElementById('mcq-points').value;
+        const mcqMultipleChoice = document.getElementById('mcq-multiple-choice').value;
+        const mcqTrueFalse = document.getElementById('mcq-true-false').value;
+        const mcqShortAnswer = document.getElementById('mcq-short-answer').value;
+        const essayPoints = document.getElementById('essay-points').value;
+        const levelKnowledge = document.getElementById('level-knowledge').value;
+        const levelComprehension = document.getElementById('level-comprehension').value;
+        const levelApplication = document.getElementById('level-application').value;
+        const pointsMultipleChoice = document.getElementById('points-multiple-choice').value;
+        const pointsTrueFalse = document.getElementById('points-true-false').value;
+        const pointsShortAnswer = document.getElementById('points-short-answer').value;
+        const pointsEssay = document.getElementById('points-essay').value;
+
+        let topicsString = '';
+        const topicBlocks = topicsContainer.querySelectorAll('.topic-block');
+        topicBlocks.forEach((block, index) => {
+            const id = block.getAttribute('data-id');
+            const name = block.querySelector(`#topic-name-${id}`).value;
+            const duration = block.querySelector(`#topic-duration-${id}`).value;
+            const content = block.querySelector(`#topic-content-${id}`).value;
+            
+            topicsString += `###${index + 1}. Chủ đề ${index + 1}: [${name}]
+`;
+            topicsString += `####1. Thời lượng giảng dạy: [${duration} tiết].
+`;
+            topicsString += `####2. Nội dung/đơn vị kiến thức: [${content}].
+
+`;
+        });
+
+        const finalPrompt = `
+#1. NGỮ CẢNH
+Bạn là một chuyên gia về thiết kế và đánh giá giáo dục, có kiến thức sâu rộng về Chương trình Giáo dục phổ thông 2018 của Việt Nam và các văn bản hướng dẫn chuyên môn như Công văn 7991/BGDĐT-GDTrH. Nhiệm vụ của bạn là xây dựng một ma trận đề kiểm tra định kỳ cho môn học [${subject}] một cách khoa học, logic và chính xác tuyệt đối dựa trên các dữ liệu và yêu cầu được cung cấp.
+
+#2. DỮ LIỆU ĐẦU VÀO
+Nội dung tạo ma trận tuyệt đối chỉ được lấy thông tin từ các file đính kèm Sách giáo khoa và mẫu của ma trận đã được đính kèm của Công văn 7991.
+
+##1. THÔNG SỐ CHUNG CỦA BÀI KIỂM TRA
+###1. Môn học: [${subject}]
+###2. Thời gian làm bài: [${examTime} phút]
+###3. Tổng điểm: 10 điểm.
+###4. Cơ cấu điểm:
+####1. Trắc nghiệm khách quan (TN): [${mcqPoints} điểm] (tương đương [${mcqPoints * 10}%] tổng điểm).
+1. Nhiều lựa chọn: [${mcqMultipleChoice} điểm].
+2. Đúng - Sai: [${mcqTrueFalse} điểm].
+3. Trả lời ngắn: [${mcqShortAnswer} điểm].
+####2. Tự luận (TL): [${essayPoints} điểm] (tương đương [${essayPoints * 10}%] tổng điểm).
+###5. Tỉ lệ điểm theo mức độ nhận thức:
+1. Nhận biết (NB): [${levelKnowledge}%].
+2. Thông hiểu (TH): [${levelComprehension}%].
+3. Vận dụng (VD): [${levelApplication}%].
+###6. Định dạng điểm cho mỗi câu hỏi:
+1. Điểm mỗi câu Nhiều lựa chọn: [${pointsMultipleChoice} điểm/câu].
+2. Điểm mỗi câu Đúng-Sai (gồm 4 ý nhỏ): [${pointsTrueFalse}].
+3. Điểm mỗi câu Trả lời ngắn: [${pointsShortAnswer} điểm/câu].
+4. Điểm cho các câu Tự luận: [${pointsEssay}].
+
+##2. THÔNG TIN CÁC CHỦ ĐỀ VÀ TRỌNG SỐ
+${topicsString.trim()}
+###5. (Thêm các chủ đề khác nếu cần)
+
+#3. HƯỚNG DẪN THỰC HIỆN
+Hãy thiết kế một “Ma trận đề kiểm tra định kì” hoàn chỉnh. Quá trình thiết kế phải tuân thủ tuyệt đối các quy trình tính toán và yêu cầu về cấu trúc dưới đây.
+
+##1. QUY TRÌNH TÍNH TOÁN VÀ PHÂN BỔ TỰ ĐỘNG
+###1. Tính tổng số tiết: Tính Ttổng​ = ∑(Thời lượng giảng dạy của từng chủ đề).
+###2. Tính trọng số và phân bổ điểm cho từng chủ đề:
+####1. Trọng số của Chủ đề i được tính bằng công thức: Wi​(%) =​ (Số tiết Chủ đề i​/Ttổng)×100%
+####2. Tổng điểm cho Chủ đề i được tính bằng công thức: Si​ = Wi​ × Tổng điểm bài kiểm tra
+####3. Làm tròn điểm Si​ đến 0.25 hoặc 0.5 để đảm bảo tính khả thi khi chia điểm.
+###3. Phân bổ điểm TN/TL cho từng chủ đề:
+####1. Dựa vào tổng điểm Si​ của mỗi chủ đề, phân bổ điểm cho hai phần Trắc nghiệm (Si,TN​) và Tự luận (Si,TL​) sao cho tổng điểm của các cột TN và TL khớp với cơ cấu điểm đã cho ở mục #2.##1.###4.
+####2. Ưu tiên phân bổ điểm tự luận trước (thường là các câu hỏi vận dụng ở các chủ đề quan trọng), sau đó phân bổ điểm trắc nghiệm.
+###4. Phân bổ điểm theo mức độ nhận thức (NB, TH, VD) trong từng chủ đề:
+####1. Với mỗi chủ đề, phân bổ điểm Si,TN​ và Si,TL​ vào 3 cột mức độ Nhận biết, Thông hiểu, Vận dụng theo tỉ lệ chung [${levelKnowledge}% NB, ${levelComprehension}% TH, ${levelApplication}% VD].
+####2. Điều chỉnh linh hoạt để điểm số phù hợp với đặc thù kiến thức của chủ đề và định dạng điểm của câu hỏi.
+###5. Quy đổi điểm ra số câu hỏi:
+####1. Dựa vào "Định dạng điểm cho mỗi câu hỏi" ở mục #2.##1.###6, tính toán số lượng câu hỏi cho từng ô trong ma trận.
+####2. Ví dụ: Nếu ô "Nhiều lựa chọn - Nhận biết" của Chủ đề 1 được phân bổ 0.75 điểm, và mỗi câu nhiều lựa chọn là 0.25 điểm, thì số câu hỏi ở ô này là 0.75/0.25=3 câu.
+####3. Thực hiện làm tròn toán học và điều chỉnh hợp lý để "Tổng số câu" và "Tổng số điểm" ở các hàng và các cột cuối cùng khớp chính xác với dữ liệu đầu vào.
+
+##2. CẤU TRÚC BẢNG MA TRẬN
+Bảng ma trận gồm 6 cột chính:
+###1. STT.
+###2. Chủ đề/Chương.
+###3. Nội dung/Đơn vị kiến thức.
+###4. Mức độ đánh giá: Chia thành 2 cột lớn là TNKQ và Tự luận.
+####1. Trong TNKQ, có 3 loại: "Nhiều lựa chọn", "Đúng - Sai", "Trả lời ngắn". Mỗi loại lại được chia thành 3 cột nhỏ: "Biết", "Hiểu", "Vận dụng".
+####2. Trong Tự luận, có 3 cột nhỏ: "Biết", "Hiểu", "Vận dụng".
+###5. Tổng: Gồm 3 cột nhỏ: "Biết", "Hiểu", "Vận dụng" để tổng hợp số điểm của từng mức độ.
+###6. Tỉ lệ % điểm.
+####1. Các dòng của ma trận tương ứng với từng chủ đề và các đơn vị kiến thức bên trong.
+####2. Cuối bảng, phải có các dòng tổng kết: “Tổng số câu”, “Tổng số điểm”, và “Tỉ lệ %” cho từng cột.
+
+#4. YÊU CẦU KẾT QUẢ
+##1. Định dạng kết quả đầu ra là một bảng tính Excel theo đúng mẫu ma trận số câu hỏi đã mô tả ở trên và trong Công văn 7991.
+##2. Cấu trúc bảng phải giống hệt file mẫu, tuyệt đối không thay đổi thứ tự hay tên gọi các cột.
+##3. Tất cả các số liệu (số câu, điểm số, tỉ lệ %) phải được tính toán chính xác và khớp với nhau ở các hàng và cột tổng cộng.
+##4. Ma trận phải phản ánh đúng năng lực cần đánh giá của học sinh theo Chương trình Giáo dục phổ thông 2018.

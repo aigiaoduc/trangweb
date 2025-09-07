@@ -3,162 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bảng điều khiển Khóa học</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Bảng điều khiển - Nền tảng khóa học</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); /* Light, modern gradient */
-            color: #333;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #f8f9fa;
         }
-        .header {
-            background: linear-gradient(90deg, #4299e1 0%, #667eea 100%); /* Blue to purple gradient */
-            color: white;
-            padding: 1.5rem 0;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-            font-family: 'Montserrat', sans-serif;
+        .sidebar {
+            background-color: #ffffff;
+            border-right: 1px solid #e5e7eb;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem; /* More padding for content */
+        .sidebar-link {
+            transition: background-color 0.2s, color 0.2s;
         }
-        .logout-button {
-            background-color: #e53e3e; /* Red for logout */
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 700;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            font-family: 'Quicksand', sans-serif;
-        }
-        .logout-button:hover {
-            background-color: #c53030;
-            transform: translateY(-2px);
+        .sidebar-link.active, .sidebar-link:hover {
+            background-color: #f3f4f6;
+            color: #4f46e5;
         }
         .course-card {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 15px; /* More rounded corners */
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow */
-            margin-bottom: 25px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            font-family: 'Quicksand', sans-serif;
+            border: 1px solid #e5e7eb;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         .course-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
-        .course-card h3 {
-            color: #2c5282; /* Darker blue for headings */
-            margin-bottom: 15px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
+        .progress-bar-bg {
+            background-color: #e5e7eb;
         }
-        .course-card p {
-            color: #4a5568; /* Dark gray for description */
-            margin-bottom: 20px;
-            font-size: 1rem;
-        }
-        .course-card a {
-            display: inline-block;
-            background: linear-gradient(90deg, #4299e1 0%, #667eea 100%);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            font-family: 'Quicksand', sans-serif;
-        }
-        .course-card a:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(90deg, #667eea 0%, #4299e1 100%);
-        }
-        h2 {
-            color: #2c5282;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        h3.mb-4 { /* For "Các khóa học của bạn" */
-            color: #4a5568;
-            font-family: 'Inter', sans-serif;
-            font-size: 1.5rem;
-            margin-top: 30px;
-        }
-        .hero-section {
-            background: linear-gradient(135deg, #a7bfe8 0%, #6190e8 100%);
-            color: white;
-            padding: 4rem 0; /* Reduced padding */
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            border-radius: 15px;
-            margin-top: 2rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: -50px;
-            width: 200px;
-            height: 200px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: moveCircle1 10s infinite alternate;
-        }
-        .hero-section::after {
-            content: '';
-            position: absolute;
-            bottom: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: moveCircle2 12s infinite alternate;
-        }
-        @keyframes moveCircle1 {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(100px, 50px); }
-        }
-        @keyframes moveCircle2 {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(-80px, -30px); }
+        .progress-bar-fill {
+            background-color: #4f46e5;
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="container flex justify-between items-center">
-            <h1 class="text-3xl font-bold">Bảng điều khiển Khóa học</h1>
-            <nav>
-                <button onclick="logoutUser()" class="logout-button">Đăng xuất</button>
+
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 sidebar hidden md:flex flex-col">
+            <div class="p-6 text-2xl font-bold text-indigo-600 border-b">
+                <i class="fas fa-book-open-reader mr-2"></i>
+                Khóa Học
+            </div>
+            <nav class="flex-1 p-4 space-y-2">
+                <a href="#" class="flex items-center px-4 py-2.5 rounded-lg sidebar-link active">
+                    <i class="fas fa-tachometer-alt w-6 text-center"></i>
+                    <span class="ml-3">Bảng điều khiển</span>
+                </a>
+                <a href="#" class="flex items-center px-4 py-2.5 rounded-lg sidebar-link">
+                    <i class="fas fa-layer-group w-6 text-center"></i>
+                    <span class="ml-3">Tất cả khóa học</span>
+                </a>
+                <a href="#" class="flex items-center px-4 py-2.5 rounded-lg sidebar-link">
+                    <i class="fas fa-user-circle w-6 text-center"></i>
+                    <span class="ml-3">Hồ sơ</span>
+                </a>
             </nav>
-        </div>
-    </header>
+            <div class="p-4 border-t">
+                <button onclick="logoutUser()" class="w-full flex items-center justify-center px-4 py-2.5 rounded-lg text-red-500 hover:bg-red-50">
+                    <i class="fas fa-sign-out-alt w-6 text-center"></i>
+                    <span class="ml-3">Đăng xuất</span>
+                </button>
+            </div>
+        </aside>
 
-    <main class="container my-8">
-        <div class="hero-section">
-            <h2 class="text-4xl font-bold mb-4">Chào mừng, <span id="usernameDisplay"></span>!</h2>
-            <p class="text-xl leading-relaxed">Khám phá các khóa học độc quyền của bạn.</p>
-        </div>
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header class="bg-white border-b p-4 flex justify-between items-center">
+                <h1 class="text-2xl font-semibold text-gray-800">Chào mừng trở lại, <span id="usernameDisplay" class="text-indigo-600">...</span>!</h1>
+                <div class="relative hidden md:block">
+                    <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" placeholder="Tìm kiếm khóa học..." class="bg-gray-100 rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+            </header>
 
-        <h3 class="text-xl font-bold mb-4">Các khóa học của bạn:</h3>
-        <div id="coursesList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Các khóa học sẽ được tải ở đây bằng JavaScript -->
+            <!-- Content Area -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-6 md:p-8">
+                <div class="container mx-auto">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Các khóa học của bạn</h2>
+                    
+                    <div id="coursesList" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                        <!-- Course cards will be injected here by JavaScript -->
+                    </div>
+
+                </div>
+            </main>
         </div>
-    </main>
+    </div>
 
     <script src="script.js"></script>
     <script>
@@ -173,13 +108,24 @@
                 const courseMap = {
                     "khoahoc_ungdungcanva": {
                         title: "Khóa Học Xây Dựng Ứng Dụng Học Tập",
-                        description: "Nâng tầm kỹ năng dạy học của bạn với AI. Khám phá các bí quyết và thủ thuật để tạo ra những ứng dụng học tập chuyên nghiệp, ấn tượng và thu hút mọi học sinh.",
-                        link: "khoahoc_ungdungcanva.html"
+                        description: "Nâng tầm kỹ năng dạy học của bạn với AI để tạo ra những ứng dụng học tập chuyên nghiệp.",
+                        link: "khoahoc_ungdungcanva.html",
+                        icon: "fa-chalkboard-user",
+                        color: "#3b82f6"
                     },
                     "khoahoc_ungdung_ai_truyentranh": {
-                        title: "Ứng Dụng AI Tạo Truyện Tranh Minh Họa Nội Dung",
-                        description: "Ứng dụng Tạo truyện tranh bằng AI là công cụ hỗ trợ người dùng biến ý tưởng thành những câu chuyện tranh sinh động chỉ trong vài bước đơn giản.",
-                        link: "khoahoc_ungdung_ai_truyentranh.html"
+                        title: "AI Tạo Truyện Tranh Minh Họa Nội Dung",
+                        description: "Biến ý tưởng thành những câu chuyện tranh sinh động chỉ trong vài bước đơn giản với sức mạnh của AI.",
+                        link: "khoahoc_ungdung_ai_truyentranh.html",
+                        icon: "fa-palette",
+                        color: "#8b5cf6"
+                    },
+                    "khoahoc_thietkewebcanhan": {
+                        title: "Thiết kế Website Cá Nhân Chuyên Nghiệp",
+                        description: "Học cách thiết kế và xây dựng website cá nhân của riêng bạn từ cơ bản đến nâng cao.",
+                        link: "khoahoc_thietkewebcanhan.html",
+                        icon: "fa-code",
+                        color: "#10b981"
                     }
                 };
 
@@ -188,21 +134,37 @@
                         const courseInfo = courseMap[courseId];
                         if (courseInfo) {
                             const card = document.createElement('div');
-                            card.className = 'course-card';
+                            card.className = 'bg-white rounded-xl overflow-hidden course-card flex flex-col';
                             card.innerHTML = `
-                                <h3>${courseInfo.title}</h3>
-                                <p>${courseInfo.description}</p>
-                                <a href="${courseInfo.link}">Vào học</a>
+                                <div class="p-6 flex-1 flex flex-col">
+                                    <div class="flex items-start justify-between mb-4">
+                                        <div class="w-12 h-12 flex items-center justify-center rounded-full" style="background-color: ${courseInfo.color}1A;">
+                                            <i class="fas ${courseInfo.icon} text-2xl" style="color: ${courseInfo.color};"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-gray-800 mb-2">${courseInfo.title}</h3>
+                                    <p class="text-gray-500 text-sm mb-4 flex-1">${courseInfo.description}</p>
+                                    <div>
+                                        <div class="flex justify-between items-center mb-2 text-sm text-gray-500">
+                                            <span>Tiến độ</span>
+                                            <span>35%</span>
+                                        </div>
+                                        <div class="w-full progress-bar-bg rounded-full h-2">
+                                            <div class="progress-bar-fill h-2 rounded-full" style="width: 35%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 px-6 py-4">
+                                    <a href="${courseInfo.link}" class="w-full text-center block bg-indigo-600 text-white font-semibold py-2 rounded-lg hover:bg-indigo-700 transition-colors">Vào học</a>
+                                </div>
                             `;
                             coursesList.appendChild(card);
                         }
                     });
                 } else {
-                    coursesList.innerHTML = '<p class="text-center text-gray-600">Bạn chưa có khóa học nào được cấp quyền truy cập.</p>';
+                    coursesList.innerHTML = '<p class="text-center text-gray-500 col-span-full">Bạn chưa được cấp quyền truy cập khóa học nào.</p>';
                 }
-            } else {
-                // Nếu không có currentUser, chuyển hướng về trang đăng nhập (đã được xử lý trong script.js)
-            }
+            } 
         });
     </script>
 </body>
