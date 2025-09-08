@@ -1,271 +1,152 @@
-0
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khóa học "Tạo Truyện Tranh Tự Động Bằng AI"</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
-    
     <!-- Open Graph Tags -->
     <meta property="og:title" content="Khóa học 'Tạo Truyện Tranh Tự Động Bằng AI'">
     <meta property="og:description" content="Khóa học toàn diện giúp bạn tạo truyện tranh bằng AI từ kịch bản đến thiết kế và chia sẻ. Phù hợp cho mọi đối tượng!">
-    <meta property="og:image" content="https://s3-ap-southeast-1.amazonaws.com/vmixvn/wp-media-folder-vmix-viet-nam/wp-content/uploads/2024/08/m_o_s_ng_t_o_ai.jpg">
+    <meta property="og:image" content="https://res.cloudinary.com/dejnvixvn/image/upload/v1757314880/B%C3%A0i_%C4%91%C4%83ng_Instagram_Qu%E1%BA%A3ng_c%C3%A1o_Tour_Du_l%E1%BB%8Bch_Vi%E1%BB%87t_Nam_Thi%C3%AAn_nhi%C3%AAn_Xanh_v%C3%A0ng_ppvghu.png">
     <meta property="og:url" content="[URL chuẩn của trang]">
     <meta property="og:type" content="article">
-
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Montserrat', sans-serif;
-        }
-        .card {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-        .hover-effect:hover {
-            font-family: 'Quicksand', sans-serif;
-            color: #4f46e5; /* Indigo 600 */
-        }
-        .hero-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-            animation: rotate 20s linear infinite;
-        }
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .hero-section {
-                padding: 4rem 1rem;
-            }
-            .grid-cols-2 {
-                grid-template-columns: 1fr;
-            }
-        }
-        /* Remove list styles */
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        ul li::before {
-            content: none;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="min-h-screen flex flex-col">
-<style>
-    /* Navbar */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 1rem 2rem;
-      z-index: 100;
-      background: rgba(0, 0, 0, 0.5);
-      transition: top 0.3s;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .logo-img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #2f73ff;
-    }
-    .logo-text {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #fff;
-    }
-    .nav-links { display: flex; gap: 2rem; font-weight: 600; }
-    .nav-links a { font-size: 1rem; color: #fff; text-decoration: none; transition: color 0.3s; }
-    .nav-links a:hover { color: #2f73ff; }
-    .cta {
-      padding: 0.6rem 1.4rem;
-      background: #2f73ff;
-      border-radius: 999px;
-      font-weight: 600;
-      color: #fff;
-      transition: background 0.3s;
-    }
-    .cta:hover { background: #245ad1; }
+<body style="font-family: 'Inter', sans-serif; background-color: #111827; color: #d1d5db; min-height: 100vh;">
+<img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1757314880/B%C3%A0i_%C4%91%C4%83ng_Instagram_Qu%E1%BA%A3ng_c%C3%A1o_Tour_Du_l%E1%BB%8Bch_Vi%E1%BB%87t_Nam_Thi%C3%AAn_nhi%C3%AAn_Xanh_v%C3%A0ng_ppvghu.png" style="max-height:0; overflow:hidden;"/>
 
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      gap: 0.3rem;
-    }
-    .menu-toggle span {
-      width: 25px;
-      height: 3px;
-      background: #fff;
-      border-radius: 5px;
-      transition: all 0.3s ease-in-out;
-    }
-    .menu-toggle.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
-    .menu-toggle.open span:nth-child(2) { opacity: 0; }
-    .menu-toggle.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .navbar { padding: 1rem; }
-      .nav-links { display: none; flex-direction: column; width: 100%; background: rgba(0,0,0,0.8); position: absolute; top: 60px; left: 0; padding: 1rem; }
-      .nav-links.open { display: flex; }
-      .nav-links a { padding: 0.5rem 0; text-align: center; }
-      .cta { display: none; }
-      .menu-toggle { display: flex; }
-    }
-</style>
-<nav class="navbar">
-    <div class="logo">
-      <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1747379764/ChatGPT_Image_Mar_31_2025_02_03_41_PM_qxeaeq.png" alt="Logo Quân H" class="logo-img">
-      <span class="logo-text">Quân H</span>
-    </div>
-    <div class="nav-links" id="navLinks">
-      <a href="../index.html">Trang chủ</a>
-      <a href="../baiviet.html">Bài viết</a>
-      <a href="../congcu.html">Công cụ</a>
-      <a href="../video.html">Video</a>
-      <a href="../trochoi.html">Trò chơi</a>
-      <a href="../thinghiemao.html">Thí nghiệm ảo</a>
-      <a href="../khoahoconline.html">Khóa học</a>
-      <a href="../lienhe.html">Liên hệ</a>
-    </div>
-    <a href="../lienhe.html" class="cta">Liên hệ</a>
-    <div class="menu-toggle" id="menuToggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </nav>
-<script>
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-
-    menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-      menuToggle.classList.toggle('open');
-    });
-</script>
-    <header class="hero-section text-center py-20 px-4 pt-32">
-        <div class="container mx-auto relative z-10">
-            <h1 class="text-5xl font-extrabold mb-4 leading-tight">🚀 Dành riêng cho bạn: Khóa học "Tạo Truyện Tranh Tự Động Bằng AI"</h1>
-            <p class="text-xl font-light mb-8 max-w-3xl mx-auto">Nếu bạn là người mới bắt đầu và muốn học cách sử dụng ứng dụng này một cách bài bản, hiệu quả và sáng tạo, hãy tham gia ngay khóa học của chúng tôi:</p>
-            <a href="#contact" class="bg-yellow-400 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-yellow-300 transition duration-300 hover-effect">Đăng ký ngay!</a>
+    <header style="background: #1f2937 url('https://www.transparenttextures.com/patterns/cubes.png') repeat; color: white; text-align: center; padding: 6rem 1rem;">
+        <div style="max-width: 1024px; margin: auto;">
+            <h1 style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 3.75rem; margin-bottom: 1rem; color: #fff;">Mở Khóa Sức Mạnh Sáng Tạo Của Bạn Với AI</h1>
+            <p style="font-size: 1.25rem; margin-bottom: 2rem; max-width: 56rem; margin-left: auto; margin-right: auto;">Biến mọi ý tưởng thành truyện tranh sống động. Không cần kỹ năng vẽ, chỉ cần đam mê!</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScjDr5I1l03-iL7OK5YuP7HSo7jCUh8bfuHFjDkVJ3rNSQTdw/viewform" target="_blank" style="background-color: #3b82f6; color: white; font-weight: bold; padding: 1rem 2.5rem; border-radius: 9999px; font-size: 1.25rem; text-decoration: none;">Nhận ưu đãi ngay!</a>
         </div>
     </header>
 
-    <main class="container mx-auto p-4 md:p-8 flex-grow">
-        <section class="bg-white rounded-lg shadow-xl p-6 md:p-8 mb-8">
-            <img src="https://s3-ap-southeast-1.amazonaws.com/vmixvn/wp-media-folder-vmix-viet-nam/wp-content/uploads/2024/08/m_o_s_ng_t_o_ai.jpg" alt="Hình ảnh khóa học AI tạo truyện tranh" class="w-full h-auto rounded-lg mb-6 object-cover" style="max-height: 400px;">
-            
-            <h2 class="text-3xl font-bold text-gray-800 mb-6">Bạn sẽ học được gì?</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div class="card bg-blue-50 p-6 rounded-lg shadow-md border border-blue-200">
-                    <h3 class="text-xl font-semibold text-blue-700 mb-3">Kịch bản hấp dẫn</h3>
-                    <p class="text-gray-700">Cách viết kịch bản truyện tranh hấp dẫn bằng ChatGPT.</p>
-                </div>
-                <div class="card bg-green-50 p-6 rounded-lg shadow-md border border-green-200">
-                    <h3 class="text-xl font-semibold text-green-700 mb-3">Sử dụng ứng dụng AI</h3>
-                    <p class="text-gray-700">Cách sử dụng và tùy chỉnh ứng dụng AI tạo truyện.</p>
-                </div>
-                <div class="card bg-purple-50 p-6 rounded-lg shadow-md border border-purple-200">
-                    <h3 class="text-xl font-semibold text-purple-700 mb-3">Thiết kế nhân vật</h3>
-                    <p class="text-gray-700">Cách thiết kế nhân vật và chọn phong cách phù hợp.</p>
-                </div>
-                <div class="card bg-red-50 p-6 rounded-lg shadow-md border border-red-200">
-                    <h3 class="text-xl font-semibold text-red-700 mb-3">Tải về và chia sẻ</h3>
-                    <p class="text-gray-700">Hướng dẫn tải về và chia sẻ truyện tranh hoàn chỉnh.</p>
-                </div>
-                <div class="card bg-yellow-50 p-6 rounded-lg shadow-md border border-yellow-200 col-span-1 md:col-span-2">
-                    <h3 class="text-xl font-semibold text-yellow-700 mb-3">Ứng dụng đặc biệt</h3>
-                    <p class="text-gray-700">Đặc biệt: Ứng dụng trong giảng dạy, sáng tạo nội dung cá nhân.</p>
-                </div>
-            </div>
-
-            <h2 class="text-3xl font-bold text-gray-800 mb-6">Thông tin khóa học</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div class="card bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200">
-                    <h3 class="text-xl font-semibold text-gray-700 mb-3">Thời gian</h3>
-                    <p class="text-gray-700">📅 Khóa học hiện đang mở đăng ký.</p>
-                </div>
-                <div class="card bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200">
-                    <h3 class="text-xl font-semibold text-gray-700 mb-3">Đối tượng</h3>
-                    <p class="text-gray-700">👉 Phù hợp cho giáo viên, học sinh, youtuber, người làm nội dung.</p>
-                </div>
-                <div class="card bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200">
-                    <h3 class="text-xl font-semibold text-gray-700 mb-3">Lợi ích</h3>
-                    <p class="text-gray-700">👉 Học một lần – dùng mãi mãi.</p>
-                </div>
-                <div class="card bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200">
-                    <h3 class="text-xl font-semibold text-gray-700 mb-3">Hình thức & Thời lượng</h3>
-                    <p class="text-gray-700">👉 Hình thức: Học online, video hướng dẫn chi tiết từng bước.</p>
-                    <p class="text-gray-700">👉 Thời lượng: ngắn gọn – đầy đủ – dễ làm theo.</p>
-                </div>
-            </div>
-
-            <p class="text-center text-2xl font-bold text-indigo-600 mt-8">
-                💥 Đừng để ý tưởng chỉ nằm trong đầu bạn – hãy biến nó thành một tác phẩm truyện tranh tuyệt vời ngay hôm nay!
-            </p>
+    <main style="max-width: 1024px; margin: auto; padding: 2rem 1rem;">
+        <section style="margin-bottom: 4rem;">
+            <img src="https://s3-ap-southeast-1.amazonaws.com/vmixvn/wp-media-folder-vmix-viet-nam/wp-content/uploads/2024/08/m_o_s_ng_t_o_ai.jpg" alt="Hình ảnh khóa học AI tạo truyện tranh" style="width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); object-fit: cover; margin: auto; max-height: 500px;">
         </section>
 
-        <section id="contact" class="bg-white rounded-lg shadow-xl p-6 md:p-8 mb-8 text-center">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6">Liên hệ đăng ký khóa học</h2>
-            <p class="text-lg text-gray-700 mb-6">Để đăng ký khóa học hoặc cần tư vấn thêm, vui lòng liên hệ qua các kênh sau:</p>
-            <div class="flex flex-col md:flex-row justify-center items-center gap-4">
-                <a href="https://www.facebook.com/tran.hong.quan.216221/" target="_blank" rel="noopener noreferrer" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 flex items-center justify-center hover-effect">
-                    <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.776-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V22H12c5.523 0 10-4.477 10-10z" clip-rule="evenodd" />
-                    </svg>
-                    Facebook
-                </a>
-                <a href="https://zalo.me/0355213107" target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-green-600 transition duration-300 flex items-center justify-center hover-effect">
-                    <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.707 14.293a1 1 0 01-1.414 1.414L12 13.414l-3.293 3.293a1 1 0 01-1.414-1.414L10.586 12 7.293 8.707a1 1 0 011.414-1.414L12 10.586l3.293-3.293a1 1 0 011.414 1.414L13.414 12l3.293 3.293z" clip-rule="evenodd" />
-                    </svg>
-                    SĐT Zalo: 0355213107
-                </a>
+        <section id="pricing" style="margin-bottom: 4rem;">
+            <h2 style="font-family: 'Montserrat', sans-serif; color: #fff; font-size: 1.875rem; font-weight: bold; text-align: center; margin-bottom: 2.5rem;">Ưu Đãi Đặc Biệt - Chỉ Một Lần Duy Nhất!</h2>
+            <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 2px solid #3b82f6; box-shadow: 0 0 30px rgba(59, 130, 246, 0.5); border-radius: 0.5rem; padding: 2rem; max-width: 42rem; margin: auto; text-align: center;">
+                <h3 style="font-family: 'Montserrat', sans-serif; color: #facc15; font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem;">TRỌN BỘ KHÓA HỌC</h3>
+                <p style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 3rem; margin-bottom: 1rem; color: #fff;">200.000đ</p>
+                <p style="color: #9ca3af; text-decoration: line-through; margin-bottom: 1.5rem;">Giá gốc: 800.000đ</p>
+                <ul style="text-align: left; list-style: none; padding: 0; margin: 0 auto 2rem auto; max-width: 28rem; display: flex; flex-direction: column; gap: 1rem;">
+                    <li><i class="fas fa-check-circle" style="margin-right: 0.5rem; color: #4ade80;"></i>Truy cập trọn đời</li>
+                    <li><i class="fas fa-check-circle" style="margin-right: 0.5rem; color: #4ade80;"></i>Video hướng dẫn chi tiết, dễ hiểu</li>
+                    <li><i class="fas fa-check-circle" style="margin-right: 0.5rem; color: #4ade80;"></i>Sử dụng trên mọi thiết bị</li>
+                    <li><i class="fas fa-check-circle" style="margin-right: 0.5rem; color: #4ade80;"></i>Hỗ trợ 1-1 từ giảng viên</li>
+                </ul>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScjDr5I1l03-iL7OK5YuP7HSo7jCUh8bfuHFjDkVJ3rNSQTdw/viewform" target="_blank" style="background-color: #3b82f6; color: white; font-weight: bold; padding: 1rem 3rem; border-radius: 9999px; font-size: 1.5rem; text-decoration: none; animation: pulse 2s infinite;">ĐĂNG KÝ NGAY</a>
+            </div>
+        </section>
+
+        <section style="margin-bottom: 4rem;">
+            <h2 style="font-family: 'Montserrat', sans-serif; color: #fff; font-size: 1.875rem; font-weight: bold; text-align: center; margin-bottom: 2rem;">Bạn sẽ học được gì?</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 0.5rem; text-align: center;">
+                    <i class="fas fa-pen-nib" style="font-size: 2.25rem; color: #60a5fa; margin-bottom: 1rem;"></i>
+                    <h3 style="font-family: 'Montserrat', sans-serif; color: #fff; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">Kịch bản hấp dẫn</h3>
+                    <p>Viết kịch bản truyện tranh lôi cuốn bằng ChatGPT.</p>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 0.5rem; text-align: center;">
+                    <i class="fas fa-robot" style="font-size: 2.25rem; color: #60a5fa; margin-bottom: 1rem;"></i>
+                    <h3 style="font-family: 'Montserrat', sans-serif; color: #fff; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">Sử dụng ứng dụng AI</h3>
+                    <p>Làm chủ và tùy chỉnh ứng dụng AI tạo truyện.</p>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 0.5rem; text-align: center;">
+                    <i class="fas fa-palette" style="font-size: 2.25rem; color: #60a5fa; margin-bottom: 1rem;"></i>
+                    <h3 style="font-family: 'Montserrat', sans-serif; color: #fff; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">Thiết kế nhân vật</h3>
+                    <p>Thiết kế nhân vật và chọn phong cách nghệ thuật.</p>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 0.5rem; text-align: center;">
+                    <i class="fas fa-share-alt" style="font-size: 2.25rem; color: #60a5fa; margin-bottom: 1rem;"></i>
+                    <h3 style="font-family: 'Montserrat', sans-serif; color: #fff; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">Tải về và chia sẻ</h3>
+                    <p>Hướng dẫn tải và chia sẻ tác phẩm của bạn.</p>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 0.5rem; text-align: center;">
+                     <i class="fas fa-chalkboard-teacher" style="font-size: 2.25rem; color: #60a5fa; margin-bottom: 1rem;"></i>
+                    <h3 style="font-family: 'Montserrat', sans-serif; color: #fff; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">Ứng dụng đặc biệt</h3>
+                    <p>Ứng dụng trong giảng dạy và sáng tạo nội dung cá nhân.</p>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 0.5rem; text-align: center;">
+                     <i class="fas fa-users" style="font-size: 2.25rem; color: #60a5fa; margin-bottom: 1rem;"></i>
+                    <h3 style="font-family: 'Montserrat', sans-serif; color: #fff; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">Hỗ trợ & Cộng đồng</h3>
+                    <p>Tham gia cộng đồng và nhận hỗ trợ từ giảng viên.</p>
+                </div>
+            </div>
+        </section>
+
+        <section style="margin-bottom: 4rem;">
+            <h2 style="font-family: 'Montserrat', sans-serif; color: #fff; font-size: 1.875rem; font-weight: bold; text-align: center; margin-bottom: 2rem;">Học viên nói gì về khóa học?</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 64rem; margin: auto;">
+                <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 0.5rem;">
+                    <p style="margin-bottom: 1rem; font-style: italic;">"Khóa học quá tuyệt vời! Mình không nghĩ tạo truyện tranh lại dễ dàng đến thế. Giảng viên hỗ trợ rất nhiệt tình."</p>
+                    <div>
+                        <p style="font-weight: bold; color: #fff;">Ngọc Anh</p>
+                        <p style="font-size: 0.875rem; color: #9ca3af;">Học viên</p>
+                    </div>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 0.5rem;">
+                    <p style="margin-bottom: 1rem; font-style: italic;">"Mình là giáo viên và đã áp dụng ngay vào bài giảng. Học sinh rất thích thú. Cảm ơn khóa học!"</p>
+                    <div>
+                        <p style="font-weight: bold; color: #fff;">Minh Tuấn</p>
+                        <p style="font-size: 0.875rem; color: #9ca3af;">Giáo viên</p>
+                    </div>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 0.5rem;">
+                    <p style="margin-bottom: 1rem; font-style: italic;">"Rất đáng tiền! Nội dung chi tiết, dễ hiểu, mình đã tự tạo được bộ truyện đầu tiên chỉ sau vài giờ học."</p>
+                    <div>
+                        <p style="font-weight: bold; color: #fff;">Thanh Hằng</p>
+                        <p style="font-size: 0.875rem; color: #9ca3af;">Nhà sáng tạo nội dung</p>
+                    </div>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 0.5rem;">
+                    <p style="margin-bottom: 1rem; font-style: italic;">"Học xong khóa này mình tiết kiệm được rất nhiều thời gian cho việc vẽ vời. Rất khuyến khích cho ai muốn làm truyện tranh nhanh."</p>
+                    <div>
+                        <p style="font-weight: bold; color: #fff;">Quốc Bảo</p>
+                        <p style="font-size: 0.875rem; color: #9ca3af;">Youtuber</p>
+                    </div>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 0.5rem;">
+                    <p style="margin-bottom: 1rem; font-style: italic;">"Mình không có năng khiếu vẽ nhưng vẫn có thể tạo ra những câu chuyện của riêng mình. Cảm ơn đội ngũ đã tạo ra khóa học này."</p>
+                    <div>
+                        <p style="font-weight: bold; color: #fff;">Hương Giang</p>
+                        <p style="font-size: 0.875rem; color: #9ca3af;">Học sinh</p>
+                    </div>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 0.5rem;">
+                    <p style="margin-bottom: 1rem; font-style: italic;">"Một công cụ tuyệt vời để kể chuyện bằng hình ảnh. Mình đã giới thiệu cho nhiều bạn bè và ai cũng thích."</p>
+                    <div>
+                        <p style="font-weight: bold; color: #fff;">Đức Anh</p>
+                        <p style-="font-size: 0.875rem; color: #9ca3af;">Blogger</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" style="text-align: center; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 2rem; border-radius: 0.5rem; max-width: 56rem; margin: auto;">
+            <h2 style="font-family: 'Montserrat', sans-serif; color: #fff; font-size: 1.875rem; font-weight: bold; margin-bottom: 1rem;">Đăng Ký Ngay!</h2>
+            <p style="font-size: 1.125rem; margin-bottom: 2rem;">Chỉ với một cú nhấp chuột, bạn đã có thể bắt đầu hành trình sáng tạo của mình.</p>
+            <div style="display: flex; justify-content: center;">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScjDr5I1l03-iL7OK5YuP7HSo7jCUh8bfuHFjDkVJ3rNSQTdw/viewform" target="_blank" style="background-color: #3b82f6; color: white; font-weight: bold; padding: 1rem 3rem; border-radius: 9999px; font-size: 1.5rem; text-decoration: none;">Điền Form Đăng Ký</a>
             </div>
         </section>
     </main>
 
-    <footer class="bg-gray-800 text-white text-center p-6 mt-8">
-        <p>&copy; 2024 Khóa học AI. Mọi quyền được bảo lưu.</p>
+    <footer style="text-align: center; padding: 1.5rem; margin-top: 3rem;">
+        <p style="color: #6b7280;">&copy; 2024 Khóa học AI. All rights reserved.</p>
     </footer>
 
-    <script>
-    </script>
+    <style>
+        @keyframes pulse {
+            50% {
+                opacity: .5;
+            }
+        }
+    </style>
 </body>
 </html>
