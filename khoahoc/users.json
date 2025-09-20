@@ -19,7 +19,8 @@
         "courses": [
             "khoahoc_ungdungcanva",
             "khoahoc_ungdung_ai_truyentranh",
-            "khoahoc_thietkewebcanhan"
+            "khoahoc_thietkewebcanhan",
+            "khoahoc_thu_nghiem_ung_dung_toi_uu_hoa_prompt"
         ]
     },
     {
@@ -63,6 +64,13 @@
         "password": "huytuan170504",
         "courses": [
             "khoahoc_thietkewebcanhan"
+        ]
+    },
+    {
+        "username": "taikhoanthunghiem",
+        "password": "aivagiaoduc",
+        "courses": [
+            "khoahoc_thu_nghiem_ung_dung_toi_uu_hoa_prompt"
         ]
     }
 ]

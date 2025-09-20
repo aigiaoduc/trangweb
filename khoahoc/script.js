@@ -7,11 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'dashboard.html';
     }
     // Nếu đang ở trang nội dung khóa học và chưa đăng nhập, chuyển hướng về login
-    else if (isLoggedIn !== 'true' && (window.location.pathname.includes('khoahoc_ungdungcanva.html') || window.location.pathname.includes('khoahoc_ungdung_ai_truyentranh.html') || window.location.pathname.includes('khoahoc_thietkewebcanhan.html') || window.location.pathname.includes('dashboard.html'))) {
+    else if (isLoggedIn !== 'true' && (window.location.pathname.includes('khoahoc_ungdungcanva.html') || window.location.pathname.includes('khoahoc_ungdung_ai_truyentranh.html') || window.location.pathname.includes('khoahoc_thietkewebcanhan.html') || window.location.pathname.includes('khoahoc_thu_nghiem_ung_dung_toi_uu_hoa_prompt.html') || window.location.pathname.includes('dashboard.html'))) {
         window.location.href = 'login.html';
     }
     // Nếu đang ở trang khóa học cụ thể, kiểm tra quyền truy cập
-    else if (isLoggedIn === 'true' && (window.location.pathname.includes('khoahoc_ungdungcanva.html') || window.location.pathname.includes('khoahoc_ungdung_ai_truyentranh.html') || window.location.pathname.includes('khoahoc_thietkewebcanhan.html'))) {
+    else if (isLoggedIn === 'true' && (window.location.pathname.includes('khoahoc_ungdungcanva.html') || window.location.pathname.includes('khoahoc_ungdung_ai_truyentranh.html') || window.location.pathname.includes('khoahoc_thietkewebcanhan.html') || window.location.pathname.includes('khoahoc_thu_nghiem_ung_dung_toi_uu_hoa_prompt.html'))) {
         const courseId = window.location.pathname.split('/').pop().replace('.html', '');
         if (!currentUser || !currentUser.courses || !currentUser.courses.includes(courseId)) {
             alert('Bạn không có quyền truy cập khóa học này.');

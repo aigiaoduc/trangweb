@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khóa Học Blogspot Toàn Diện - Xây Dựng Website Chuyên Nghiệp</title>
+    <style>
+    /* CSS Variables for easy customization */
+    :root {
+        --primary-color: #007bff;
+        --secondary-color: #6c757d;
+        --success-color: #28a745;
+        --warning-color: #ffc107;
+        --light-color: #f8f9fa;
+        --dark-color: #343a40;
+        --text-color: #212529;
+        --border-radius: 12px;
+        --box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    /* General Styling */
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.7;
+        background-color: #f7f9fc;
+        color: var(--text-color);
+        margin: 0;
+    }
+    
+    .container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Header */
+    .header {
+        background: linear-gradient(135deg, var(--primary-color), #0056b3);
+        color: white;
+        padding: 60px 25px;
+        text-align: center;
+        border-radius: var(--border-radius);
+        margin-top: 20px;
+        animation: fadeIn 0.5s ease-out;
+    }
+    .header h1 { margin: 0; font-size: 2.8em; font-weight: 800; text-shadow: 1px 1px 4px rgba(0,0,0,0.2); }
+    .header p { font-size: 1.2em; margin-top: 15px; opacity: 0.95; max-width: 700px; margin-left: auto; margin-right: auto; }
+
+    /* Section */
+    .section {
+        background: white;
+        margin-top: 35px;
+        padding: 40px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        opacity: 0; /* For animation */
+        animation: fadeIn 0.8s ease-out forwards;
+        animation-delay: 0.2s;
+    }
+    .section h2 { font-size: 2.2em; font-weight: 700; color: var(--dark-color); text-align: center; margin-top: 0; margin-bottom: 40px; }
+
+    /* Gift Section */
+    .gift-section {
+        background-color: #fffaf0;
+        border: 2px dashed var(--warning-color);
+        padding: 30px;
+        text-align: center;
+        animation-delay: 0.4s;
+    }
+    .gift-section h2 {
+        color: #b38600;
+        font-size: 2.3em;
+    }
+    .gift-section .gift-icon {
+        width: 50px; height: 50px; color: #b38600; margin-bottom: 15px;
+    }
+    .gift-section p {
+        font-size: 1.2em; max-width: 650px; margin: 0 auto 20px auto;
+    }
+    .gift-list {
+        list-style: none; padding: 0; display: inline-block; text-align: left; }
+    .gift-list li {
+        font-size: 1.1em; font-weight: 500; margin-bottom: 10px; display: flex; align-items: center; }
+    .gift-list li::before {
+        content: '✓'; color: var(--success-color); font-weight: bold; font-size: 1.2em; margin-right: 10px; }
+
+    /* Intro Grid Layout */
+    .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+    .intro-image img { width: 100%; height: auto; border-radius: var(--border-radius); box-shadow: var(--box-shadow); }
+
+    /* Benefits List */
+    .benefits-list { list-style: none; padding: 0; }
+    .benefits-list li { font-size: 1.1em; margin-bottom: 20px; display: flex; align-items: flex-start; }
+    .benefits-list .icon { flex-shrink: 0; margin-right: 15px; width: 24px; height: 24px; color: var(--primary-color); margin-top: 2px; }
+
+    /* Curriculum */
+    .curriculum { display: grid; gap: 20px; }
+    .module { background-color: var(--light-color); padding: 25px; border-radius: var(--border-radius); border: 1px solid #e9ecef; display: flex; align-items: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .module:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .module .icon { flex-shrink: 0; width: 32px; height: 32px; margin-right: 20px; color: var(--primary-color); }
+    .module h3 { margin: 0; font-size: 1.4em; color: var(--dark-color); }
+    .module p { margin: 5px 0 0 0; color: var(--secondary-color); font-size: 1em; }
+
+    /* CTA Section */
+    .cta-section { text-align: center; padding: 50px; background: linear-gradient(135deg, var(--primary-color), #0056b3); color: white; border-radius: var(--border-radius); animation-delay: 0.6s; }
+    .cta-section h2 { color: white; font-size: 2.5em; }
+    .price { font-size: 3.5em; font-weight: 800; margin: 15px 0; text-shadow: 1px 1px 3px rgba(0,0,0,0.1); }
+    .price-note { opacity: 0.9; margin-top: -15px; margin-bottom: 30px; font-size: 1.1em; }
+    .btn { display: inline-block; background: var(--success-color); color: white !important; padding: 18px 45px; font-size: 1.4em; font-weight: bold; text-decoration: none; border-radius: 50px; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    .btn:hover { background: #218838; transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
+
+    /* Footer */
+    .footer { text-align: center; margin-top: 50px; padding: 25px; color: var(--secondary-color); animation-delay: 0.8s; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .intro-grid { grid-template-columns: 1fr; }
+        .header h1 { font-size: 2.2em; }
+        .header p { font-size: 1.1em; }
+        .section h2 { font-size: 1.8em; }
+        .gift-section h2 { font-size: 2em; }
+    }
+    </style>
+</head>
+<body>
+
+    <div style="max-height:0; overflow:hidden;">
+        <img src="https://res.cloudinary.com/dejnvixvn/image/upload/v1757411415/T%E1%BA%A0O_WEBSITE_C%C3%81_NH%C3%82N_2_hoabbh.png" width="100%" />
+    </div>
+
+    <!-- SVG Icon Definitions (Hidden) -->
+    <svg width="0" height="0" style="position:absolute;pointer-events:none;opacity:0;">
+      <defs>
+        <symbol id="icon-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></symbol>
+        <symbol id="icon-dashboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></symbol>
+        <symbol id="icon-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></symbol>
+        <symbol id="icon-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></symbol>
+        <symbol id="icon-optimize" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></symbol>
+        <symbol id="icon-growth" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></symbol>
+        <symbol id="icon-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></symbol>
+        <symbol id="icon-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></symbol>
+      </defs>
+    </svg>
+
+    <div class="container">
+        <header class="header">
+            <h1>Làm Chủ Blogspot</h1>
+            <p>Biến ý tưởng của bạn thành một trang blog, tin tức, hay bán hàng ấn tượng mà không cần biết lập trình!</p>
+        </header>
+
+        <p><strong>Khóa học này sẽ hướng dẫn bạn từ A-Z cách làm chủ Blogspot, biến nó thành trang web cá nhân, blog, hay trang bán hàng chuyên nghiệp mà không cần biết code. Khám phá bí quyết tùy biến giao diện, sáng tạo nội dung và nhận ngay một website hoàn chỉnh được thiết kế riêng!</strong></p><!-- more -->
+
+        <section class="section">
+            <div class="intro-grid">
+                <div class="intro-text">
+                    <h2>Tại sao nên học Blogspot?</h2>
+                    <ul class="benefits-list">
+                        <li><svg class="icon"><use xlink:href="#icon-target"/></svg><div><strong>Nền tảng miễn phí, mạnh mẽ:</strong> Bắt đầu sự nghiệp viết lách hoặc kinh doanh online mà không tốn chi phí hosting.</div></li>
+                        <li><svg class="icon"><use xlink:href="#icon-dashboard"/></svg><div><strong>Dễ dàng sử dụng:</strong> Giao diện trực quan, thân thiện với người mới bắt đầu, giúp bạn xuất bản nội dung chỉ trong vài phút.</div></li>
+                        <li><svg class="icon"><use xlink:href="#icon-code"/></svg><div><strong>Tùy biến linh hoạt:</strong> Can thiệp sâu bằng HTML/CSS để tạo ra một giao diện độc đáo, mang đậm dấu ấn cá nhân.</div></li>
+                        <li><svg class="icon"><use xlink:href="#icon-growth"/></svg><div><strong>Hỗ trợ bởi Google:</strong> Tận hưởng sự ổn định, bảo mật và khả năng SEO tốt từ gã khổng lồ công nghệ.</div></li>
+                    </ul>
+                </div>
+                <div class="intro-image">
+                    <img src="https://www.bounche.com/blog/wp-content/uploads/2023/09/web-template-website-design-concept-1024x804.jpg" alt="Web Design Concept">
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Nội Dung Khóa Học Chi Tiết</h2>
+            <div class="curriculum">
+                <div class="module">
+                    <svg class="icon"><use xlink:href="#icon-book"/></svg>
+                    <div>
+                        <h3>Phần 1 & 2: Nhập Môn & Khám Phá Giao Diện</h3>
+                        <p>Làm quen, xác định mục tiêu và khám phá toàn bộ bảng điều khiển quản trị Blogspot.</p>
+                    </div>
+                </div>
+                <div class="module">
+                    <svg class="icon"><use xlink:href="#icon-pen"/></svg>
+                    <div>
+                        <h3>Phần 3.1: Sáng Tạo Nội Dung Trực Quan</h3>
+                        <p>Sử dụng trình soạn thảo để định dạng văn bản, chèn hình ảnh, video và quản lý bài đăng.</p>
+                    </div>
+                </div>
+                <div class="module">
+                    <svg class="icon"><use xlink:href="#icon-code"/></svg>
+                    <div>
+                        <h3>Phần 3.2: Mở Khóa Sức Mạnh Với HTML</h3>
+                        <p>Đi sâu vào chế độ HTML để tùy biến nâng cao, nhúng video và các ứng dụng web.</p>
+                    </div>
+                </div>
+                <div class="module">
+                    <svg class="icon"><use xlink:href="#icon-optimize"/></svg>
+                    <div>
+                        <h3>Phần 4 & 5: Tối Ưu và Phát Triển</h3>
+                        <p>Kỹ thuật quản lý thông minh, ôn tập và vạch ra lộ trình phát triển blog bền vững.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section gift-section">
+            <svg class="gift-icon"><use xlink:href="#icon-gift"/></svg>
+            <h2>Quà Tặng Đặc Biệt Khi Đăng Ký</h2>
+            <p>Không chỉ học kỹ năng, bạn còn nhận được một bộ công cụ hoàn chỉnh để bắt đầu ngay lập tức. Tôi sẽ <strong>trực tiếp tặng bạn</strong>:</p>
+            <ul class="gift-list">
+                <li>Một website hoàn chỉnh được thiết kế riêng.</li>
+                <li>Tên miền mang thương hiệu của bạn (vi-du.blogspot.com).</li>
+                <li>Giao diện cài đặt sẵn, chỉ việc vào viết bài và kinh doanh.</li>
+            </ul>
+        </section>
+
+        <section class="section cta-section">
+            <h2>Tham Gia Ngay Hôm Nay!</h2>
+            <p>Đầu tư một lần, sở hữu kỹ năng và cả một website chuyên nghiệp.</p>
+            <div class="price">300.000 VNĐ</div>
+            <p class="price-note">Thanh toán một lần duy nhất</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScjDr5I1l03-iL7OK5YuP7HSo7jCUh8bfuHFjDkVJ3rNSQTdw/viewform" target="_blank" class="btn">ĐĂNG KÝ & NHẬN QUÀ</a>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; 2025 Khóa Học Online. Mọi quyền được bảo lưu.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
