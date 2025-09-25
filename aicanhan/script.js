@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const commandModal = document.getElementById('command-list-modal');
     const closeModalBtn = document.getElementById('close-modal-btn');
     const commandList = document.getElementById('command-list');
+    const themeToggle = document.getElementById('theme-toggle');
 
     // --- State and Data ---
     const dataUrl = 'data.json';
@@ -38,6 +39,21 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error fetching or parsing data:', error);
             addMessage('Đã có lỗi xảy ra khi tải dữ liệu. Vui lòng thử lại sau.', 'bot');
         });
+
+    // --- Theme Management ---
+    const savedTheme = localStorage.getItem('chatbot-theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeToggle.classList.add('dark-mode');
+    }
+
+    themeToggle.addEventListener('click', () => {
+        const isDarkMode = document.body.classList.toggle('dark-mode');
+        themeToggle.classList.toggle('dark-mode', isDarkMode);
+
+        // Save theme preference
+        localStorage.setItem('chatbot-theme', isDarkMode ? 'dark' : 'light');
+    });
 
     // --- Event Listeners ---
     sendBtn.addEventListener('click', () => handleUserMessage());
